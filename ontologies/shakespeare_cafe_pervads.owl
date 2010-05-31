@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY PervADS "http://www.pervads.com/PervADS.owl#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY www "http://www.pervads.comshakespeare_cafe_pervads.owl#" >
+    <!ENTITY shakespeare_cafe_pervads "http://www.pervads.com/shakespeare_cafe_pervads.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.pervads.com/shakespeare_cafe_pervads.owl#"
+     xml:base="http://www.pervads.com/shakespeare_cafe_pervads.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:www="http://www.pervads.comshakespeare_cafe_pervads.owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:shakespeare_cafe_pervads="http://www.pervads.com/shakespeare_cafe_pervads.owl#"
+     xmlns:PervADS="http://www.pervads.com/PervADS.owl#">
+    <owl:Ontology rdf:about=""/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#advertiser -->
+
+    <owl:ObjectProperty rdf:about="&PervADS;advertiser"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#advertises -->
+
+    <owl:ObjectProperty rdf:about="&PervADS;advertises"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#isAdvertisedBy -->
+
+    <owl:ObjectProperty rdf:about="&PervADS;isAdvertisedBy"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#item -->
+
+    <owl:ObjectProperty rdf:about="&PervADS;item"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#offers -->
+
+    <owl:ObjectProperty rdf:about="&PervADS;offers"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#coupon -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;coupon"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#currency -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;currency"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#itemDescription -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;itemDescription"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#itemName -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;itemName"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgAddress -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgAddress"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgCity -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgCity"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgEmail -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgEmail"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgName -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgName"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgZIP -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgZIP"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#orgZone -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;orgZone"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#price -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;price"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#tags -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;tags"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#validFrom -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;validFrom"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#validUntil -->
+
+    <owl:DatatypeProperty rdf:about="&PervADS;validUntil"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#Good -->
+
+    <owl:Class rdf:about="&PervADS;Good"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#GoodServiceComposition -->
+
+    <owl:Class rdf:about="&PervADS;GoodServiceComposition"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#Organization -->
+
+    <owl:Class rdf:about="&PervADS;Organization"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#PervADS -->
+
+    <owl:Class rdf:about="&PervADS;PervADS"/>
+    
+
+
+    <!-- http://www.pervads.com/PervADS.owl#SpecialPrice -->
+
+    <owl:Class rdf:about="&PervADS;SpecialPrice"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.pervads.com/shakespeare_cafe_pervads.owl#good1 -->
+
+    <owl:Thing rdf:about="#good1">
+        <rdf:type rdf:resource="&PervADS;Good"/>
+        <PervADS:itemName rdf:datatype="&xsd;string">Cocktail</PervADS:itemName>
+        <PervADS:itemDescription rdf:datatype="&xsd;string"
+            >any cocktail from the bar</PervADS:itemDescription>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.pervads.com/shakespeare_cafe_pervads.owl#gsc1 -->
+
+    <owl:Thing rdf:about="#gsc1">
+        <rdf:type rdf:resource="&PervADS;GoodServiceComposition"/>
+        <PervADS:item rdf:resource="#good1"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.pervads.com/shakespeare_cafe_pervads.owl#organization1 -->
+
+    <owl:Thing rdf:about="#organization1">
+        <rdf:type rdf:resource="&PervADS;Organization"/>
+        <PervADS:orgZIP rdf:datatype="&xsd;int">20133</PervADS:orgZIP>
+        <PervADS:orgZone rdf:datatype="&xsd;string">Citt&#224; Studi</PervADS:orgZone>
+        <PervADS:orgCity rdf:datatype="&xsd;string">Milan</PervADS:orgCity>
+        <PervADS:orgName rdf:datatype="&xsd;string"
+            >Shakespeare Caf&#233;</PervADS:orgName>
+        <PervADS:orgAddress rdf:datatype="&xsd;string"
+            >Via Giuseppe Ponzio 81</PervADS:orgAddress>
+        <PervADS:orgEmail rdf:datatype="&xsd;string"
+            >info@shakespearecafe.it</PervADS:orgEmail>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.pervads.com/shakespeare_cafe_pervads.owl#pervads1 -->
+
+    <PervADS:PervADS rdf:about="#pervads1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <PervADS:tags rdf:datatype="&xsd;string">Aperitivo</PervADS:tags>
+        <PervADS:tags rdf:datatype="&xsd;string">Cocktail Bar</PervADS:tags>
+        <PervADS:tags rdf:datatype="&xsd;string">Happy Hour</PervADS:tags>
+        <PervADS:tags rdf:datatype="&xsd;string">Paninoteca</PervADS:tags>
+        <PervADS:tags rdf:datatype="&xsd;string">Pub</PervADS:tags>
+        <PervADS:tags rdf:datatype="&xsd;string"
+            >Sport in Diretta</PervADS:tags>
+        <PervADS:advertiser rdf:resource="#organization1"/>
+        <PervADS:advertises rdf:resource="&www;offer1"/>
+    </PervADS:PervADS>
+    
+
+
+    <!-- http://www.pervads.comshakespeare_cafe_pervads.owl#offer1 -->
+
+    <PervADS:SpecialPrice rdf:about="&www;offer1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <PervADS:validFrom rdf:datatype="&xsd;date">2010-04-29</PervADS:validFrom>
+        <PervADS:validUntil rdf:datatype="&xsd;date">2010-05-02</PervADS:validUntil>
+        <PervADS:price rdf:datatype="&xsd;float">3</PervADS:price>
+        <PervADS:currency rdf:datatype="&xsd;string">euro</PervADS:currency>
+        <PervADS:coupon rdf:datatype="&xsd;anyURI"
+            >http://w.cdn-tonight.eu/22434.jpg</PervADS:coupon>
+        <PervADS:offers rdf:resource="#gsc1"/>
+        <PervADS:isAdvertisedBy rdf:resource="#pervads1"/>
+    </PervADS:SpecialPrice>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+
