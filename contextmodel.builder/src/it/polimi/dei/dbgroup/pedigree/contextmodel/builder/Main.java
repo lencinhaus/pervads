@@ -2,12 +2,16 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CategoriesFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Help;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.ModelURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputLanguage;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.SpecificationURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.UseMetaModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Version;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,7 +40,13 @@ public class Main {
 		Option help = new Help();
 		options.put("h", help);
 		options.put("-help", help);
-		
+		Option modelURI = new ModelURI();
+		options.put("u", modelURI);
+		options.put("-model-uri", modelURI);
+		Option specURI = new SpecificationURI();
+		options.put("s", specURI);
+		options.put("-specification-uri", specURI);
+
 		VALID_LANGS.add("RDF/XML");
 		VALID_LANGS.add("RDF/XML-ABBREV");
 		VALID_LANGS.add("N3");
@@ -51,15 +61,17 @@ public class Main {
 		Builder builder = null;
 		try {
 			BuilderConfiguration config = parseArgs(args);
-			if(config == null) return;
+			if (config == null)
+				return;
 			builder = new Builder(config);
 		} catch (ParseException pex) {
 			System.err.println("Syntax error: " + pex.getMessage());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-		if(builder != null) builder.run();
+
+		if (builder != null)
+			builder.run();
 	}
 
 	private static BuilderConfiguration parseArgs(String[] args)
@@ -79,7 +91,7 @@ public class Main {
 			if (current + option.getNumArguments() >= args.length)
 				throw new ParseException("missing arguments for option "
 						+ optionName);
-			if(!option.parse(config, args, ++current)) {
+			if (!option.parse(config, args, ++current)) {
 				System.out.println("Stopped.");
 				return null;
 			}
@@ -89,20 +101,41 @@ public class Main {
 		// validate configuration
 		// check if categories file exists
 		File categoriesFolder = new File(Builder.CATEGORIES_FOLDER);
-		File categoriesFile = new File(categoriesFolder, config.getCategoriesFileName());
+		File categoriesFile = new File(categoriesFolder, config
+				.getCategoriesFileName());
 		if (!categoriesFile.exists())
 			throw new ParseException("categories file "
-					+ config.getCategoriesFileName()
-					+ " does not exist");
-		if(!VALID_LANGS.contains(config.getOutputLanguage())) throw new ParseException("language " + config.getOutputLanguage() + " not supported");
-		
+					+ config.getCategoriesFileName() + " does not exist");
+		// check if valid lang
+		if (!VALID_LANGS.contains(config.getOutputLanguage()))
+			throw new ParseException("language " + config.getOutputLanguage()
+					+ " not supported");
+		// check if model uri is valid
+		try {
+			new URI(config.getModelURI());
+		} catch (URISyntaxException urisex) {
+			throw new ParseException(config.getModelURI()
+					+ " is not a valid ontology URI", urisex);
+		}
+		if (config.getUseMetaModel()) {
+			// check if specification uri is valid
+			try {
+				new URI(config.getSpecificationURI());
+			} catch (URISyntaxException urisex) {
+				throw new ParseException(config.getSpecificationURI()
+						+ " is not a valid specification URI", urisex);
+			}
+		}
+
 		// output configuration
-		System.out.println("Categories file: "
-				+ config.getCategoriesFileName());
+		System.out
+				.println("Categories file: " + config.getCategoriesFileName());
 		System.out.println("Output file: " + config.getOutputFileName());
 		System.out.println("Output language: " + config.getOutputLanguage());
 		System.out.println("Use meta model: " + config.getUseMetaModel());
 		System.out.println("Version: " + config.getVersion());
+		System.out.println("Output ontology URI: " + config.getModelURI());
+		if(config.getUseMetaModel()) System.out.println("Context specification URI: " + config.getSpecificationURI());
 
 		return config;
 	}
