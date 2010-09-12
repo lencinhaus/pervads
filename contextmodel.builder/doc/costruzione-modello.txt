@@ -1,0 +1,51 @@
+ad ogni step ho:
+- un set di categories
+- il parent dimension assignment (all'inizio è DimensionAssignment)
+- la proprietà di assegnamento valori del parent (all'inizio è null)
+- il parent value (all'inizio è null)
+- identificatore (all'inizio stringa vuota)
+
+- per ogni category nel set
+	- creo identificatore dimensione
+	- creo una dimensione in FormalDimension
+	- dimensione label nome
+	- dimensione comment descrizione
+	- se il parent value è null
+		- specifica rootDimension dimensione
+	- altrimenti
+		- parent value valueSubDimension dimensione
+	- per ogni parametro
+		- parso il parametro che mi ritorna l'individuo dentro FormalParameter
+		- dimensione dimensionParameter parametro
+	- creo una classe di valori in DimensionValue
+	- creo una proprietà di assegnamento valori sotto dimensionAssignmentValue
+	- creo la classe dell'assegnamento come
+		- equivalente all'unione di
+			- assignmentDimension value {dimensione}
+			- dimensionAssignmentValue some ClasseValori
+		- sottoclasse dell'intersezione di
+			- classe parent assignment
+			- ? assignmentDimension value (dimensione)
+			- proprietà di assegnamento valori exactly 1 Thing
+			- proprietà di assegnamento valori parent (se non null) value parent value
+	- per ogni sottocategoria
+		- creo identificatore valore
+		- creo un individuo nella classe dei valori
+		- dimensione dimensionValue valore
+		- valore label nome
+		- valore comment descrizione
+		- per ogni parametro
+			- parso il parametro che mi ritorna l'individuo dentro FormalParameter
+			- valore valueParameter parametro
+		- se ha delle sottocategorie, metto in coda un nuovo contesto con:
+			- set di categorie: sottocategorie
+			- parent dimension assignment = classe dell'assegnamento
+			- proprietà di assegnamento valori parent = quella attuale
+			- parent value = valore corrente
+- segno tutte le classi dei valori come disgiunte
+- segno tutte le classi degli assegnamenti come disgiunte
+- riparto col prossimo elemento in coda
+
+
+
+PARSING PARAMETRI

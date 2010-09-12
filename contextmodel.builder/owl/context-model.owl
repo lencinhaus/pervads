@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/context-model.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://dei.polimi.it/dbgroup/pedigree/context-model.owl#"
+     xml:base="http://dei.polimi.it/dbgroup/pedigree/context-model.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/context-model.owl#">
+    <owl:Ontology rdf:about=""/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#assignmentDimension -->
+
+    <owl:ObjectProperty rdf:about="#assignmentDimension">
+        <rdfs:domain rdf:resource="#DimensionAssignment"/>
+        <rdfs:range rdf:resource="#FormalDimension"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#assignmentParameter -->
+
+    <owl:ObjectProperty rdf:about="#assignmentParameter">
+        <rdfs:range rdf:resource="#FormalParameter"/>
+        <rdfs:domain rdf:resource="#ParameterAssignment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#dimensionAssignment -->
+
+    <owl:ObjectProperty rdf:about="#dimensionAssignment">
+        <rdfs:domain rdf:resource="#Context"/>
+        <rdfs:range rdf:resource="#DimensionAssignment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#dimensionAssignmentValue -->
+
+    <owl:ObjectProperty rdf:about="#dimensionAssignmentValue">
+        <rdfs:domain rdf:resource="#DimensionAssignment"/>
+        <rdfs:range rdf:resource="#DimensionValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#parameterAssignment -->
+
+    <owl:ObjectProperty rdf:about="#parameterAssignment">
+        <rdfs:domain rdf:resource="#DimensionAssignment"/>
+        <rdfs:range rdf:resource="#ParameterAssignment"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#parameterAssignmentValue -->
+
+    <owl:DatatypeProperty rdf:about="#parameterAssignmentValue">
+        <rdfs:domain rdf:resource="#ParameterAssignment"/>
+        <rdfs:range rdf:resource="&xsd;anyType"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#Context -->
+
+    <owl:Class rdf:about="#Context"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#DimensionAssignment -->
+
+    <owl:Class rdf:about="#DimensionAssignment">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#dimensionAssignmentValue"/>
+                <owl:someValuesFrom rdf:resource="#DimensionValue"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#assignmentDimension"/>
+                <owl:someValuesFrom rdf:resource="#FormalDimension"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#assignmentDimension"/>
+                        <owl:someValuesFrom rdf:resource="#FormalDimension"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#dimensionAssignmentValue"/>
+                        <owl:someValuesFrom rdf:resource="#DimensionValue"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#DimensionValue -->
+
+    <owl:Class rdf:about="#DimensionValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#FormalDimension -->
+
+    <owl:Class rdf:about="#FormalDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#FormalParameter -->
+
+    <owl:Class rdf:about="#FormalParameter"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#ParameterAssignment -->
+
+    <owl:Class rdf:about="#ParameterAssignment">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#assignmentParameter"/>
+                <owl:someValuesFrom rdf:resource="#FormalParameter"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="#parameterAssignmentValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;anyType"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#assignmentParameter"/>
+                        <owl:someValuesFrom rdf:resource="#FormalParameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="#parameterAssignmentValue"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;anyType"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+
