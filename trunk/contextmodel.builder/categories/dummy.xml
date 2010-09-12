@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<categories>
+    <category name="cat1">
+        <category name="cat11">
+            <category name="cat111"/>
+        </category>
+        <category name="cat12"/>
+    </category>
+    <category name="cat2">
+        <category name="cat21"/>
+        <category name="cat22">
+            <category name="cat221"/>
+        </category>
+    </category>
+</categories>
