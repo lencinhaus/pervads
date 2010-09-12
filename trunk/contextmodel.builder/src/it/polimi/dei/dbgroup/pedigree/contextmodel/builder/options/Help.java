@@ -4,10 +4,12 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.Main;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.Option;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Help extends Option {
 
@@ -19,21 +21,30 @@ public class Help extends Option {
 	public boolean parse(BuilderConfiguration config, String[] args, int offset)
 			throws Exception {
 		// build options map
-		Map<Option, Set<String>> optionsMap = new HashMap<Option, Set<String>>();
+		Map<Option, List<String>> optionsMap = new HashMap<Option, List<String>>();
 		for (String optionArg : Main.options.keySet()) {
 			Option option = Main.options.get(optionArg);
-			Set<String> optionArgSet = optionsMap.get(option);
+			List<String> optionArgSet = optionsMap.get(option);
 			if (optionArgSet == null) {
-				optionArgSet = new HashSet<String>();
+				optionArgSet = new ArrayList<String>();
 				optionsMap.put(option, optionArgSet);
 			}
 			optionArgSet.add(optionArg);
 		}
 		System.out.println("Usage:");
 		System.out.println();
+		Comparator<String> argsComparator = new Comparator<String>() {
+			
+			@Override
+			public int compare(String o1, String o2) {
+				return o1.length() - o2.length();
+			}
+		};
 		for (Option option : optionsMap.keySet()) {
 			boolean firstArg = true;
-			for (String arg : optionsMap.get(option)) {
+			List<String> optionArgs = optionsMap.get(option);
+			Collections.sort(optionArgs, argsComparator);
+			for (String arg : optionArgs) {
 				if (firstArg)
 					firstArg = false;
 				else

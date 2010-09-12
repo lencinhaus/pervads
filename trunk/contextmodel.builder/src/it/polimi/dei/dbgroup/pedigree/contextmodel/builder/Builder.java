@@ -106,11 +106,11 @@ public class Builder {
 			} catch (UnknownPropertyException upe) {
 			}
 			try {
-				writer.setProperty("xmlbase", PervADsContextModel.URI);
+				writer.setProperty("xmlbase", config.getModelURI());
 			} catch (UnknownPropertyException upe) {
 			}
-			writer.write(model, new FileOutputStream(modelFile),
-					PervADsContextModel.URI);
+			writer.write(model, new FileOutputStream(modelFile), config
+					.getModelURI());
 
 			// p("Testing model...");
 			// OntModel test = ModelFactory
@@ -337,8 +337,7 @@ public class Builder {
 			categories = categorySource.getCategories();
 			serializeCategories(categoriesFile, categories);
 		} else {
-			p("Reading categories from file "
-					+ categoriesFile.getName());
+			p("Reading categories from file " + categoriesFile.getName());
 			categories = deserializeCategories(categoriesFile);
 		}
 
@@ -365,11 +364,12 @@ public class Builder {
 		OntModel m = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 
 		// set namespace prefix
-		m.setNsPrefix("", PervADsContextModel.NS);
+		String ns = config.getModelURI() + "#";
+		m.setNsPrefix("", ns);
 		m.setNsPrefix(CONTEXT_MODEL_NS_PREFIX, ContextModel.NS);
 
 		// create ontology and import context model
-		Ontology ontology = m.createOntology(PervADsContextModel.URI);
+		Ontology ontology = m.createOntology(config.getModelURI());
 		ontology.addVersionInfo(config.getVersion());
 		ontology.addImport(proxy.getContextModelOntology());
 
@@ -381,9 +381,9 @@ public class Builder {
 		Individual specificationIndividual = null;
 		if (config.getUseMetaModel()) {
 			// create context specification
-			specificationIndividual = m.createIndividual(
-					PervADsContextModel.PERVADS_SPECIFICATION_URI, proxy
-							.getContextSpecificationClass());
+			specificationIndividual = m.createIndividual(config
+					.getSpecificationURI(), proxy
+					.getContextSpecificationClass());
 			specificationIndividual.addVersionInfo("pagine_gialle_0.1");
 		}
 
@@ -412,12 +412,10 @@ public class Builder {
 						.getIdentifier(), dimensionIndex);
 
 				// create formal dimension individual
-				Individual dimensionIndividual = m.createIndividual(
-						PervADsContextModel.NS
-								+ String.format(
-										DIMENSION_INDIVIDUAL_NAME_FORMAT,
-										dimensionIdentifier), proxy
-								.getFormalDimensionClass());
+				Individual dimensionIndividual = m.createIndividual(ns
+						+ String.format(DIMENSION_INDIVIDUAL_NAME_FORMAT,
+								dimensionIdentifier), proxy
+						.getFormalDimensionClass());
 
 				if (config.getUseMetaModel()) {
 					// set rootDimension or valueSubDimension properties
@@ -457,7 +455,7 @@ public class Builder {
 				}
 
 				// create values class
-				OntClass valueClass = m.createClass(PervADsContextModel.NS
+				OntClass valueClass = m.createClass(ns
 						+ String.format(VALUE_CLASS_NAME_FORMAT,
 								dimensionIdentifier));
 				valueClass.addSuperClass(proxy.getDimensionValueClass());
@@ -466,18 +464,16 @@ public class Builder {
 				definedValueClasses.add(valueClass);
 
 				// create value assignment property
-				OntProperty assignmentProperty = m
-						.createOntProperty(PervADsContextModel.NS
-								+ String.format(
-										ASSIGNMENT_PROPERTY_NAME_FORMAT,
-										dimensionIdentifier));
+				OntProperty assignmentProperty = m.createOntProperty(ns
+						+ String.format(ASSIGNMENT_PROPERTY_NAME_FORMAT,
+								dimensionIdentifier));
 				assignmentProperty.setSuperProperty(proxy
 						.getDimensionAssignmentValueProperty());
 				assignmentProperty.setRange(valueClass);
 				// we'll set domain later
 
 				// create assignment class
-				OntClass assignmentClass = m.createClass(PervADsContextModel.NS
+				OntClass assignmentClass = m.createClass(ns
 						+ String.format(ASSIGNMENT_CLASS_NAME_FORMAT,
 								dimensionIdentifier));
 
@@ -519,11 +515,9 @@ public class Builder {
 							dimensionIdentifier, valueIndex);
 
 					// create value individual
-					Individual valueIndividual = m.createIndividual(
-							PervADsContextModel.NS
-									+ String.format(
-											VALUE_INDIVIDUAL_NAME_FORMAT,
-											valueIdentifier), valueClass);
+					Individual valueIndividual = m.createIndividual(ns
+							+ String.format(VALUE_INDIVIDUAL_NAME_FORMAT,
+									valueIdentifier), valueClass);
 
 					// assign label and comment to value
 					assignLabelAndComment(valueIndividual, valueCategory);
