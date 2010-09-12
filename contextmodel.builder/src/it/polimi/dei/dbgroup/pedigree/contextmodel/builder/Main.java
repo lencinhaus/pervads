@@ -1,6 +1,7 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CategoriesFileName;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Help;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputLanguage;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.UseMetaModel;
@@ -13,25 +14,28 @@ import java.util.Map;
 import java.util.Set;
 
 public class Main {
-	private static final Map<String, Option> options = new HashMap<String, Option>();
-	private static final Set<String> VALID_LANGS = new HashSet<String>();
+	public static final Map<String, Option> options = new HashMap<String, Option>();
+	public static final Set<String> VALID_LANGS = new HashSet<String>();
 
 	static {
 		Option output = new OutputFileName();
 		options.put("o", output);
-		options.put("output", output);
+		options.put("-output", output);
 		Option categories = new CategoriesFileName();
 		options.put("c", categories);
-		options.put("categories", categories);
+		options.put("-categories", categories);
 		Option lang = new OutputLanguage();
 		options.put("l", lang);
-		options.put("language", lang);
+		options.put("-language", lang);
 		Option meta = new UseMetaModel();
 		options.put("m", meta);
-		options.put("use-meta-model", meta);
+		options.put("-use-meta-model", meta);
 		Option version = new Version();
 		options.put("v", version);
-		options.put("version", version);
+		options.put("-version", version);
+		Option help = new Help();
+		options.put("h", help);
+		options.put("-help", help);
 		
 		VALID_LANGS.add("RDF/XML");
 		VALID_LANGS.add("RDF/XML-ABBREV");
@@ -43,9 +47,11 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println("Context model ontology builder");
 		Builder builder = null;
 		try {
 			BuilderConfiguration config = parseArgs(args);
+			if(config == null) return;
 			builder = new Builder(config);
 		} catch (ParseException pex) {
 			System.err.println("Syntax error: " + pex.getMessage());
@@ -73,7 +79,10 @@ public class Main {
 			if (current + option.getNumArguments() >= args.length)
 				throw new ParseException("missing arguments for option "
 						+ optionName);
-			option.parse(config, args, ++current);
+			if(!option.parse(config, args, ++current)) {
+				System.out.println("Stopped.");
+				return null;
+			}
 			current += option.getNumArguments();
 		}
 

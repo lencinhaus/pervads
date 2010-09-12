@@ -1,11 +1,11 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 public class BuilderConfiguration {
-	private static final String DEFAULT_CATEGORIES_FILE_NAME = "main.xml";
-	private static final String DEFAULT_OUTPUT_FILE_NAME = "pervads";
-	private static final String DEFAULT_OUTPUT_LANGUAGE = "RDF/XML-ABBREV";
-	private static final boolean DEFAULT_USE_META_MODEL = false;
-	private static final String DEFAULT_VERSION = "0.1";
+	public static final String DEFAULT_CATEGORIES_FILE_NAME = "main.xml";
+	public static final String DEFAULT_OUTPUT_FILE_NAME = "pervads";
+	public static final String DEFAULT_OUTPUT_LANGUAGE = "RDF/XML-ABBREV";
+	public static final boolean DEFAULT_USE_META_MODEL = false;
+	public static final String DEFAULT_VERSION = "0.1";
 
 	private String categoriesFileName = DEFAULT_CATEGORIES_FILE_NAME;
 	private String outputFileName = DEFAULT_OUTPUT_FILE_NAME;

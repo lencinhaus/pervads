@@ -9,9 +9,14 @@ public class Version extends Option {
 	}
 	
 	@Override
-	public void parse(BuilderConfiguration config, String[] args, int offset)
+	public boolean parse(BuilderConfiguration config, String[] args, int offset)
 			throws Exception {
 		config.setVersion(args[offset]);
+		return true;
 	}
 
+	@Override
+	public String getDescription() {
+		return "sets the output ontology version. (defaults to " + BuilderConfiguration.DEFAULT_VERSION + ")";
+	}
 }
