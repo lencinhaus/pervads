@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<!-- JENA -->
+	<classpathentry kind="lib" path="/libs/jena/jena-2.6.3.jar" sourcepath="/libs/jena/jena-2.6.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jena.sourceforge.net/javadoc"/>
+		</attributes>
+	</classpathentry>
+	<!-- ARQ -->
+	<classpathentry kind="lib" path="/libs/arq/arq-2.8.5.jar" sourcepath="/libs/arq/arq-2.8.5-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jena.sourceforge.net/ARQ/javadoc"/>
+		</attributes>
+	</classpathentry>
+	<!-- HTTPUNIT -->
+	<classpathentry kind="lib" path="/libs/httpunit/httpunit.jar" sourcepath="/libs/httpunit/src">
+		<attributes>
+			<attribute name="javadoc_location" value="http://httpunit.sourceforge.net/doc/api"/>
+		</attributes>
+	</classpathentry>
+	<!-- PELLET -->
+	<classpathentry kind="lib" path="/libs/pellet/aterm-java-1.6.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-cli.jar" sourcepath="/libs/pellet/src/pellet-cli-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-core.jar" sourcepath="/libs/pellet/src/pellet-core-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-datatypes.jar" sourcepath="/libs/pellet/src/pellet-datatypes-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-dig.jar" sourcepath="/libs/pellet/src/pellet-dig-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-el.jar" sourcepath="/libs/pellet/src/pellet-el-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-explanation.jar" sourcepath="/libs/pellet/src/pellet-explanation-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-jena.jar" sourcepath="/libs/pellet/src/pellet-jena-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-modularity.jar" sourcepath="/libs/pellet/src/pellet-modularity-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-owlapi.jar" sourcepath="/libs/pellet/src/pellet-owlapi-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-owlapiv3.jar" sourcepath="/libs/pellet/src/pellet-owlapiv3-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-pellint.jar" sourcepath="/libs/pellet/src/pellet-pellint-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-query.jar" sourcepath="/libs/pellet/src/pellet-query-src.jar"/>
+	<classpathentry kind="lib" path="/libs/pellet/pellet-rules.jar" sourcepath="/libs/pellet/src/pellet-rules-src.jar"/>
+	<!-- ANDROJENA -->
+	<classpathentry kind="lib" path="/libs/androjena/androjena_0.2.jar" sourcepath="/libs/androjena/androjena_0.2_sources.jar"/>
+	<!-- IRI 0.8 -->
+	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
+	<!-- IRI 0.7 -->
+	<classpathentry kind="lib" path="/libs/iri/iri-0.7.jar"/>
+	<!-- LUCENE -->
+	<classpathentry kind="lib" path="/libs/lucene/lucene-core-3.0.2.jar" sourcepath="/libs/lucene/lucene-3.0.2-src.zip"/>
+	<!-- SLF4J-ANDROID -->
+	<classpathentry kind="lib" path="/libs/slf4j-android/slf4j-android-1.6.1-RC1.jar" sourcepath="/libs/slf4j-android/slf4j-android-1.6.1-RC1-sources.jar"/>
+	<!-- OTHER -->
+	<classpathentry kind="lib" path="/libs/other/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.4.jar"/>
+	<classpathentry kind="lib" path="/libs/other/js-1.6R5.jar"/>
+	<classpathentry kind="lib" path="/libs/other/jtidy-4aug2000r7-dev.jar"/>
+	<classpathentry kind="lib" path="/libs/other/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="/libs/other/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/libs/other/lucene-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="/libs/other/nekohtml-0.9.5.jar"/>
+	<classpathentry kind="lib" path="/libs/other/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="/libs/other/slf4j-api-1.5.8.jar"/>
+	<classpathentry kind="lib" path="/libs/other/slf4j-log4j12-1.5.8.jar"/>
+	<classpathentry kind="lib" path="/libs/other/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/wstx-asl-3.2.9.jar"/>
+	<classpathentry kind="lib" path="/libs/other/xercesImpl-2.7.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/xmlParserAPIs-2.6.1.jar"/>
+</classpath>
