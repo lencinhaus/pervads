@@ -1,0 +1,1190 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY this 'http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#'>
+  <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+  <!ENTITY c 'http://dei.polimi.it/dbgroup/pedigree/context-model.owl#'>
+  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+  <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+  <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>]>
+<rdf:RDF
+    xmlns:rdf="&rdf;"
+    xmlns="&this;"
+    xmlns:owl="&owl;"
+    xmlns:xsd="&xsd;"
+    xmlns:rdfs="&rdfs;"
+    xmlns:c="&c;"
+  xml:base="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="../context-model.owl"/>
+    <owl:versionInfo>0.1</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Dimension_2_Assignment">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionAssignment"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_2_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_2">
+                <rdfs:label xml:lang="it">Dove</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_3_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_2_1_3_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_3_1_Value rdf:ID="value_1_2_1_3_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_2_1_3_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_3_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_3_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_3_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_1_1_3_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_3_1_Value rdf:ID="value_1_1_1_3_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_1_1_3_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_3_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_3_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_3_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_1_1_3_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_Value rdf:ID="value_1_1_1_3">
+                <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+              </Dimension_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_3_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_Value rdf:ID="value_1_2_1_2">
+                <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+              </Dimension_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_2_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_2_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_1_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_2_1_Value rdf:ID="value_1_1_1_2_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_1_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_2_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_2_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_3_Assignment">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionAssignment"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_3_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_3">
+                <rdfs:label xml:lang="it">Quando</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_1_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_1_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_1_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_1_1_Value rdf:ID="value_1_1_1_1_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_1_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_1_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_1_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_Assignment">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionAssignment"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_2_1_Value rdf:ID="value_1_2_1_2_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_2_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_2_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_2_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_1_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_3_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_2_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_3_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_1_1_3_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_3_1_Value rdf:ID="value_1_1_1_3_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_1_1_3_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_3_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_3_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_3_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_1_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_1_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_1_1_Value rdf:ID="value_1_1_1_1_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_1_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_1_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_1_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_3_1_2_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_1_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_Value rdf:ID="value_1_1_1_1">
+                <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+              </Dimension_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_1_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_Value rdf:ID="value_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_3_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_Value rdf:ID="value_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_3_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_3_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_3_1_Value rdf:ID="value_1_2_1_3_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_2_1_3_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_3_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_3_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_3_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_2_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_2_1_Value rdf:ID="value_1_2_1_2_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_2_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_2_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_2_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_1_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_Value rdf:ID="value_1_1_1_2">
+                <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+              </Dimension_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_2_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_3_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_2_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_1_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Dimension_1_2_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_1_1_Value rdf:ID="value_1_2_1_1_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_2_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_1_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_1_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_1_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_1_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_1_1_Value rdf:ID="value_1_2_1_1_1_1">
+                <rdfs:label xml:lang="it">Questo</rdfs:label>
+              </Dimension_1_2_1_1_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_2_1_1_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_1_1_1_1">
+                <rdfs:label xml:lang="it">Questo cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_2_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_2_1_1_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_2_1_2_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_1_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_1_1_2_1_Value rdf:ID="value_1_1_1_2_1_2">
+                <rdfs:label xml:lang="it">Quest'altro</rdfs:label>
+              </Dimension_1_1_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_1_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:ID="dimension_1_1_1_2_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_1_1_2_1_2_1">
+                <rdfs:label xml:lang="it">Quest'altro cosa?</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_2_1_3_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_Value rdf:ID="value_1_2_1_3">
+                <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+              </Dimension_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_3_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_3_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension_1_2_1_1_1_Assignment">
+    <rdfs:subClassOf>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Dimension_1_2_1_Assignment"/>
+          <owl:Restriction>
+            <owl:hasValue>
+              <Dimension_1_2_1_Value rdf:ID="value_1_2_1_1">
+                <rdfs:label xml:lang="it">Bo!</rdfs:label>
+              </Dimension_1_2_1_Value>
+            </owl:hasValue>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </rdfs:subClassOf>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Restriction>
+            <owl:cardinality rdf:datatype="&xsd;int">1</owl:cardinality>
+            <owl:onProperty>
+              <rdf:Property rdf:about="#dimension_1_2_1_1_1_AssignmentValue"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:hasValue>
+              <c:FormalDimension rdf:ID="dimension_1_2_1_1_1">
+                <rdfs:comment xml:lang="it">Categorie merceologiche</rdfs:comment>
+                <rdfs:label xml:lang="it">Cosa</rdfs:label>
+              </c:FormalDimension>
+            </owl:hasValue>
+            <owl:onProperty rdf:resource="../context-model.owl#assignmentDimension"/>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension_1_1_1_1_1_1_1_Value">
+    <rdfs:subClassOf rdf:resource="../context-model.owl#DimensionValue"/>
+  </owl:Class>
+  <rdf:Property rdf:about="#dimension_1_1_1_1_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_1_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_1_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_3_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_3_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_3_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_1_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_1_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_1_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_2_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_2_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_2_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_3_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_3_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_3_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_2_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_2_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_2_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_2_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_2_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_2_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_3_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_3_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_3_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_2_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_2_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_2_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_1_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_1_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_1_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_3_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_3_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_3_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_3_1_2_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_3_1_2_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_3_1_2_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_1_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_1_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_1_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_2_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_2_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_2_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_2_1_3_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_2_1_3_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_2_1_3_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="#dimension_1_1_1_3_1_1_1_AssignmentValue">
+    <rdfs:domain rdf:resource="#Dimension_1_1_1_3_1_1_1_Assignment"/>
+    <rdfs:range rdf:resource="#Dimension_1_1_1_3_1_1_1_Value"/>
+    <rdfs:subPropertyOf rdf:resource="../context-model.owl#dimensionAssignmentValue"/>
+  </rdf:Property>
+  <Dimension_2_Value rdf:ID="value_2_1">
+    <rdfs:label xml:lang="it">qui</rdfs:label>
+  </Dimension_2_Value>
+  <Dimension_1_1_1_3_1_1_1_Value rdf:ID="value_1_1_1_3_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_1_1_3_1_1_1_Value>
+  <Dimension_1_2_1_2_1_1_1_Value rdf:ID="value_1_2_1_2_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_2_1_2_1_1_1_Value>
+  <Dimension_1_2_1_1_1_2_1_Value rdf:ID="value_1_2_1_1_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_2_1_1_1_2_1_Value>
+  <Dimension_1_2_1_2_1_1_1_Value rdf:ID="value_1_2_1_2_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_2_1_2_1_1_1_Value>
+  <Dimension_1_2_1_2_1_2_1_Value rdf:ID="value_1_2_1_2_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_2_1_2_1_2_1_Value>
+  <Dimension_1_2_1_1_1_2_1_Value rdf:ID="value_1_2_1_1_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_2_1_1_1_2_1_Value>
+  <c:FormalParameter rdf:ID="parameter_2_2_1">
+    <rdfs:label xml:lang="it">posizione</rdfs:label>
+  </c:FormalParameter>
+  <Dimension_1_1_1_3_1_1_1_Value rdf:ID="value_1_1_1_3_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_1_1_3_1_1_1_Value>
+  <Dimension_3_Value rdf:ID="value_3_2">
+    <rdfs:label xml:lang="it">Prima o poi</rdfs:label>
+  </Dimension_3_Value>
+  <c:FormalParameter rdf:ID="parameter_2_2_2">
+    <rdfs:label xml:lang="it">N</rdfs:label>
+  </c:FormalParameter>
+  <Dimension_1_2_1_1_1_2_1_Value rdf:ID="value_1_2_1_1_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_2_1_1_1_2_1_Value>
+  <Dimension_1_1_1_3_1_1_1_Value rdf:ID="value_1_1_1_3_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_1_1_3_1_1_1_Value>
+  <Dimension_1_2_1_2_1_1_1_Value rdf:ID="value_1_2_1_2_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_2_1_2_1_1_1_Value>
+  <Dimension_3_Value rdf:ID="value_3_1">
+    <rdfs:label xml:lang="it">Ora</rdfs:label>
+  </Dimension_3_Value>
+  <Dimension_1_1_1_1_1_1_1_Value rdf:ID="value_1_1_1_1_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_1_1_1_1_1_1_Value>
+  <Dimension_1_2_1_2_1_2_1_Value rdf:ID="value_1_2_1_2_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_2_1_2_1_2_1_Value>
+  <Dimension_1_2_1_3_1_1_1_Value rdf:ID="value_1_2_1_3_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_2_1_3_1_1_1_Value>
+  <Dimension_1_1_1_3_1_2_1_Value rdf:ID="value_1_1_1_3_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_1_1_3_1_2_1_Value>
+  <Dimension_1_2_1_2_1_2_1_Value rdf:ID="value_1_2_1_2_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_2_1_2_1_2_1_Value>
+  <Dimension_1_1_1_3_1_2_1_Value rdf:ID="value_1_1_1_3_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_1_1_3_1_2_1_Value>
+  <Dimension_1_1_1_3_1_2_1_Value rdf:ID="value_1_1_1_3_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_1_1_3_1_2_1_Value>
+  <Dimension_1_2_1_3_1_1_1_Value rdf:ID="value_1_2_1_3_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_2_1_3_1_1_1_Value>
+  <Dimension_1_2_1_1_1_1_1_Value rdf:ID="value_1_2_1_1_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_2_1_1_1_1_1_Value>
+  <Dimension_1_1_1_2_1_2_1_Value rdf:ID="value_1_1_1_2_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_1_1_2_1_2_1_Value>
+  <Dimension_1_2_1_3_1_1_1_Value rdf:ID="value_1_2_1_3_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_2_1_3_1_1_1_Value>
+  <Dimension_1_1_1_2_1_2_1_Value rdf:ID="value_1_1_1_2_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_1_1_2_1_2_1_Value>
+  <Dimension_1_2_1_3_1_2_1_Value rdf:ID="value_1_2_1_3_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_2_1_3_1_2_1_Value>
+  <Dimension_1_1_1_1_1_1_1_Value rdf:ID="value_1_1_1_1_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_1_1_1_1_1_1_Value>
+  <Dimension_1_2_1_1_1_1_1_Value rdf:ID="value_1_2_1_1_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_2_1_1_1_1_1_Value>
+  <Dimension_1_2_1_3_1_2_1_Value rdf:ID="value_1_2_1_3_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_2_1_3_1_2_1_Value>
+  <c:FormalParameter rdf:ID="parameter_2_1_1">
+    <rdfs:label xml:lang="it">posizione</rdfs:label>
+  </c:FormalParameter>
+  <Dimension_1_1_1_1_1_1_1_Value rdf:ID="value_1_1_1_1_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_1_1_1_1_1_1_Value>
+  <Dimension_1_2_1_1_1_1_1_Value rdf:ID="value_1_2_1_1_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_2_1_1_1_1_1_Value>
+  <Dimension_1_1_1_2_1_2_1_Value rdf:ID="value_1_1_1_2_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_1_1_2_1_2_1_Value>
+  <Dimension_1_2_1_3_1_2_1_Value rdf:ID="value_1_2_1_3_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_2_1_3_1_2_1_Value>
+  <Dimension_1_1_1_2_1_1_1_Value rdf:ID="value_1_1_1_2_1_1_1_3">
+    <rdfs:label xml:lang="it">Non lo so cosa vuoi da me.</rdfs:label>
+  </Dimension_1_1_1_2_1_1_1_Value>
+  <Dimension_2_Value rdf:ID="value_2_2">
+    <rdfs:label xml:lang="it">in un raggio di N chilometri da qui</rdfs:label>
+  </Dimension_2_Value>
+  <Dimension_1_1_1_1_1_2_1_Value rdf:ID="value_1_1_1_1_1_2_1_3">
+    <rdfs:label xml:lang="it">La vita è un po' così</rdfs:label>
+  </Dimension_1_1_1_1_1_2_1_Value>
+  <Dimension_1_1_1_2_1_1_1_Value rdf:ID="value_1_1_1_2_1_1_1_1">
+    <rdfs:label xml:lang="it">Questo ho detto!</rdfs:label>
+  </Dimension_1_1_1_2_1_1_1_Value>
+  <Dimension_1_1_1_1_1_2_1_Value rdf:ID="value_1_1_1_1_1_2_1_2">
+    <rdfs:label xml:lang="it">Uffa.</rdfs:label>
+  </Dimension_1_1_1_1_1_2_1_Value>
+  <Dimension_1_1_1_2_1_1_1_Value rdf:ID="value_1_1_1_2_1_1_1_2">
+    <rdfs:label xml:lang="it">Quest'altro forse.</rdfs:label>
+  </Dimension_1_1_1_2_1_1_1_Value>
+  <Dimension_1_1_1_1_1_2_1_Value rdf:ID="value_1_1_1_1_1_2_1_1">
+    <rdfs:label xml:lang="it">Bo!</rdfs:label>
+  </Dimension_1_1_1_1_1_2_1_Value>
+</rdf:RDF>

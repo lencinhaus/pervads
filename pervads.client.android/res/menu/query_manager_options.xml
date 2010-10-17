@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:icon="@android:drawable/ic_menu_add" android:titleCondensed="@string/query_manager_options_add_query_title_condensed" android:title="@string/query_manager_options_add_query_title" android:id="@+id/add"></item>
+<item android:id="@+id/clear" android:title="@string/query_manager_options_clear_queries_title" android:icon="@android:drawable/ic_menu_close_clear_cancel" android:titleCondensed="@string/query_manager_options_clear_queries_title_condensed"></item>
+</menu>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:pervads="http://schemas.android.com/apk/res/it.polimi.dei.dbgroup.pedigree.pervads">
+<CheckBoxPreference android:key="@string/setting_autoupdate" android:title="@string/setting_autoupdate_title" android:summaryOff="@string/setting_autoupdate_summaryoff" android:summaryOn="@string/setting_autoupdate_summaryon" android:disableDependentsState="false" android:defaultValue="@string/setting_autoupdate_defaultvalue"></CheckBoxPreference>
+<it.polimi.dei.dbgroup.pedigree.pervads.preference.NumberPickerPreference android:summary="@string/setting_updateinterval_summary" android:defaultValue="@string/setting_updateinterval_defaultvalue" android:key="@string/setting_updateinterval" android:dependency="@string/setting_autoupdate" android:title="@string/setting_updateinterval_title" android:dialogMessage="@string/setting_updateinterval_dialogmessage" pervads:minValue="@string/setting_updateinterval_minvalue" pervads:maxValue="@string/setting_updateinterval_maxvalue" pervads:speed="100"></it.polimi.dei.dbgroup.pedigree.pervads.preference.NumberPickerPreference>
+</PreferenceScreen>

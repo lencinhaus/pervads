@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<declare-styleable name="PervadsTheme">
+		<attr name="numberPickerPreferenceStyle" format="reference" />
+	</declare-styleable>
+<!-- These are the standard attributes that make up a complete theme. -->
+    <declare-styleable name="NumberPickerPreference">
+    	<attr name="minValue" format="integer" />
+    	<attr name="maxValue" format="integer" />
+    	<attr name="speed" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
+
+<TextSwitcher android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/tswServiceStatus" android:outAnimation="@anim/fade_out" android:inAnimation="@anim/delayed_fade_in">
+
+<TextView android:layout_height="wrap_content" android:id="@+id/lblServiceEnabled" android:text="@string/pervads_enabled" android:layout_width="fill_parent" android:gravity="center" android:textStyle="bold|italic"></TextView>
+<TextView android:layout_height="wrap_content" android:id="@+id/lblServiceDisabled" android:text="@string/pervads_disabled" android:layout_width="fill_parent" android:textStyle="bold|italic" android:gravity="center"></TextView>
+</TextSwitcher><ToggleButton android:id="@+id/btnToggleService" android:layout_width="fill_parent" android:textOff="@string/enable_pervads" android:textOn="@string/disable_pervads" android:layout_height="wrap_content"></ToggleButton><Button android:layout_height="wrap_content" android:text="@string/start_lookup" android:id="@+id/btnStartLookup" android:layout_width="fill_parent"></Button><ScrollView android:id="@+id/ScrollView01" android:layout_width="fill_parent" android:layout_height="wrap_content"><TextView android:id="@+id/output" android:layout_height="wrap_content" android:layout_width="wrap_content"></TextView>
+</ScrollView>
+
+
+
+
+
+
+
+
+</LinearLayout>
