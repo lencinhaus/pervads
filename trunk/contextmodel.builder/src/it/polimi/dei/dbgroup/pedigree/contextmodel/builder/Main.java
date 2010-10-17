@@ -1,6 +1,9 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CategoriesFileName;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Complexity;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CreateTDBStore;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.DocTypeDeclaration;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Help;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.ModelURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputFileName;
@@ -8,6 +11,7 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputLanguag
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.SpecificationURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.UseMetaModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Version;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.XMLDeclaration;
 
 import java.io.File;
 import java.net.URI;
@@ -46,6 +50,18 @@ public class Main {
 		Option specURI = new SpecificationURI();
 		options.put("s", specURI);
 		options.put("-specification-uri", specURI);
+		Option complexity = new Complexity();
+		options.put("x", complexity);
+		options.put("-complexity", complexity);
+		Option xmlDeclaration = new XMLDeclaration();
+		options.put("xd", xmlDeclaration);
+		options.put("-xml-declaration", xmlDeclaration);
+		Option doctypeDeclaration = new DocTypeDeclaration();
+		options.put("d", doctypeDeclaration);
+		options.put("-doctype-declaration", doctypeDeclaration);
+		Option createTDBStore = new CreateTDBStore();
+		options.put("tdb", createTDBStore);
+		options.put("-create-tdb-store", createTDBStore);
 
 		VALID_LANGS.add("RDF/XML");
 		VALID_LANGS.add("RDF/XML-ABBREV");
@@ -136,6 +152,10 @@ public class Main {
 		System.out.println("Version: " + config.getVersion());
 		System.out.println("Output ontology URI: " + config.getModelURI());
 		if(config.getUseMetaModel()) System.out.println("Context specification URI: " + config.getSpecificationURI());
+		System.out.println("Output model complexity: " + config.getComplexity().toString());
+		System.out.println("Show XML declaration: " + (config.isShowXMLDeclaration()?"yes":"no"));
+		System.out.println("Show DocType declaration: " + (config.isShowDocTypeDeclaration()?"yes":"no"));
+		if(config.isCreateTDBStore()) System.out.println("TDB store output file: " + config.getOutputFileName() + "_tdb.zip");
 
 		return config;
 	}

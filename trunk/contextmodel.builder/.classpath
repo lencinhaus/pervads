@@ -49,6 +49,7 @@
 	<classpathentry kind="lib" path="/libs/pellet/pellet-pellint.jar" sourcepath="/libs/pellet/src/pellet-pellint-src.jar"/>
 	<classpathentry kind="lib" path="/libs/pellet/pellet-query.jar" sourcepath="/libs/pellet/src/pellet-query-src.jar"/>
 	<classpathentry kind="lib" path="/libs/pellet/pellet-rules.jar" sourcepath="/libs/pellet/src/pellet-rules-src.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/contextmodel.vocabulary"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/contextmodel.core"/>
+	<classpathentry kind="lib" path="/libs/tdb/tdb-0.8.7.jar" sourcepath="/libs/tdb/tdb-0.8.7-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

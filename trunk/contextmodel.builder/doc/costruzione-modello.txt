@@ -42,8 +42,8 @@ ad ogni step ho:
 			- parent dimension assignment = classe dell'assegnamento
 			- proprietà di assegnamento valori parent = quella attuale
 			- parent value = valore corrente
-- segno tutte le classi dei valori come disgiunte
-- segno tutte le classi degli assegnamenti come disgiunte
+- segno tutte le classi dei valori come disgiunte - RIMOSSO (è OWL2)
+- segno tutte le classi degli assegnamenti come disgiunte - RIMOSSO (è OWL2)
 - riparto col prossimo elemento in coda
 
 

@@ -10,6 +10,10 @@ public class BuilderConfiguration {
 	public static final String DEFAULT_VERSION = "0.1";
 	public static final String DEFAULT_MODEL_URI = PervADsContextModel.URI;
 	public static final String DEFAULT_SPECIFICATION_URI = PervADsContextModel.PERVADS_SPECIFICATION_URI;
+	public static final ModelComplexityLevel DEFAULT_COMPLEXITY = ModelComplexityLevel.LOW;
+	public static final boolean DEFAULT_SHOW_XML_DECLARATION = false;
+	public static final boolean DEFAULT_SHOW_DOCTYPE_DECLARATION = false;
+	public static final boolean DEFAULT_CREATE_TDB_STORE = false;
 
 	private String categoriesFileName = DEFAULT_CATEGORIES_FILE_NAME;
 	private String outputFileName = DEFAULT_OUTPUT_FILE_NAME;
@@ -18,6 +22,10 @@ public class BuilderConfiguration {
 	private String version = DEFAULT_VERSION;
 	private String modelURI = DEFAULT_MODEL_URI;
 	private String specificationURI = DEFAULT_SPECIFICATION_URI;
+	private ModelComplexityLevel complexity = DEFAULT_COMPLEXITY;
+	private boolean showXMLDeclaration = DEFAULT_SHOW_XML_DECLARATION;
+	private boolean showDocTypeDeclaration = DEFAULT_SHOW_DOCTYPE_DECLARATION;
+	private boolean createTDBStore = DEFAULT_CREATE_TDB_STORE;
 
 	public String getCategoriesFileName() {
 		return categoriesFileName;
@@ -73,6 +81,38 @@ public class BuilderConfiguration {
 
 	public void setSpecificationURI(String specificationURI) {
 		this.specificationURI = specificationURI;
+	}
+
+	public ModelComplexityLevel getComplexity() {
+		return complexity;
+	}
+
+	public void setComplexity(ModelComplexityLevel complexity) {
+		this.complexity = complexity;
+	}
+
+	public boolean isShowXMLDeclaration() {
+		return showXMLDeclaration;
+	}
+
+	public void setShowXMLDeclaration(boolean showXMLDeclaration) {
+		this.showXMLDeclaration = showXMLDeclaration;
+	}
+
+	public boolean isShowDocTypeDeclaration() {
+		return showDocTypeDeclaration;
+	}
+
+	public void setShowDocTypeDeclaration(boolean showDocTypeDeclaration) {
+		this.showDocTypeDeclaration = showDocTypeDeclaration;
+	}
+
+	public boolean isCreateTDBStore() {
+		return createTDBStore;
+	}
+
+	public void setCreateTDBStore(boolean createTDBStore) {
+		this.createTDBStore = createTDBStore;
 	}
 
 	
