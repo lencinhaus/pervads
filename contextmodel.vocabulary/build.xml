@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     20/09/2010 
+
+     Context Model Core Library
+                   
+     Lorenzo Carrara (lorecarra@gmail.com)
+     ====================================================================== -->
+<project name="contextmodel.core" default="contextmodel-core-all" basedir=".">
+	<description>
+            context model core library build file
+    </description>
+
+	<property name="contextmodel.core.version" value="0.1" />
+	<dirname property="contextmodel.core.dir" file="${ant.file.contextmodel.core}"/>
+	<property name="contextmodel.core.bin.dir" value="${contextmodel.core.dir}/bin" />
+	<property name="contextmodel.core.owl.dir" value="${contextmodel.core.dir}/owl" />
+	<property name="contextmodel.core.sparql.dir" value="${contextmodel.core.dir}/sparql" />
+	<property name="contextmodel.core.jar.dir" value="${contextmodel.core.dir}/dist" />
+	<property name="contextmodel.core.jar.path" value="${contextmodel.core.jar.dir}/contextmodel.core_${contextmodel.core.version}.jar" />
+	<property name="contextmodel.core.jar.owl.prefix" value="owl" />
+	<property name="contextmodel.core.jar.sparql.prefix" value="sparql" />
+	<!--
+	<property name="contextmodel.core.update.dest" value="../libs/contextmodel" />
+	-->
+	<target name="contextmodel-core-clean">
+		<delete dir="${contextmodel.core.jar.dir}" />
+	</target>
+	<target name="contextmodel-core-jar">
+		<mkdir dir="${contextmodel.core.jar.dir}" />
+		<jar destfile="${contextmodel.core.jar.path}">
+			<fileset dir="${contextmodel.core.bin.dir}" includes="**/*.class" />
+			<zipfileset dir="${contextmodel.core.owl.dir}" prefix="${contextmodel.core.jar.owl.prefix}" />
+			<zipfileset dir="${contextmodel.core.sparql.dir}" prefix="${contextmodel.core.jar.sparql.prefix}" />
+		</jar>
+	</target>
+	<!--
+	<target name="contextmodel-core-update" depends="contextmodel-core-jar">
+		<copy file="${contextmodel.core.jar.path}" todir="${contextmodel.core.update.dest}" />
+	</target>
+	-->
+	<target name="contextmodel-core-all" depends="contextmodel-core-jar" />
+</project>

@@ -1,0 +1,15 @@
+PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?valueIndividual
+WHERE 
+{
+	<%1$s> rdfs:subClassOf ?superclass .
+	?superclass owl:intersectionOf ?intersectionItem1 .
+	?intersectionItem1 rdf:rest ?intersectionItem2 .
+	?intersectionItem2 rdf:first ?superValueRestriction .
+#	?superValueRestriction rdf:type owl:Restriction .
+	?superValueRestriction owl:hasValue ?valueIndividual
+}
