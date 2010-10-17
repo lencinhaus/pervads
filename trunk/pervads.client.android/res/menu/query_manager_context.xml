@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/edit" android:titleCondensed="@string/query_manager_context_edit_label_condensed" android:title="@string/query_manager_context_edit_label" android:icon="@android:drawable/ic_menu_edit"></item><item android:id="@+id/delete" android:titleCondensed="@string/query_manager_context_delete_query_title_condensed" android:title="@string/query_manager_context_delete_query_title" android:icon="@android:drawable/ic_menu_delete"></item>
+
+
+</menu>

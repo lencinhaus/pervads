@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     18/05/2010 02.11.38                                                        
+
+     PervADS
+     Android client
+                   
+     Lorenzo Carrara (lorecarra@gmail.com)
+     ====================================================================== -->
+<project name="pervads" default="pervads-all" basedir=".">
+	<description>
+            pervads build file
+    </description>
+
+	<!--
+	<property name="pervads.version" value="0.1" />
+	<dirname property="pervads.dir" file="${ant.file.pervads}"/>
+	<property name="pervads.lib.dir" value="${pervads.dir}/lib" />
+	<property name="pervads.slf4j.android.dir" value="../slf4j.android" />
+	<property name="pervads.androjena.dir" value="../androjena" />
+	<import file="${pervads.slf4j.android.dir}/build.xml" />
+	<import file="${pervads.androjena.dir}/build.xml" />
+	<target name="pervads-lib" depends="slf4j-jar, androjena-jar">
+		<copy file="${slf4j.android.jar.path}" todir="${pervads.lib.dir}" />
+		<copy file="${androjena.jar.path}" todir="${pervads.lib.dir}" />
+		<copy todir="${pervads.lib.dir}">
+			<fileset dir="${androjena.lib.dir}" includes="*.jar" />
+		</copy>
+	</target>
+	-->
+	<target name="pervads-context-model">
+		<copy file="../contextmodel.builder/models/pervads.owl" todir="assets/owl" />
+		<copy file="../contextmodel.builder/models/pervads_tdb.zip" todir="assets" />
+		<copy file="../contextmodel.builder/models/dummy.owl" todir="assets/owl" />
+		<copy file="../contextmodel.builder/models/dummy_tdb.zip" todir="assets" />
+	</target>
+	<target name="pervads-all" depends="pervads-context-model" />
+</project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/queries" android:titleCondensed="@string/pervads_list_options_queries_title" android:title="@string/pervads_list_options_queries_title" android:icon="@android:drawable/ic_menu_search"></item><item android:id="@+id/settings" android:title="@string/pervads_list_options_settings_title" android:titleCondensed="@string/pervads_list_options_settings_title" android:icon="@android:drawable/ic_menu_preferences">
+</item>
+
+</menu>

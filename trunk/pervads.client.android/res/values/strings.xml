@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="assignment_search_empty_text">The search returned no results.</string>
+    <string name="assignment_search_activity_label">Category Search</string>
+    <string name="assignment_searchable_hint">Search categories</string>
+    <string name="query_editor_options_clear_title">Clear assignments</string>
+    <string name="query_manager_options_clear_queries_title_condensed">Clear</string>
+    <string name="query_manager_options_clear_queries_title">Clear queries</string>
+    <string name="assignment_navigation_empty_text">No subcategories.</string>
+    <string name="query_editor_empty_text">No assignments. Use the Add menu item to create one.</string>
+    <string name="query_manager_empty_text">No queries. Use the Add menu item to create one.</string>
+    <string name="assignment_navigation_activity_label">Navigation</string>
+    <string name="assignment_navigation_choose_sub_dimension_text">Click Ok or choose a subcategory</string>
+    <string name="assignment_navigation_choose_value_text">Choose a value</string>
+    <string name="assignment_navigation_choose_first_dimension_text">Choose a category</string>
+    <string name="query_editor_options_add_search_title">Search</string>
+    <string name="query_editor_options_add_navigate_title">Navigate</string>
+    
+    <string name="query_editor_context_delete_title">Delete assignment</string>
+    
+    
+    <string name="assignment_view_row_equal_text">=</string>
+    <string name="query_editor_save_button_text">Save query</string>
+    
+    <string name="query_editor_options_add_title">Add assignment</string>
+    
+    <string name="button_cancel_text">Cancel</string>
+    <string name="button_ok_text">Ok</string>
+    <string name="query_editor_name_label_text">Name</string>
+    <string name="query_manager_context_edit_label_condensed">Edit</string>
+    <string name="query_manager_context_edit_label">Edit query</string>
+    <string name="pervads_list_activity_label">PervADs</string>
+    <string name="query_editor_activity_label">Query Editor</string>
+    <string name="query_manager_activity_label">Queries</string>
+    <string name="query_manager_context_delete_query_title_condensed">Delete</string>
+    <string name="query_manager_context_delete_query_title">Delete query</string>
+    <string name="pervads_list_options_queries_title">Queries</string>
+    <string name="query_manager_options_add_query_title_condensed">Add</string>
+    <string name="query_manager_options_add_query_title">Add query</string>
+    <string name="pervads_update_text">update!</string>
+    <string name="pervads_label_text">Found PervAds</string>
+    
+    <string name="pervads_service_process">:it.polimi.dei.dbgroup.pedigree.pervads.service</string>
+    <string name="pervads_list_options_settings_title">Settings</string>
+    <string name="lifecycle_eventreceiver_label">PervAds event receiver</string>
+    <string name="pervads_service_label">PervAds Service</string>
+    
+    
+    <string name="setting_autoupdate_defaultvalue">false</string>
+    <string name="setting_updateinterval_defaultvalue">10</string>
+    <string name="setting_updateinterval_title">Update interval</string>
+    
+    <string name="setting_autoupdate_summaryon">PervAds will be updated periodically with the specified interval</string>
+    <string name="setting_autoupdate_summaryoff">PervAds will be updated manually</string>
+    
+    <string name="setting_autoupdate_title">Auto update</string>
+    
+    
+    
+    <string name="start_lookup">start update</string>
+    <string name="pervads_disabled">PervADS is currently disabled</string>
+    <string name="pervads_enabled">PervADS is currently enabled</string>
+    <string name="disable_pervads">disable PervADS</string>
+    <string name="enable_pervads">enable PervADS</string>
+    
+    <string name="toggle_service">toggle service</string>
+    
+    <string name="app_name">PervADS</string>
+
+<string name="setting_updateinterval_summary">The interval between updates, in minutes</string>
+<string name="setting_updateinterval_dialogmessage">Choose the update interval in minutes:</string>
+
+<string name="numberpickerpreference_minvalue_default">100</string>
+<string name="numberpickerpreference_maxvalue_default">5</string>
+<string name="numberpickerpreference_speed_default">100</string>
+<string name="setting_updateinterval_minvalue">1</string>
+<string name="setting_updateinterval_maxvalue">240</string>
+<string name="setting_updateinterval">updateinterval</string>
+<string name="setting_autoupdate">autoupdate</string>
+<string name="pervads_updating_text">updating...</string>
+<string name="notification_new_pervads_ticker_text">%d new PervAds found!</string>
+<string name="notification_new_pervads_content_title">You received %d new PervAds!</string>
+
+<string name="settings_activity_label">Settings</string>
+
+
+<string name="assignment_view_empty_value_text">"?"</string>
+<string name="query_editor_toast_empty_name">Please enter a name for this query</string>
+<string name="query_editor_toast_no_assignments">Please create at least one assignment for this query. Use the Add menu item.</string>
+<string name="assignment_navigation_choose_no_root_dimensions_text">No categories available</string>
+<string name="assignment_navigation_choose_ok_or_back_text">Click Ok or change previous choices</string>
+<string name="query_manager_toast_query_enabled">&lt;b&gt;%1$s&lt;/b&gt; query is now enabled</string>
+<string name="query_manager_toast_query_disabled">&lt;b&gt;%1$s&lt;/b&gt; query has been disabled</string>
+<string name="context_model_manager_operation_init">Initializing categories</string>
+
+<string name="context_search_manager_operation_build_index">Building category index (this time only, may take a few minutes)</string>
+<string name="initialization_progress_dialog_default_title">Please wait</string>
+<string name="initialization_progress_dialog_default_message">Initializing...</string>
+
+<string name="yes">Yes</string>
+<string name="no">No</string>
+<string name="query_editor_dialog_clear_assignments_confirm_message">All the assignments in this query will be permanently deleted. Are you sure?</string>
+<string name="query_manager_dialog_clear_queries_confirm_message">All the queries will be permanently deleted. Are you sure?</string>
+<string name="assignment_search_dialog_searching_title">Please wait</string>
+<string name="assignment_search_dialog_searching_message">Searching categories...</string>
+<string name="query_editor_dialog_replace_assignment_message">Choosen value &lt;b&gt;%1$s&lt;/b&gt; and existing value &lt;b&gt;%2$s&lt;/b&gt; share the same root category (&lt;b&gt;%3$s&lt;/b&gt;). Do you want to replace the existing value with the new one?</string>
+
+</resources>

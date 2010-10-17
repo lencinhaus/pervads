@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/add" android:icon="@android:drawable/ic_menu_add" android:title="@string/query_editor_options_add_title"><menu><item android:id="@+id/navigate" android:icon="@android:drawable/ic_menu_compass" android:title="@string/query_editor_options_add_navigate_title"></item>
+<item android:id="@+id/search" android:icon="@android:drawable/ic_menu_search" android:title="@string/query_editor_options_add_search_title"></item>
+</menu>
+</item>
+<item android:id="@+id/clear" android:title="@string/query_editor_options_clear_title" android:icon="@android:drawable/ic_menu_close_clear_cancel"></item>
+</menu>

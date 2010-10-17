@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<style parent="android:Theme" name="PervadsTheme">
+		<item name="numberPickerPreferenceStyle">@style/NumberPickerPreference
+		</item>
+	</style>
+	<!-- Preference Styles -->
+	<style name="NumberPickerPreference">
+	</style>
+</resources>
