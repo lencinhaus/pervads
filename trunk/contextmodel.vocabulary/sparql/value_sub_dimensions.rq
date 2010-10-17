@@ -1,0 +1,32 @@
+PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?assignmentClass ?assignmentProperty ?valuesClass ?formalDimension
+WHERE 
+{
+#	?assignmentClass rdf:type owl:Class .
+	?assignmentClass rdfs:subClassOf ?superclass .
+	?superclass owl:intersectionOf ?superclassItem1 .
+	?superclassItem1 rdf:first <%1$s> .
+	?superclassItem1 rdf:rest ?superclassItem2 .
+	?superclassItem2 rdf:first ?superclassValueRestriction .
+	?superclassValueRestriction owl:hasValue <%2$s> .
+	?superclassValueRestriction owl:onProperty <%3$s> .
+	?assignmentClass owl:equivalentClass ?equivalentClass .
+	?equivalentClass owl:intersectionOf ?equivalentItem1 .
+	?equivalentItem1 rdf:first ?valueRestriction .
+	?valueRestriction owl:onProperty ?assignmentProperty .
+#	?assignmentProperty rdf:type rdf:Property .
+#	?assignmentProperty rdfs:subPropertyOf cm:dimensionAssignmentValue .
+	?assignmentProperty rdfs:domain ?assignmentClass .
+	?assignmentProperty rdfs:range ?valuesClass .
+#	?valuesClass rdf:type owl:Class .
+#	?valuesClass rdfs:subClassOf cm:DimensionValue .
+	?equivalentItem1 rdf:rest ?equivalentItem2 .
+	?equivalentItem2 rdf:first ?dimensionRestriction .
+	?dimensionRestriction owl:onProperty cm:assignmentDimension .
+	?dimensionRestriction owl:hasValue ?formalDimension .
+#	?formalDimension rdf:type cm:FormalDimension
+}

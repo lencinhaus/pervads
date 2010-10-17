@@ -1,16 +1,45 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary;
 
+import com.hp.hpl.jena.ontology.AnnotationProperty;
+import com.hp.hpl.jena.ontology.ObjectProperty;
+import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
+import com.hp.hpl.jena.ontology.Ontology;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+
 public final class ContextMetaModel {
+	private static final OntModel m = ModelFactory
+			.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+
+	private static final OntClass clazz(String local) {
+		return m.createClass(NS + local);
+	}
+
+	private static final ObjectProperty obj(String local) {
+		return m.createObjectProperty(NS + local);
+	}
+
+	private static final AnnotationProperty annot(String local) {
+		return m.createAnnotationProperty(NS + local);
+	}
+
 	public static final String URI = Common.URI_BASE + "context-meta-model.owl";
 	public static final String NS = URI + "#";
-	
+
+	// Ontologies
+	public static final Ontology Ontology = m.createOntology(URI);
+
 	// Classes
-	public static final String CONTEXT_SPECIFICATION_CLASS_URI = NS + "ContextSpecification";
-	
+	public static final OntClass ContextSpecification = clazz("ContextSpecification");
+
+	// Object properties
+	public static final ObjectProperty contextSpecification = obj("contextSpecification");
+
 	// Annotation properties
-	public static final String VALUE_PARAMETER_PROPERTY_URI = NS + "valueParameter";
-	public static final String DIMENSION_PARAMETER_PROPERTY_URI = NS + "dimensionParameter";
-	public static final String DIMENSION_VALUE_PROPERTY_URI = NS + "dimensionValue";
-	public static final String ROOT_DIMENSION_PROPERTY_URI = NS + "rootDimension";
-	public static final String VALUE_SUB_DIMENSION_PROPERTY_URI = NS + "valueSubDimension";
+	public static final AnnotationProperty valueParameter = annot("valueParameter");
+	public static final AnnotationProperty dimensionParameter = annot("dimensionParameter");
+	public static final AnnotationProperty dimensionValue = annot("dimensionValue");
+	public static final AnnotationProperty rootDimension = annot("rootDimension");
+	public static final AnnotationProperty valueSubDimension = annot("valueSubDimension");
 }

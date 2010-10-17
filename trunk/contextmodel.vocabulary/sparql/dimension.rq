@@ -1,0 +1,20 @@
+PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?assignmentClass ?assignmentProperty ?valuesClass
+WHERE 
+{
+#	<%1$s> rdf:type cm:FormalDimension .
+	?restr owl:hasValue <%1$s> .
+	?restr owl:onProperty cm:assignmentDimension .
+#	?restr rdf:type owl:Restriction .
+	?int2 rdf:first $restr .
+	?int rdf:rest ?int2 .
+	?equiv owl:intersectionOf ?int .
+	?assignmentClass owl:equivalentClass ?equiv .
+	?assignmentProperty rdfs:subPropertyOf cm:dimensionAssignmentValue .
+	?assignmentProperty rdfs:domain ?assignmentClass .
+	?assignmentProperty rdfs:range ?valuesClass .
+}
