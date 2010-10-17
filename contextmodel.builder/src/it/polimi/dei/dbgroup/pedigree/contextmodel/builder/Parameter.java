@@ -18,4 +18,11 @@ public class Parameter extends Node {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return getName() + " (" + type + ")";
+	}
+	
+	
 }

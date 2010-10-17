@@ -1,15 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <categories>
-    <category name="cat1">
-        <category name="cat11">
-            <category name="cat111"/>
-        </category>
-        <category name="cat12"/>
-    </category>
-    <category name="cat2">
-        <category name="cat21"/>
-        <category name="cat22">
-            <category name="cat221"/>
-        </category>
-    </category>
+	<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+		<category name="Questo" xml:lang="it">
+			<category name="Questo cosa?" xml:lang="it">
+				<category name="Questo ho detto!" xml:lang="it">
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+				<category name="Quest'altro forse." xml:lang="it">
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+				<category name="Non lo so cosa vuoi da me." xml:lang="it">
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+			</category>
+		</category>
+		<category name="Quest'altro" xml:lang="it">
+			<category name="Quest'altro cosa?" xml:lang="it">
+				<category name="Bo!" xml:lang="it">
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+				<category name="Uffa." xml:lang="it">
+
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+				<category name="La vita è un po' così" xml:lang="it">
+					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
+						<category name="Questo" xml:lang="it">
+							<category name="Questo cosa?" xml:lang="it">
+								<category name="Questo ho detto!" xml:lang="it" />
+								<category name="Quest'altro forse." xml:lang="it" />
+								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
+							</category>
+						</category>
+						<category name="Quest'altro" xml:lang="it">
+							<category name="Quest'altro cosa?" xml:lang="it">
+								<category name="Bo!" xml:lang="it" />
+								<category name="Uffa." xml:lang="it" />
+								<category name="La vita è un po' così" xml:lang="it" />
+							</category>
+						</category>
+					</category>
+				</category>
+			</category>
+		</category>
+	</category>
+	<category name="Dove" xml:lang="it">
+		<category name="qui" xml:lang="it">
+			<parameter name="posizione" type="current_position"
+				xml:lang="it" />
+		</category>
+		<category name="in un raggio di N chilometri da qui"
+			xml:lang="it">
+			<parameter name="posizione" type="current_position"
+				xml:lang="it" />
+			<parameter name="N" type="double" xml:lang="it" />
+		</category>
+	</category>
+	<category name="Quando" xml:lang="it">
+		<category name="Ora" xml:lang="it" />
+		<category name="Prima o poi" xml:lang="it" />
+	</category>
 </categories>

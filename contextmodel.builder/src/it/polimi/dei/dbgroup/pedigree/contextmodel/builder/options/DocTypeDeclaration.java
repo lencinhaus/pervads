@@ -3,22 +3,22 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.Option;
 
-public class UseMetaModel extends Option {
-	public UseMetaModel() {
+public class DocTypeDeclaration extends Option {
+
+	public DocTypeDeclaration() {
 		super(0);
+	}
+	
+	@Override
+	public String getDescription() {
+		return "shows DOCTYPE declaration in the output document (if format is derived from XML). Doesn't by default";
 	}
 
 	@Override
 	public boolean parse(BuilderConfiguration config, String[] args, int offset)
 			throws Exception {
-		config.setUseMetaModel(true);
+		config.setShowDocTypeDeclaration(true);
 		return true;
 	}
 
-	@Override
-	public String getDescription() {
-		return "if this option is set, the generated model will include meta-model axioms. (by default it does"
-				+ (BuilderConfiguration.DEFAULT_USE_META_MODEL ? "" : "n't")
-				+ ")";
-	}
 }
