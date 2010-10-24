@@ -19,7 +19,7 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <it.polimi.dei.dbgroup.pedigree.pervads.widget.NumberPickerButton android:id="@+id/increment"
+    <it.polimi.dei.dbgroup.pedigree.pervads.client.android.widget.NumberPickerButton android:id="@+id/increment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/numberpicker_up_btn" />
@@ -34,7 +34,7 @@
         android:textSize="30sp"
         android:background="@drawable/numberpicker_input" />
 
-    <it.polimi.dei.dbgroup.pedigree.pervads.widget.NumberPickerButton android:id="@+id/decrement"
+    <it.polimi.dei.dbgroup.pedigree.pervads.client.android.widget.NumberPickerButton android:id="@+id/decrement"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/numberpicker_down_btn" />

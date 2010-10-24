@@ -40,7 +40,7 @@
     <string name="pervads_update_text">update!</string>
     <string name="pervads_label_text">Found PervAds</string>
     
-    <string name="pervads_service_process">:it.polimi.dei.dbgroup.pedigree.pervads.service</string>
+    <string name="pervads_service_process">:it.polimi.dei.dbgroup.pedigree.pervads.client.android.service</string>
     <string name="pervads_list_options_settings_title">Settings</string>
     <string name="lifecycle_eventreceiver_label">PervAds event receiver</string>
     <string name="pervads_service_label">PervAds Service</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="it.polimi.dei.dbgroup.pedigree.pervads"
+      package="it.polimi.dei.dbgroup.pedigree.pervads.client.android"
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name" android:theme="@style/PervadsTheme" android:debuggable="true">
@@ -32,6 +32,7 @@
 </intent-filter>
 <meta-data android:resource="@xml/assignment_searchable" android:name="android.app.searchable"></meta-data>
 </activity>
+<uses-library android:name="com.google.android.maps"></uses-library>
 </application>
     <uses-sdk android:minSdkVersion="3"/>
 
