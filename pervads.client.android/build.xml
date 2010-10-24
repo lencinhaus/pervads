@@ -29,8 +29,8 @@
 	</target>
 	-->
 	<target name="pervads-context-model">
-		<copy file="../contextmodel.builder/models/pervads.owl" todir="assets/owl" />
-		<copy file="../contextmodel.builder/models/pervads_tdb.zip" todir="assets" />
+		<copy file="../contextmodel.builder/models/context_model.owl" todir="assets/owl" />
+		<copy file="../contextmodel.builder/models/context_model_tdb.zip" todir="assets" />
 		<copy file="../contextmodel.builder/models/dummy.owl" todir="assets/owl" />
 		<copy file="../contextmodel.builder/models/dummy_tdb.zip" todir="assets" />
 	</target>

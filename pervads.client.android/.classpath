@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="/libs/lucenoid/lucenoid_3.0.2.jar" sourcepath="/libs/lucenoid/lucenoid_3.0.2_sources.jar"/>
 	<classpathentry kind="lib" path="/contextmodel.core/dist/contextmodel.core_0.1.jar" sourcepath="/contextmodel.core/src"/>
 	<classpathentry kind="lib" path="/libs/tdboid/tdboid_0.1.jar" sourcepath="/libs/tdboid/tdboid_0.1_sources.jar"/>
+	<classpathentry kind="lib" path="/pervads.model.core/dist/pervads.model.core_0.1.jar" sourcepath="/pervads.model.core/src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
