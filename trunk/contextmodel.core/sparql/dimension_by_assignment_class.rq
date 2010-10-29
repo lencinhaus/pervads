@@ -1,0 +1,35 @@
+# Parameters:
+# 1 - dimension assignment class
+
+PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?formalDimension ?assignmentProperty ?valuesClass
+WHERE 
+{
+	<%1$s> owl:equivalentClass ?equiv .
+	?equiv owl:intersectionOf ?int .
+	?int rdf:rest ?int2 .
+	?int2 rdf:first ?restr .
+	?restr owl:hasValue ?formalDimension .
+#	?formalDimension rdf:type cm:FormalDimension .
+	?restr owl:onProperty cm:assignmentDimension .
+#	?restr rdf:type owl:Restriction .
+	?assignmentProperty rdfs:subPropertyOf cm:dimensionAssignmentValue .
+	?assignmentProperty rdfs:domain <%1$s> .
+	?assignmentProperty rdfs:range ?valuesClass
+	
+# alternative
+#	<%1$s> owl:equivalentClass ?equiv .
+#	?equiv owl:intersectionOf ?int .
+#	?int rdf:first ?restr1 .
+#	?restr1 owl:onProperty ?assignmentProperty .
+#	?assignmentProperty rdfs:domain <%1$s> .
+#	?assignmentProperty rdfs:range ?valuesClass .
+#	?int rdf:rest ?int2 .
+#	?int2 rdf:first ?restr2 .
+#	?restr2 owl:hasValue ?formalDimension .
+#	?restr2 owl:onProperty cm:assignmentDimension
+}

@@ -1,4 +1,4 @@
-package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl;
+package it.polimi.dei.dbgroup.pedigree.contextmodel.util;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,9 +23,14 @@ public class QueryUtils {
 	private QueryUtils() {
 
 	}
+	
+	public static QueryExecution createQuery(Model model, String queryName, Object... args) throws IOException {
+		return createQueryFromPath(model, queryName, SPARQL_FOLDER_NAME, QUERY_FILE_EXT, args);
+	}
 
-	public static QueryExecution createQuery(Model model, String queryName,
-			Object... args) throws IOException {
+	public static QueryExecution createQueryFromPath(Model model, String queryName,
+			String queriesFolderPath, String queryFileExtension, Object... args)
+			throws IOException {
 		String queryString = queryMap.get(queryName);
 		if (queryString == null) {
 			BufferedReader reader = null;

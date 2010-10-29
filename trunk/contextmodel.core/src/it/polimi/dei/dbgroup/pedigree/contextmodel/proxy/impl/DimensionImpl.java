@@ -4,11 +4,11 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.ContextModelException;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.util.QueryUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
@@ -18,9 +18,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 
-public class DimensionImpl extends
-		ContextEntityImpl implements
-		Dimension {
+public class DimensionImpl extends ContextModelEntityImpl implements Dimension {
 	private static final String DIMENSION_PARENT_VALUE_QUERY_NAME = "dimension_parent_value";
 	private OntClass assignmentClass;
 	private OntProperty assignmentProperty;
@@ -59,16 +57,19 @@ public class DimensionImpl extends
 	public OntClass getValuesClass() {
 		return valuesClass;
 	}
-	
+
 	@Override
 	public Value getParentValue() {
-		if(parentValue == null) {
+		if (parentValue == null) {
 			QueryExecution qe = null;
 			try {
-				qe = QueryUtils.createQuery(assignmentClass.getModel(), DIMENSION_PARENT_VALUE_QUERY_NAME, assignmentClass.getURI());
+				qe = QueryUtils.createQuery(getProxy().getModel(),
+						DIMENSION_PARENT_VALUE_QUERY_NAME, assignmentClass
+								.getURI());
 				ResultSet rs = qe.execSelect();
-				if(rs.hasNext()) {
-					parentValue = ValueImpl.createFromQuerySolution(getProxy(), rs.next(), null);
+				if (rs.hasNext()) {
+					parentValue = ValueImpl.createFromQuerySolution(getProxy(),
+							rs.next(), null);
 				}
 			} catch (Exception ex) {
 				throw new ContextModelException("Cannot parse parent value", ex);
@@ -79,12 +80,12 @@ public class DimensionImpl extends
 		}
 		return parentValue;
 	}
-	
+
 	@Override
 	public Collection<? extends Value> listChildValues() {
 		List<Value> values = new ArrayList<Value>();
 		ExtendedIterator<Individual> valueIndividualsIterator = valuesClass
-		.getOntModel().listIndividuals(valuesClass);
+				.getOntModel().listIndividuals(valuesClass);
 		while (valueIndividualsIterator.hasNext()) {
 			Individual valueIndividual = valueIndividualsIterator.next();
 			Value value = ValueImpl.create(getProxy(), valueIndividual, this);
@@ -93,21 +94,46 @@ public class DimensionImpl extends
 		return values;
 	}
 
+	@Override
+	public int getDepth() {
+		int depth = 0;
+		Dimension dimension = this;
+		while (dimension.getParentValue() != null) {
+			dimension = dimension.getParentValue().getParentDimension();
+			depth++;
+		}
+		return depth;
+	}
 
-	public static Dimension createFromQuerySolution(ContextModelProxy proxy, QuerySolution solution,
-			Value parentValue) {
-		return new DimensionImpl(proxy, solution.getResource("assignmentClass").as(
-				OntClass.class), solution.getResource("assignmentProperty").as(
-				OntProperty.class), solution.getResource("formalDimension").as(
-				Individual.class), solution.getResource("valuesClass").as(
+	@Override
+	public int getDistance(Dimension dimension) {
+		return getDepth() - dimension.getDepth();
+	}
+
+	public static Dimension createFromQuerySolution(ContextModelProxy proxy,
+			QuerySolution solution, Value parentValue) {
+		return new DimensionImpl(proxy, solution.getResource("assignmentClass")
+				.as(OntClass.class), solution.getResource("assignmentProperty")
+				.as(OntProperty.class), solution.getResource("formalDimension")
+				.as(Individual.class), solution.getResource("valuesClass").as(
 				OntClass.class), parentValue);
 	}
-	
-	public static Dimension createFromFormalDimensionAndQuerySolution(ContextModelProxy proxy, Individual formalDimension, QuerySolution solution,
-			Value parentValue) {
-		return new DimensionImpl(proxy, solution.getResource("assignmentClass").as(
-				OntClass.class), solution.getResource("assignmentProperty").as(
-				OntProperty.class), formalDimension, solution.getResource("valuesClass").as(
-				OntClass.class), parentValue);
+
+	public static Dimension createFromFormalDimensionAndQuerySolution(
+			ContextModelProxy proxy, Individual formalDimension,
+			QuerySolution solution, Value parentValue) {
+		return new DimensionImpl(proxy, solution.getResource("assignmentClass")
+				.as(OntClass.class), solution.getResource("assignmentProperty")
+				.as(OntProperty.class), formalDimension, solution.getResource(
+				"valuesClass").as(OntClass.class), parentValue);
+	}
+
+	public static Dimension createFromAssignmentClassAndQuerySolution(
+			ContextModelProxy proxy, OntClass assignmentClass,
+			QuerySolution solution, Value parentValue) {
+		return new DimensionImpl(proxy, assignmentClass, solution.getResource(
+				"assignmentProperty").as(OntProperty.class), solution
+				.getResource("formalDimension").as(Individual.class), solution
+				.getResource("valuesClass").as(OntClass.class), parentValue);
 	}
 }
