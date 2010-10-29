@@ -1,5 +1,7 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy;
 
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.AssignmentDefinitionImpl;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.ContextInstanceProxyImpl;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.ContextModelProxyImpl;
 
 import com.hp.hpl.jena.ontology.OntModel;
@@ -13,4 +15,19 @@ public class ContextModelFactory {
 	public static ContextModelProxy createProxy(OntModel model) {
 		return new ContextModelProxyImpl(model);
 	}
+	
+	public static ContextInstanceProxy createInstanceProxy(ContextModelProxy contextModel, OntModel model) {
+		return new ContextInstanceProxyImpl(contextModel, model);
+	}
+	
+	public static AssignmentDefinition createAssignmentDefinition(Value value, Dimension dimension) {
+		if(value == null) throw new IllegalArgumentException("value cannot be null");
+		if(dimension == null) dimension = value.getParentDimension();
+		return new AssignmentDefinitionImpl(dimension, value);
+	}
+	
+	public static AssignmentDefinition createAssignmentDefinition(Value value) {
+		if(value == null) throw new IllegalArgumentException("value cannot be null");
+		return createAssignmentDefinition(value, value.getParentDimension());
+	} 
 }

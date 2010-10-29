@@ -4,6 +4,7 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.ContextModelException;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.util.QueryUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,7 +16,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 
 public class ValueImpl extends
-		ContextEntityImpl implements
+		ContextModelEntityImpl implements
 		Value {
 	private static final String VALUE_SUB_DIMENSIONS_QUERY_NAME = "value_sub_dimensions";
 	private static final String VALUE_PARENT_DIMENSION_QUERY_NAME = "value_parent_dimension";
@@ -33,7 +34,7 @@ public class ValueImpl extends
 		List<Dimension> dimensions = new ArrayList<Dimension>();
 		QueryExecution qe = null;
 		try {
-			qe = QueryUtils.createQuery(valueIndividual.getOntModel(),
+			qe = QueryUtils.createQuery(getProxy().getModel(),
 					VALUE_SUB_DIMENSIONS_QUERY_NAME, getParentDimension()
 							.getAssignmentClass().getURI(), valueIndividual
 							.getURI(), getParentDimension().getAssignmentProperty()
@@ -61,7 +62,7 @@ public class ValueImpl extends
 		if(parentDimension == null) {
 			QueryExecution qe = null;
 			try {
-				qe = QueryUtils.createQuery(valueIndividual.getModel(), VALUE_PARENT_DIMENSION_QUERY_NAME, valueIndividual.getURI());
+				qe = QueryUtils.createQuery(getProxy().getModel(), VALUE_PARENT_DIMENSION_QUERY_NAME, valueIndividual.getURI());
 				ResultSet rs = qe.execSelect();
 				if(rs.hasNext()) {
 					parentDimension = DimensionImpl.createFromQuerySolution(getProxy(), rs.next(), null);
