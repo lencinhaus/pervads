@@ -1,8 +1,10 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration.IncludedModelData;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextMetaModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.PervADsContextModel;
+import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.management.ManagementFactory;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
@@ -39,22 +40,32 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.ontology.Ontology;
+import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFList;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.shared.UnknownPropertyException;
+import com.hp.hpl.jena.sparql.core.DatasetGraph;
 import com.hp.hpl.jena.sparql.sse.Item;
 import com.hp.hpl.jena.tdb.TDB;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.tdb.TDBLoader;
 import com.hp.hpl.jena.tdb.solver.stats.StatsCollector;
+import com.hp.hpl.jena.tdb.store.DatasetGraphTDB;
 import com.hp.hpl.jena.tdb.store.GraphTDB;
+import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.util.LocationMapper;
+
+import de.fuberlin.wiwiss.ng4j.NamedGraph;
+import de.fuberlin.wiwiss.ng4j.NamedGraphSet;
+import de.fuberlin.wiwiss.ng4j.impl.NamedGraphSetImpl;
 
 public class Builder {
 	public static final String CATEGORIES_FOLDER = "categories";
@@ -126,35 +137,62 @@ public class Builder {
 			} catch (UnknownPropertyException upe) {
 			}
 			OutputStream os = new FileOutputStream(modelFile);
-			writer.write(model, os, config
-					.getModelURI());
+			writer.write(model, os, config.getModelURI());
 			os.close();
 
 			if (config.isCreateTDBStore()) {
 				String storeDir = MODELS_FOLDER + "/"
 						+ config.getOutputFileName();
+				p("Creating TriG dataset for TDB store");
+				NamedGraphSet ngs = new NamedGraphSetImpl();
+				Model contextModel = ngs.asJenaModel(config.getModelURI());
+				contextModel.read("file:" + MODELS_FOLDER + "/" + modelFile.getName(), config.getModelURI(), null);
+				for(IncludedModelData includedModelData : config.getTDBStoreIncludedModels()) {
+					Model includedModel = ngs.asJenaModel(includedModelData.URI);
+					includedModel.read(includedModelData.path, includedModelData.URI, null);
+				}
+				String dsFileName = MODELS_FOLDER + "/" + config.getOutputFileName() + "_dataset.trig";
+				ngs.write(new FileOutputStream(dsFileName), "TRIG", config.getModelURI());
 				p("Creating TDB store in folder " + storeDir);
-				Model tdbModel = TDBFactory.createModel(storeDir);
-				GraphTDB tdbGraph = (GraphTDB) tdbModel.getGraph();
-				p("Bulk loading TDB store");
-				TDBLoader.load(tdbGraph, "file:" + MODELS_FOLDER + "/" + modelFile.getName());
-				TDB.sync(tdbModel);
+				DatasetGraphTDB ds = TDBFactory.createDatasetGraph(storeDir);
+				TDBLoader loader = new TDBLoader();
+				loader.setGenerateStats(false);
+				loader.setShowProgress(false);
+				loader.loadDataset(ds, "file:" + dsFileName);
+				TDB.sync(ds);
 				p("Creating TDB stats.opt file");
-				Item statsItem = StatsCollector.gatherTDB(tdbGraph);
+				Item statsItem = StatsCollector.gatherTDB(ds.getGraphTDB(com.hp.hpl.jena.graph.Node.createURI("urn:x-arq:UnionGraph")));
 				File statsFile = new File(storeDir + "/stats.opt");
-				BufferedWriter statsWriter = new BufferedWriter(new FileWriter(statsFile));
+				BufferedWriter statsWriter = new BufferedWriter(new FileWriter(
+						statsFile));
 				statsWriter.write(statsItem.toString());
 				statsWriter.close();
-				tdbModel.close();
+				ds.close();
 				TDB.closedown();
+//				Model tdbModel = TDBFactory.createModel(storeDir);
+//				GraphTDB tdbGraph = (GraphTDB) tdbModel.getGraph();
+//				p("Bulk loading TDB store");
+//				TDBLoader.load(tdbGraph, "file:" + MODELS_FOLDER + "/"
+//						+ modelFile.getName());
+//				TDB.sync(tdbModel);
+//				p("Creating TDB stats.opt file");
+//				Item statsItem = StatsCollector.gatherTDB(tdbGraph);
+//				File statsFile = new File(storeDir + "/stats.opt");
+//				BufferedWriter statsWriter = new BufferedWriter(new FileWriter(
+//						statsFile));
+//				statsWriter.write(statsItem.toString());
+//				statsWriter.close();
+//				tdbModel.close();
+//				TDB.closedown();
 				File storeFile = getDestinationFile(config.getOutputFileName()
 						+ "_tdb", MODELS_FOLDER, "zip");
 				p("Creating TDB store archive in " + storeFile.getName());
 				zipDir(storeDir, storeFile);
-				// store deletion doesn't work because tdb leaks some file handle that prevents file from
+				// store deletion doesn't work because tdb leaks some file
+				// handle that prevents file from
 				// being deleted
-//				p("Deleting TDB store folder " + storeDir);
-//				recursiveDelete(new File(storeDir));
+				// p("Deleting TDB store folder " + storeDir);
+				// recursiveDelete(new File(storeDir));
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -172,32 +210,34 @@ public class Builder {
 			}
 		}
 		file.deleteOnExit();
-		if(!file.delete()) {
+		if (!file.delete()) {
 			throw new Exception("cannot delete file " + file.getPath());
 		}
 	}
 
-	private static final void zipDir(String dir2zip, File destFile) throws IOException  {
+	private static final void zipDir(String dir2zip, File destFile)
+			throws IOException {
 		ZipOutputStream zos = new ZipOutputStream(
 				new FileOutputStream(destFile));
 		zipDir("", new File(dir2zip), zos, new byte[2156]);
 		zos.close();
 	}
 
-	private static final void zipDir(String prefix, File directory, ZipOutputStream zos, byte[] buffer) throws IOException {
-		for(File child : directory.listFiles()) {
+	private static final void zipDir(String prefix, File directory,
+			ZipOutputStream zos, byte[] buffer) throws IOException {
+		for (File child : directory.listFiles()) {
 			String childPath = prefix;
-			if(childPath.length() > 0) childPath += "/";
+			if (childPath.length() > 0)
+				childPath += "/";
 			childPath += child.getName();
-			if(child.isDirectory()) {
+			if (child.isDirectory()) {
 				zipDir(childPath, child, zos, buffer);
-			}
-			else {
+			} else {
 				FileInputStream fis = new FileInputStream(child);
 				ZipEntry entry = new ZipEntry(childPath);
 				zos.putNextEntry(entry);
 				int read;
-				while((read = fis.read(buffer)) != -1) {
+				while ((read = fis.read(buffer)) != -1) {
 					zos.write(buffer, 0, read);
 				}
 				fis.close();

@@ -2,9 +2,24 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.PervADsContextModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BuilderConfiguration {
+	public static class IncludedModelData {
+		public String path;
+		public String URI;
+
+		public IncludedModelData(String path, String uRI) {
+			super();
+			this.path = path;
+			URI = uRI;
+		}
+
+	}
+
 	public static final String DEFAULT_CATEGORIES_FILE_NAME = "main.xml";
-	public static final String DEFAULT_OUTPUT_FILE_NAME = "pervads";
+	public static final String DEFAULT_OUTPUT_FILE_NAME = "context_model";
 	public static final String DEFAULT_OUTPUT_LANGUAGE = "RDF/XML-ABBREV";
 	public static final boolean DEFAULT_USE_META_MODEL = false;
 	public static final String DEFAULT_VERSION = "0.1";
@@ -26,6 +41,7 @@ public class BuilderConfiguration {
 	private boolean showXMLDeclaration = DEFAULT_SHOW_XML_DECLARATION;
 	private boolean showDocTypeDeclaration = DEFAULT_SHOW_DOCTYPE_DECLARATION;
 	private boolean createTDBStore = DEFAULT_CREATE_TDB_STORE;
+	private List<IncludedModelData> TDBStoreIncludedModels = new ArrayList<IncludedModelData>();
 
 	public String getCategoriesFileName() {
 		return categoriesFileName;
@@ -115,5 +131,8 @@ public class BuilderConfiguration {
 		this.createTDBStore = createTDBStore;
 	}
 
-	
+	public List<IncludedModelData> getTDBStoreIncludedModels() {
+		return TDBStoreIncludedModels;
+	}
+
 }

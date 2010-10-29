@@ -1,10 +1,12 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration.IncludedModelData;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CategoriesFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Complexity;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CreateTDBStore;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.DocTypeDeclaration;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Help;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.IncludeModelInTDBStore;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.ModelURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputLanguage;
@@ -62,6 +64,9 @@ public class Main {
 		Option createTDBStore = new CreateTDBStore();
 		options.put("tdb", createTDBStore);
 		options.put("-create-tdb-store", createTDBStore);
+		Option includeModelInTDBStore = new IncludeModelInTDBStore();
+		options.put("tdbi", includeModelInTDBStore);
+		options.put("-include-model-in-tdb-store", includeModelInTDBStore);
 
 		VALID_LANGS.add("RDF/XML");
 		VALID_LANGS.add("RDF/XML-ABBREV");
@@ -155,7 +160,15 @@ public class Main {
 		System.out.println("Output model complexity: " + config.getComplexity().toString());
 		System.out.println("Show XML declaration: " + (config.isShowXMLDeclaration()?"yes":"no"));
 		System.out.println("Show DocType declaration: " + (config.isShowDocTypeDeclaration()?"yes":"no"));
-		if(config.isCreateTDBStore()) System.out.println("TDB store output file: " + config.getOutputFileName() + "_tdb.zip");
+		if(config.isCreateTDBStore()) {
+			System.out.println("TDB store output file: " + config.getOutputFileName() + "_tdb.zip");
+			if(config.getTDBStoreIncludedModels().size() > 0) {
+				System.out.println("Included models:");
+				for(IncludedModelData includedModel : config.getTDBStoreIncludedModels()) {
+					System.out.println("\t" + includedModel.path + " <" + includedModel.URI + ">");
+				}
+			}
+		}
 
 		return config;
 	}
