@@ -11,7 +11,7 @@ public class CreateTDBStore extends Option {
 	
 	@Override
 	public String getDescription() {
-		return "creates a TDB store loaded with the context model in outputfile_tdb.zip. Disabled by default";
+		return "creates a TDB store loaded with the context model in outputfile_tdb.zip. Other models can be automatically included in the store, see other options. Disabled by default";
 	}
 
 	@Override
