@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<!-- JENA -->
-	<classpathentry kind="lib" path="/libs/jena/jena-2.6.3.jar" sourcepath="/libs/jena/jena-2.6.3-sources.jar">
+	<classpathentry kind="lib" path="/libs/jena/jena-2.6.2.jar" sourcepath="/libs/jena/jena-2.6.2-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://jena.sourceforge.net/javadoc"/>
 		</attributes>
 	</classpathentry>
 	<!-- ARQ -->
-	<classpathentry kind="lib" path="/libs/arq/arq-2.8.5.jar" sourcepath="/libs/arq/arq-2.8.5-sources.jar">
+	<classpathentry kind="lib" path="/libs/arq/arq-2.8.3.jar" sourcepath="/libs/arq/arq-2.8.3-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://jena.sourceforge.net/ARQ/javadoc"/>
 		</attributes>
@@ -37,8 +37,6 @@
 	<classpathentry kind="lib" path="/libs/androjena/androjena_0.2.jar" sourcepath="/libs/androjena/androjena_0.2_sources.jar"/>
 	<!-- IRI 0.8 -->
 	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
-	<!-- IRI 0.7 -->
-	<classpathentry kind="lib" path="/libs/iri/iri-0.7.jar"/>
 	<!-- LUCENE -->
 	<classpathentry kind="lib" path="/libs/lucene/lucene-core-3.0.2.jar" sourcepath="/libs/lucene/lucene-3.0.2-src.zip"/>
 	<!-- SLF4J-ANDROID -->
