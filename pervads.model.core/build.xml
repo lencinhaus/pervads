@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     20/09/2010 
+
+     PervADs Model Core Library
+                   
+     Lorenzo Carrara (lorecarra@gmail.com)
+     ====================================================================== -->
+<project name="pervads.model.core" default="pervads-model-core-all" basedir=".">
+	<description>
+            context model core library build file
+    </description>
+
+	<property name="pervads.model.core.version" value="0.1" />
+	<dirname property="pervads.model.core.dir" file="${ant.file.pervads.model.core}"/>
+	<property name="pervads.model.core.bin.dir" value="${pervads.model.core.dir}/bin" />
+	<property name="pervads.model.core.owl.dir" value="${pervads.model.core.dir}/owl" />
+	<property name="pervads.model.core.jar.dir" value="${pervads.model.core.dir}/dist" />
+	<property name="pervads.model.core.jar.path" value="${pervads.model.core.jar.dir}/pervads.model.core_${pervads.model.core.version}.jar" />
+	<property name="pervads.model.core.jar.owl.prefix" value="owl" />
+	<!--
+	<property name="pervads.model.core.sparql.dir" value="${pervads.model.core.dir}/sparql" />
+	<property name="pervads.model.core.jar.sparql.prefix" value="sparql" />
+	-->
+	<target name="pervads-model-core-clean">
+		<delete dir="${pervads.model.core.jar.dir}" />
+	</target>
+	<target name="pervads-model-core-jar">
+		<mkdir dir="${pervads.model.core.jar.dir}" />
+		<jar destfile="${pervads.model.core.jar.path}">
+			<fileset dir="${pervads.model.core.bin.dir}" includes="**/*.class" />
+			<zipfileset dir="${pervads.model.core.owl.dir}" prefix="${pervads.model.core.jar.owl.prefix}" />
+			<!--<zipfileset dir="${pervads.model.core.sparql.dir}" prefix="${pervads.model.core.jar.sparql.prefix}" />-->
+		</jar>
+	</target>
+	<!--
+	<target name="contextmodel-core-update" depends="contextmodel-core-jar">
+		<copy file="${contextmodel.core.jar.path}" todir="${contextmodel.core.update.dest}" />
+	</target>
+	-->
+	<target name="pervads-model-core-all" depends="pervads-model-core-jar" />
+</project>
