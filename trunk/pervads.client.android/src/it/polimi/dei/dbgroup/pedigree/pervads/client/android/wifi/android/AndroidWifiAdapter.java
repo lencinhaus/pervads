@@ -37,6 +37,7 @@ public class AndroidWifiAdapter extends AbstractWifiAdapter {
 	private WifiManager manager;
 	private boolean sessionStarted = false;
 	private WifiLock lock = null;
+	private int previouslyConnectedNetworkId = -1;
 	private List<Integer> temporaryNetworkIds = new ArrayList<Integer>();
 	private AdapterState adapterState = AdapterState.IDLE;
 	private static final String LOCK_TAG = "pervads_wifi_lock";
@@ -250,6 +251,11 @@ public class AndroidWifiAdapter extends AbstractWifiAdapter {
 
 			// unregister broadcast receiver
 			context.unregisterReceiver(receiver);
+			
+			// reconnect to previous network
+			if(previouslyConnectedNetworkId != -1) {
+				manager.enableNetwork(previouslyConnectedNetworkId, true);
+			}
 
 			sessionStarted = false;
 		}
@@ -261,6 +267,13 @@ public class AndroidWifiAdapter extends AbstractWifiAdapter {
 			if (sessionStarted)
 				throw new WifiAdapterException(
 						"a session has already been started");
+			
+			// save current network id
+			previouslyConnectedNetworkId = -1;
+			WifiInfo info = manager.getConnectionInfo();
+			if(info != null) {
+				previouslyConnectedNetworkId = info.getNetworkId();
+			}
 
 			// register broadcast receiver
 			context.registerReceiver(receiver, filter);

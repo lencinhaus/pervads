@@ -9,33 +9,33 @@ import android.content.Context;
 
 import com.thoughtworks.xstream.XStream;
 
-public class QueryManager extends SerializedDataManager<List<Query>> {
-
-	public QueryManager(Context context) {
+public class ResultManager extends SerializedDataManager<List<QueryResult>> {
+	public ResultManager(Context context) {
 		super(context);
 	}
 
-	public List<Query> getQueries() {
+	public List<QueryResult> getResults() {
 		return getData();
 	}
 
-	public void writeQueries() {
+	public void setResults(List<QueryResult> results) {
+		setData(results);
 		writeData();
 	}
 
 	@Override
-	protected List<Query> getInitialData() {
-		return new ArrayList<Query>();
+	protected List<QueryResult> getInitialData() {
+		return new ArrayList<QueryResult>();
 	}
 
 	@Override
 	protected String getName() {
-		return "queries";
+		return "results";
 	}
 
 	@Override
 	protected void initializeXStream(XStream xstream) {
-		xstream.alias("query", Query.class);
-		xstream.alias("assignment", LightweightAssignment.class);
+		// TODO class aliases
 	}
+
 }

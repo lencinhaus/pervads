@@ -8,7 +8,7 @@ import android.os.Parcelable;
 public class LightweightAssignment implements Parcelable, Serializable {
 	public static final long serialVersionUID = 0L;
 	private String valueURI;
-	public LightweightAssignment() {
+	private LightweightAssignment() {
 		
 	}
 	

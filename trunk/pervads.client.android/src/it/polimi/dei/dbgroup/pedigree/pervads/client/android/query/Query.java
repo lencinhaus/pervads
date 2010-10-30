@@ -1,13 +1,12 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.client.android.query;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Query implements Parcelable, Serializable {
+public class Query implements Parcelable {
 	public static final long serialVersionUID = 0L;
 	private List<LightweightAssignment> assignments = new ArrayList<LightweightAssignment>();
 	private String name;

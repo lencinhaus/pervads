@@ -95,7 +95,7 @@ public class QueryEditorActivity extends ListActivity {
 		}
 
 		// init context manager
-		InitializationManager.initialize(this,
+		InitializationManager.initializeAsync(this,
 				contextInitializationFinishedListener, ContextProxyManager
 						.getInstance(), ContextSearchManager.getInstance());
 	}

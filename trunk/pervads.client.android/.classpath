@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="/libs/androjena/androjena_0.2.jar" sourcepath="/libs/androjena/androjena_0.2_sources.jar"/>
-	<classpathentry kind="lib" path="/libs/iri/iri-0.7.jar"/>
 	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.4.jar"/>
 	<classpathentry kind="lib" path="/libs/slf4j-android/slf4j-android-1.6.1-RC1.jar" sourcepath="/libs/slf4j-android/slf4j-android-1.6.1-RC1-sources.jar"/>
 	<classpathentry kind="lib" path="/libs/arqoid/arqoid_0.2.jar" sourcepath="/libs/arqoid/arqoid_0.2_sources.jar"/>
@@ -12,5 +10,8 @@
 	<classpathentry kind="lib" path="/contextmodel.core/dist/contextmodel.core_0.1.jar" sourcepath="/contextmodel.core/src"/>
 	<classpathentry kind="lib" path="/libs/tdboid/tdboid_0.1.jar" sourcepath="/libs/tdboid/tdboid_0.1_sources.jar"/>
 	<classpathentry kind="lib" path="/pervads.model.core/dist/pervads.model.core_0.1.jar" sourcepath="/pervads.model.core/src"/>
+	<classpathentry kind="lib" path="/xstream.android/dist/xstream.android_1.2.2.jar" sourcepath="/xstream.android/src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

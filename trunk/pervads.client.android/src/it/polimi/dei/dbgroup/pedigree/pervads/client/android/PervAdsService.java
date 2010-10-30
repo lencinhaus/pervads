@@ -1,6 +1,12 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.preference.Settings;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.QueryResult;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ResultBuilder;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ResultManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ServerDataManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ServerDataSource;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.ConnectionInfo;
@@ -11,17 +17,10 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.WifiNetwork;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.WifiSecurity;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.android.AndroidWifiAdapter;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.windows.WindowsNativeWifiAdapter;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.IPervAdsService;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.IPervAdsServiceListener;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Iterator;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -39,12 +38,12 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Debug;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
+import android.text.Html;
 import android.text.TextUtils;
 
 public class PervAdsService extends Service implements IWifiAdapterListener {
@@ -71,6 +70,8 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 
 	private IWifiAdapter adapter = null;
 
+	private ServerDataManager serverDataManager = null;
+
 	private boolean adapterEnabled = false;
 
 	private int bindingsCounter = 0;
@@ -81,14 +82,8 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 
 	private long lastUpdateStartTime = 0;
 
-	private Map<String, List<PervAd>> pervAdsMap = new HashMap<String, List<PervAd>>();
-
-	private PervAd[] pervAds = new PervAd[0];
-
 	private WifiNetwork[] networks = null;
 	private int currentNetworkId;
-	// TODO not needed anymore, connection status is managed by adapter sessions
-	// private WifiNetwork current = null;
 
 	private final Handler handler = new Handler() {
 
@@ -113,16 +108,6 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		@Override
 		public void startUpdate() throws RemoteException {
 			PervAdsService.this.startUpdate();
-		}
-
-		@Override
-		public PervAd[] getPervAds() throws RemoteException {
-			return PervAdsService.this.getPervAds();
-		}
-
-		@Override
-		public void pervAdSeen(String pervAdId) throws RemoteException {
-			PervAdsService.this.pervAdSeen(pervAdId);
 		}
 
 		@Override
@@ -156,10 +141,6 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 
 	@Override
 	public void scanCompleted() {
-		// TODO removed, this should be done during adapter's startSession
-		// get current connection (will be restored after the scan)
-		// current = adapter.getConnectedNetwork();
-
 		if (Logger.D)
 			L.d("network scan completed");
 
@@ -186,6 +167,9 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 
 		// notify listeners about scan completed
 		fireNetworkScanEvent(EventTypes.Completed, numFoundNetworks);
+
+		// start server data manager update
+		serverDataManager.startUpdate();
 
 		if (networks != null && networks.length > 0) {
 			currentNetworkId = -1;
@@ -238,16 +222,10 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		// notify listeners about connection completed
 		fireNetworkConnectionEvent(EventTypes.Completed, networkName);
 
-		// get current network pervads list
+		// use BSSID as network univoque id
 		final String networkId = network.getBSSID();
-		List<PervAd> pervAdsList = pervAdsMap.get(networkId);
-		if (pervAdsList == null) {
-			// create a list for current network
-			pervAdsList = new ArrayList<PervAd>();
-			pervAdsMap.put(networkId, pervAdsList);
-		}
 
-		// download ontology from gateway
+		// download content from gateway
 
 		try {
 			int gateway = 0;
@@ -266,7 +244,7 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 			HttpConnectionParams.setSoTimeout(params, 5000);
 			HttpClient client = new DefaultHttpClient(params);
 			String uri = "http://" + Utils.formatIPAddress(gateway)
-					+ "/pervads.n3";
+					+ "/pervads.owl";
 
 			if (Logger.D)
 				L.d("sending a pervad request on URI " + uri + " to network "
@@ -287,33 +265,19 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 								+ (TextUtils.isEmpty(encoding) ? "undefined"
 										: encoding)
 								+ " encoding, reading content");
-					InputStreamReader isReader = null;
+					Charset charset = Charset.defaultCharset();
 					if (!TextUtils.isEmpty(encoding)
 							&& Charset.isSupported(encoding))
-						isReader = new InputStreamReader(entity.getContent(),
-								Charset.forName(encoding));
-					else
-						isReader = new InputStreamReader(entity.getContent());
-					BufferedReader reader = new BufferedReader(isReader);
-					StringBuilder sb = new StringBuilder();
-					String s = null;
-					while ((s = reader.readLine()) != null) {
-						sb.append(s + "\n");
-					}
-					reader.close();
-					s = sb.toString();
+						charset = Charset.forName(encoding);
+					String content = Utils.toString(entity.getContent(),
+							charset);
 
 					if (Logger.D)
-						L.d("response content read, adding pervads to results");
+						L
+								.d("response content read, adding data to server data manager");
 
-					// separate tokens
-					String tokens[] = s.split("\n");
-					int numPervAds = tokens.length / 2;
-					for (int i = 0; i < numPervAds; i++) {
-						String id = tokens[2 * i];
-						String content = tokens[2 * i + 1];
-						addPervAd(id, networkName, content, pervAdsList);
-					}
+					// add content to server data manager
+					serverDataManager.addData(networkId, content);
 				}
 			} catch (Exception ex) {
 				if (Logger.W)
@@ -328,35 +292,6 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		}
 
 		handler.sendEmptyMessage(CONNECT_TO_NEXT_NETWORK_MESSAGE);
-	}
-
-	private void addPervAd(String id, String networkName, String content,
-			List<PervAd> pervAdsList) {
-		// TODO mettere a posto sta roba quando si avrà il matching
-		// ontologico vero
-		boolean newPervAd = true;
-		PervAd pervAd = null;
-		for (PervAd oldPervAd : pervAdsList) {
-			if (oldPervAd.getId().equals(id)) {
-				if (oldPervAd.getContent().equals(content))
-					newPervAd = false;
-				else
-					pervAd = oldPervAd;
-				break;
-			}
-		}
-
-		if (newPervAd) {
-			if (pervAd == null) {
-				pervAd = new PervAd(id, networkName, content, System
-						.currentTimeMillis());
-				pervAdsList.add(pervAd);
-			} else {
-				pervAd.setContent(content);
-				pervAd.setFindTime(System.currentTimeMillis());
-			}
-			pervAd.setSeen(false);
-		}
 	}
 
 	private void connectToNextNetwork() {
@@ -504,18 +439,47 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 					"An error occurred while ending adapter session after successful update");
 		}
 
-		// create final pervads array
-		int total = 0;
-		for (List<PervAd> pervAdsList : pervAdsMap.values()) {
-			total += pervAdsList.size();
-		}
-		pervAds = new PervAd[total];
-		int i = 0;
-		for (List<PervAd> pervAdsList : pervAdsMap.values()) {
-			for (PervAd pervAd : pervAdsList) {
-				pervAds[i++] = pervAd;
+		if (Logger.D)
+			L.d("building results");
+
+		// build results
+		int numContents = serverDataManager.countData();
+		fireContentProcessingEvent(EventTypes.Started, numContents);
+		ResultManager resultManager = new ResultManager(this);
+		resultManager.clear();
+
+		// initialize result builder
+		ResultBuilder resultBuilder = ResultBuilder.getInstance();
+		InitializationManager.initializeSync(this, resultBuilder);
+
+		if (numContents > 0 && resultBuilder.start()) {
+			Iterator<ServerDataSource> contentIterator = serverDataManager
+					.getData();
+			while (contentIterator.hasNext()) {
+				fireResultCreationEvent(EventTypes.Started);
+				ServerDataSource source = contentIterator.next();
+				if (!resultBuilder.processContent(source.getStream())) {
+					L
+							.w("Cannot process content from source "
+									+ source.getKey());
+					contentIterator.remove();
+					fireResultCreationEvent(EventTypes.Failed);
+				} else
+					fireResultCreationEvent(EventTypes.Completed);
+				try {
+					source.getStream().close();
+				} catch (IOException ingored) {
+				}
 			}
+			resultManager.setResults(resultBuilder.stop());
 		}
+		fireContentProcessingEvent(EventTypes.Completed, numContents);
+
+		if (Logger.D)
+			L.d("results built");
+
+		// stop updating server data manager
+		serverDataManager.endUpdate();
 
 		// send notifications
 		if (shouldSendNotifications())
@@ -588,15 +552,21 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 
 	private void sendNewPervAdsNotifications() {
 		// build ticker text
-		PervAd[] pervAds = getPervAds();
+		// PervAd[] pervAds = getPervAds();
+		// int numNewPervads = 0;
+		// StringBuilder contentSB = new StringBuilder();
+		// for (PervAd pervAd : pervAds) {
+		// if (!pervAd.isSeen()) {
+		// if (numNewPervads++ > 0)
+		// contentSB.append(", ");
+		// contentSB.append(pervAd.getId());
+		// }
+		// }
+		ResultManager resultManager = new ResultManager(this);
 		int numNewPervads = 0;
-		StringBuilder contentSB = new StringBuilder();
-		for (PervAd pervAd : pervAds) {
-			if (!pervAd.isSeen()) {
-				if (numNewPervads++ > 0)
-					contentSB.append(", ");
-				contentSB.append(pervAd.getId());
-			}
+		// StringBuilder contentSB = new StringBuilder();
+		for (QueryResult result : resultManager.getResults()) {
+			numNewPervads += result.getMatchingPervADs().size();
 		}
 		if (numNewPervads > 0) {
 			NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -618,9 +588,11 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 			n.number = numNewPervads;
 			Intent ni = new Intent(this, PervAdsListActivity.class);
 			PendingIntent pi = PendingIntent.getActivity(this, 0, ni, 0);
-			n.setLatestEventInfo(getApplicationContext(), String.format(
-					getString(R.string.notification_new_pervads_content_title),
-					numNewPervads), contentSB.toString(), pi);
+			n.setLatestEventInfo(getApplicationContext(),
+					getText(R.string.notification_new_pervads_content_title),
+					Html.fromHtml(getString(
+							R.string.notification_new_pervads_content_text,
+							numNewPervads)), pi);
 			manager.notify(PERVADS_NOTIFICATION_ID, n);
 		}
 	}
@@ -657,18 +629,6 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 			if (Logger.D)
 				L.d("posting an immediate update");
 			handler.sendEmptyMessage(START_UPDATE_MESSAGE);
-		}
-	}
-
-	public PervAd[] getPervAds() {
-		return pervAds;
-	}
-
-	public void pervAdSeen(String pervAdId) {
-		for (PervAd oldPervAd : pervAds) {
-			if (oldPervAd.getId().equals(pervAdId)) {
-				oldPervAd.setSeen(true);
-			}
 		}
 	}
 
@@ -749,6 +709,9 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		settings = new Settings(this);
 
 		initializeAdapter();
+
+		// create server data manager
+		serverDataManager = new ServerDataManager(this);
 	}
 
 	@Override
@@ -909,6 +872,43 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 									"an error occurred while notifying listeners about network connection event (type "
 											+ EventTypes.describe(eventType)
 											+ ", SSID: " + SSID + ")", ex);
+			}
+		}
+		listeners.finishBroadcast();
+	}
+
+	private void fireContentProcessingEvent(int eventType, int numContents) {
+		final int N = listeners.beginBroadcast();
+		for (int i = 0; i < N; i++) {
+			try {
+				listeners.getBroadcastItem(i).contentProcessingEvent(eventType,
+						numContents);
+			} catch (RemoteException ex) {
+				if (Logger.E)
+					L
+							.e(
+									"an error occurred while notifying listeners about content processing event (type "
+											+ EventTypes.describe(eventType)
+											+ ", num contents: "
+											+ numContents
+											+ ")", ex);
+			}
+		}
+		listeners.finishBroadcast();
+	}
+
+	private void fireResultCreationEvent(int eventType) {
+		final int N = listeners.beginBroadcast();
+		for (int i = 0; i < N; i++) {
+			try {
+				listeners.getBroadcastItem(i).resultCreationEvent(eventType);
+			} catch (RemoteException ex) {
+				if (Logger.E)
+					L
+							.e(
+									"an error occurred while notifying listeners about result creation event (type "
+											+ EventTypes.describe(eventType)
+											+ ")", ex);
 			}
 		}
 		listeners.finishBroadcast();
