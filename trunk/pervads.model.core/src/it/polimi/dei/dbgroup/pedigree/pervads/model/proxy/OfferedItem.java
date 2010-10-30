@@ -1,10 +1,10 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.model.proxy;
 
-import com.hp.hpl.jena.ontology.Individual;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.NamedEntity;
 
-public interface OfferedItem extends PervADsModelEntity {
-	public Individual getOfferedItemIndividual();
+import com.hp.hpl.jena.rdf.model.Resource;
+
+public interface OfferedItem extends PervADsModelEntity, NamedEntity {
+	public Resource getOfferedItemIndividual();
 	public Offer getOffer();
-	public String getName();
-	public String getDescription();
 }

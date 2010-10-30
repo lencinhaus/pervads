@@ -6,17 +6,17 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.OfferedItem;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
-import com.hp.hpl.jena.ontology.Individual;
+import java.util.Locale;
+
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class OfferedItemImpl extends PervADsModelEntityImpl implements
 		OfferedItem {
-	private Individual itemIndividual;
 	private Offer offer;
-	
-	public OfferedItemImpl(PervADsModelProxy proxy, Individual itemIndividual,
+
+	public OfferedItemImpl(PervADsModelProxy proxy, Resource itemIndividual,
 			Offer offer) {
 		super(proxy, itemIndividual);
-		this.itemIndividual = itemIndividual;
 		this.offer = offer;
 	}
 
@@ -26,18 +26,37 @@ public class OfferedItemImpl extends PervADsModelEntityImpl implements
 	}
 
 	@Override
+	public String getDescription(String lang) {
+		return ModelUtils.getStringProperty(getResource(),
+				PervADsModel.itemDescription, lang);
+	}
+
+	@Override
+	public String getName(String lang) {
+		return ModelUtils.getStringProperty(getResource(),
+				PervADsModel.itemName, lang);
+	}
+
+	@Override
 	public String getDescription() {
-		return ModelUtils.parseStringLiteral(itemIndividual.getPropertyValue(PervADsModel.itemDescription));
+
+		return getDescription(getDefaultLanguage());
 	}
 
 	@Override
 	public String getName() {
-		return ModelUtils.parseStringLiteral(itemIndividual.getPropertyValue(PervADsModel.itemName));
+		return getName(getDefaultLanguage());
 	}
 
 	@Override
-	public Individual getOfferedItemIndividual() {
-		return itemIndividual;
+	public Resource getOfferedItemIndividual() {
+		return getResource();
 	}
 
+	private static String getDefaultLanguage() {
+		Locale locale = Locale.getDefault();
+		if (locale != null)
+			return locale.getLanguage();
+		return null;
+	}
 }

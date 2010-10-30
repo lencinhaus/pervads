@@ -4,12 +4,16 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Context;
 
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public interface PervAD extends PervADsModelEntity {
-	public Individual getPervADIndividual();
+	public Resource getPervADIndividual();
+
 	public Context getContext();
+
 	public List<? extends Organization> listAdvertisers();
+
 	public List<? extends Offer> listOffers();
+
 	public List<String> listTags();
 }

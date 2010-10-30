@@ -11,18 +11,18 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class PervADsModelProxyImpl implements PervADsModelProxy {
 	private ContextModelProxy contextModel;
 	private ContextInstanceProxy contextInstance;
-	private OntModel model;
+	private Model model;
 
-	public PervADsModelProxyImpl(ContextModelProxy contextModel, OntModel model) {
+	public PervADsModelProxyImpl(ContextModelProxy contextModel, Model model) {
 		super();
 		this.contextModel = contextModel;
 		this.model = model;
@@ -36,23 +36,23 @@ public class PervADsModelProxyImpl implements PervADsModelProxy {
 	}
 
 	@Override
-	public OntModel getModel() {
+	public Model getModel() {
 		return model;
 	}
 
 	@Override
 	public List<? extends PervAD> listPervADs() {
 		List<PervAD> pervads = new ArrayList<PervAD>();
-		ExtendedIterator<Individual> iterator = model
-				.listIndividuals(PervADsModel.PervAD);
+		ExtendedIterator<Resource> iterator = model.listResourcesWithProperty(
+				RDF.type, PervADsModel.PervAD);
 		while (iterator.hasNext()) {
-			Individual pervadIndividual = iterator.next();
-			RDFNode contextNode = pervadIndividual
-					.getPropertyValue(PervADsModel.hasContext);
+			Resource pervadIndividual = iterator.next();
+			RDFNode contextNode = pervadIndividual.getProperty(
+					PervADsModel.hasContext).getObject();
 			// TODO warn if pervad has no context
 			if (contextNode != null && contextNode.isURIResource()) {
-				Context context = contextInstance.getContext(contextNode.as(
-						Resource.class).getURI());
+				Context context = contextInstance
+						.getContext(((Resource) contextNode).getURI());
 				if (context != null) {
 					PervAD pervad = new PervADImpl(this, pervadIndividual,
 							context);
