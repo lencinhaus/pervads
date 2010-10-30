@@ -59,12 +59,20 @@ public class ModelUtils {
 	}
 
 	public static Literal getLocalizedLiteral(Iterator<RDFNode> it, String lang) {
+		return getLocalizedLiteral(it, lang, false);
+	}
+
+	public static Literal getLocalizedLiteral(Iterator<RDFNode> it,
+			String lang, boolean preferredLang) {
 		if (lang == null)
 			throw new IllegalArgumentException("lang cannot be null");
 		Literal found = null;
+		Literal first = null;
 		while (it.hasNext()) {
 			Literal lit = parseLiteral(it.next());
 			if (lit != null) {
+				if (first == null)
+					first = lit;
 				String llang = lit.getLanguage();
 				if (lang.equalsIgnoreCase(llang)) {
 					found = lit;
@@ -72,11 +80,15 @@ public class ModelUtils {
 				} else if (llang != null && llang.length() > 1
 						&& llang.substring(0, 2).equalsIgnoreCase(lang)) {
 					found = lit;
-				} else if (llang == null && found == null) {
+				} else if (found == null
+						&& (llang == null || llang.length() == 0)) {
 					found = lit;
 				}
 			}
 		}
+
+		if (found == null && preferredLang)
+			return first;
 
 		return found;
 	}
@@ -120,7 +132,12 @@ public class ModelUtils {
 
 	public static <T> T getLocalizedTypedLiteral(Iterator<RDFNode> it,
 			Class<T> clazz, String lang) {
-		Literal lit = getLocalizedLiteral(it, lang);
+		return getLocalizedTypedLiteral(it, clazz, lang, false);
+	}
+
+	public static <T> T getLocalizedTypedLiteral(Iterator<RDFNode> it,
+			Class<T> clazz, String lang, boolean preferredLang) {
+		Literal lit = getLocalizedLiteral(it, lang, preferredLang);
 		if (lit != null)
 			return parseTypedLiteral(lit, clazz);
 		return null;
@@ -135,15 +152,24 @@ public class ModelUtils {
 
 	public static String getLocalizedStringLiteral(Iterator<RDFNode> it,
 			String lang) {
-		Literal lit = getLocalizedLiteral(it, lang);
+		return getLocalizedStringLiteral(it, lang, false);
+	}
+
+	public static String getLocalizedStringLiteral(Iterator<RDFNode> it,
+			String lang, boolean preferredLang) {
+		Literal lit = getLocalizedLiteral(it, lang, preferredLang);
 		if (lit != null)
 			return lit.getLexicalForm();
 		return null;
 	}
-	
+
+	public static Date getLocalizedDateLiteral(Iterator<RDFNode> it, String lang) {
+		return getLocalizedDateLiteral(it, lang, false);
+	}
+
 	public static Date getLocalizedDateLiteral(Iterator<RDFNode> it,
-			String lang) {
-		Literal lit = getLocalizedLiteral(it, lang);
+			String lang, boolean preferredLang) {
+		Literal lit = getLocalizedLiteral(it, lang, preferredLang);
 		if (lit != null)
 			return parseDateLiteral(lit);
 		return null;
@@ -182,42 +208,57 @@ public class ModelUtils {
 
 	public static <T> T getTypedProperty(Resource r, Property p,
 			Class<T> clazz, String lang) {
+		return getTypedProperty(r, p, clazz, lang, false);
+	}
+
+	public static <T> T getTypedProperty(Resource r, Property p,
+			Class<T> clazz, String lang, boolean preferredLang) {
 		Iterator<RDFNode> it = getPropertyValueIterator(r, p);
 		if (lang == null) {
 			if (it.hasNext())
 				return parseTypedLiteral(it.next(), clazz);
 			return null;
 		} else {
-			return getLocalizedTypedLiteral(it, clazz, lang);
+			return getLocalizedTypedLiteral(it, clazz, lang, preferredLang);
+		}
+	}
+
+	public static String getStringProperty(Resource r, Property p, String lang,
+			boolean preferredLang) {
+		Iterator<RDFNode> it = getPropertyValueIterator(r, p);
+		if (lang != null) {
+			return getLocalizedStringLiteral(it, lang, preferredLang);
+		} else {
+			if (it.hasNext())
+				return parseStringLiteral(it.next());
+			return null;
 		}
 	}
 
 	public static String getStringProperty(Resource r, Property p, String lang) {
-		Iterator<RDFNode> it = getPropertyValueIterator(r, p);
-		if (lang == null) {
-			if (it.hasNext())
-				return parseStringLiteral(it.next());
-			return null;
-		} else {
-			return getLocalizedStringLiteral(it, lang);
-		}
+		return getStringProperty(r, p, lang, false);
 	}
-	
+
 	public static String getStringProperty(Resource r, Property p) {
-		return getStringProperty(r, p, null);
+		return getStringProperty(r, p, null, false);
 	}
 
 	public static Date getDateProperty(Resource r, Property p, String lang) {
+		return getDateProperty(r, p, lang, false);
+	}
+
+	public static Date getDateProperty(Resource r, Property p, String lang,
+			boolean preferredLang) {
 		Iterator<RDFNode> it = getPropertyValueIterator(r, p);
 		if (lang == null) {
 			if (it.hasNext())
 				return parseDateLiteral(it.next());
 			return null;
 		} else {
-			return getLocalizedDateLiteral(it, lang);
+			return getLocalizedDateLiteral(it, lang, preferredLang);
 		}
 	}
-	
+
 	public static Date getDateProperty(Resource r, Property p) {
 		return getDateProperty(r, p, null);
 	}
