@@ -1,21 +1,21 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl;
 
-import com.hp.hpl.jena.ontology.OntResource;
-
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelEntity;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Entity;
 
+import com.hp.hpl.jena.rdf.model.Resource;
+
 public class EntityImpl implements Entity {
-	private OntResource resource;
-	
-	public EntityImpl(OntResource resource) {
+	private Resource resource;
+
+	public EntityImpl(Resource resource) {
 		this.resource = resource;
 	}
-	
-	protected OntResource getResource() {
+
+	public Resource getResource() {
 		return resource;
 	}
-	
+
 	@Override
 	public String getURI() {
 		return resource.getURI();

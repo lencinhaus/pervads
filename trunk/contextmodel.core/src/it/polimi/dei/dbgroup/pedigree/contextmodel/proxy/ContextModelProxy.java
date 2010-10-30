@@ -2,10 +2,10 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy;
 
 import java.util.Collection;
 
-import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.rdf.model.Model;
 
 public interface ContextModelProxy extends DimensionParent {
-	public OntModel getModel();
+	public Model getModel();
 	
 	public Dimension findDimension(String uri);
 	

@@ -6,40 +6,40 @@ import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.Ontology;
+import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public final class ContextMetaModel {
-	private static final OntModel m = ModelFactory
-			.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+	private static final Model m = ModelFactory.createDefaultModel();
 
-	private static final OntClass clazz(String local) {
-		return m.createClass(NS + local);
+	private static final Resource resource(String local) {
+		if (local == null)
+			return m.createResource(URI);
+		return m.createResource(NS + local);
 	}
 
-	private static final ObjectProperty obj(String local) {
-		return m.createObjectProperty(NS + local);
-	}
-
-	private static final AnnotationProperty annot(String local) {
-		return m.createAnnotationProperty(NS + local);
+	private static final Property property(String local) {
+		return m.createProperty(NS + local);
 	}
 
 	public static final String URI = Common.URI_BASE + "context-meta-model.owl";
 	public static final String NS = URI + "#";
 
 	// Ontologies
-	public static final Ontology Ontology = m.createOntology(URI);
+	public static final Resource Ontology = resource(null);
 
 	// Classes
-	public static final OntClass ContextSpecification = clazz("ContextSpecification");
+	public static final Resource ContextSpecification = resource("ContextSpecification");
 
 	// Object properties
-	public static final ObjectProperty contextSpecification = obj("contextSpecification");
+	public static final Property contextSpecification = property("contextSpecification");
 
 	// Annotation properties
-	public static final AnnotationProperty valueParameter = annot("valueParameter");
-	public static final AnnotationProperty dimensionParameter = annot("dimensionParameter");
-	public static final AnnotationProperty dimensionValue = annot("dimensionValue");
-	public static final AnnotationProperty rootDimension = annot("rootDimension");
-	public static final AnnotationProperty valueSubDimension = annot("valueSubDimension");
+	public static final Property valueParameter = property("valueParameter");
+	public static final Property dimensionParameter = property("dimensionParameter");
+	public static final Property dimensionValue = property("dimensionValue");
+	public static final Property rootDimension = property("rootDimension");
+	public static final Property valueSubDimension = property("valueSubDimension");
 }
