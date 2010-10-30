@@ -3,9 +3,10 @@ package it.polimi.dei.dbgroup.pedigree.pervads.client.android.context;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.Config;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Initializable;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.ProgressMonitor;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 
@@ -44,8 +45,7 @@ public class ContextSearchManager implements Initializable {
 	private static final String FIELD_DIMENSION_DESCRIPTION = "dimension_description";
 	private static final String FIELD_URI = "uri";
 	private static final float FUZZY_MINIMUM = .8F;
-	// private final Logger L = new Logger(ContextSearchManager.class
-	// .getSimpleName());
+	private final Logger L = new Logger(ContextSearchManager.class);
 	private Value selectedValue = null;
 	private OnValueSelectedListener onValueSelectedListener = null;
 	private boolean initialized = false;
@@ -159,67 +159,77 @@ public class ContextSearchManager implements Initializable {
 
 	@Override
 	public void initialize(Context context, ProgressMonitor monitor) {
-		// collect all dimensions and values
-		ContextModelProxy proxy = ContextProxyManager.getInstance().getProxy();
-		monitor.indeterminate(true);
-		monitor.message(R.string.context_search_manager_operation_build_index);
+		if (!isInitialized(context)) {
+			L.d("initializing context search manager");
+			// collect all dimensions and values
+			if (!ContextProxyManager.getInstance().isInitialized(context))
+				ContextProxyManager.getInstance().initialize(context, monitor);
 
-		// collect dimensions
-		Collection<? extends Dimension> dimensions = proxy.findAllDimensions();
+			ContextModelProxy proxy = ContextProxyManager.getInstance()
+					.getProxy();
+			monitor.indeterminate(true);
+			monitor
+					.message(R.string.context_search_manager_operation_build_index);
 
-		// build the index
-		monitor.indeterminate(false);
-		monitor.max(dimensions.size());
-		monitor.progress(0);
-		Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
-		try {
-			Directory directory = FSDirectory.open(getIndexDirectory(context));
-			IndexWriter writer = new IndexWriter(directory, analyzer, true,
-					IndexWriter.MaxFieldLength.LIMITED);
-			for (Dimension dimension : dimensions) {
-				Field dimensionNameField = new Field(FIELD_DIMENSION_NAME,
-						dimension.getName(), Field.Store.YES,
-						Field.Index.ANALYZED);
-				dimensionNameField.setBoost(.7F);
-				Field dimensionDescriptionField = null;
-				if (!TextUtils.isEmpty(dimension.getDescription())) {
-					dimensionDescriptionField = new Field(
-							FIELD_DIMENSION_DESCRIPTION, dimension
-									.getDescription(), Field.Store.YES,
+			// collect dimensions
+			Collection<? extends Dimension> dimensions = proxy
+					.findAllDimensions();
+
+			// build the index
+			monitor.indeterminate(false);
+			monitor.max(dimensions.size());
+			monitor.progress(0);
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_30);
+			try {
+				Directory directory = FSDirectory
+						.open(getIndexDirectory(context));
+				IndexWriter writer = new IndexWriter(directory, analyzer, true,
+						IndexWriter.MaxFieldLength.LIMITED);
+				for (Dimension dimension : dimensions) {
+					Field dimensionNameField = new Field(FIELD_DIMENSION_NAME,
+							dimension.getName(), Field.Store.YES,
 							Field.Index.ANALYZED);
-					dimensionDescriptionField.setBoost(.35F);
-				}
-				for (Value value : dimension.listChildValues()) {
-					Document doc = new Document();
-					doc.add(dimensionNameField);
-					if (dimensionDescriptionField != null)
-						doc.add(dimensionDescriptionField);
-					Field valueNameField = new Field(FIELD_VALUE_NAME, value
-							.getName(), Field.Store.YES, Field.Index.ANALYZED);
-					valueNameField.setBoost(1F);
-					doc.add(valueNameField);
-					if (!TextUtils.isEmpty(value.getDescription())) {
-						Field valueDescriptionField = new Field(
-								FIELD_VALUE_DESCRIPTION,
-								value.getDescription(), Field.Store.YES,
+					dimensionNameField.setBoost(.7F);
+					Field dimensionDescriptionField = null;
+					if (!TextUtils.isEmpty(dimension.getDescription())) {
+						dimensionDescriptionField = new Field(
+								FIELD_DIMENSION_DESCRIPTION, dimension
+										.getDescription(), Field.Store.YES,
 								Field.Index.ANALYZED);
-						valueDescriptionField.setBoost(.5F);
-						doc.add(valueDescriptionField);
+						dimensionDescriptionField.setBoost(.35F);
 					}
+					for (Value value : dimension.listChildValues()) {
+						Document doc = new Document();
+						doc.add(dimensionNameField);
+						if (dimensionDescriptionField != null)
+							doc.add(dimensionDescriptionField);
+						Field valueNameField = new Field(FIELD_VALUE_NAME,
+								value.getName(), Field.Store.YES,
+								Field.Index.ANALYZED);
+						valueNameField.setBoost(1F);
+						doc.add(valueNameField);
+						if (!TextUtils.isEmpty(value.getDescription())) {
+							Field valueDescriptionField = new Field(
+									FIELD_VALUE_DESCRIPTION, value
+											.getDescription(), Field.Store.YES,
+									Field.Index.ANALYZED);
+							valueDescriptionField.setBoost(.5F);
+							doc.add(valueDescriptionField);
+						}
 
-					doc
-							.add(new Field(FIELD_URI, value.getURI(),
-									Field.Store.YES,
-									Field.Index.NOT_ANALYZED_NO_NORMS));
-					writer.addDocument(doc);
+						doc.add(new Field(FIELD_URI, value.getURI(),
+								Field.Store.YES,
+								Field.Index.NOT_ANALYZED_NO_NORMS));
+						writer.addDocument(doc);
+					}
+					monitor.increment(1);
 				}
-				monitor.increment(1);
+				writer.close();
+				directory.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(
+						"an error occurred while indexing context model", ex);
 			}
-			writer.close();
-			directory.close();
-		} catch (Exception ex) {
-			throw new RuntimeException(
-					"an error occurred while indexing context model", ex);
 		}
 	}
 

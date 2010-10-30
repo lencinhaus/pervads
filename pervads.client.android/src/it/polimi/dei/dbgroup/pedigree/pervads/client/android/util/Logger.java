@@ -18,6 +18,10 @@ public class Logger {
 			throw new NullPointerException("tag cannot be null or empty");
 		this.tag = tag;
 	}
+	
+	public Logger(Class<? extends Object> clazz) {
+		this(clazz.getSimpleName());
+	}
 
 	public String getTag() {
 		return tag;

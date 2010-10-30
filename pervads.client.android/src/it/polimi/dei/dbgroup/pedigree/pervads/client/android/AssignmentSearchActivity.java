@@ -90,7 +90,7 @@ public class AssignmentSearchActivity extends ListActivity {
 		setListAdapter(valueAdapter);
 
 		// initialize search manager
-		InitializationManager.initialize(this,
+		InitializationManager.initializeAsync(this,
 				searchInitializationFinishedListener, ContextProxyManager
 						.getInstance(), ContextSearchManager.getInstance());
 	}

@@ -14,7 +14,7 @@ public final class Config {
 	
 	public static final boolean TESTING_BEHAVIOR = true;
 	public static final String TESTING_SSID = "LOREPRI";
-	public static final int TESTING_GATEWAY = Utils.parseIPAddress("192.168.1.101");
+	public static final int TESTING_GATEWAY = Utils.parseIPAddress("192.168.1.100");
 	
 	public static final String WEP40_PASSWORD = "1234567890";
 	public static final String WEP104_PASSWORD = "12345678901234567890123456";

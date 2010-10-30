@@ -1,0 +1,266 @@
+-> table(rdf:type).
+-> table(rdfs:subClassOf).
+
+#------------------------------------------------------------------
+# RDFS Closure rules
+#------------------------------------------------------------------ 
+# backward transitive closure on subclassof
+[rdfs8:  (?a rdfs:subClassOf ?c) <- unbound(?c) (?a rdfs:subClassOf ?b) (?b rdfs:subClassOf ?c)] 
+[rdfs8:  (?a rdfs:subClassOf ?c) <- bound(?c)   (?b rdfs:subClassOf ?c) (?a rdfs:subClassOf ?b)] 
+
+[rdfs6:  (?p rdfs:subPropertyOf ?q), notEqual(?p,?q) -> table(?p, ?q), [ (?a ?q ?b) <- (?a ?p ?b)] ] 
+
+[rdfs9-alt:  (?a rdf:type ?y) <- bound(?y) (?x rdfs:subClassOf ?y), (?a rdf:type ?x) ] 
+[rdfs9-alt:  (?a rdf:type ?y) <- unbound(?y) (?a rdf:type ?x) (?x rdfs:subClassOf ?y) ] 
+
+#------------------------------------------------------------------
+# OWL Rules
+#------------------------------------------------------------------
+
+#[thing1: (?C rdf:type owl:Class) -> (?C rdfs:subClassOf owl:Thing), (owl:Nothing rdfs:subClassOf ?C)]
+
+#------------------------------------------------------------------
+# Class equality
+#------------------------------------------------------------------
+
+# equivalentClass
+[equivalentClass1: (?P owl:equivalentClass ?Q) 
+						-> (?P rdfs:subClassOf ?Q), (?Q rdfs:subClassOf ?P) ]
+						
+#[equivalentClass2: (?P owl:equivalentClass ?Q) <-  (?P rdfs:subClassOf ?Q), (?Q rdfs:subClassOf ?P) ]
+		
+#------------------------------------------------------------------
+# Property rules
+#------------------------------------------------------------------
+
+# EquivalentProperty 
+
+#[equivalentProperty1: (?P owl:equivalentProperty ?Q) 
+#						-> (?P rdfs:subPropertyOf ?Q), (?Q rdfs:subPropertyOf ?P) ]
+						
+#[equivalentProperty2: (?P rdfs:subPropertyOf ?Q), (?Q rdfs:subPropertyOf ?P) 
+#						-> (?P owl:equivalentProperty ?Q) ]
+# backward version
+#[equivalentProperty2: (?P owl:equivalentProperty ?Q) <- (?P rdfs:subPropertyOf ?Q), (?Q rdfs:subPropertyOf ?P) ] 
+						
+#[equivalentProperty3: (?P owl:sameAs ?Q), (?P rdf:type rdf:Property), (?Q rdf:type rdf:Property) 
+#						-> (?P owl:equivalentProperty ?Q) ]
+
+# SymmetricProperty
+
+#[symmetricProperty1: (?P rdf:type owl:SymmetricProperty) -> table(?P),
+#                     [symmetricProperty1b: (?X ?P ?Y) <- (?Y ?P ?X)] ]
+
+
+# inverseOf
+#[inverseOf1: (?P owl:inverseOf ?Q) -> (?Q owl:inverseOf ?P) ]
+
+#[inverseOf2: (?P owl:inverseOf ?Q) -> table(?P), table(?Q), [inverseOf2b: (?X ?P ?Y) <- (?Y ?Q ?X)] ]
+
+#[inverseOf3: (?P owl:inverseOf ?Q), (?P rdf:type owl:FunctionalProperty) 
+#						-> (?Q rdf:type owl:InverseFunctionalProperty) ]
+		
+#[inverseOf4: (?P owl:inverseOf ?Q), (?P rdf:type owl:InverseFunctionalProperty) 
+#						-> (?Q rdf:type owl:FunctionalProperty) ]
+
+#[inverseof5:  (?P owl:inverseOf ?Q) (?P rdfs:range ?C) -> (?Q rdfs:domain ?C)]
+#[inverseof6:  (?P owl:inverseOf ?Q) (?P rdfs:domain ?C) -> (?Q rdfs:range ?C)]
+
+# TransitiveProperty
+
+#[transitiveProperty1: (?P rdf:type owl:TransitiveProperty) -> table(?P),
+#			[transitiveProperty1b:  (?A ?P ?C) <- (?A ?P ?B), (?B ?P ?C)] ]
+#			[transitiveProperty1b:  (?A ?P ?C) <- bound (?C), (?B ?P ?C), (?A ?P ?B)] 
+#			[transitiveProperty1b:  (?A ?P ?C) <- unbound (?C), (?A ?P ?B) (?B ?P ?C)] 
+#			]
+						
+# Object properties 
+
+#[objectProperty: (?P rdf:type owl:ObjectProperty) ->
+#						(?P rdfs:domain owl:Thing) (?P rdfs:range owl:Thing) ]
+
+#------------------------------------------------------------------
+# Identify restriction assertions
+#------------------------------------------------------------------
+
+[restriction1: (?C owl:onProperty ?P), (?C owl:someValuesFrom ?D)
+	-> (?C owl:equivalentClass some(?P, ?D))]
+		
+[restriction2: (?C owl:onProperty ?P), (?C owl:allValuesFrom ?D)
+	-> (?C owl:equivalentClass all(?P, ?D))]
+		
+[restriction3: (?C owl:onProperty ?P), (?C owl:minCardinality ?X)
+	-> (?C owl:equivalentClass min(?P, ?X))]
+		
+[restriction4: (?C owl:onProperty ?P), (?C owl:maxCardinality ?X)
+	-> (?C owl:equivalentClass max(?P, ?X)) ]
+
+
+# provo ad alleggerire		
+#[restriction5: (?C owl:onProperty ?P), (?C owl:cardinality ?X)
+#	-> (?C owl:equivalentClass card(?P, ?X)), 
+#	   (?C rdfs:subClassOf min(?P, ?X)), 
+#	   (?C rdfs:subClassOf max(?P, ?X)) ]
+		
+#[restriction6: (?C rdfs:subClassOf min(?P, ?X)), (?C rdfs:subClassOf max(?P, ?X)) 
+#   	-> (?C rdfs:subClassOf card(?P, ?X))]
+
+[restriction5: (?C owl:onProperty ?P), (?C owl:cardinality ?X)
+	-> (?C owl:equivalentClass card(?P, ?X)) ] 
+
+       					
+[hasValueRec: (?C owl:onProperty ?P), (?C owl:hasValue ?V)
+	-> (?C owl:equivalentClass hasValue(?P, ?V)) ]
+						
+
+## TODO do we need the early restriction propagation rules in this configuration?
+
+# Equality propagation
+
+#[restrictionEq1: (?R1 owl:equivalentClass some(?P, ?C)) (?R2 owl:equivalentClass some(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+#[restrictionEq2: (?R1 owl:equivalentClass all(?P, ?C)) (?R2 owl:equivalentClass all(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+#[restrictionEq3: (?R1 owl:equivalentClass min(?P, ?C)) (?R2 owl:equivalentClass min(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+#[restrictionEq4: (?R1 owl:equivalentClass max(?P, ?C)) (?R2 owl:equivalentClass max(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+#[restrictionEq5: (?R1 owl:equivalentClass card(?P, ?C)) (?R2 owl:equivalentClass card(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+#[restrictionEq6: (?R1 owl:equivalentClass hasValue(?P, ?C)) (?R2 owl:equivalentClass hasValue(?P, ?C))
+#					notEqual(?R1, ?R2) -> (?R1 owl:equivalentClass ?R2) ]
+# all backward:
+#[restrictionEq1: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass some(?P, ?C)) (?R2 owl:equivalentClass some(?P, ?C)) notEqual(?R1, ?R2) ]
+#[restrictionEq2: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass all(?P, ?C)) (?R2 owl:equivalentClass all(?P, ?C)) notEqual(?R1, ?R2) ]
+#[restrictionEq3: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass min(?P, ?C)) (?R2 owl:equivalentClass min(?P, ?C)) notEqual(?R1, ?R2) ]
+#[restrictionEq4: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass max(?P, ?C)) (?R2 owl:equivalentClass max(?P, ?C)) notEqual(?R1, ?R2 ]
+#[restrictionEq5: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass card(?P, ?C)) (?R2 owl:equivalentClass card(?P, ?C)) notEqual(?R1, ?R2) ]
+#[restrictionEq6: (?R1 owl:equivalentClass ?R2) <- (?R1 owl:equivalentClass hasValue(?P, ?C)) (?R2 owl:equivalentClass hasValue(?P, ?C)) notEqual(?R1, ?R2) ]
+					
+#[restrictionPropagate1: (?C owl:equivalentClass ?R), (?D rdfs:subClassOf ?C)
+#                                -> (?D rdfs:subClassOf ?R) ]
+#[restrictionPropagate2: (?C owl:equivalentClass ?R), (?D owl:equivalentClass ?C) 
+#                                -> (?D owl:equivalentClass ?R) ]
+
+
+#------------------------------------------------------------------
+# One direction of unionOf
+#------------------------------------------------------------------
+
+#[unionOf1:  (?C owl:unionOf ?L) -> listMapAsSubject(?L, rdfs:subClassOf ?C) ]
+
+# Note could also add relation between two unionOf's if we add a listSubsumes primitive
+
+#------------------------------------------------------------------
+# Intersection of (instance reasoning is done by the translation hook)
+#------------------------------------------------------------------
+
+#LORE the translation hook has been disabled because too slow
+# the result is that there are no rules for intersection recognition, but it's ok
+[intersectionOf1:  (?C owl:intersectionOf ?L) -> listMapAsObject(?C rdfs:subClassOf ?L) ]
+
+#------------------------------------------------------------------
+# someValuesFrom - recognition direction only
+#------------------------------------------------------------------
+    
+[someRec2: (?C owl:equivalentClass some(?P, ?D)) ->
+     [someRec2b: (?X rdf:type ?C) <- (?X ?P ?A) (?A rdf:type ?D) ] ]
+    
+[someRec2b: (?C owl:equivalentClass some(?P, ?D)), (?D rdf:type rdfs:Datatype)->
+     [someRec2b: (?X rdf:type ?C) <- (?X ?P ?A), isDType(?A, ?D) ] ]
+
+# In the absence of prototype and bNode introduction rules we have to manually
+# code in additional subclass relationships
+
+#[restriction-inter-MnS: (?P rdfs:range ?D), (?C rdfs:subClassOf min(?P, 1)) 
+#						-> (?C rdfs:subClassOf some(?P, ?D)) ]
+						
+#------------------------------------------------------------------
+# allValuesFrom (main rule is in Mini, this just does minimal subclass propagation
+#------------------------------------------------------------------
+
+#[allRec1: (?C rdfs:subClassOf max(?P, 1)), (?C rdfs:subClassOf some(?P, ?D))
+#						-> (?C rdfs:subClassOf all(?P, ?D)) ]
+
+#[allRec2: (?P rdf:type owl:FunctionalProperty), (?C rdfs:subClassOf some(?P, ?C))
+#						 -> (?C rdfs:subClassOf all(?P, ?C)) ]
+    
+#[allRec4: (?P rdf:type owl:FunctionalProperty), (?C owl:equivalentClass all(?P, ?D))
+#                        -> [ (?X rdf:type ?C) <- (?X ?P ?Y) (?Y rdf:type ?D) ] ]
+    
+#[allRec5: (?C rdfs:subClassOf max(?P, 1)) (?C owl:equivalentClass all(?P, ?D))
+#                         -> [ (?X rdf:type ?C) <- (?X ?P ?Y) (?Y rdf:type ?D) ] ]
+    
+#[restriction-inter-RA-T: (?P rdfs:range ?C), (?D owl:equivalentClass all(?P, ?C)) 
+#						-> (owl:Thing rdfs:subClassOf ?D) ]
+						
+#[restriction-inter-AT-R: (owl:Thing rdfs:subClassOf all(?P, ?C)) 
+#						-> (?P rdfs:range ?C), (?P rdf:type owl:ObjectProperty) ]
+						
+#------------------------------------------------------------------
+# Restricted support for hasValue, even though that is beyond OWL/lite
+#------------------------------------------------------------------
+
+# hasValue
+[hasValueIF: (?C owl:equivalentClass hasValue(?P, ?V)) -> 
+								[ (?x ?P ?V) <- (?x rdf:type ?C) ]
+								[ (?x rdf:type ?C) <- (?x ?P ?V) ]
+								]
+
+#------------------------------------------------------------------
+# Nothing
+#------------------------------------------------------------------
+    
+#[nothing1: (?C rdfs:subClassOf min(?P, ?n)) (?C rdfs:subClassOf max(?P, ?x))
+#           lessThan(?x, ?n)  ->  (?C owl:equivalentClass owl:Nothing) ]
+           
+#[nothing3: (?C rdfs:subClassOf owl:Nothing) ->  (?C owl:equivalentClass owl:Nothing) ]
+
+#[nothing4: (?C owl:oneOf rdf:nil) -> (?C owl:equivalentClass owl:Nothing) ]
+           
+#------------------------------------------------------------------
+# Disjointness
+#------------------------------------------------------------------
+
+#[distinct1: (?X owl:differentFrom ?Y) <- 
+#    (?C owl:disjointWith ?D), (?X rdf:type ?C), (?Y rdf:type ?D)   ]
+
+# Exploding the pairwise assertions is simply done procedurally here.
+# This is better handled by a dedicated equality reasoner any.
+#[distinct2: (?w owl:distinctMembers ?L) -> assertDisjointPairs(?L) ]
+
+						
+#------------------------------------------------------------------
+# min cardinality
+#------------------------------------------------------------------
+
+[minRec: (?C owl:equivalentClass min(?P, 1)), notEqual(?P, rdf:type) ->
+    [min2b: (?X rdf:type ?C) <- (?X ?P ?Y)] ]
+
+#------------------------------------------------------------------
+# max cardinality 1
+#------------------------------------------------------------------
+
+#[maxRec: (?C owl:equivalentClass max(?P, 1)), (?P rdf:type owl:FunctionalProperty)
+#		-> (owl:Thing rdfs:subClassOf ?C) ]
+
+#------------------------------------------------------------------
+# max cardinality 0
+#------------------------------------------------------------------
+
+# For completeness this requires iff version of rdfs:domain working forwards which it does not just now
+#[maxRec2: (?C owl:equivalentClass max(?P, 0)), (?P rdfs:domain ?D), (?E owl:disjointWith ?D)
+#	-> (?E owl:equivalentClass ?C)]
+	
+#[cardRec1: (?C owl:equivalentClass card(?P, 0)), (?P rdfs:domain ?D), (?E owl:disjointWith ?D)
+#	-> (?E owl:equivalentClass ?C)]
+	
+#------------------------------------------------------------------
+# cardinality 1
+#------------------------------------------------------------------
+
+#[restriction-inter-CFP: (?C owl:equivalentClass card(?P, 1)), (?P rdf:type owl:FunctionalProperty) ->
+#     (?C owl:equivalentClass min(?P, 1)) ]
+
+#[restriction6: (?C owl:equivalentClass min(?P, ?X)), (?C owl:equivalentClass max(?P, ?X)) 
+#       					-> (?C owl:equivalentClass card(?P, ?X))]

@@ -9,6 +9,39 @@ import android.os.AsyncTask;
 public class InitializationManager {
 	private static final Logger L = new Logger(InitializationManager.class
 			.getSimpleName());
+	
+	private static final ProgressMonitor MockProgressMonitor = new ProgressMonitor() {
+		
+		@Override
+		public void progress(int progress) {
+			// do nothing
+		}
+		
+		@Override
+		public void message(int messageId) {
+			// do nothing
+		}
+		
+		@Override
+		public void message(String message) {
+			// do nothing
+		}
+		
+		@Override
+		public void max(int max) {
+			// do nothing
+		}
+		
+		@Override
+		public void indeterminate(boolean indeterminate) {
+			// do nothing
+		}
+		
+		@Override
+		public void increment(int by) {
+			// do nothing
+		}
+	};
 
 	private static interface ProgressInfo {
 		public void apply(ProgressDialog dialog);
@@ -218,14 +251,22 @@ public class InitializationManager {
 		return true;
 	}
 	
-	public static void initialize(Context context, OnFinishListener listener,
+	public static void initializeAsync(Context context, Initializable... initializables) {
+		initializeAsync(context, null, initializables);
+	}
+	
+	public static void initializeAsync(Context context, boolean showDialog, Initializable... initializables) {
+		initializeAsync(context, null, showDialog, initializables);
+	}
+	
+	public static void initializeAsync(Context context, OnFinishListener listener,
 			Initializable... initializables) {
 		boolean showDialog = false;
 		if(context instanceof Activity) showDialog = true;
-		initialize(context, listener, showDialog, initializables);
+		initializeAsync(context, listener, showDialog, initializables);
 	}
 
-	public static void initialize(Context context, OnFinishListener listener, boolean showDialog,
+	public static void initializeAsync(Context context, OnFinishListener listener, boolean showDialog,
 			Initializable... initializables) {
 		if (initializer != null) {
 			throw new RuntimeException(
@@ -251,6 +292,12 @@ public class InitializationManager {
 		L.d("executing initializer task for "
 				+ formatInitializables(initializables));
 		initializer.execute(params);
+	}
+	
+	public static void initializeSync(Context context, Initializable... initializables) {
+		for(Initializable initializable : initializables) {
+			if(!initializable.isInitialized(context)) initializable.initialize(context, MockProgressMonitor);
+		}
 	}
 
 	private static String formatInitializables(Initializable... initializables) {

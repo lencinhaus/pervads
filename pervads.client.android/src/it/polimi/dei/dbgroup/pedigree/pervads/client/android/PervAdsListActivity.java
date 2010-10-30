@@ -2,10 +2,8 @@ package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.IPervAdsService;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.IPervAdsServiceListener;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
@@ -26,7 +24,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class PervAdsListActivity extends Activity {
+public class PervAdsListActivity extends ListActivity {
 	private static final Logger L = new Logger(PervAdsListActivity.class
 			.getSimpleName());
 
@@ -39,16 +37,17 @@ public class PervAdsListActivity extends Activity {
 	private static final int NETWORK_CONNECTION_STARTED = 7;
 	private static final int NETWORK_CONNECTION_COMPLETED = 8;
 	private static final int NETWORK_CONNECTION_FAILED = 9;
-	private static final String NETWORK_SSID_KEY = "SSID";
-	private static final String NUM_FOUND_NETWORKS_KEY = "numFoundNetworks";
+	private static final int CONTENT_PROCESSING_STARTED = 10;
+	private static final int CONTENT_PROCESSING_COMPLETED = 11;
+	private static final int CONTENT_PROCESSING_FAILED = 12;
+	private static final int RESULT_CREATION_STARTED = 13;
+	private static final int RESULT_CREATION_COMPLETED = 14;
+	private static final int RESULT_CREATION_FAILED = 15;
 
-	private ListView pervAdsList;
-	private PervAdsAdapter listAdapter;
+	private QueryResultAdapter resultAdapter;
 	private Button updateButton;
 	private ProgressDialog progressDialog = null;
 	private IPervAdsService pervAdsService = null;
-	private int numFoundNetworks = 0;
-	private int numConnectedNetworks = 0;
 
 	private final Handler handler = new Handler() {
 
@@ -68,8 +67,7 @@ public class PervAdsListActivity extends Activity {
 					networkScanStarted();
 					break;
 				case NETWORK_SCAN_COMPLETED:
-					networkScanCompleted(msg.getData().getInt(
-							NUM_FOUND_NETWORKS_KEY));
+					networkScanCompleted(msg.arg1);
 					break;
 				case NETWORK_SCAN_FAILED:
 					networkScanFailed();
@@ -77,7 +75,7 @@ public class PervAdsListActivity extends Activity {
 				case NETWORK_CONNECTION_STARTED:
 				case NETWORK_CONNECTION_COMPLETED:
 				case NETWORK_CONNECTION_FAILED:
-					String SSID = msg.getData().getString(NETWORK_SSID_KEY);
+					String SSID = (String) msg.obj;
 					switch (msg.what) {
 						case NETWORK_CONNECTION_STARTED:
 							networkConnectionStarted(SSID);
@@ -90,8 +88,27 @@ public class PervAdsListActivity extends Activity {
 							break;
 					}
 					break;
+				case CONTENT_PROCESSING_STARTED:
+					contentProcessingStarted(msg.arg1);
+					break;
+				case CONTENT_PROCESSING_COMPLETED:
+					contentProcessingCompleted();
+					break;
+				case CONTENT_PROCESSING_FAILED:
+					contentProcessingFailed();
+					break;
+				case RESULT_CREATION_STARTED:
+					resultCreationStarted();
+					break;
+				case RESULT_CREATION_COMPLETED:
+					resultCreationCompleted();
+					break;
+				case RESULT_CREATION_FAILED:
+					resultCreationFailed();
+					break;
 				default:
 					super.handleMessage(msg);
+					break;
 			}
 		}
 	};
@@ -119,9 +136,6 @@ public class PervAdsListActivity extends Activity {
 			if (Logger.V)
 				L.v("onServiceDisconnected(" + name + ")");
 			pervAdsService = null;
-
-			// update adapter service
-			listAdapter.setService(null);
 		}
 
 		@Override
@@ -145,9 +159,6 @@ public class PervAdsListActivity extends Activity {
 							L.v("registering service listener");
 						pervAdsService.registerListener(serviceListener);
 
-						// set adapter service
-						listAdapter.setService(pervAdsService);
-
 						// check if updating
 						if (Logger.V)
 							L.v("checking if service is updating");
@@ -159,8 +170,6 @@ public class PervAdsListActivity extends Activity {
 							updateStarted();
 						} else {
 							// service is not updating
-							// just refresh the list
-							listAdapter.update();
 
 							setUpdating(false);
 							setControlsEnabled(true);
@@ -212,49 +221,75 @@ public class PervAdsListActivity extends Activity {
 			if (Logger.V)
 				L.v("networkConnectionEvent(" + EventTypes.describe(type)
 						+ ", " + SSID + ")");
-
-			Message message = Message.obtain(handler);
-			message.getData().putString(NETWORK_SSID_KEY, SSID);
+			
 			switch (type) {
 				case EventTypes.Started:
-					message.what = NETWORK_CONNECTION_STARTED;
+					handler.obtainMessage(NETWORK_CONNECTION_STARTED, SSID).sendToTarget();
 					break;
 				case EventTypes.Completed:
-					message.what = NETWORK_CONNECTION_COMPLETED;
+					handler.obtainMessage(NETWORK_CONNECTION_COMPLETED, SSID).sendToTarget();
 					break;
 				case EventTypes.Failed:
-					message.what = NETWORK_CONNECTION_FAILED;
+					handler.obtainMessage(NETWORK_CONNECTION_FAILED, SSID).sendToTarget();
 					break;
-				default:
-					return;
 			}
-			message.sendToTarget();
 		}
 
 		@Override
 		public void networkScanEvent(int type, int numFoundNetworks)
 				throws RemoteException {
 			if (Logger.V)
-				L.v("networkScanEvent(" + EventTypes.describe(type) + ")");
-
-			Message message = Message.obtain(handler);
-			message.getData().putInt(NUM_FOUND_NETWORKS_KEY, numFoundNetworks);
+				L.v("networkScanEvent(" + EventTypes.describe(type) + ", " + numFoundNetworks + ")");
 
 			switch (type) {
 				case EventTypes.Started:
-					message.what = NETWORK_SCAN_STARTED;
+					handler.obtainMessage(NETWORK_SCAN_STARTED, numFoundNetworks, 0).sendToTarget();
 					break;
 				case EventTypes.Completed:
-					message.what = NETWORK_SCAN_COMPLETED;
+					handler.obtainMessage(NETWORK_SCAN_COMPLETED, numFoundNetworks, 0).sendToTarget();
 					break;
 				case EventTypes.Failed:
-					message.what = NETWORK_SCAN_FAILED;
+					handler.obtainMessage(NETWORK_SCAN_FAILED, numFoundNetworks, 0).sendToTarget();
 					break;
 			}
-
-			message.sendToTarget();
 		}
 
+		@Override
+		public void contentProcessingEvent(int type, int numContents)
+				throws RemoteException {
+			if (Logger.V)
+				L.v("contentProcessingEvent(" + EventTypes.describe(type) + ", " + numContents + ")");
+
+			switch (type) {
+				case EventTypes.Started:
+					handler.obtainMessage(CONTENT_PROCESSING_STARTED, numContents, 0).sendToTarget();
+					break;
+				case EventTypes.Completed:
+					handler.obtainMessage(CONTENT_PROCESSING_COMPLETED, numContents, 0).sendToTarget();
+					break;
+				case EventTypes.Failed:
+					handler.obtainMessage(CONTENT_PROCESSING_FAILED, numContents, 0).sendToTarget();
+					break;
+			}
+		}
+
+		@Override
+		public void resultCreationEvent(int type) throws RemoteException {
+			if (Logger.V)
+				L.v("resultCreationEvent(" + EventTypes.describe(type) + ")");
+
+			switch (type) {
+				case EventTypes.Started:
+					handler.sendEmptyMessage(RESULT_CREATION_STARTED);
+					break;
+				case EventTypes.Completed:
+					handler.sendEmptyMessage(RESULT_CREATION_COMPLETED);
+					break;
+				case EventTypes.Failed:
+					handler.sendEmptyMessage(RESULT_CREATION_FAILED);
+					break;
+			}
+		}
 	};
 
 	private final OnClickListener updateButtonClickListener = new OnClickListener() {
@@ -265,35 +300,35 @@ public class PervAdsListActivity extends Activity {
 		}
 	};
 
-	private final OnItemClickListener pervAdClickListener = new OnItemClickListener() {
-
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			PervAd pervAd = listAdapter.getPervAd(position);
-			Toast.makeText(
-					PervAdsListActivity.this,
-					"Network: " + pervAd.getNetworkName() + "\n\n"
-							+ pervAd.getContent(), Toast.LENGTH_LONG).show();
-			if (!pervAd.isSeen() && pervAdsService != null) {
-				try {
-					pervAdsService.pervAdSeen(pervAd.getId());
-					listAdapter.update();
-				} catch (RemoteException ex) {
-					if (Logger.E)
-						L
-								.e(
-										"an error occurred while calling pervAdSeen method on service",
-										ex);
-				}
-			}
-		}
-	};
+//	private final OnItemClickListener pervAdClickListener = new OnItemClickListener() {
+//
+//		@Override
+//		public void onItemClick(AdapterView<?> parent, View view, int position,
+//				long id) {
+//			PervAd pervAd = listAdapter.getPervAd(position);
+//			Toast.makeText(
+//					PervAdsListActivity.this,
+//					"Network: " + pervAd.getNetworkName() + "\n\n"
+//							+ pervAd.getContent(), Toast.LENGTH_LONG).show();
+//			if (!pervAd.isSeen() && pervAdsService != null) {
+//				try {
+//					pervAdsService.pervAdSeen(pervAd.getId());
+//					listAdapter.update();
+//				} catch (RemoteException ex) {
+//					if (Logger.E)
+//						L
+//								.e(
+//										"an error occurred while calling pervAdSeen method on service",
+//										ex);
+//				}
+//			}
+//		}
+//	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		// set content view
 		setContentView(R.layout.pervads_list_activity);
 
@@ -306,13 +341,9 @@ public class PervAdsListActivity extends Activity {
 		// init update button
 		updateButton = (Button) findViewById(R.id.update_button);
 		updateButton.setOnClickListener(updateButtonClickListener);
-
-		// init pervads list
-		pervAdsList = (ListView) findViewById(R.id.pervads_list);
-		pervAdsList.setOnItemClickListener(pervAdClickListener);
-
-		listAdapter = new PervAdsAdapter(this);
-		pervAdsList.setAdapter(listAdapter);
+		
+		resultAdapter = new QueryResultAdapter(this);
+		setListAdapter(resultAdapter);
 
 		setControlsEnabled(false);
 		setUpdating(false);
@@ -353,7 +384,7 @@ public class PervAdsListActivity extends Activity {
 
 	private void setControlsEnabled(boolean enabled) {
 		updateButton.setEnabled(enabled);
-		pervAdsList.setEnabled(enabled);
+		getListView().setEnabled(enabled);
 	}
 
 	private void updateStarted() {
@@ -364,7 +395,7 @@ public class PervAdsListActivity extends Activity {
 
 	private void updateCompleted() {
 		// update adapter
-		listAdapter.update();
+		resultAdapter.update();
 
 		setUpdating(false);
 		setControlsEnabled(true);
@@ -388,16 +419,14 @@ public class PervAdsListActivity extends Activity {
 	}
 
 	private void networkScanCompleted(int numFoundNetworks) {
-		// progressDialog.setMessage("network scan completed");
-		this.numFoundNetworks = numFoundNetworks;
-		numConnectedNetworks = 0;
+		progressDialog.setMessage("network scan completed");
 		progressDialog.setIndeterminate(false);
 		progressDialog.setProgress(0);
 		progressDialog.setMax(numFoundNetworks);
 	}
 
 	private void networkScanFailed() {
-		// progressDialog.setMessage("network scan failed");
+		// do nothing
 	}
 
 	private void networkConnectionStarted(String SSID) {
@@ -405,24 +434,41 @@ public class PervAdsListActivity extends Activity {
 	}
 
 	private void networkConnectionCompleted(String SSID) {
-		// progressDialog.setMessage("connection to network " + SSID +
-		// " completed");
-		updateConnectionProgress();
+		incrementProgress();
 	}
 
 	private void networkConnectionFailed(String SSID) {
-		// progressDialog.setMessage("connection to network " + SSID +
-		// " failed");
-		updateConnectionProgress();
+		incrementProgress();
+	}
+	
+	private void contentProcessingStarted(int numContents) {
+		progressDialog.setMessage("creating results");
+		progressDialog.setProgress(0);
+		progressDialog.setMax(numContents);
 	}
 
-	private void updateConnectionProgress() {
-		numConnectedNetworks++;
-		// int progressPercent = Math.max(0, Math.min(100, (int)
-		// Math.round(((double) numConnectedNetworks / (double)
-		// numFoundNetworks)*100D)));
-		// progressDialog.setProgress(progressPercent);
-		progressDialog.setProgress(numConnectedNetworks);
+	private void contentProcessingCompleted() {
+		progressDialog.setMessage("done");
+	}
+
+	private void contentProcessingFailed() {
+		progressDialog.setMessage("done");
+	}
+	
+	private void resultCreationStarted() {
+		// DO NOTHING
+	}
+
+	private void resultCreationCompleted() {
+		incrementProgress();
+	}
+
+	private void resultCreationFailed() {
+		incrementProgress();
+	}
+
+	private void incrementProgress() {
+		progressDialog.incrementProgressBy(1);
 	}
 
 	@Override
