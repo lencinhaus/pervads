@@ -6,25 +6,25 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.SpecialPrice;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
-import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class SpecialPriceImpl extends OfferImpl implements SpecialPrice {
 
-	public SpecialPriceImpl(PervADsModelProxy proxy,
-			Individual offerIndividual, PervAD pervad) {
+	public SpecialPriceImpl(PervADsModelProxy proxy, Resource offerIndividual,
+			PervAD pervad) {
 		super(proxy, offerIndividual, pervad);
 	}
 
 	@Override
 	public String getCurrency() {
-		return ModelUtils.parseStringLiteral(getOfferIndividual()
-				.getPropertyValue(PervADsModel.currency));
+		return ModelUtils.getStringProperty(getOfferIndividual(),
+				PervADsModel.currency);
 	}
 
 	@Override
 	public float getPrice() {
-		return ModelUtils.parseFloatLiteral(getOfferIndividual()
-				.getPropertyValue(PervADsModel.price));
+		return ModelUtils.getTypedProperty(getOfferIndividual(),
+				PervADsModel.price, Float.class);
 	}
 
 }

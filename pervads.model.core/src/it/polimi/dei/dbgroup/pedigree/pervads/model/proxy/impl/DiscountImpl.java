@@ -6,18 +6,18 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervAD;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
-import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class DiscountImpl extends OfferImpl implements Discount {
 
-	public DiscountImpl(PervADsModelProxy proxy, Individual offerIndividual,
+	public DiscountImpl(PervADsModelProxy proxy, Resource offerIndividual,
 			PervAD pervad) {
 		super(proxy, offerIndividual, pervad);
 	}
 
 	@Override
 	public float getDiscount() {
-		return ModelUtils.parseFloatLiteral(getOfferIndividual().getPropertyValue(PervADsModel.discount));
+		return ModelUtils.getTypedProperty(getOfferIndividual(), PervADsModel.discount, Float.class);
 	}
 
 }

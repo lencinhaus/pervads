@@ -8,17 +8,15 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public class OrganizationImpl extends PervADsModelEntityImpl implements
 		Organization {
-	private Individual organizationIndividual;
 	private PervAD pervad;
 
 	public OrganizationImpl(PervADsModelProxy proxy,
-			Individual organizationIndividual, PervAD pervad) {
+			Resource organizationIndividual, PervAD pervad) {
 		super(proxy, organizationIndividual);
-		this.organizationIndividual = organizationIndividual;
 		this.pervad = pervad;
 	}
 
@@ -29,42 +27,49 @@ public class OrganizationImpl extends PervADsModelEntityImpl implements
 
 	@Override
 	public String getAddress() {
-		return ModelUtils.parseStringLiteral(organizationIndividual.getPropertyValue(PervADsModel.organizationAddress));
+		return ModelUtils.getStringProperty(getOrganizationIndividual(),
+				PervADsModel.organizationAddress);
 	}
 
 	@Override
 	public String getCity() {
-		return ModelUtils.parseStringLiteral(organizationIndividual.getPropertyValue(PervADsModel.organizationCity));
+		return ModelUtils.getStringProperty(getOrganizationIndividual(),
+				PervADsModel.organizationCity);
 	}
 
 	@Override
 	public List<String> getEmails() {
-		return ModelUtils.parseStringLiterals(organizationIndividual.listPropertyValues(PervADsModel.organizationEmail));
+		return ModelUtils.listStringProperties(getOrganizationIndividual(),
+				PervADsModel.organizationEmail);
 	}
 
 	@Override
 	public String getName() {
-		return ModelUtils.parseStringLiteral(organizationIndividual.getPropertyValue(PervADsModel.organizationName));
+		return ModelUtils.getStringProperty(getOrganizationIndividual(),
+				PervADsModel.organizationName);
 	}
 
 	@Override
-	public Individual getOrganizationIndividual() {
-		return organizationIndividual;
+	public Resource getOrganizationIndividual() {
+		return getResource();
 	}
 
 	@Override
 	public List<String> getWebsites() {
-		return ModelUtils.parseStringLiterals(organizationIndividual.listPropertyValues(PervADsModel.organizationWebsite));
+		return ModelUtils.listStringProperties(getOrganizationIndividual(),
+				PervADsModel.organizationWebsite);
 	}
 
 	@Override
 	public int getZipCode() {
-		return ModelUtils.parseIntLiteral(organizationIndividual.getPropertyValue(PervADsModel.organizationZipCode)); 
+		return ModelUtils.getTypedProperty(getOrganizationIndividual(),
+				PervADsModel.organizationZipCode, Integer.class);
 	}
 
 	@Override
 	public String getZone() {
-		return ModelUtils.parseStringLiteral(organizationIndividual.getPropertyValue(PervADsModel.organizationZone));
+		return ModelUtils.getStringProperty(getOrganizationIndividual(),
+				PervADsModel.organizationZone);
 	}
 
 }

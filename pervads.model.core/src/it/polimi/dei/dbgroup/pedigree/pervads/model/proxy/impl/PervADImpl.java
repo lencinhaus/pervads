@@ -11,34 +11,34 @@ import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class PervADImpl extends PervADsModelEntityImpl implements PervAD {
-	private Individual pervadIndividual;
 	private Context context;
 
-	public PervADImpl(PervADsModelProxy proxy, Individual pervadIndividual,
+	public PervADImpl(PervADsModelProxy proxy, Resource pervadIndividual,
 			Context context) {
 		super(proxy, pervadIndividual);
-		this.pervadIndividual = pervadIndividual;
 		this.context = context;
 	}
 
 	@Override
-	public Individual getPervADIndividual() {
-		return pervadIndividual;
+	public Resource getPervADIndividual() {
+		return getResource();
 	}
 
 	@Override
 	public List<? extends Organization> listAdvertisers() {
 		List<Organization> organizations = new ArrayList<Organization>();
-		for (NodeIterator it = pervadIndividual
-				.listPropertyValues(PervADsModel.hasAdvertiser); it.hasNext();) {
+		for (NodeIterator it = getProxy().getModel().listObjectsOfProperty(
+				getPervADIndividual(), PervADsModel.hasAdvertiser); it
+				.hasNext();) {
 			RDFNode node = it.next();
 			if (node.isURIResource()) {
-				Individual organizationIndividual = node.as(Individual.class);
+				Resource organizationIndividual = (Resource) node;
 				Organization organization = new OrganizationImpl(getProxy(),
 						organizationIndividual, this);
 				organizations.add(organization);
@@ -56,16 +56,18 @@ public class PervADImpl extends PervADsModelEntityImpl implements PervAD {
 	@Override
 	public List<? extends Offer> listOffers() {
 		List<Offer> offers = new ArrayList<Offer>();
-		for (NodeIterator it = pervadIndividual
-				.listPropertyValues(PervADsModel.advertises); it.hasNext();) {
+		for (NodeIterator it = getProxy().getModel().listObjectsOfProperty(
+				getPervADIndividual(), PervADsModel.advertises); it.hasNext();) {
 			RDFNode node = it.next();
 			if (node.isURIResource()) {
-				Individual offerIndividual = node.as(Individual.class);
+				Resource offerIndividual = (Resource) node;
 				Offer offer;
-				if (offerIndividual.hasOntClass(PervADsModel.SpecialPrice))
+				if (offerIndividual.hasProperty(RDF.type,
+						PervADsModel.SpecialPrice))
 					offer = new SpecialPriceImpl(getProxy(), offerIndividual,
 							this);
-				else if (offerIndividual.hasOntClass(PervADsModel.Discount))
+				else if (offerIndividual.hasProperty(RDF.type,
+						PervADsModel.Discount))
 					offer = new DiscountImpl(getProxy(), offerIndividual, this);
 				else
 					offer = new OfferImpl(getProxy(), offerIndividual, this);
@@ -78,8 +80,8 @@ public class PervADImpl extends PervADsModelEntityImpl implements PervAD {
 
 	@Override
 	public List<String> listTags() {
-		return ModelUtils.parseStringLiterals(pervadIndividual
-				.listPropertyValues(PervADsModel.hasTag));
+		return ModelUtils.listStringProperties(getPervADIndividual(),
+				PervADsModel.hasTag);
 	}
 
 }

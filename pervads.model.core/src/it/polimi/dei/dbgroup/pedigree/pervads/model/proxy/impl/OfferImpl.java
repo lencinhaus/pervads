@@ -11,55 +11,50 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.rdf.model.NodeIterator;
 import com.hp.hpl.jena.rdf.model.RDFNode;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.vocabulary.RDF;
 
 public class OfferImpl extends PervADsModelEntityImpl implements Offer {
-	private Individual offerIndividual;
 	private PervAD pervad;
 
-	public OfferImpl(PervADsModelProxy proxy, Individual offerIndividual,
+	public OfferImpl(PervADsModelProxy proxy, Resource offerIndividual,
 			PervAD pervad) {
 		super(proxy, offerIndividual);
-		this.offerIndividual = offerIndividual;
 		this.pervad = pervad;
 	}
 
 	@Override
 	public List<String> getAttachedImages() {
-		return ModelUtils.parseStringLiterals(offerIndividual
-				.listPropertyValues(PervADsModel.hasAttachedImage));
+		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedImage);
 	}
 
 	@Override
 	public List<String> getAttachedMedia() {
-		return ModelUtils.parseStringLiterals(offerIndividual
-				.listPropertyValues(PervADsModel.hasAttachedMedia));
+		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedMedia);
 	}
 
 	@Override
 	public List<String> getAttachedVideos() {
-		return ModelUtils.parseStringLiterals(offerIndividual
-				.listPropertyValues(PervADsModel.hasAttachedVideo));
+		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedVideo);
 	}
 
 	@Override
 	public List<String> getDetailCoupons() {
-		return ModelUtils.parseStringLiterals(offerIndividual
-				.listPropertyValues(PervADsModel.hasDetailCoupon));
+		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasDetailCoupon);
 	}
 
 	@Override
 	public List<? extends OfferedItem> getItems() {
 		List<OfferedItem> items = new ArrayList<OfferedItem>();
-		for(NodeIterator it = offerIndividual.listPropertyValues(PervADsModel.offers); it.hasNext();) {
+		for(ExtendedIterator<RDFNode> it = getProxy().getModel().listObjectsOfProperty(getOfferIndividual(), PervADsModel.offers); it.hasNext();) {
 			RDFNode node = it.next();
 			if(node.isURIResource()) {
-				Individual itemIndividual = node.as(Individual.class);
+				Resource itemIndividual = (Resource) node;
 				OfferedItem item;
-				if(itemIndividual.hasOntClass(PervADsModel.Good)) item = new GoodImpl(getProxy(), itemIndividual, this);
-				else if(offerIndividual.hasOntClass(PervADsModel.Service)) item = new ServiceImpl(getProxy(), itemIndividual, this);
+				if(itemIndividual.hasProperty(RDF.type, PervADsModel.Good)) item = new GoodImpl(getProxy(), itemIndividual, this);
+				else if(itemIndividual.hasProperty(RDF.type, PervADsModel.Service)) item = new ServiceImpl(getProxy(), itemIndividual, this);
 				else item = new OfferedItemImpl(getProxy(), itemIndividual, this);
 				items.add(item);
 			}
@@ -70,13 +65,12 @@ public class OfferImpl extends PervADsModelEntityImpl implements Offer {
 
 	@Override
 	public List<String> getListCoupons() {
-		return ModelUtils.parseStringLiterals(offerIndividual
-				.listPropertyValues(PervADsModel.hasListCoupon));
+		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasListCoupon);
 	}
 
 	@Override
-	public Individual getOfferIndividual() {
-		return offerIndividual;
+	public Resource getOfferIndividual() {
+		return getResource();
 	}
 
 	@Override
@@ -86,14 +80,12 @@ public class OfferImpl extends PervADsModelEntityImpl implements Offer {
 
 	@Override
 	public Date getValidFrom() {
-		return ModelUtils.parseDateLiteral(offerIndividual
-				.getPropertyValue(PervADsModel.validFrom));
+		return ModelUtils.getDateProperty(getOfferIndividual(), PervADsModel.validFrom);
 	}
 
 	@Override
 	public Date getValidUntil() {
-		return ModelUtils.parseDateLiteral(offerIndividual
-				.getPropertyValue(PervADsModel.validUntil));
+		return ModelUtils.getDateProperty(getOfferIndividual(), PervADsModel.validUntil);
 	}
 
 }
