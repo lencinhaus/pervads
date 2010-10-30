@@ -1,23 +1,27 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.impl;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.util.ModelUtils;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.NamedEntityImpl;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.Offer;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.OfferedItem;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
-import java.util.Locale;
-
 import com.hp.hpl.jena.rdf.model.Resource;
 
-public class OfferedItemImpl extends PervADsModelEntityImpl implements
-		OfferedItem {
+public class OfferedItemImpl extends NamedEntityImpl implements OfferedItem {
 	private Offer offer;
+	private PervADsModelProxy proxy;
 
 	public OfferedItemImpl(PervADsModelProxy proxy, Resource itemIndividual,
 			Offer offer) {
-		super(proxy, itemIndividual);
+		super(itemIndividual, PervADsModel.itemName, PervADsModel.itemDescription);
 		this.offer = offer;
+		this.proxy = proxy;
+	}
+
+	@Override
+	public PervADsModelProxy getProxy() {
+		return proxy;
 	}
 
 	@Override
@@ -26,37 +30,7 @@ public class OfferedItemImpl extends PervADsModelEntityImpl implements
 	}
 
 	@Override
-	public String getDescription(String lang) {
-		return ModelUtils.getStringProperty(getResource(),
-				PervADsModel.itemDescription, lang);
-	}
-
-	@Override
-	public String getName(String lang) {
-		return ModelUtils.getStringProperty(getResource(),
-				PervADsModel.itemName, lang);
-	}
-
-	@Override
-	public String getDescription() {
-
-		return getDescription(getDefaultLanguage());
-	}
-
-	@Override
-	public String getName() {
-		return getName(getDefaultLanguage());
-	}
-
-	@Override
 	public Resource getOfferedItemIndividual() {
 		return getResource();
-	}
-
-	private static String getDefaultLanguage() {
-		Locale locale = Locale.getDefault();
-		if (locale != null)
-			return locale.getLanguage();
-		return null;
 	}
 }
