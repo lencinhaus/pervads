@@ -1,6 +1,6 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.PervADsContextModel;
+import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsContextModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration.IncludedModelData;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelFactory;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextMetaModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextModel;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.PervADsContextModel;
-import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
+import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsContextModel;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -44,26 +44,21 @@ import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.ontology.OntProperty;
+import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.ontology.Ontology;
-import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFList;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.shared.UnknownPropertyException;
-import com.hp.hpl.jena.sparql.core.DatasetGraph;
 import com.hp.hpl.jena.sparql.sse.Item;
 import com.hp.hpl.jena.tdb.TDB;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.tdb.TDBLoader;
 import com.hp.hpl.jena.tdb.solver.stats.StatsCollector;
 import com.hp.hpl.jena.tdb.store.DatasetGraphTDB;
-import com.hp.hpl.jena.tdb.store.GraphTDB;
-import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.util.LocationMapper;
 
-import de.fuberlin.wiwiss.ng4j.NamedGraph;
 import de.fuberlin.wiwiss.ng4j.NamedGraphSet;
 import de.fuberlin.wiwiss.ng4j.impl.NamedGraphSetImpl;
 
@@ -146,13 +141,19 @@ public class Builder {
 				p("Creating TriG dataset for TDB store");
 				NamedGraphSet ngs = new NamedGraphSetImpl();
 				Model contextModel = ngs.asJenaModel(config.getModelURI());
-				contextModel.read("file:" + MODELS_FOLDER + "/" + modelFile.getName(), config.getModelURI(), null);
-				for(IncludedModelData includedModelData : config.getTDBStoreIncludedModels()) {
-					Model includedModel = ngs.asJenaModel(includedModelData.URI);
-					includedModel.read(includedModelData.path, includedModelData.URI, null);
+				contextModel.read("file:" + MODELS_FOLDER + "/"
+						+ modelFile.getName(), config.getModelURI(), null);
+				for (IncludedModelData includedModelData : config
+						.getTDBStoreIncludedModels()) {
+					Model includedModel = ngs
+							.asJenaModel(includedModelData.URI);
+					includedModel.read(includedModelData.path,
+							includedModelData.URI, null);
 				}
-				String dsFileName = MODELS_FOLDER + "/" + config.getOutputFileName() + "_dataset.trig";
-				ngs.write(new FileOutputStream(dsFileName), "TRIG", config.getModelURI());
+				String dsFileName = MODELS_FOLDER + "/"
+						+ config.getOutputFileName() + "_dataset.trig";
+				ngs.write(new FileOutputStream(dsFileName), "TRIG", config
+						.getModelURI());
 				p("Creating TDB store in folder " + storeDir);
 				DatasetGraphTDB ds = TDBFactory.createDatasetGraph(storeDir);
 				TDBLoader loader = new TDBLoader();
@@ -161,7 +162,9 @@ public class Builder {
 				loader.loadDataset(ds, "file:" + dsFileName);
 				TDB.sync(ds);
 				p("Creating TDB stats.opt file");
-				Item statsItem = StatsCollector.gatherTDB(ds.getGraphTDB(com.hp.hpl.jena.graph.Node.createURI("urn:x-arq:UnionGraph")));
+				Item statsItem = StatsCollector.gatherTDB(ds
+						.getGraphTDB(com.hp.hpl.jena.graph.Node
+								.createURI("urn:x-arq:UnionGraph")));
 				File statsFile = new File(storeDir + "/stats.opt");
 				BufferedWriter statsWriter = new BufferedWriter(new FileWriter(
 						statsFile));
@@ -169,21 +172,22 @@ public class Builder {
 				statsWriter.close();
 				ds.close();
 				TDB.closedown();
-//				Model tdbModel = TDBFactory.createModel(storeDir);
-//				GraphTDB tdbGraph = (GraphTDB) tdbModel.getGraph();
-//				p("Bulk loading TDB store");
-//				TDBLoader.load(tdbGraph, "file:" + MODELS_FOLDER + "/"
-//						+ modelFile.getName());
-//				TDB.sync(tdbModel);
-//				p("Creating TDB stats.opt file");
-//				Item statsItem = StatsCollector.gatherTDB(tdbGraph);
-//				File statsFile = new File(storeDir + "/stats.opt");
-//				BufferedWriter statsWriter = new BufferedWriter(new FileWriter(
-//						statsFile));
-//				statsWriter.write(statsItem.toString());
-//				statsWriter.close();
-//				tdbModel.close();
-//				TDB.closedown();
+				// Model tdbModel = TDBFactory.createModel(storeDir);
+				// GraphTDB tdbGraph = (GraphTDB) tdbModel.getGraph();
+				// p("Bulk loading TDB store");
+				// TDBLoader.load(tdbGraph, "file:" + MODELS_FOLDER + "/"
+				// + modelFile.getName());
+				// TDB.sync(tdbModel);
+				// p("Creating TDB stats.opt file");
+				// Item statsItem = StatsCollector.gatherTDB(tdbGraph);
+				// File statsFile = new File(storeDir + "/stats.opt");
+				// BufferedWriter statsWriter = new BufferedWriter(new
+				// FileWriter(
+				// statsFile));
+				// statsWriter.write(statsItem.toString());
+				// statsWriter.close();
+				// tdbModel.close();
+				// TDB.closedown();
 				File storeFile = getDestinationFile(config.getOutputFileName()
 						+ "_tdb", MODELS_FOLDER, "zip");
 				p("Creating TDB store archive in " + storeFile.getName());
@@ -202,18 +206,18 @@ public class Builder {
 		}
 	}
 
-	private static final void recursiveDelete(File file) throws Exception {
-		System.gc();
-		if (file.isDirectory()) {
-			for (File child : file.listFiles()) {
-				recursiveDelete(child);
-			}
-		}
-		file.deleteOnExit();
-		if (!file.delete()) {
-			throw new Exception("cannot delete file " + file.getPath());
-		}
-	}
+	// private static final void recursiveDelete(File file) throws Exception {
+	// System.gc();
+	// if (file.isDirectory()) {
+	// for (File child : file.listFiles()) {
+	// recursiveDelete(child);
+	// }
+	// }
+	// file.deleteOnExit();
+	// if (!file.delete()) {
+	// throw new Exception("cannot delete file " + file.getPath());
+	// }
+	// }
 
 	private static final void zipDir(String dir2zip, File destFile)
 			throws IOException {
@@ -469,7 +473,12 @@ public class Builder {
 
 	private OntModel buildModel(List<Category> categories) throws Exception {
 		// create model with no reasoning
+		OntDocumentManager docManager = OntDocumentManager.getInstance();
+		docManager.addAltEntry(ContextModel.URI,
+				ContextModelFactory.CONTEXT_MODEL_ALT_URI);
+
 		OntModel m = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
+		docManager.loadImport(m, ContextModel.URI);
 
 		// set namespace prefix
 		String ns = config.getModelURI() + "#";
@@ -496,8 +505,9 @@ public class Builder {
 		}
 
 		// prepare initial context
-		Context initialContext = new Context(categories,
-				ContextModel.DimensionAssignment, null, null, "");
+		Context initialContext = new Context(categories, m
+				.getOntClass(ContextModel.DimensionAssignment.getURI()), null,
+				null, "");
 
 		// init data structures and start parsing categories
 		// Set<OntClass> definedAssignmentClasses = new HashSet<OntClass>();
@@ -523,7 +533,7 @@ public class Builder {
 				Individual dimensionIndividual = m.createIndividual(ns
 						+ String.format(DIMENSION_INDIVIDUAL_NAME_FORMAT,
 								dimensionIdentifier),
-						ContextModel.FormalDimension);
+						m.getOntClass(ContextModel.FormalDimension.getURI()));
 
 				if (config.getUseMetaModel()) {
 					// set rootDimension or valueSubDimension properties
@@ -553,8 +563,9 @@ public class Builder {
 
 					// create parameter stuff
 					Individual parameterIndividual = createParameter(parameter,
-							parameterIdentifier, m,
-							ContextModel.FormalParameter);
+							parameterIdentifier, m, m
+									.getOntClass(ContextModel.FormalParameter
+											.getURI()));
 
 					// assign label and comment to parameter
 					assignLabelAndComment(parameterIndividual, parameter);
@@ -571,7 +582,7 @@ public class Builder {
 				OntClass valueClass = m.createClass(ns
 						+ String.format(VALUE_CLASS_NAME_FORMAT,
 								dimensionIdentifier));
-				valueClass.addSuperClass(ContextModel.DimensionValue);
+				valueClass.addSuperClass(m.getOntClass(ContextModel.DimensionValue.getURI()));
 
 				// add values class to set
 				// definedValueClasses.add(valueClass);
@@ -581,7 +592,7 @@ public class Builder {
 						+ String.format(ASSIGNMENT_PROPERTY_NAME_FORMAT,
 								dimensionIdentifier));
 				assignmentProperty
-						.setSuperProperty(ContextModel.dimensionAssignmentValue);
+						.setSuperProperty(m.getObjectProperty(ContextModel.dimensionAssignmentValue.getURI()));
 				assignmentProperty.setRange(valueClass);
 				// we'll set domain later
 
@@ -594,11 +605,11 @@ public class Builder {
 					// set equivalent restrictions
 					assignmentClass.addEquivalentClass(m
 							.createHasValueRestriction(null,
-									ContextModel.assignmentDimension,
+									m.getObjectProperty(ContextModel.assignmentDimension.getURI()),
 									dimensionIndividual));
 					assignmentClass.addEquivalentClass(m
 							.createSomeValuesFromRestriction(null,
-									ContextModel.dimensionAssignmentValue,
+									m.getObjectProperty(ContextModel.dimensionAssignmentValue.getURI()),
 									valueClass));
 
 					// set superclass
@@ -623,7 +634,7 @@ public class Builder {
 									assignmentProperty, 1));
 					equivalentIntersectionList = equivalentIntersectionList
 							.with(m.createHasValueRestriction(null,
-									ContextModel.assignmentDimension,
+									m.getObjectProperty(ContextModel.assignmentDimension.getURI()),
 									dimensionIndividual));
 					assignmentClass.addEquivalentClass(m
 							.createIntersectionClass(null,
@@ -690,7 +701,8 @@ public class Builder {
 						// create parameter stuff
 						Individual parameterIndividual = createParameter(
 								parameter, parameterIdentifier, m,
-								ContextModel.FormalParameter);
+								m.getOntClass(ContextModel.FormalParameter
+										.getURI()));
 
 						// assign label and comment to parameter
 						assignLabelAndComment(parameterIndividual, parameter);
@@ -757,7 +769,7 @@ public class Builder {
 		return parameterIndividual;
 	}
 
-	private static void assignLabelAndComment(Individual i, Node n) {
+	private static void assignLabelAndComment(OntResource i, Node n) {
 		i.addLabel(n.getName(), n.getLang());
 		if (!StringUtils.isEmpty(n.getDescription()))
 			i.addComment(n.getDescription(), n.getLang());
