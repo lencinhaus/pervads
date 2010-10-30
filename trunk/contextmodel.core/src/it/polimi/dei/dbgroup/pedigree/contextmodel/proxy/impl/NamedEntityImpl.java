@@ -37,12 +37,14 @@ public class NamedEntityImpl extends EntityImpl implements NamedEntity {
 
 	@Override
 	public String getDescription() {
-		return getDescription(getDefaultLanguage());
+		return ModelUtils.getStringProperty(getResource(), descriptionProperty,
+				getDefaultLanguage(), true);
 	}
 
 	@Override
 	public String getName() {
-		return getName(getDefaultLanguage());
+		return ModelUtils.getStringProperty(getResource(), nameProperty,
+				getDefaultLanguage(), true);
 	}
 
 	private static String getDefaultLanguage() {
