@@ -1,10 +1,9 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy;
 
-import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.ontology.OntClass;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public interface Parameter extends ContextModelEntity {
-	public OntClass getAssignmentClass();
+	public Resource getAssignmentClass();
 
-	public Individual getFormalParameterIndividual();
+	public Resource getFormalParameterIndividual();
 }

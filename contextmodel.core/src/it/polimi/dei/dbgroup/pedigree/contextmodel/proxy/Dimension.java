@@ -1,21 +1,20 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy;
 
-import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.ontology.OntProperty;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
 
 public interface Dimension extends ContextModelEntity, ValueParent {
-	public OntClass getAssignmentClass();
+	public Resource getAssignmentClass();
 
-	public OntClass getValuesClass();
+	public Resource getValuesClass();
 
-	public OntProperty getAssignmentProperty();
+	public Property getAssignmentProperty();
 
-	public Individual getFormalDimensionIndividual();
+	public Resource getFormalDimensionIndividual();
 
 	public Value getParentValue();
-	
+
 	public int getDepth();
-	
+
 	public int getDistance(Dimension dimension);
 }

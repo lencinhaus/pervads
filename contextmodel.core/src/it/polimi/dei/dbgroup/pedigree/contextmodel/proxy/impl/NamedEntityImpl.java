@@ -1,34 +1,38 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.NamedEntity;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.util.ModelUtils;
 
 import java.util.Locale;
 
-import com.hp.hpl.jena.ontology.OntResource;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 public class NamedEntityImpl extends EntityImpl implements NamedEntity {
-	public NamedEntityImpl(OntResource resource) {
+	private Property nameProperty;
+	private Property descriptionProperty;
+
+	public NamedEntityImpl(Resource resource) {
+		this(resource, RDFS.label, RDFS.comment);
+	}
+
+	public NamedEntityImpl(Resource resource, Property nameProperty,
+			Property descriptionProperty) {
 		super(resource);
+		this.nameProperty = nameProperty;
+		this.descriptionProperty = descriptionProperty;
 	}
 
 	@Override
 	public String getDescription(String lang) {
-		if (lang != null) {
-			String description = getResource().getComment(lang);
-			if (description != null)
-				return description;
-		}
-		return getResource().getComment(null);
+		return ModelUtils.getStringProperty(getResource(), descriptionProperty,
+				lang);
 	}
 
 	@Override
 	public String getName(String lang) {
-		if (lang != null) {
-			String name = getResource().getLabel(lang);
-			if (name != null)
-				return name;
-		}
-		return getResource().getLabel(null);
+		return ModelUtils.getStringProperty(getResource(), nameProperty, lang);
 	}
 
 	@Override
