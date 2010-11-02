@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -301,10 +302,10 @@ public class Builder {
 		for (Category category : categories) {
 			Element el = doc.createElement("category");
 			parent.appendChild(el);
-			serializeNode(category, el);
+			serializeNode(doc, category, el);
 			for (Parameter parameter : category.getParameters()) {
 				Element parEl = doc.createElement("parameter");
-				serializeNode(parameter, parEl);
+				serializeNode(doc, parameter, parEl);
 				parEl.setAttribute("type", parameter.getType());
 				el.appendChild(parEl);
 			}
@@ -312,86 +313,162 @@ public class Builder {
 		}
 	}
 
-	private static void serializeNode(Node node, Element el) {
-		el.setAttribute("name", node.getName());
-		if (!StringUtils.isEmpty(node.getDescription()))
-			el.setAttribute("description", node.getDescription());
+	private static void serializeNode(Document doc, Node node, Element el) {
+		serializeLocalizedAttribute(node.getName(), "name", doc, el);
+		serializeLocalizedAttribute(node.getDescription(), "description", doc,
+				el);
 		if (!StringUtils.isEmpty(node.getId()))
 			el.setAttribute("id", node.getId());
-		if (!StringUtils.isEmpty(node.getLang()))
-			el.setAttribute("xml:lang", node.getLang());
+	}
+
+	private static void serializeLocalizedAttribute(
+			LocalizedAttribute attribute, String name, Document doc, Element el) {
+		if (attribute.getDefaultValue() != null)
+			el.appendChild(createTextElement(doc, name, attribute
+					.getDefaultValue()));
+		for (String lang : attribute.getLocalizedValues().keySet()) {
+			String text = attribute.get(lang);
+			el.appendChild(createTextElement(doc, name, text, lang));
+		}
+	}
+
+	private static Element createTextElement(Document doc, String tag,
+			String text) {
+		return createTextElement(doc, tag, text, null);
+	}
+
+	private static Element createTextElement(Document doc, String tag,
+			String text, String lang) {
+		Element el = doc.createElement(tag);
+		el.appendChild(doc.createTextNode(text));
+		if (lang != null)
+			el.setAttribute("xml:lang", lang);
+		return el;
 	}
 
 	private static class CategoriesHandler extends DefaultHandler {
-		private final Stack<Category> stack = new Stack<Category>();
+		private enum Type {
+			Categories, Category, Parameter, Name, Description, Reference
+		};
+
+		private static final Map<String, Type> typeMappings = new HashMap<String, Type>();
+		static {
+			typeMappings.put("categories", Type.Categories);
+			typeMappings.put("category", Type.Category);
+			typeMappings.put("parameter", Type.Parameter);
+			typeMappings.put("name", Type.Name);
+			typeMappings.put("description", Type.Description);
+			typeMappings.put("reference", Type.Reference);
+		}
+
+		private static final Map<Type, Type[]> allowedTypes = new HashMap<Type, Type[]>();
+		static {
+			allowedTypes.put(Type.Categories, new Type[] { Type.Category });
+			allowedTypes.put(Type.Category,
+					new Type[] { Type.Category, Type.Parameter, Type.Name,
+							Type.Description, Type.Reference });
+			allowedTypes.put(Type.Parameter, new Type[] { Type.Name,
+					Type.Description });
+			allowedTypes.put(Type.Name, new Type[0]);
+			allowedTypes.put(Type.Description, new Type[0]);
+			allowedTypes.put(Type.Reference, new Type[0]);
+		}
+		private static final Type[] allowedRootTypes = new Type[] { Type.Categories };
+
+		private final Stack<Type> typeStack = new Stack<Type>();
+		private final Stack<Category> categoryStack = new Stack<Category>();
 		private Category parent = null;
+		private Node node = null;
+		private Type type = null;
+		private String lang = null;
+		private StringBuilder sb = null;
 		public List<Category> rootCategories = new ArrayList<Category>();
-		boolean inEmptyElement = false;
 		private Locator locator = null;
 
 		@Override
 		public void endElement(String uri, String localName, String qName)
 				throws SAXException {
-			if (inEmptyElement)
-				inEmptyElement = false;
-			else if (qName.equals("category")) {
-				parent = stack.isEmpty() ? null : stack.pop();
+			if (type == Type.Category) {
+				parent = categoryStack.isEmpty() ? null : categoryStack.pop();
+			} else if (type == Type.Name || type == Type.Description) {
+				LocalizedAttribute la = (type == Type.Name) ? node.getName()
+						: node.getDescription();
+				if (lang == null)
+					la.setDefaultValue(sb.toString());
+				else
+					la.set(lang, sb.toString());
+				sb = null;
 			}
+			type = typeStack.isEmpty() ? null : typeStack.pop();
 		}
 
 		@Override
 		public void startElement(String uri, String localName, String qName,
 				Attributes atts) throws SAXException {
-			if (inEmptyElement)
-				throw new SAXParseException("No child elements allowed here",
-						locator);
-			boolean isCategory = localName.equals("category");
-			boolean isParameter = !isCategory && localName.equals("parameter");
-			boolean isReference = !isCategory && !isParameter
-					&& localName.equals("reference");
-			if (isCategory || (isParameter && parent != null)) {
-				Node n;
-				if (isCategory) {
-					Category c = new Category();
-					if (parent != null) {
-						parent.getSubCategories().add(c);
-						stack.push(parent);
-					} else {
-						rootCategories.add(c);
-					}
-					parent = c;
-					n = c;
-				} else {
-					Parameter p = new Parameter();
-					p.setType(atts.getValue("type"));
-					parent.getParameters().add(p);
-					n = p;
-				}
+			Type oldType = type;
 
-				String name = atts.getValue("name");
-				if (StringUtils.isEmpty(name))
-					throw new SAXParseException(
-							"Missing or empty name attribute in category or parameter element",
-							locator);
-				n.setName(name);
-				String id = atts.getValue("id");
-				String desc = atts.getValue("description");
-				String lang = atts.getValue("xml:lang");
-				if (!StringUtils.isEmpty(id))
-					n.setId(id);
-				if (!StringUtils.isEmpty(desc))
-					n.setDescription(desc);
-				if (!StringUtils.isEmpty(lang))
-					n.setLang(lang);
-			} else if (isReference) {
+			type = typeMappings.get(qName);
+			if (type == null)
+				throw new SAXParseException("unrecognized element " + qName
+						+ " inside " + oldType + " element", locator);
+
+			Type[] allowed;
+			if (oldType == null)
+				allowed = allowedRootTypes;
+			else
+				allowed = allowedTypes.get(oldType);
+
+			if (Arrays.binarySearch(allowed, type) < 0)
+				throw new SAXParseException(type
+						+ " elements are not allowed inside " + oldType
+						+ " elements", locator);
+
+			typeStack.push(oldType);
+
+			if (type == Type.Category) {
+				Category c = new Category();
+				if (parent != null) {
+					parent.getSubCategories().add(c);
+					categoryStack.push(parent);
+				} else {
+					rootCategories.add(c);
+				}
+				c.setParent(parent);
+
+				parent = c;
+				node = c;
+			} else if (type == Type.Parameter) {
+				Parameter p = new Parameter();
+				p.setType(atts.getValue("type"));
+				parent.getParameters().add(p);
+				p.setCategory(parent);
+
+				node = p;
+			} else if (type == Type.Reference) {
 				String sourceClassName = atts.getValue("source");
 				if (StringUtils.isEmpty(sourceClassName))
 					throw new SAXParseException(
 							"Missing or empty source attribute in reference element",
 							locator);
+				int limit = -1;
+				String limitStr = atts.getValue("limit");
+				if (!StringUtils.isEmpty(limitStr)) {
+					try {
+						limit = Integer.parseInt(limitStr);
+					} catch (NumberFormatException nfex) {
+						throw new SAXParseException(
+								"reference with non integer limit " + limitStr,
+								locator, nfex);
+					}
+					if (limit < 0)
+						throw new SAXParseException(
+								"reference with negative limit " + limit,
+								locator);
+				}
+
 				List<Category> referenceCategories;
 				try {
-					referenceCategories = parseReference(sourceClassName);
+					referenceCategories = parseReference(sourceClassName, limit);
 				} catch (Exception ex) {
 					throw new SAXParseException("Cannot parse reference",
 							locator, ex);
@@ -402,10 +479,29 @@ public class Builder {
 				} else {
 					rootCategories.addAll(referenceCategories);
 				}
+			} else if (type == Type.Name || type == Type.Description) {
+				String l = atts.getValue("xml:lang");
+				if (!StringUtils.isEmpty(l))
+					lang = l;
+				else
+					lang = null;
+				sb = new StringBuilder();
 			}
 
-			if (isParameter || isReference)
-				inEmptyElement = true;
+			if (type == Type.Category || type == Type.Parameter) {
+				String id = atts.getValue("id");
+				if (!StringUtils.isEmpty(id))
+					node.setId(id);
+				else
+					node.setId(null);
+			}
+		}
+
+		@Override
+		public void characters(char[] ch, int start, int length)
+				throws SAXException {
+			if (type == Type.Name || type == Type.Description)
+				sb.append(ch, start, length);
 		}
 
 		@Override
@@ -415,8 +511,8 @@ public class Builder {
 
 	}
 
-	private static List<Category> parseReference(String sourceClassName)
-			throws Exception {
+	private static List<Category> parseReference(String sourceClassName,
+			int limit) throws Exception {
 		if (sourceClassName == null)
 			throw new Exception("category source class cannot be null");
 		sourceClassName = findCategorySourceClassByName(sourceClassName);
@@ -456,7 +552,20 @@ public class Builder {
 			categories = deserializeCategories(categoriesFile);
 		}
 
+		if (limit > 0)
+			pruneCategories(categories, limit);
+
 		return categories;
+	}
+
+	private static void pruneCategories(List<Category> categories, int limit) {
+		if (limit == 0)
+			categories.clear();
+		else {
+			for (Category category : categories) {
+				pruneCategories(category.getSubCategories(), limit - 1);
+			}
+		}
 	}
 
 	private static List<Category> deserializeCategories(File categoriesFile)
@@ -532,8 +641,8 @@ public class Builder {
 				// create formal dimension individual
 				Individual dimensionIndividual = m.createIndividual(ns
 						+ String.format(DIMENSION_INDIVIDUAL_NAME_FORMAT,
-								dimensionIdentifier),
-						m.getOntClass(ContextModel.FormalDimension.getURI()));
+								dimensionIdentifier), m
+						.getOntClass(ContextModel.FormalDimension.getURI()));
 
 				if (config.getUseMetaModel()) {
 					// set rootDimension or valueSubDimension properties
@@ -582,7 +691,8 @@ public class Builder {
 				OntClass valueClass = m.createClass(ns
 						+ String.format(VALUE_CLASS_NAME_FORMAT,
 								dimensionIdentifier));
-				valueClass.addSuperClass(m.getOntClass(ContextModel.DimensionValue.getURI()));
+				valueClass.addSuperClass(m
+						.getOntClass(ContextModel.DimensionValue.getURI()));
 
 				// add values class to set
 				// definedValueClasses.add(valueClass);
@@ -592,7 +702,9 @@ public class Builder {
 						+ String.format(ASSIGNMENT_PROPERTY_NAME_FORMAT,
 								dimensionIdentifier));
 				assignmentProperty
-						.setSuperProperty(m.getObjectProperty(ContextModel.dimensionAssignmentValue.getURI()));
+						.setSuperProperty(m
+								.getObjectProperty(ContextModel.dimensionAssignmentValue
+										.getURI()));
 				assignmentProperty.setRange(valueClass);
 				// we'll set domain later
 
@@ -603,14 +715,22 @@ public class Builder {
 
 				if (config.getComplexity() == ModelComplexityLevel.HIGH) {
 					// set equivalent restrictions
-					assignmentClass.addEquivalentClass(m
-							.createHasValueRestriction(null,
-									m.getObjectProperty(ContextModel.assignmentDimension.getURI()),
-									dimensionIndividual));
-					assignmentClass.addEquivalentClass(m
-							.createSomeValuesFromRestriction(null,
-									m.getObjectProperty(ContextModel.dimensionAssignmentValue.getURI()),
-									valueClass));
+					assignmentClass
+							.addEquivalentClass(m
+									.createHasValueRestriction(
+											null,
+											m
+													.getObjectProperty(ContextModel.assignmentDimension
+															.getURI()),
+											dimensionIndividual));
+					assignmentClass
+							.addEquivalentClass(m
+									.createSomeValuesFromRestriction(
+											null,
+											m
+													.getObjectProperty(ContextModel.dimensionAssignmentValue
+															.getURI()),
+											valueClass));
 
 					// set superclass
 					RDFList intersectionList = m.createList();
@@ -633,9 +753,13 @@ public class Builder {
 							.with(m.createCardinalityRestriction(null,
 									assignmentProperty, 1));
 					equivalentIntersectionList = equivalentIntersectionList
-							.with(m.createHasValueRestriction(null,
-									m.getObjectProperty(ContextModel.assignmentDimension.getURI()),
-									dimensionIndividual));
+							.with(m
+									.createHasValueRestriction(
+											null,
+											m
+													.getObjectProperty(ContextModel.assignmentDimension
+															.getURI()),
+											dimensionIndividual));
 					assignmentClass.addEquivalentClass(m
 							.createIntersectionClass(null,
 									equivalentIntersectionList));
@@ -770,9 +894,18 @@ public class Builder {
 	}
 
 	private static void assignLabelAndComment(OntResource i, Node n) {
-		i.addLabel(n.getName(), n.getLang());
-		if (!StringUtils.isEmpty(n.getDescription()))
-			i.addComment(n.getDescription(), n.getLang());
+		if (n.getName().getDefaultValue() != null)
+			i.addLabel(n.getName().getDefaultValue(), null);
+		for (String lang : n.getName().getLocalizedValues().keySet()) {
+			String name = n.getName().get(lang);
+			i.addLabel(name, lang);
+		}
+		if (n.getDescription().getDefaultValue() != null)
+			i.addComment(n.getDescription().getDefaultValue(), null);
+		for (String lang : n.getDescription().getLocalizedValues().keySet()) {
+			String desc = n.getDescription().get(lang);
+			i.addComment(desc, lang);
+		}
 	}
 
 	private static String createIdentifier(String parentIdentifier, int index) {

@@ -52,8 +52,11 @@ public class UNSPSC implements ICategorySource {
 					code = ((Literal) codeNode).getLexicalForm();
 				}
 			}
-			Category category = new Category(className);
-			category.setDescription(label);
+			Category category = new Category();
+			category.getName().setDefaultValue(className);
+			category.getName().set("en", className);
+			category.getDescription().setDefaultValue(label);
+			category.getDescription().set("en", label);
 			if(code != null) category.setId(code);
 			categories.add(category);
 			parseCategories(category.getSubCategories(), ontClass.listSubClasses(true));

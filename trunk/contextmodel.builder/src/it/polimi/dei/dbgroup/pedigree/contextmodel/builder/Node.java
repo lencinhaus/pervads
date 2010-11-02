@@ -1,33 +1,29 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 public class Node {
-	private String name;
-	private String description;
+	private LocalizedAttribute name = new LocalizedAttribute();
+	private LocalizedAttribute description = new LocalizedAttribute();
 	private String id;
-	private String lang;
-	
-	public Node() {
-		
-	}
 	
 	public Node(String name) {
-		this.name = name;
+		getName().setDefaultValue(name);
 	}
 
-	public String getName() {
+	public Node() {
+
+	}
+
+	public LocalizedAttribute getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
+	public LocalizedAttribute getDescription() {
 		return description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	@Override
+	public String toString() {
+		return name.getDefaultValue();
 	}
 
 	public String getId() {
@@ -38,18 +34,4 @@ public class Node {
 		this.id = id;
 	}
 
-	public String getLang() {
-		return lang;
-	}
-
-	public void setLang(String lang) {
-		this.lang = lang;
-	}
-
-	@Override
-	public String toString() {
-		return name;
-	}
-	
-	
 }

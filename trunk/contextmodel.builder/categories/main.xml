@@ -1,18 +1,55 @@
 <categories>
-	<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-		<reference source="paginegialle" />
+	<category>
+		<name xml:lang="it">Cosa</name>
+		<description xml:lang="it">Categorie merceologiche
+		</description>
+		<name xml:lang="en">What</name>
+		<description xml:lang="en">Product categories</description>
+		<name>What</name>
+		<description>Product categories</description>
+		<reference source="paginegialle" limit="3" />
 	</category>
-	<category name="Dove" xml:lang="it">
-		<category name="qui" xml:lang="it">
-			<parameter name="posizione" type="current_position" xml:lang="it" />
+	<category>
+		<name xml:lang="it">Dove</name>
+		<name xml:lang="en">Where</name>
+		<name>Where</name>
+		<category>
+			<name xml:lang="it">Qui</name>
+			<name xml:lang="en">Here</name>
+			<name>Here</name>
+			<parameter type="current_position">
+				<name xml:lang="it">posizione</name>
+				<name xml:lang="en">position</name>
+				<name>position</name>
+			</parameter>
 		</category>
-		<category name="in un raggio di N chilometri da qui" xml:lang="it">
-			<parameter name="posizione" type="current_position" xml:lang="it" />
-			<parameter name="N" type="double" xml:lang="it" />
+		<category>
+			<name xml:lang="it">in un raggio di N kilometri da qui</name>
+			<name xml:lang="en">within N kilometers from here</name>
+			<name>within N kilometers from here</name>
+			<parameter type="current_position">
+				<name xml:lang="it">posizione</name>
+				<name xml:lang="en">position</name>
+				<name>position</name>
+			</parameter>
+			<parameter type="double">
+				<name>N</name>
+			</parameter>
 		</category>
 	</category>
-	<category name="Quando" xml:lang="it">
-		<category name="Ora"  xml:lang="it" />
-		<category name="Prima o poi" xml:lang="it" />
+	<category>
+		<name xml:lang="it">Quando</name>
+		<name xml:lang="en">When</name>
+		<name>When</name>
+		<category>
+			<name xml:lang="it">Ora</name>
+			<name xml:lang="en">Now</name>
+			<name>Now</name>
+		</category>
+		<category>
+			<name xml:lang="it">Prima o poi</name>
+			<name xml:lang="en">Someday</name>
+			<name>Someday</name>
+		</category>
 	</category>
 </categories>

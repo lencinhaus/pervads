@@ -4,19 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category extends Node {
+	private Category parent;
 	private List<Category> subCategories = new ArrayList<Category>();
 	private List<Parameter> parameters = new ArrayList<Parameter>();
-
-	public Category() {
-		super();
-	}
 
 	public Category(String name) {
 		super(name);
 	}
+	public Category() {
+		super();
+	}
 
 	public List<Category> getSubCategories() {
 		return subCategories;
+	}
+
+	public Category getParent() {
+		return parent;
+	}
+
+	public void setParent(Category parent) {
+		this.parent = parent;
 	}
 
 	public List<Parameter> getParameters() {
