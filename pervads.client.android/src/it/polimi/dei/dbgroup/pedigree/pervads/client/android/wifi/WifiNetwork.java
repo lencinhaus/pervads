@@ -60,5 +60,12 @@ public class WifiNetwork {
 	public Map<String, String> getExtendedProperties() {
 		return extendedProperties;
 	}
+
+	@Override
+	public String toString() {
+		//TODO more meaningful output here
+		return SSID + " (" + BSSID + ")";
+	}
+	
 	
 }

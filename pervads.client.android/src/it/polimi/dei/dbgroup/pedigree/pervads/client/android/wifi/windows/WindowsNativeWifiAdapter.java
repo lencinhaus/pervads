@@ -48,6 +48,7 @@ public final class WindowsNativeWifiAdapter extends AbstractWifiAdapter {
 	private static final String CONNECTION_SERVER_ADDRESS_KEY = "serverAddress";
 	private AspNetJsonServiceClient client = null;
 	private WifiNetwork[] reachableNetworks = null;
+	private boolean sessionStarted = false;
 
 	private final Runnable SCAN_RUNNER = new Runnable() {
 
@@ -120,14 +121,8 @@ public final class WindowsNativeWifiAdapter extends AbstractWifiAdapter {
 	}
 
 	@Override
-	public void disconnect() throws WifiAdapterException {
-		// do nothing, there is no win32 api to disconnect wlan
-	}
-
-	@Override
 	public void endSession() throws WifiAdapterException {
-		// TODO Auto-generated method stub
-
+		sessionStarted = false;
 	}
 
 	@Override
@@ -169,7 +164,14 @@ public final class WindowsNativeWifiAdapter extends AbstractWifiAdapter {
 
 	@Override
 	public void startSession() {
-		// TODO Auto-generated method stub
+		sessionStarted = true;
+	}
+	
+	
+
+	@Override
+	public boolean isSessionStarted() throws WifiAdapterException {
+		return sessionStarted;
 	}
 
 	private boolean callPing() throws WifiAdapterException {

@@ -2,7 +2,6 @@ package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -18,11 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class PervAdsListActivity extends ListActivity {
 	private static final Logger L = new Logger(PervAdsListActivity.class
@@ -31,18 +26,16 @@ public class PervAdsListActivity extends ListActivity {
 	private static final int UPDATE_STARTED_MESSAGE = 1;
 	private static final int UPDATE_COMPLETED_MESSAGE = 2;
 	private static final int UPDATE_FAILED_MESSAGE = 3;
-	private static final int NETWORK_SCAN_STARTED = 4;
-	private static final int NETWORK_SCAN_COMPLETED = 5;
-	private static final int NETWORK_SCAN_FAILED = 6;
-	private static final int NETWORK_CONNECTION_STARTED = 7;
-	private static final int NETWORK_CONNECTION_COMPLETED = 8;
-	private static final int NETWORK_CONNECTION_FAILED = 9;
-	private static final int CONTENT_PROCESSING_STARTED = 10;
-	private static final int CONTENT_PROCESSING_COMPLETED = 11;
-	private static final int CONTENT_PROCESSING_FAILED = 12;
-	private static final int RESULT_CREATION_STARTED = 13;
-	private static final int RESULT_CREATION_COMPLETED = 14;
-	private static final int RESULT_CREATION_FAILED = 15;
+	private static final int NETWORK_SCAN_STARTED_MESSAGE = 4;
+	private static final int NETWORK_SCAN_COMPLETED_MESSAGE = 5;
+	private static final int NETWORK_SCAN_FAILED_MESSAGE = 6;
+	private static final int NETWORK_CONNECTION_STARTED_MESSAGE = 7;
+	private static final int NETWORK_CONNECTION_COMPLETED_MESSAGE = 8;
+	private static final int NETWORK_CONNECTION_FAILED_MESSAGE = 9;
+	private static final int CACHED_DATA_COUNT_MESSAGE = 10;
+	private static final int CACHED_DATA_PROCESSING_STARTED_MESSAGE = 11;
+	private static final int CACHED_DATA_PROCESSING_COMPLETED_MESSAGE = 12;
+	private static final int CACHED_DATA_PROCESSING_FAILED_MESSAGE = 13;
 
 	private QueryResultAdapter resultAdapter;
 	private Button updateButton;
@@ -63,48 +56,42 @@ public class PervAdsListActivity extends ListActivity {
 				case UPDATE_FAILED_MESSAGE:
 					updateFailed();
 					break;
-				case NETWORK_SCAN_STARTED:
+				case NETWORK_SCAN_STARTED_MESSAGE:
 					networkScanStarted();
 					break;
-				case NETWORK_SCAN_COMPLETED:
+				case NETWORK_SCAN_COMPLETED_MESSAGE:
 					networkScanCompleted(msg.arg1);
 					break;
-				case NETWORK_SCAN_FAILED:
+				case NETWORK_SCAN_FAILED_MESSAGE:
 					networkScanFailed();
 					break;
-				case NETWORK_CONNECTION_STARTED:
-				case NETWORK_CONNECTION_COMPLETED:
-				case NETWORK_CONNECTION_FAILED:
+				case NETWORK_CONNECTION_STARTED_MESSAGE:
+				case NETWORK_CONNECTION_COMPLETED_MESSAGE:
+				case NETWORK_CONNECTION_FAILED_MESSAGE:
 					String SSID = (String) msg.obj;
 					switch (msg.what) {
-						case NETWORK_CONNECTION_STARTED:
+						case NETWORK_CONNECTION_STARTED_MESSAGE:
 							networkConnectionStarted(SSID);
 							break;
-						case NETWORK_CONNECTION_COMPLETED:
+						case NETWORK_CONNECTION_COMPLETED_MESSAGE:
 							networkConnectionCompleted(SSID);
 							break;
-						case NETWORK_CONNECTION_FAILED:
+						case NETWORK_CONNECTION_FAILED_MESSAGE:
 							networkConnectionFailed(SSID);
 							break;
 					}
 					break;
-				case CONTENT_PROCESSING_STARTED:
-					contentProcessingStarted(msg.arg1);
+				case CACHED_DATA_PROCESSING_STARTED_MESSAGE:
+					cachedDataProcessingStarted();
 					break;
-				case CONTENT_PROCESSING_COMPLETED:
-					contentProcessingCompleted();
+				case CACHED_DATA_PROCESSING_COMPLETED_MESSAGE:
+					cachedDataProcessingCompleted();
 					break;
-				case CONTENT_PROCESSING_FAILED:
-					contentProcessingFailed();
+				case CACHED_DATA_PROCESSING_FAILED_MESSAGE:
+					cachedDataProcessingFailed();
 					break;
-				case RESULT_CREATION_STARTED:
-					resultCreationStarted();
-					break;
-				case RESULT_CREATION_COMPLETED:
-					resultCreationCompleted();
-					break;
-				case RESULT_CREATION_FAILED:
-					resultCreationFailed();
+				case CACHED_DATA_COUNT_MESSAGE:
+					cachedDataCount(msg.arg1);
 					break;
 				default:
 					super.handleMessage(msg);
@@ -221,16 +208,19 @@ public class PervAdsListActivity extends ListActivity {
 			if (Logger.V)
 				L.v("networkConnectionEvent(" + EventTypes.describe(type)
 						+ ", " + SSID + ")");
-			
+
 			switch (type) {
 				case EventTypes.Started:
-					handler.obtainMessage(NETWORK_CONNECTION_STARTED, SSID).sendToTarget();
+					handler.obtainMessage(NETWORK_CONNECTION_STARTED_MESSAGE,
+							SSID).sendToTarget();
 					break;
 				case EventTypes.Completed:
-					handler.obtainMessage(NETWORK_CONNECTION_COMPLETED, SSID).sendToTarget();
+					handler.obtainMessage(NETWORK_CONNECTION_COMPLETED_MESSAGE,
+							SSID).sendToTarget();
 					break;
 				case EventTypes.Failed:
-					handler.obtainMessage(NETWORK_CONNECTION_FAILED, SSID).sendToTarget();
+					handler.obtainMessage(NETWORK_CONNECTION_FAILED_MESSAGE,
+							SSID).sendToTarget();
 					break;
 			}
 		}
@@ -239,56 +229,54 @@ public class PervAdsListActivity extends ListActivity {
 		public void networkScanEvent(int type, int numFoundNetworks)
 				throws RemoteException {
 			if (Logger.V)
-				L.v("networkScanEvent(" + EventTypes.describe(type) + ", " + numFoundNetworks + ")");
+				L.v("networkScanEvent(" + EventTypes.describe(type) + ", "
+						+ numFoundNetworks + ")");
 
 			switch (type) {
 				case EventTypes.Started:
-					handler.obtainMessage(NETWORK_SCAN_STARTED, numFoundNetworks, 0).sendToTarget();
+					handler.obtainMessage(NETWORK_SCAN_STARTED_MESSAGE,
+							numFoundNetworks, 0).sendToTarget();
 					break;
 				case EventTypes.Completed:
-					handler.obtainMessage(NETWORK_SCAN_COMPLETED, numFoundNetworks, 0).sendToTarget();
+					handler.obtainMessage(NETWORK_SCAN_COMPLETED_MESSAGE,
+							numFoundNetworks, 0).sendToTarget();
 					break;
 				case EventTypes.Failed:
-					handler.obtainMessage(NETWORK_SCAN_FAILED, numFoundNetworks, 0).sendToTarget();
+					handler.obtainMessage(NETWORK_SCAN_FAILED_MESSAGE,
+							numFoundNetworks, 0).sendToTarget();
 					break;
 			}
 		}
 
 		@Override
-		public void contentProcessingEvent(int type, int numContents)
-				throws RemoteException {
+		public void cachedDataProcessingEvent(int type) throws RemoteException {
 			if (Logger.V)
-				L.v("contentProcessingEvent(" + EventTypes.describe(type) + ", " + numContents + ")");
+				L.v("cachedDataProcessingEvent(" + EventTypes.describe(type)
+						+ ")");
 
 			switch (type) {
 				case EventTypes.Started:
-					handler.obtainMessage(CONTENT_PROCESSING_STARTED, numContents, 0).sendToTarget();
+					handler
+							.sendEmptyMessage(CACHED_DATA_PROCESSING_STARTED_MESSAGE);
 					break;
 				case EventTypes.Completed:
-					handler.obtainMessage(CONTENT_PROCESSING_COMPLETED, numContents, 0).sendToTarget();
+					handler
+							.sendEmptyMessage(CACHED_DATA_PROCESSING_COMPLETED_MESSAGE);
 					break;
 				case EventTypes.Failed:
-					handler.obtainMessage(CONTENT_PROCESSING_FAILED, numContents, 0).sendToTarget();
+					handler
+							.sendEmptyMessage(CACHED_DATA_PROCESSING_FAILED_MESSAGE);
 					break;
 			}
 		}
 
 		@Override
-		public void resultCreationEvent(int type) throws RemoteException {
+		public void cachedDataCountEvent(int count) throws RemoteException {
 			if (Logger.V)
-				L.v("resultCreationEvent(" + EventTypes.describe(type) + ")");
+				L.v("cachedDataCountEvent(" + count + ")");
 
-			switch (type) {
-				case EventTypes.Started:
-					handler.sendEmptyMessage(RESULT_CREATION_STARTED);
-					break;
-				case EventTypes.Completed:
-					handler.sendEmptyMessage(RESULT_CREATION_COMPLETED);
-					break;
-				case EventTypes.Failed:
-					handler.sendEmptyMessage(RESULT_CREATION_FAILED);
-					break;
-			}
+			handler.obtainMessage(CACHED_DATA_COUNT_MESSAGE, count, 0)
+					.sendToTarget();
 		}
 	};
 
@@ -300,35 +288,36 @@ public class PervAdsListActivity extends ListActivity {
 		}
 	};
 
-//	private final OnItemClickListener pervAdClickListener = new OnItemClickListener() {
-//
-//		@Override
-//		public void onItemClick(AdapterView<?> parent, View view, int position,
-//				long id) {
-//			PervAd pervAd = listAdapter.getPervAd(position);
-//			Toast.makeText(
-//					PervAdsListActivity.this,
-//					"Network: " + pervAd.getNetworkName() + "\n\n"
-//							+ pervAd.getContent(), Toast.LENGTH_LONG).show();
-//			if (!pervAd.isSeen() && pervAdsService != null) {
-//				try {
-//					pervAdsService.pervAdSeen(pervAd.getId());
-//					listAdapter.update();
-//				} catch (RemoteException ex) {
-//					if (Logger.E)
-//						L
-//								.e(
-//										"an error occurred while calling pervAdSeen method on service",
-//										ex);
-//				}
-//			}
-//		}
-//	};
+	// private final OnItemClickListener pervAdClickListener = new
+	// OnItemClickListener() {
+	//
+	// @Override
+	// public void onItemClick(AdapterView<?> parent, View view, int position,
+	// long id) {
+	// PervAd pervAd = listAdapter.getPervAd(position);
+	// Toast.makeText(
+	// PervAdsListActivity.this,
+	// "Network: " + pervAd.getNetworkName() + "\n\n"
+	// + pervAd.getContent(), Toast.LENGTH_LONG).show();
+	// if (!pervAd.isSeen() && pervAdsService != null) {
+	// try {
+	// pervAdsService.pervAdSeen(pervAd.getId());
+	// listAdapter.update();
+	// } catch (RemoteException ex) {
+	// if (Logger.E)
+	// L
+	// .e(
+	// "an error occurred while calling pervAdSeen method on service",
+	// ex);
+	// }
+	// }
+	// }
+	// };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// set content view
 		setContentView(R.layout.pervads_list_activity);
 
@@ -341,7 +330,7 @@ public class PervAdsListActivity extends ListActivity {
 		// init update button
 		updateButton = (Button) findViewById(R.id.update_button);
 		updateButton.setOnClickListener(updateButtonClickListener);
-		
+
 		resultAdapter = new QueryResultAdapter(this);
 		setListAdapter(resultAdapter);
 
@@ -440,30 +429,22 @@ public class PervAdsListActivity extends ListActivity {
 	private void networkConnectionFailed(String SSID) {
 		incrementProgress();
 	}
-	
-	private void contentProcessingStarted(int numContents) {
-		progressDialog.setMessage("creating results");
+
+	private void cachedDataCount(int count) {
+		progressDialog.setMessage("processing cached data");
 		progressDialog.setProgress(0);
-		progressDialog.setMax(numContents);
+		progressDialog.setMax(count);
 	}
 
-	private void contentProcessingCompleted() {
-		progressDialog.setMessage("done");
+	private void cachedDataProcessingStarted() {
+		// do nothing
 	}
 
-	private void contentProcessingFailed() {
-		progressDialog.setMessage("done");
-	}
-	
-	private void resultCreationStarted() {
-		// DO NOTHING
-	}
-
-	private void resultCreationCompleted() {
+	private void cachedDataProcessingCompleted() {
 		incrementProgress();
 	}
 
-	private void resultCreationFailed() {
+	private void cachedDataProcessingFailed() {
 		incrementProgress();
 	}
 

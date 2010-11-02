@@ -6,10 +6,12 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
+import android.text.TextUtils;
 
 public class LifeCycleEventReceiver extends BroadcastReceiver {
-	private static final Logger L = new Logger(LifeCycleEventReceiver.class
-			.getSimpleName());
+	private static final Logger L = new Logger(LifeCycleEventReceiver.class);
 
 	@Override
 	public void onReceive(Context context, Intent intent) {

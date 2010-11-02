@@ -6,7 +6,10 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.AssignmentDefinition;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelFactory;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.Config;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextProxyManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.AttachedMediaManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.HotspotClient;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.OWLSpecializedReasoner;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.PervADsMatcher;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.TDBAwareOntDocumentManager;
@@ -15,19 +18,26 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Initializable;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.ProgressMonitor;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
+import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.Offer;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervAD;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelFactory;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
 import arq.query;
 
 import com.hp.hpl.jena.ontology.OntDocumentManager;
@@ -58,9 +68,10 @@ public class ResultBuilder implements Initializable {
 		return instance;
 	}
 
-	public boolean processContent(InputStream stream) {
+	public boolean processContent(InputStream stream,
+			AttachedMediaManager mediaManager) {
 		checkStarted();
-		
+
 		try {
 			if (Logger.D)
 				L.d("parsing content from stream");
@@ -71,20 +82,50 @@ public class ResultBuilder implements Initializable {
 			PervADsModelProxy proxy = PervADsModelFactory.createProxy(
 					ContextProxyManager.getInstance().getProxy(),
 					inferenceModel);
-			for (String queryName : queryDefinitions.keySet()) {
+
+			if (Logger.D)
+				L.d("retrieving local attached media");
+			Map<String, String> cachedLocalMedia = new HashMap<String, String>();
+			Set<String> unreachableLocalMedia = new HashSet<String>();
+			for (PervAD pervad : proxy.listPervADs()) {
+				for (Offer offer : pervad.listOffers()) {
+					for (String media : offer.getAttachedMedia()) {
+						if (!cachedLocalMedia.containsKey(media)
+								&& !unreachableLocalMedia.contains(media)) {
+							// try to cache it
+							try {
+								String cached = mediaManager
+										.cacheIfNeeded(media);
+								if (cached == null)
+									unreachableLocalMedia.add(media);
+								else if (!cached.equals(media))
+									cachedLocalMedia.put(media, cached);
+							} catch (IOException ex) {
+								if (Logger.W)
+									L
+											.w(
+													"An error occurred while trying to cache local attached media",
+													ex);
+							}
+						}
+					}
+				}
+			}
+
+			for (PervAD pervad : proxy.listPervADs()) {
 				if (Logger.D)
-					L.d("computing matches for query " + queryName);
-				QueryResult result = resultsMap.get(queryName);
-				matcher.setDefinitions(queryDefinitions.get(queryName));
-				for (PervAD pervad : proxy.listPervADs()) {
+					L.d("processing pervad " + pervad.getURI());
+
+				matcher.setSource(pervad.getContext());
+				for (String queryName : queryDefinitions.keySet()) {
 					if (Logger.D)
-						L.d("computing matching for pervad " + pervad.getURI());
-					matcher.setSource(pervad.getContext());
+						L.d("matching pervad with query " + queryName);
+					QueryResult result = resultsMap.get(queryName);
+					matcher.setDefinitions(queryDefinitions.get(queryName));
 					Matching matching = matcher.match();
 					if (matching.getScore() > 0) {
 						if (Logger.D)
-							L.d("positive matching for pervad "
-									+ pervad.getURI() + " with score "
+							L.d("positive matching with score "
 									+ matching.getScore());
 						LightweightPervAD lPervad = new LightweightPervAD();
 						List<LightweightAssignmentMatching> lAssignmentMatchings = new ArrayList<LightweightAssignmentMatching>();
@@ -102,10 +143,11 @@ public class ResultBuilder implements Initializable {
 								lPervad);
 						result.getMatchingPervADs().add(matchingPervad);
 					} else if (Logger.D)
-						L.d("no matching for pervad " + pervad.getURI());
+						L.d("no matching");
 				}
+
 				if (Logger.D)
-					L.d("done computing matches for query " + queryName);
+					L.d("done processing pervad " + pervad.getURI());
 			}
 			return true;
 		} catch (Exception ex) {
@@ -116,11 +158,11 @@ public class ResultBuilder implements Initializable {
 
 	public boolean start() {
 		checkInitialized();
-		
+
 		if (started) {
 			stop();
 		}
-		
+
 		List<Query> queries = getUpdatedQueries();
 
 		if (queries.size() > 0) {
@@ -130,6 +172,8 @@ public class ResultBuilder implements Initializable {
 			resultsMap = new HashMap<String, QueryResult>();
 			for (Query query : queries) {
 				if (query.isEnabled()) {
+					started = true;
+					
 					String queryName = query.getName();
 					if (Logger.D)
 						L.d("initializing assignment definitions for query "
@@ -147,8 +191,6 @@ public class ResultBuilder implements Initializable {
 					resultsMap.put(queryName, result);
 				}
 			}
-
-			started = true;
 		}
 
 		return started;
@@ -157,7 +199,8 @@ public class ResultBuilder implements Initializable {
 	public List<QueryResult> stop() {
 		checkStarted();
 
-		List<QueryResult> results = new ArrayList<QueryResult>(resultsMap.values());
+		List<QueryResult> results = new ArrayList<QueryResult>(resultsMap
+				.values());
 		queryDefinitions = null;
 		resultsMap = null;
 		started = false;
@@ -178,7 +221,8 @@ public class ResultBuilder implements Initializable {
 			// create reasoner
 			if (Logger.D)
 				L.d("creating reasoner schema with pervads model");
-			OntDocumentManager docManager = TDBAwareOntDocumentManager.getInstance();
+			OntDocumentManager docManager = TDBAwareOntDocumentManager
+					.getInstance();
 			Model pervadsModel = docManager.getModel(PervADsModel.URI);
 			OntModelSpec schemaSpec = new OntModelSpec(OntModelSpec.OWL_MEM);
 			schemaSpec.setDocumentManager(docManager);
@@ -193,10 +237,10 @@ public class ResultBuilder implements Initializable {
 			} catch (IOException ex) {
 				throw new RuntimeException("cannot create reasoner", ex);
 			}
-			
+
 			// create query manager
 			queryManager = new QueryManager(context);
-			
+
 			initialized = true;
 		}
 	}
@@ -205,7 +249,7 @@ public class ResultBuilder implements Initializable {
 	public boolean isInitialized(Context context) {
 		return initialized;
 	}
-	
+
 	public boolean isStarted() {
 		return started;
 	}
@@ -214,12 +258,14 @@ public class ResultBuilder implements Initializable {
 		queryManager.synchronize();
 		return queryManager.getQueries();
 	}
-	
+
 	private void checkStarted() {
 		checkInitialized();
-		if(!started) throw new IllegalStateException("ResultBuilder must be started before calling this method");
+		if (!started)
+			throw new IllegalStateException(
+					"ResultBuilder must be started before calling this method");
 	}
-	
+
 	private void checkInitialized() {
 		if (!initialized)
 			throw new IllegalStateException(

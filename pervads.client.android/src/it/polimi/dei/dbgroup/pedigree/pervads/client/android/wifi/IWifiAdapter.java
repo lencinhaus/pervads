@@ -11,13 +11,13 @@ public interface IWifiAdapter {
 	
 	public void endSession() throws WifiAdapterException;
 	
+	public boolean isSessionStarted() throws WifiAdapterException;
+	
 	public void startNetworkScan() throws WifiAdapterException;
 	
 	public WifiNetwork[] getReachableNetworks() throws WifiAdapterException;
 	
 	public void connect(WifiNetwork network) throws WifiAdapterException;
-	
-	public void disconnect() throws WifiAdapterException;
 	
 	public boolean isConnected() throws WifiAdapterException;
 	

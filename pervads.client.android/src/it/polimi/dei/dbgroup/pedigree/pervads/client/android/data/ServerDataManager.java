@@ -1,4 +1,4 @@
-package it.polimi.dei.dbgroup.pedigree.pervads.client.android.query;
+package it.polimi.dei.dbgroup.pedigree.pervads.client.android.data;
 
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
@@ -7,18 +7,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.zip.GZIPInputStream;
 
 import android.content.Context;
 
 public class ServerDataManager {
-	private class ServerDataSourceImpl implements ServerDataSource {
+	private static class ServerDataSourceImpl implements ServerDataSource {
 		private InputStream stream;
 		private String key;
 
-		public ServerDataSourceImpl(InputStream stream, String key) {
+		private ServerDataSourceImpl(InputStream stream, String key) {
 			super();
 			this.stream = stream;
 			this.key = key;
@@ -34,13 +37,24 @@ public class ServerDataManager {
 			return stream;
 		}
 
+		public static ServerDataSource fromFile(File dataFile, String key) {
+			try {
+				return new ServerDataSourceImpl(new GZIPInputStream(
+						new FileInputStream(dataFile)), key);
+			} catch (IOException ex) {
+				throw new RuntimeException("cannot read data file "
+						+ dataFile.getAbsolutePath() + " for key " + key, ex);
+			}
+		}
+
 	}
-	
+
 	private static final String DATA_FOLDER_NAME = "server_data";
 	private static final String DATA_FILE_EXT = ".gz";
 	private Context context;
 	private final Logger L = new Logger(ServerDataManager.class);
 	private boolean updating = false;
+	private Set<File> unmodifiedDataFiles = null;
 
 	public ServerDataManager(Context context) {
 		this.context = context;
@@ -52,31 +66,44 @@ public class ServerDataManager {
 		updating = true;
 		// move all the data files to the update folder
 		moveDataToUpdateFolder();
+		// initialize the unmodified set
+		unmodifiedDataFiles = new HashSet<File>(Arrays
+				.asList(getDataUpdateFolder().listFiles()));
 	}
 
 	public void endUpdate() {
 		if (!updating)
 			throw new RuntimeException("not updating");
 		updating = false;
+		
+		// clear unmodified set
+		unmodifiedDataFiles = null;
+		
 		// move all the data files to the cache folder
 		moveDataToCacheFolder();
 	}
+	
+	public boolean isUpdating() {
+		return updating;
+	}
 
-	public boolean addData(String key, String data) {
+	public ServerDataSource addData(String key, InputStream data) {
 		if (!updating)
-			throw new RuntimeException(
-					"Must be updating in order to add new data");
-		if(Logger.V) L.v("adding data for key " + key);
-		String dataFileName = key + DATA_FILE_EXT;
-		File dataFile = new File(getDataUpdateFolder(), dataFileName);
+			throw new IllegalStateException(
+					"must be updating in order to add new datas");
+		if (Logger.V)
+			L.v("adding data for key " + key);
+
+		File dataFile = getDataFileFromKey(key);
 
 		// if data file exists, replace it
-		boolean replaced = false;
 		if (dataFile.exists()) {
 			if (!dataFile.delete())
 				throw new RuntimeException("Cannot delete data file "
 						+ dataFile.getAbsolutePath());
-			replaced = true;
+
+			// remove it from the unmodified files
+			unmodifiedDataFiles.remove(dataFile);
 		}
 
 		try {
@@ -86,26 +113,48 @@ public class ServerDataManager {
 					+ dataFile.getAbsolutePath(), ex);
 		}
 
-		return replaced;
-	}
-	
-	public int countData() {
-		return getDataUpdateFolder().list().length;
+		return ServerDataSourceImpl.fromFile(dataFile, key);
 	}
 
-	public Iterator<ServerDataSource> getData() {
+	public boolean removeData(String key) {
+		if (!updating)
+			throw new IllegalStateException(
+					"must be updating in order to remove data");
+
+		File dataFile = getDataFileFromKey(key);
+		if (dataFile.exists()) {
+			if (!dataFile.delete())
+				throw new RuntimeException("cannot remove data file "
+						+ dataFile.getAbsolutePath() + " for key " + key);
+			unmodifiedDataFiles.remove(dataFile);
+			return true;
+		}
+
+		return false;
+	}
+	
+	public int countUnmodifiedData() {
+		if (!updating)
+			throw new RuntimeException(
+					"Must be updating in order to count unmodified data");
+		
+		return unmodifiedDataFiles.size();
+	}
+
+	public Iterator<ServerDataSource> getUnmodifiedData() {
 		if (!updating)
 			throw new RuntimeException(
 					"Must be updating in order to retrieve data");
 
 		return new Iterator<ServerDataSource>() {
-			private File[] dataFiles = getDataUpdateFolder().listFiles();
-			private int index = -1;
+			private Iterator<File> unmodifiedDataIterator = unmodifiedDataFiles
+					.iterator();
+			private File curr = null;
 			private boolean removed = false;
 
 			@Override
 			public boolean hasNext() {
-				return index < dataFiles.length - 1;
+				return unmodifiedDataIterator.hasNext();
 			}
 
 			@Override
@@ -113,22 +162,20 @@ public class ServerDataManager {
 				if (!hasNext())
 					throw new NoSuchElementException();
 				removed = false;
-				File curr = dataFiles[++index];
-				String key = curr.getName().substring(0, curr.getName().length() - DATA_FILE_EXT.length());
-				try {
-					return new ServerDataSourceImpl(new GZIPInputStream(new FileInputStream(curr)), key);
-				} catch (IOException ex) {
-					throw new RuntimeException("Cannot read server data file "
-							+ curr.getAbsolutePath(), ex);
-				}
+				curr = unmodifiedDataIterator.next();
+
+				return ServerDataSourceImpl.fromFile(curr,
+						getKeyFromDataFile(curr));
 			}
 
 			@Override
 			public void remove() {
-				if(index == -1 || index >= dataFiles.length) throw new NoSuchElementException();
-				if(removed) throw new NoSuchElementException();
-				File curr = dataFiles[index];
-				if(!curr.delete()) throw new RuntimeException("cannot delete server data file " + curr.getAbsolutePath());
+				if (removed || curr == null)
+					throw new NoSuchElementException();
+				if (!curr.delete())
+					throw new RuntimeException(
+							"cannot delete server data file "
+									+ curr.getAbsolutePath());
 				removed = true;
 			}
 		};
@@ -157,5 +204,15 @@ public class ServerDataManager {
 			dataFolder.mkdirs();
 		}
 		return dataFolder;
+	}
+
+	private File getDataFileFromKey(String key) {
+		String dataFileName = key + DATA_FILE_EXT;
+		return new File(getDataUpdateFolder(), dataFileName);
+	}
+
+	private String getKeyFromDataFile(File dataFile) {
+		return dataFile.getName().substring(0,
+				dataFile.getName().length() - DATA_FILE_EXT.length());
 	}
 }

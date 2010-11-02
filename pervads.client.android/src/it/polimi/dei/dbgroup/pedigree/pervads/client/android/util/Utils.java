@@ -154,13 +154,14 @@ public final class Utils {
 			sb.append((char) ('a' + randomGenerator.nextInt(chars)));
 		return sb.toString();
 	}
-	
-	public static void recursiveDelete(File file) {
+
+	public static void recursiveDelete(final File file) {
 		recursiveDelete(file, false);
 	}
 
-	public static void recursiveDelete(File file, boolean onlyDeleteChildren) {
-		if(!file.exists()) return;
+	public static void recursiveDelete(final File file, final boolean onlyDeleteChildren) {
+		if (!file.exists())
+			return;
 		if (file.isDirectory()) {
 			for (File child : file.listFiles()) {
 				recursiveDelete(child, false);
@@ -171,17 +172,17 @@ public final class Utils {
 					+ file.getAbsolutePath());
 	}
 
-	public static void unzip(File zipFile, File destFolder) {
+	public static void unzip(final File zipFile, final File destFolder) {
 		try {
 			unzip(new FileInputStream(zipFile), destFolder);
 		} catch (Exception ex) {
 			throw new RuntimeException("Cannot unzip "
-					+ zipFile.getAbsolutePath() + " to " + destFolder.getAbsolutePath(),
-					ex);
+					+ zipFile.getAbsolutePath() + " to "
+					+ destFolder.getAbsolutePath(), ex);
 		}
 	}
 
-	public static void unzip(InputStream input, File destFolder) {
+	public static void unzip(final InputStream input, final File destFolder) {
 		try {
 			byte[] buffer = new byte[4096];
 			int read;
@@ -214,114 +215,176 @@ public final class Utils {
 					+ destFolder.getAbsolutePath(), ex);
 		}
 	}
-	
-	public static void moveAll(File fromFolder, File toFolder) {
+
+	public static void moveAll(final File fromFolder, final File toFolder) {
 		moveAll(fromFolder, toFolder, false, false);
 	}
-	
-	public static void moveAll(File fromFolder, File toFolder, boolean overwrite, boolean clearDestinationFolder) {
-		if(!fromFolder.exists()) throw new RuntimeException("From folder " + fromFolder.getAbsolutePath() + " does not exist");
-		if(!toFolder.exists()) toFolder.mkdirs();
-		else if(clearDestinationFolder) recursiveDelete(toFolder, true);
-		for(File fromFile : fromFolder.listFiles()) {
+
+	public static void moveAll(final File fromFolder, final File toFolder,
+			final boolean overwrite, final boolean clearDestinationFolder) {
+		if (!fromFolder.exists())
+			throw new RuntimeException("From folder "
+					+ fromFolder.getAbsolutePath() + " does not exist");
+		if (!toFolder.exists())
+			toFolder.mkdirs();
+		else if (clearDestinationFolder)
+			recursiveDelete(toFolder, true);
+		for (File fromFile : fromFolder.listFiles()) {
 			File toFile = new File(toFolder, fromFile.getName());
-			if(!clearDestinationFolder && toFile.exists()) {
-				if(overwrite) recursiveDelete(toFile);
-				else continue;
+			if (!clearDestinationFolder && toFile.exists()) {
+				if (overwrite)
+					recursiveDelete(toFile);
+				else
+					continue;
 			}
-			if(!fromFile.renameTo(toFile)) throw new RuntimeException("Cannot rename " + fromFile.getAbsolutePath() + " to " + toFile.getAbsolutePath());
+			if (!fromFile.renameTo(toFile))
+				throw new RuntimeException("Cannot rename "
+						+ fromFile.getAbsolutePath() + " to "
+						+ toFile.getAbsolutePath());
 		}
 	}
-	
-	public static String toString(File file) throws IOException {
+
+	public static String toString(final File file) throws IOException {
 		return toString(file, false, Charset.defaultCharset());
 	}
-	
-	public static String toString(File file, Charset charset) throws IOException {
+
+	public static String toString(final File file, final Charset charset)
+			throws IOException {
 		return toString(file, false, charset);
 	}
-	
-	public static String toString(File file, boolean gzip) throws IOException {
+
+	public static String toString(final File file, final boolean gzip) throws IOException {
 		return toString(file, gzip, Charset.defaultCharset());
 	}
-	
-	public static String toString(File file, boolean gzip, Charset charset) throws IOException {
+
+	public static String toString(final File file, final boolean gzip, final Charset charset)
+			throws IOException {
 		InputStream is = new FileInputStream(file);
-		if(gzip) is = new GZIPInputStream(is);
+		if (gzip)
+			is = new GZIPInputStream(is);
 		return toString(is, charset);
 	}
-	
-	public static String toString(InputStream is) throws IOException {
+
+	public static String toString(final InputStream is) throws IOException {
 		return toString(is, Charset.defaultCharset());
 	}
-	
-	public static String toString(InputStream is, Charset charset) throws IOException {
+
+	public static String toString(final InputStream is, final Charset charset)
+			throws IOException {
 		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is, charset));
-			char[] buffer = new char[8192];
-			StringBuilder sb = new StringBuilder();
+			final BufferedReader reader = new BufferedReader(new InputStreamReader(
+					is, charset));
+			final char[] buffer = new char[8192];
+			final StringBuilder sb = new StringBuilder();
 			int read;
-			while((read = reader.read(buffer, 0, buffer.length)) != -1) {
+			while ((read = reader.read(buffer, 0, buffer.length)) != -1) {
 				sb.append(buffer, 0, read);
 			}
 			return sb.toString();
-		}
-		finally {
+		} finally {
 			is.close();
 		}
 	}
-	
-	public static void toFile(String str, File file) throws IOException {
+
+	public static void toFile(final String str, final File file) throws IOException {
 		toFile(str, file, false, Charset.defaultCharset());
 	}
-	
-	public static void toFile(String str, File file, Charset charset) throws IOException {
+
+	public static void toFile(final String str, final File file, final Charset charset)
+			throws IOException {
 		toFile(str, file, false, charset);
 	}
-	
-	public static void toFile(String str, File file, boolean gzip) throws IOException {
+
+	public static void toFile(final String str, final File file, final boolean gzip)
+			throws IOException {
 		toFile(str, file, gzip, Charset.defaultCharset());
 	}
-	
-	public static void toFile(String str, File file, boolean gzip, Charset charset) throws IOException {
+
+	public static void toFile(final String str, final File file, final boolean gzip,
+			final Charset charset) throws IOException {
 		OutputStream stream = new FileOutputStream(file);
-		if(gzip) stream = new GZIPOutputStream(stream);
+		if (gzip)
+			stream = new GZIPOutputStream(stream);
 		toStream(str, stream, charset);
 	}
 	
-	public static void toStream(String str, OutputStream stream) throws IOException {
+	public static void toFile(final InputStream is, final File file) throws IOException {
+		toFile(is, file, false);
+	}
+
+	public static void toFile(final InputStream is, final File file, final boolean gzip)
+			throws IOException {
+		OutputStream os = new FileOutputStream(file);
+		if (gzip)
+			os = new GZIPOutputStream(os);
+		try {
+			toStream(is, os);
+		} finally {
+			os.flush();
+			os.close();
+		}
+	}
+
+	public static void toStream(final String str, final OutputStream stream)
+			throws IOException {
 		toStream(str, stream, Charset.defaultCharset());
 	}
-	
-	public static void toStream(String str, OutputStream stream, Charset charset) throws IOException {
-		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stream, charset));
+
+	public static void toStream(final String str, final OutputStream stream, final Charset charset)
+			throws IOException {
+		final BufferedWriter writer = new BufferedWriter(
+				new OutputStreamWriter(stream, charset));
 		try {
 			writer.write(str);
-		}
-		finally {
+		} finally {
 			writer.flush();
 			writer.close();
 		}
 	}
-	
-	public static String dumpFolder(File folder) {
-		if(!folder.isDirectory()) throw new IllegalArgumentException("folder must be a directory");
-		StringBuilder sb = new StringBuilder();
+
+	public static void toStream(final InputStream is, final OutputStream os)
+			throws IOException {
+		final int len = 4096;
+		final byte[] buffer = new byte[len];
+		int read;
+		try {
+			while ((read = is.read(buffer, 0, len)) != -1) {
+				os.write(buffer, 0, read);
+			}
+		} finally {
+			// close the inputstream (which is read to end) but not the output
+			// stream, which can still be used
+			is.close();
+		}
+	}
+
+	public static String dumpFolder(final File folder) {
+		if (!folder.isDirectory())
+			throw new IllegalArgumentException("folder must be a directory");
+		final StringBuilder sb = new StringBuilder();
 		dumpFolderRecursive(folder, sb, 0);
 		return sb.toString();
 	}
-	
-	private static void dumpFolderRecursive(File folder, StringBuilder sb, int level) {
-		for(int i=0; i < level; i++) sb.append("\t");
+
+	private static void dumpFolderRecursive(final File folder, final StringBuilder sb,
+			final int level) {
+		for (int i = 0; i < level; i++)
+			sb.append("\t");
 		sb.append(folder.getName());
 		sb.append("\n");
-		for(File file : folder.listFiles()) {
-			if(file.isDirectory()) dumpFolderRecursive(file, sb, level + 1);
+		for (File file : folder.listFiles()) {
+			if (file.isDirectory())
+				dumpFolderRecursive(file, sb, level + 1);
 			else {
-				for(int i=0; i <= level; i++) sb.append("\t");
+				for (int i = 0; i <= level; i++)
+					sb.append("\t");
 				sb.append(file.getName());
 				sb.append("\n");
 			}
 		}
+	}
+	
+	public static String getFilenameFromBSSID(final String BSSID) {
+		return BSSID.replaceAll(":", "_");
 	}
 }
