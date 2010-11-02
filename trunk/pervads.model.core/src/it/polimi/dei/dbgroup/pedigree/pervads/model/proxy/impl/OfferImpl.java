@@ -27,45 +27,70 @@ public class OfferImpl extends PervADsModelEntityImpl implements Offer {
 
 	@Override
 	public List<String> getAttachedImages() {
-		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedImage);
+		return ModelUtils.listStringProperties(getOfferIndividual(),
+				PervADsModel.hasAttachedImage);
 	}
 
 	@Override
 	public List<String> getAttachedMedia() {
-		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedMedia);
+		return ModelUtils.listStringProperties(getOfferIndividual(),
+				PervADsModel.hasAttachedMedia);
 	}
 
 	@Override
 	public List<String> getAttachedVideos() {
-		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasAttachedVideo);
+		return ModelUtils.listStringProperties(getOfferIndividual(),
+				PervADsModel.hasAttachedVideo);
 	}
 
 	@Override
-	public List<String> getDetailCoupons() {
-		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasDetailCoupon);
+	public String getDetailCoupon() {
+		return ModelUtils.getStringProperty(getOfferIndividual(),
+				PervADsModel.hasDetailCoupon, ModelUtils.getDefaultLanguage(),
+				true);
+	}
+
+	@Override
+	public String getDetailCoupon(String lang) {
+		return ModelUtils.getStringProperty(getOfferIndividual(),
+				PervADsModel.hasDetailCoupon, lang);
+	}
+
+	@Override
+	public String getListCoupon() {
+		return ModelUtils.getStringProperty(getOfferIndividual(),
+				PervADsModel.hasListCoupon, ModelUtils.getDefaultLanguage(),
+				true);
+	}
+
+	@Override
+	public String getListCoupon(String lang) {
+		return ModelUtils.getStringProperty(getOfferIndividual(),
+				PervADsModel.hasListCoupon, lang);
 	}
 
 	@Override
 	public List<? extends OfferedItem> getItems() {
 		List<OfferedItem> items = new ArrayList<OfferedItem>();
-		for(ExtendedIterator<RDFNode> it = getProxy().getModel().listObjectsOfProperty(getOfferIndividual(), PervADsModel.offers); it.hasNext();) {
+		for (ExtendedIterator<RDFNode> it = getProxy().getModel()
+				.listObjectsOfProperty(getOfferIndividual(),
+						PervADsModel.offers); it.hasNext();) {
 			RDFNode node = it.next();
-			if(node.isURIResource()) {
+			if (node.isURIResource()) {
 				Resource itemIndividual = (Resource) node;
 				OfferedItem item;
-				if(itemIndividual.hasProperty(RDF.type, PervADsModel.Good)) item = new GoodImpl(getProxy(), itemIndividual, this);
-				else if(itemIndividual.hasProperty(RDF.type, PervADsModel.Service)) item = new ServiceImpl(getProxy(), itemIndividual, this);
-				else item = new OfferedItemImpl(getProxy(), itemIndividual, this);
+				if (itemIndividual.hasProperty(RDF.type, PervADsModel.Good))
+					item = new GoodImpl(getProxy(), itemIndividual, this);
+				else if (itemIndividual.hasProperty(RDF.type,
+						PervADsModel.Service))
+					item = new ServiceImpl(getProxy(), itemIndividual, this);
+				else
+					item = new OfferedItemImpl(getProxy(), itemIndividual, this);
 				items.add(item);
 			}
 		}
-		
-		return items;
-	}
 
-	@Override
-	public List<String> getListCoupons() {
-		return ModelUtils.listStringProperties(getOfferIndividual(), PervADsModel.hasListCoupon);
+		return items;
 	}
 
 	@Override
@@ -80,12 +105,14 @@ public class OfferImpl extends PervADsModelEntityImpl implements Offer {
 
 	@Override
 	public Date getValidFrom() {
-		return ModelUtils.getDateProperty(getOfferIndividual(), PervADsModel.validFrom);
+		return ModelUtils.getDateProperty(getOfferIndividual(),
+				PervADsModel.validFrom);
 	}
 
 	@Override
 	public Date getValidUntil() {
-		return ModelUtils.getDateProperty(getOfferIndividual(), PervADsModel.validUntil);
+		return ModelUtils.getDateProperty(getOfferIndividual(),
+				PervADsModel.validUntil);
 	}
 
 }

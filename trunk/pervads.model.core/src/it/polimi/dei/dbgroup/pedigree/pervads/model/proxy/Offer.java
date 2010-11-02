@@ -21,8 +21,12 @@ public interface Offer extends PervADsModelEntity {
 	public List<String> getAttachedImages();
 
 	public List<String> getAttachedVideos();
+	
+	public String getListCoupon(String lang);
+	
+	public String getListCoupon();
 
-	public List<String> getListCoupons();
-
-	public List<String> getDetailCoupons();
+	public String getDetailCoupon(String lang);
+	
+	public String getDetailCoupon();
 }
