@@ -1,4 +1,4 @@
-package it.polimi.dei.dbgroup.pedigree.pervads.client.android.query;
+package it.polimi.dei.dbgroup.pedigree.pervads.client.android.data;
 
 import java.io.InputStream;
 

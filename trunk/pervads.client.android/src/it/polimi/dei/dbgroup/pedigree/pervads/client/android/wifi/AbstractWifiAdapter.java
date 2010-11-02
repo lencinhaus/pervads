@@ -28,9 +28,6 @@ public abstract class AbstractWifiAdapter implements IWifiAdapter {
 	public abstract void connect(WifiNetwork network) throws WifiAdapterException;
 
 	@Override
-	public abstract void disconnect() throws WifiAdapterException;
-
-	@Override
 	public abstract WifiNetwork[] getReachableNetworks() throws WifiAdapterException;
 
 	@Override

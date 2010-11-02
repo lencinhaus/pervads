@@ -5,6 +5,4 @@ public interface IWifiAdapterListener {
 	public void scanFailed(WifiAdapterException ex);
 	public void connectionCompleted();
 	public void connectionFailed(WifiAdapterException ex);
-	public void disconnectionCompleted();
-	public void disconnectionFailed(WifiAdapterException ex);
 }

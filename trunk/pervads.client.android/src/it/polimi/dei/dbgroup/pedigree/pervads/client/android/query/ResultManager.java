@@ -35,7 +35,11 @@ public class ResultManager extends SerializedDataManager<List<QueryResult>> {
 
 	@Override
 	protected void initializeXStream(XStream xstream) {
-		// TODO class aliases
+		xstream.alias("result", QueryResult.class);
+		xstream.alias("matching", MatchingPervAD.class);
+		xstream.alias("assignmentMatching", LightweightAssignmentMatching.class);
+		xstream.alias("assignment", LightweightAssignment.class);
+		xstream.alias("pervad", LightweightPervAD.class);
 	}
 
 }

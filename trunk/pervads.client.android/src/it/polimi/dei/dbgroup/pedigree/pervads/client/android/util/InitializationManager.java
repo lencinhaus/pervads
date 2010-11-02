@@ -9,34 +9,34 @@ import android.os.AsyncTask;
 public class InitializationManager {
 	private static final Logger L = new Logger(InitializationManager.class
 			.getSimpleName());
-	
+
 	private static final ProgressMonitor MockProgressMonitor = new ProgressMonitor() {
-		
+
 		@Override
 		public void progress(int progress) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void message(int messageId) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void message(String message) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void max(int max) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void indeterminate(boolean indeterminate) {
 			// do nothing
 		}
-		
+
 		@Override
 		public void increment(int by) {
 			// do nothing
@@ -125,12 +125,11 @@ public class InitializationManager {
 
 			@Override
 			public void apply(ProgressDialog dialog) {
-				if(dialog.isIndeterminate() && !indeterminate) {
+				if (dialog.isIndeterminate() && !indeterminate) {
 					dialog.setIndeterminate(false);
 					dialog.setMax(1);
 					dialog.setProgress(0);
-				}
-				else if(!dialog.isIndeterminate() && indeterminate) {
+				} else if (!dialog.isIndeterminate() && indeterminate) {
 					dialog.setIndeterminate(true);
 					dialog.setMax(1);
 					dialog.setProgress(1);
@@ -185,8 +184,6 @@ public class InitializationManager {
 
 		};
 
-		private final Logger L = new Logger(Initializer.class.getSimpleName());
-
 		private ProgressDialog dialog;
 
 		public Initializer(ProgressDialog dialog) {
@@ -196,15 +193,8 @@ public class InitializationManager {
 		@Override
 		protected InitializerParams doInBackground(InitializerParams... params2) {
 			InitializerParams params = params2[0];
-			for (Initializable initializable : params.initializables) {
-				if (!initializable.isInitialized(params.context)) {
-					L.d("initializing "
-							+ initializable.getClass().getSimpleName());
-					initializable.initialize(params.context, monitor);
-					L.d("initialized "
-							+ initializable.getClass().getSimpleName());
-				}
-			}
+			initialize(params.context, monitor, params.initializables);
+
 			return params;
 		}
 
@@ -221,7 +211,8 @@ public class InitializationManager {
 		@Override
 		protected void onPostExecute(InitializerParams result) {
 			super.onPostExecute(result);
-			if(dialog != null) dialog.dismiss();
+			if (dialog != null)
+				dialog.dismiss();
 			initializer = null;
 			if (result.listener != null)
 				result.listener.onFinish();
@@ -230,10 +221,10 @@ public class InitializationManager {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			if(dialog != null) dialog.show();
+			if (dialog != null)
+				dialog.show();
 		}
 
-		
 	}
 
 	private static Initializer initializer = null;
@@ -250,29 +241,33 @@ public class InitializationManager {
 		}
 		return true;
 	}
-	
-	public static void initializeAsync(Context context, Initializable... initializables) {
+
+	public static void initializeAsync(Context context,
+			Initializable... initializables) {
 		initializeAsync(context, null, initializables);
 	}
-	
-	public static void initializeAsync(Context context, boolean showDialog, Initializable... initializables) {
+
+	public static void initializeAsync(Context context, boolean showDialog,
+			Initializable... initializables) {
 		initializeAsync(context, null, showDialog, initializables);
 	}
-	
-	public static void initializeAsync(Context context, OnFinishListener listener,
-			Initializable... initializables) {
+
+	public static void initializeAsync(Context context,
+			OnFinishListener listener, Initializable... initializables) {
 		boolean showDialog = false;
-		if(context instanceof Activity) showDialog = true;
+		if (context instanceof Activity)
+			showDialog = true;
 		initializeAsync(context, listener, showDialog, initializables);
 	}
 
-	public static void initializeAsync(Context context, OnFinishListener listener, boolean showDialog,
+	public static void initializeAsync(Context context,
+			OnFinishListener listener, boolean showDialog,
 			Initializable... initializables) {
 		if (initializer != null) {
 			throw new RuntimeException(
 					"initialize called while initializer was still running");
 		}
-		
+
 		if (initializables.length == 0
 				|| areInitialized(context, initializables)) {
 			L.d("not initializing " + formatInitializables(initializables)
@@ -284,7 +279,8 @@ public class InitializationManager {
 
 		L.d("creating initializer task");
 		ProgressDialog dialog = null;
-		if(showDialog) dialog = new InitializationProgressDialog(context);
+		if (showDialog)
+			dialog = new InitializationProgressDialog(context);
 		InitializerParams params = new InitializerParams(context, listener,
 				initializables);
 		initializer = new Initializer(dialog);
@@ -293,10 +289,19 @@ public class InitializationManager {
 				+ formatInitializables(initializables));
 		initializer.execute(params);
 	}
-	
-	public static void initializeSync(Context context, Initializable... initializables) {
-		for(Initializable initializable : initializables) {
-			if(!initializable.isInitialized(context)) initializable.initialize(context, MockProgressMonitor);
+
+	public static void initializeSync(Context context,
+			Initializable... initializables) {
+		initialize(context, MockProgressMonitor, initializables);
+	}
+
+	private static void initialize(Context context, ProgressMonitor monitor,
+			Initializable... initializables) {
+		for (Initializable initializable : initializables) {
+			L.d("initializing " + initializable.getClass().getSimpleName());
+			if (!initializable.isInitialized(context))
+				initializable.initialize(context, monitor);
+			L.d("initialized " + initializable.getClass().getSimpleName());
 		}
 	}
 

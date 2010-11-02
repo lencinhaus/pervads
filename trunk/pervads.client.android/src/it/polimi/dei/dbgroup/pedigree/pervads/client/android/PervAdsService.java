@@ -1,11 +1,14 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.AttachedMediaManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.HotspotAttachedMediaManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.HotspotClient;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.ServerDataManager;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.ServerDataSource;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.preference.Settings;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.QueryResult;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ResultBuilder;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ResultManager;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ServerDataManager;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ServerDataSource;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
@@ -19,18 +22,8 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.android.Androi
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.windows.WindowsNativeWifiAdapter;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.io.InputStream;
 import java.util.Iterator;
-
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -44,13 +37,135 @@ import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.text.Html;
-import android.text.TextUtils;
 
 public class PervAdsService extends Service implements IWifiAdapterListener {
-	private static final Logger L = new Logger(PervAdsService.class
-			.getSimpleName());
+	private interface IListenerNotifier {
+		public void notifyListener(IPervAdsServiceListener listener)
+				throws RemoteException;
+	}
+
+	private final Runnable updateRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			if (Logger.D)
+				L.d("update started");
+
+			// notify listeners about update start
+			postUpdateNotification(EventTypes.Started);
+			lastUpdateStartTime = System.currentTimeMillis();
+
+			// initialize result builder
+			if (Logger.D)
+				L.d("initializing result builder");
+			ResultBuilder resultBuilder = ResultBuilder.getInstance();
+			InitializationManager.initializeSync(PervAdsService.this,
+					resultBuilder);
+
+			// check if the result builder can actually build any results (is
+			// there an enabled query?)
+			if (!resultBuilder.start()) {
+				// no results can be built, no need to perform a network scan
+				// stop the update now
+				if (Logger.D)
+					L
+							.d("Result builder has no queries, completing update immediately");
+				updateCompleted();
+				return;
+			}
+
+			if (adapter == null) {
+				if (Logger.D)
+					L.d("no adapter, cannot update");
+				updateFailed();
+				return;
+			}
+
+			if (Logger.D)
+				L.d("checking if adapter is enabled");
+			try {
+				if (!adapter.isEnabled()) {
+					if (Logger.D)
+						L.d("adapter is not enabled");
+					updateFailed();
+					return;
+				}
+			} catch (WifiAdapterException ex) {
+				logAdapterException(ex,
+						"an error occurred while checking if adapter was enabled");
+				updateFailed();
+				return;
+			}
+
+			if (Logger.D)
+				L.d("starting adapter session");
+			try {
+				adapter.startSession();
+				if (Logger.D)
+					L.d("adapter session started");
+			} catch (WifiAdapterException ex) {
+				logAdapterException(ex,
+						"an error occurred while starting an adapter session");
+				updateFailed();
+				return;
+			}
+			if (Logger.D)
+				L.d("starting network scan");
+
+			try {
+				adapter.startNetworkScan();
+			} catch (WifiAdapterException ex) {
+				logAdapterException(ex,
+						"an error occurred while starting a network scan");
+				updateFailed();
+				return;
+			}
+
+			if (Logger.D)
+				L.d("network scan started");
+
+			// notify listeners about network scan start
+			postNetworkScanNotification(EventTypes.Started, 0);
+		}
+	};
+
+	private final Runnable connectionRunnable = new Runnable() {
+
+		@Override
+		public void run() {
+			while (++currentNetworkId < networks.length) {
+				final WifiNetwork network = networks[currentNetworkId];
+				final String networkName = network.getSSID();
+
+				// notify listeners about connection start
+				postNetworkConnectionEvent(EventTypes.Started, networkName);
+
+				try {
+					if (Logger.D)
+						L.d("trying to connect to network " + networkName);
+					network.setPassword(choosePassword(network.getSecurity()));
+					adapter.connect(network);
+					break;
+				} catch (WifiAdapterException ex) {
+					logAdapterException(ex,
+							"an error occurred while connecting to network "
+									+ networkName, true);
+
+					// notify listeners about connection fail
+					postNetworkConnectionEvent(EventTypes.Failed, networkName);
+				}
+			}
+			if (currentNetworkId == networks.length) {
+				// we have finished connecting, complete the update
+				updateCompleted();
+			}
+		}
+	};
+
+	private final Logger L = new Logger(PervAdsService.class.getSimpleName());
+	private static final String PERVADS_DATA_FILE_NAME = "pervads.owl";
 	public static final int PERVADS_NOTIFICATION_ID = 1;
-	public static final String IGNORE_AUTO_UPDATE_EXTRA = "ignoreAutoUpdate";
+	public static final String IGNORE_AUTO_UPDATE_EXTRA = "it.polimi.dei.dbgroup.pedigree.pervads.client.android.PervAdsService.ignoreAutoUpdate";
 	public static final String SERVICE_STARTED_ACTION = "it.polimi.dei.dbgroup.pedigree.pervads.service_started";
 	public static final String SERVICE_STOPPED_ACTION = "it.polimi.dei.dbgroup.pedigree.pervads.service_stopped";
 
@@ -59,8 +174,10 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 	private static final Intent SERVICE_STOPPED_INTENT = new Intent(
 			SERVICE_STOPPED_ACTION);
 
-	private static final int CONNECT_TO_NEXT_NETWORK_MESSAGE = 1;
-	private static final int START_UPDATE_MESSAGE = 2;
+	// Handler message codes
+	private static final int START_UPDATE_MESSAGE = 1;
+	private static final int NOTIFY_LISTENERS_MESSAGE = 2;
+	private static final int CONNECT_TO_NEXT_NETWORK_MESSAGE = 3;
 
 	private RemoteCallbackList<IPervAdsServiceListener> listeners = new RemoteCallbackList<IPervAdsServiceListener>();
 
@@ -91,10 +208,14 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 				case CONNECT_TO_NEXT_NETWORK_MESSAGE:
-					connectToNextNetwork();
+					new Thread(connectionRunnable).start();
 					break;
 				case START_UPDATE_MESSAGE:
 					startUpdate();
+					break;
+				case NOTIFY_LISTENERS_MESSAGE:
+					IListenerNotifier notifier = (IListenerNotifier) msg.obj;
+					fireNotification(notifier);
 					break;
 				default:
 					super.handleMessage(msg);
@@ -148,25 +269,23 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		try {
 			networks = adapter.getReachableNetworks();
 		} catch (WifiAdapterException ex) {
-			logAdapterException(ex,
-					"an error occurred while retrieving reachable networks");
-			fireNetworkScanEvent(EventTypes.Failed, 0);
-			updateFailed();
+			scanFailed(ex);
 			return;
 		}
 
 		int numFoundNetworks = networks.length;
 
-		if (Config.TESTING_BEHAVIOR) {
-			numFoundNetworks = 0;
-			for (WifiNetwork network : networks) {
-				if (Config.TESTING_SSID.equals(network.getSSID()))
-					numFoundNetworks++;
-			}
-		}
+		// disabled, connect to all reachable networks even in testing behavior
+//		if (Config.TESTING_BEHAVIOR) {
+//			numFoundNetworks = 0;
+//			for (WifiNetwork network : networks) {
+//				if (Config.TESTING_SSID.equals(network.getSSID()))
+//					numFoundNetworks++;
+//			}
+//		}
 
 		// notify listeners about scan completed
-		fireNetworkScanEvent(EventTypes.Completed, numFoundNetworks);
+		postNetworkScanNotification(EventTypes.Completed, numFoundNetworks);
 
 		// start server data manager update
 		serverDataManager.startUpdate();
@@ -179,23 +298,11 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 	}
 
 	@Override
-	public void disconnectionCompleted() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void disconnectionFailed(WifiAdapterException ex) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void scanFailed(WifiAdapterException ex) {
 		logAdapterException(ex, "an error occurred during network scan");
 
 		// notify listeners about scan fail
-		fireNetworkScanEvent(EventTypes.Failed, 0);
+		postNetworkScanNotification(EventTypes.Failed, 0);
 
 		updateFailed();
 	}
@@ -207,7 +314,7 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 				+ " failed", true);
 
 		// notify listeners about connection fail
-		fireNetworkConnectionEvent(EventTypes.Failed, networkName);
+		postNetworkConnectionEvent(EventTypes.Failed, networkName);
 
 		handler.sendEmptyMessage(CONNECT_TO_NEXT_NETWORK_MESSAGE);
 	}
@@ -219,71 +326,58 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		if (Logger.D)
 			L.d("connection to network " + networkName + " completed");
 
-		// notify listeners about connection completed
-		fireNetworkConnectionEvent(EventTypes.Completed, networkName);
-
 		// use BSSID as network univoque id
 		final String networkId = network.getBSSID();
 
-		// download content from gateway
-
+		// read connection data for this network
 		try {
-			int gateway = 0;
-
-			if (Config.TESTING_BEHAVIOR) {
-				gateway = Config.TESTING_GATEWAY;
-			} else {
-				L.d("retrieving connection data for network " + networkName);
-				ConnectionInfo info = adapter.getConnectionInfo();
-				L.d("connection data retrieved for network " + networkName);
-				gateway = info.getGateway();
-			}
-
-			HttpParams params = new BasicHttpParams();
-			HttpConnectionParams.setConnectionTimeout(params, 5000);
-			HttpConnectionParams.setSoTimeout(params, 5000);
-			HttpClient client = new DefaultHttpClient(params);
-			String uri = "http://" + Utils.formatIPAddress(gateway)
-					+ "/pervads.owl";
-
 			if (Logger.D)
-				L.d("sending a pervad request on URI " + uri + " to network "
-						+ networkName);
-			try {
-				HttpGet request = new HttpGet(uri);
-				HttpResponse response = client.execute(request);
-				HttpEntity entity = response.getEntity();
-				if (entity != null) {
-					String encoding = null;
-					Header encHeader = entity.getContentEncoding();
-					if (encHeader != null) {
-						encoding = encHeader.getValue();
+				L.d("reading connection data for network " + networkName);
+			ConnectionInfo connection = adapter.getConnectionInfo();
+			if (connection != null) {
+				if (Logger.D)
+					L.d("downloading content for network " + networkName);
+				// download content from gateway
+				HotspotClient client = HotspotClient.createFromConnection(connection);
+				InputStream dataStream = client
+						.download(PERVADS_DATA_FILE_NAME);
+				if (dataStream != null) {
+					if (Logger.D)
+						L.d("processing content for network " + networkName);
+
+					String networkFileName = Utils.getFilenameFromBSSID(networkId);
+					// create an attached media manager for this network
+					AttachedMediaManager mediaManager = new HotspotAttachedMediaManager(
+							this, networkFileName, client);
+
+					// add the content to server data manager
+					ServerDataSource source = serverDataManager.addData(
+							networkFileName, dataStream);
+
+					// process it with result builder
+					boolean processed = ResultBuilder.getInstance()
+							.processContent(source.getStream(), mediaManager);
+
+					try {
+						dataStream.close();
+					} catch (IOException ex) {
+						L.w("Cannot close content data stream for network "
+								+ networkName, ex);
 					}
 
-					if (Logger.D)
-						L.d("received a response with "
-								+ (TextUtils.isEmpty(encoding) ? "undefined"
-										: encoding)
-								+ " encoding, reading content");
-					Charset charset = Charset.defaultCharset();
-					if (!TextUtils.isEmpty(encoding)
-							&& Charset.isSupported(encoding))
-						charset = Charset.forName(encoding);
-					String content = Utils.toString(entity.getContent(),
-							charset);
-
-					if (Logger.D)
-						L
-								.d("response content read, adding data to server data manager");
-
-					// add content to server data manager
-					serverDataManager.addData(networkId, content);
+					if (!processed) {
+						// the data is unprocessable, we can remove it from
+						// server data manager
+						serverDataManager.removeData(source.getKey());
+						if (Logger.W)
+							L.w("cannot process content for network "
+									+ networkName);
+					}
+				} else {
+					if (Logger.W)
+						L.w("cannot download content for network "
+								+ networkName);
 				}
-			} catch (Exception ex) {
-				if (Logger.W)
-					L.w(
-							"an error occurred while sending a pervad request on URI "
-									+ uri + " to network " + networkName, ex);
 			}
 		} catch (WifiAdapterException ex) {
 			logAdapterException(ex,
@@ -291,49 +385,10 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 							+ networkName, true);
 		}
 
+		// notify listeners about connection completed
+		postNetworkConnectionEvent(EventTypes.Completed, networkName);
+
 		handler.sendEmptyMessage(CONNECT_TO_NEXT_NETWORK_MESSAGE);
-	}
-
-	private void connectToNextNetwork() {
-		while (++currentNetworkId < networks.length) {
-			final WifiNetwork network = networks[currentNetworkId];
-			final String networkName = network.getSSID();
-
-			if (Config.TESTING_BEHAVIOR) {
-				if (!Config.TESTING_SSID.equalsIgnoreCase(networkName))
-					continue;
-			}
-
-			// notify listeners about connection start
-			fireNetworkConnectionEvent(EventTypes.Started, networkName);
-
-			try {
-				if (Logger.D)
-					L.d("trying to connect to network " + networkName);
-				network.setPassword(choosePassword(network.getSecurity()));
-				adapter.connect(network);
-				break;
-			} catch (WifiAdapterException ex) {
-				logAdapterException(ex,
-						"an error occurred while connecting to network "
-								+ networkName, true);
-
-				// notify listeners about connection fail
-				fireNetworkConnectionEvent(EventTypes.Failed, networkName);
-			}
-		}
-		if (currentNetworkId == networks.length) {
-			// TODO removed: this should be done in adapter's endSession
-			// we finished our update
-			// if current is not null, reconnect to that network
-			// if (current != null) {
-			// if (!adapter.connect(current))
-			// Log.w(TAG, "cannot reconnect to original network "
-			// + current.getSSID());
-			// }
-
-			updateCompleted();
-		}
 	}
 
 	private static final String choosePassword(WifiSecurity sec) {
@@ -349,68 +404,59 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		return Config.WPA_PSK_PASSWORD;
 	}
 
+	private void processCachedServerData() {
+		int count = serverDataManager.countUnmodifiedData();
+		if (Logger.D)
+			L.d("processing " + count + " cached data");
+		// notify listeners
+		postCachedDataCountEvent(count);
+
+		Iterator<ServerDataSource> it = serverDataManager.getUnmodifiedData();
+		ResultBuilder resultBuilder = ResultBuilder.getInstance();
+		while (it.hasNext()) {
+			ServerDataSource source = it.next();
+			if (Logger.D)
+				L.d("starting processing data for source " + source.getKey());
+
+			// notify listeners
+			postCachedDataProcessingEvent(EventTypes.Started);
+
+			InputStream dataStream = source.getStream();
+			boolean processed = resultBuilder.processContent(dataStream,
+					AttachedMediaManager.Offline);
+			try {
+				dataStream.close();
+			} catch (IOException ex) {
+				if (Logger.W)
+					L.w("cannot close server data stream for source "
+							+ source.getKey(), ex);
+			}
+			if (!processed) {
+				if (Logger.W)
+					L.w("cannot process data for source " + source.getKey()
+							+ ", removing it from server data cache");
+
+				it.remove();
+
+				// notify listeners
+				postCachedDataProcessingEvent(EventTypes.Failed);
+			} else {
+				if (Logger.D)
+					L.d("finished processing data for source "
+							+ source.getKey());
+				// notify listeners
+				postCachedDataProcessingEvent(EventTypes.Completed);
+			}
+		}
+	}
+
 	public synchronized boolean startUpdate() {
 		if (updating)
 			return false;
 
-		// notify listeners about update start
-		fireUpdateEvent(EventTypes.Started);
-
 		updating = true;
-		lastUpdateStartTime = System.currentTimeMillis();
 
-		if (Logger.D)
-			L.d("starting update");
-		if (adapter == null) {
-			if (Logger.D)
-				L.d("no adapter, cannot start update");
-			return false;
-		}
-		if (Logger.D)
-			L.d("checking if adapter is enabled");
-		try {
-			if (!adapter.isEnabled()) {
-				if (Logger.D)
-					L.d("adapter is not enabled");
-				return false;
-			} else {
-				if (Logger.D)
-					L.d("adapter is enabled");
-			}
-		} catch (WifiAdapterException ex) {
-			logAdapterException(ex,
-					"an error occurred while checking if adapter is enabled");
-			return false;
-		}
-		if (Logger.D)
-			L.d("starting adapter session");
-		try {
-			adapter.startSession();
-			if (Logger.D)
-				L.d("adapter session started");
-		} catch (WifiAdapterException ex) {
-			logAdapterException(ex,
-					"an error occurred while starting an adapter session");
-			return false;
-		}
-		if (Logger.D)
-			L.d("starting network scan");
-
-		try {
-			adapter.startNetworkScan();
-
-			// notify listeners about network scan start
-			fireNetworkScanEvent(EventTypes.Started, 0);
-			if (Logger.D)
-				L.d("network scan started");
-		} catch (WifiAdapterException ex) {
-			logAdapterException(ex,
-					"an error occurred while starting a network scan");
-			return false;
-		}
-		if (Logger.D)
-			L.d("update started");
-
+		new Thread(updateRunnable).start();
 		return true;
 	}
 
@@ -425,95 +471,57 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 	}
 
 	private void updateCompleted() {
-		if (Logger.D)
-			L.d("update completed");
-		if (Logger.D)
-			L.d("ending adapter session");
-		// end session
+		finishUpdate(EventTypes.Completed);
+	}
+
+	private void updateFailed() {
+		finishUpdate(EventTypes.Failed);
+	}
+
+	private void finishUpdate(int eventType) {
+		// end adapter session
 		try {
-			adapter.endSession();
-			if (Logger.D)
-				L.d("adapter session ended");
+			if (adapter.isSessionStarted())
+				adapter.endSession();
 		} catch (WifiAdapterException ex) {
 			logAdapterException(ex,
-					"An error occurred while ending adapter session after successful update");
+					"An error occurred while ending adapter session");
 		}
 
-		if (Logger.D)
-			L.d("building results");
+		if (serverDataManager.isUpdating()) {
+			// process cached server data
+			processCachedServerData();
 
-		// build results
-		int numContents = serverDataManager.countData();
-		fireContentProcessingEvent(EventTypes.Started, numContents);
-		ResultManager resultManager = new ResultManager(this);
-		resultManager.clear();
+			// stop updating server data manager
+			serverDataManager.endUpdate();
+		}
 
-		// initialize result builder
+		// stop the result builder and update the results
+		// TODO: check for duplicates, seen pervads etc
 		ResultBuilder resultBuilder = ResultBuilder.getInstance();
-		InitializationManager.initializeSync(this, resultBuilder);
-
-		if (numContents > 0 && resultBuilder.start()) {
-			Iterator<ServerDataSource> contentIterator = serverDataManager
-					.getData();
-			while (contentIterator.hasNext()) {
-				fireResultCreationEvent(EventTypes.Started);
-				ServerDataSource source = contentIterator.next();
-				if (!resultBuilder.processContent(source.getStream())) {
-					L
-							.w("Cannot process content from source "
-									+ source.getKey());
-					contentIterator.remove();
-					fireResultCreationEvent(EventTypes.Failed);
-				} else
-					fireResultCreationEvent(EventTypes.Completed);
-				try {
-					source.getStream().close();
-				} catch (IOException ingored) {
-				}
-			}
+		if (resultBuilder.isStarted()) {
+			ResultManager resultManager = new ResultManager(this);
 			resultManager.setResults(resultBuilder.stop());
 		}
-		fireContentProcessingEvent(EventTypes.Completed, numContents);
-
-		if (Logger.D)
-			L.d("results built");
-
-		// stop updating server data manager
-		serverDataManager.endUpdate();
 
 		// send notifications
 		if (shouldSendNotifications())
 			sendNewPervAdsNotifications();
 
-		onUpdateFinished();
-
-		// notify listeners about update completed
-		fireUpdateEvent(EventTypes.Completed);
-	}
-
-	private void updateFailed() {
-		if (Logger.W)
-			L.w("update failed");
-		// end session
-		try {
-			adapter.endSession();
-		} catch (WifiAdapterException ex) {
-			logAdapterException(ex,
-					"An error occurred while ending adapter session after a failed update");
-		}
-
-		onUpdateFinished();
-
-		// notify listeners about update fail
-		fireUpdateEvent(EventTypes.Failed);
-	}
-
-	private void onUpdateFinished() {
 		updating = false;
 
-		if (shouldAutoPostUpdate()) {
+		if (eventType == EventTypes.Completed)
+			if (Logger.D)
+				L.d("update completed");
+			else if (Logger.W)
+				L.w("update failed");
+
+		// notify listeners about update conclusion
+		postUpdateNotification(eventType);
+
+		// post the next update if needed
+		if (shouldAutoPostUpdate())
 			postNextUpdate();
-		}
 	}
 
 	private boolean shouldAutoPostUpdate() {
@@ -610,25 +618,27 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 	}
 
 	private void postNextUpdate() {
-		if (Logger.V)
-			L.v("postNextUpdate()");
+		if (shouldAutoPostUpdate()) {
+			if (Logger.V)
+				L.v("postNextUpdate()");
 
-		long elapsedTime = System.currentTimeMillis() - lastUpdateStartTime;
-		long interval = ((long) settings.getUpdateInterval()) * 60000L; // from
-		// minutes
-		// to
-		// milliseconds
-		if (elapsedTime < interval) {
-			// delay the update
-			long delay = interval - elapsedTime;
-			if (Logger.D)
-				L.d("posting a delayed update (delay " + delay + " ms)");
-			handler.sendEmptyMessageDelayed(START_UPDATE_MESSAGE, delay);
-		} else {
-			// instantly start the update
-			if (Logger.D)
-				L.d("posting an immediate update");
-			handler.sendEmptyMessage(START_UPDATE_MESSAGE);
+			long elapsedTime = System.currentTimeMillis() - lastUpdateStartTime;
+			long interval = ((long) settings.getUpdateInterval()) * 60000L; // from
+			// minutes
+			// to
+			// milliseconds
+			if (elapsedTime < interval) {
+				// delay the update
+				long delay = interval - elapsedTime;
+				if (Logger.D)
+					L.d("posting a delayed update (delay " + delay + " ms)");
+				handler.sendEmptyMessageDelayed(START_UPDATE_MESSAGE, delay);
+			} else {
+				// instantly start the update
+				if (Logger.D)
+					L.d("posting an immediate update");
+				handler.sendEmptyMessage(START_UPDATE_MESSAGE);
+			}
 		}
 	}
 
@@ -815,100 +825,87 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 		String fullMessage = message;
 		if (adapter != null)
 			fullMessage += ". Adapter: " + adapter.getClass().getName();
-		if (isWarning)
+		if (isWarning && Logger.W) {
 			if (ex != null)
-				if (Logger.W)
-					L.w(fullMessage, ex);
-				else if (Logger.W)
-					L.w(fullMessage);
-				else if (ex != null)
-					if (Logger.E)
-						L.e(fullMessage, ex);
-					else if (Logger.E)
-						L.e(fullMessage);
-	}
-
-	private void fireUpdateEvent(int eventType) {
-		final int N = listeners.beginBroadcast();
-		for (int i = 0; i < N; i++) {
-			try {
-				listeners.getBroadcastItem(i).updateEvent(eventType);
-			} catch (RemoteException ex) {
-				if (Logger.E)
-					L.e(
-							"an error occurred while notifying listeners about update event (type "
-									+ EventTypes.describe(eventType) + ")", ex);
-			}
+				L.w(fullMessage, ex);
+			else
+				L.w(fullMessage);
+		} else if (Logger.E) {
+			if (ex != null)
+				L.e(fullMessage, ex);
+			else
+				L.e(fullMessage);
 		}
-		listeners.finishBroadcast();
 	}
 
-	private void fireNetworkScanEvent(int eventType, int numFoundNetworks) {
-		final int N = listeners.beginBroadcast();
-		for (int i = 0; i < N; i++) {
-			try {
-				listeners.getBroadcastItem(i).networkScanEvent(eventType,
-						numFoundNetworks);
-			} catch (RemoteException ex) {
-				if (Logger.E)
-					L.e(
-							"an error occurred while notifying listeners about network scan event (type "
-									+ EventTypes.describe(eventType) + ")", ex);
+	private void postUpdateNotification(final int eventType) {
+		postNotification(new IListenerNotifier() {
+			@Override
+			public void notifyListener(IPervAdsServiceListener listener)
+					throws RemoteException {
+				listener.updateEvent(eventType);
 			}
-		}
-		listeners.finishBroadcast();
+		});
 	}
 
-	private void fireNetworkConnectionEvent(int eventType, String SSID) {
-		final int N = listeners.beginBroadcast();
-		for (int i = 0; i < N; i++) {
-			try {
-				listeners.getBroadcastItem(i).networkConnectionEvent(eventType,
-						SSID);
-			} catch (RemoteException ex) {
-				if (Logger.E)
-					L
-							.e(
-									"an error occurred while notifying listeners about network connection event (type "
-											+ EventTypes.describe(eventType)
-											+ ", SSID: " + SSID + ")", ex);
+	private void postNetworkScanNotification(final int eventType,
+			final int numFoundNetworks) {
+		postNotification(new IListenerNotifier() {
+			@Override
+			public void notifyListener(IPervAdsServiceListener listener)
+					throws RemoteException {
+				listener.networkScanEvent(eventType, numFoundNetworks);
 			}
-		}
-		listeners.finishBroadcast();
+		});
 	}
 
-	private void fireContentProcessingEvent(int eventType, int numContents) {
-		final int N = listeners.beginBroadcast();
-		for (int i = 0; i < N; i++) {
-			try {
-				listeners.getBroadcastItem(i).contentProcessingEvent(eventType,
-						numContents);
-			} catch (RemoteException ex) {
-				if (Logger.E)
-					L
-							.e(
-									"an error occurred while notifying listeners about content processing event (type "
-											+ EventTypes.describe(eventType)
-											+ ", num contents: "
-											+ numContents
-											+ ")", ex);
+	private void postNetworkConnectionEvent(final int eventType,
+			final String SSID) {
+		postNotification(new IListenerNotifier() {
+
+			@Override
+			public void notifyListener(IPervAdsServiceListener listener)
+					throws RemoteException {
+				listener.networkConnectionEvent(eventType, SSID);
 			}
-		}
-		listeners.finishBroadcast();
+		});
 	}
 
-	private void fireResultCreationEvent(int eventType) {
+	private void postCachedDataCountEvent(final int count) {
+		postNotification(new IListenerNotifier() {
+
+			@Override
+			public void notifyListener(IPervAdsServiceListener listener)
+					throws RemoteException {
+				listener.cachedDataCountEvent(count);
+			}
+		});
+	}
+
+	private void postCachedDataProcessingEvent(final int eventType) {
+		postNotification(new IListenerNotifier() {
+
+			@Override
+			public void notifyListener(IPervAdsServiceListener listener)
+					throws RemoteException {
+				listener.cachedDataProcessingEvent(eventType);
+			}
+		});
+	}
+
+	private void postNotification(IListenerNotifier notifier) {
+		handler.obtainMessage(NOTIFY_LISTENERS_MESSAGE, notifier)
+				.sendToTarget();
+	}
+
+	private void fireNotification(IListenerNotifier notifier) {
 		final int N = listeners.beginBroadcast();
 		for (int i = 0; i < N; i++) {
 			try {
-				listeners.getBroadcastItem(i).resultCreationEvent(eventType);
+				notifier.notifyListener(listeners.getBroadcastItem(i));
 			} catch (RemoteException ex) {
 				if (Logger.E)
-					L
-							.e(
-									"an error occurred while notifying listeners about result creation event (type "
-											+ EventTypes.describe(eventType)
-											+ ")", ex);
+					L.e("an error occurred while notifying listeners", ex);
 			}
 		}
 		listeners.finishBroadcast();

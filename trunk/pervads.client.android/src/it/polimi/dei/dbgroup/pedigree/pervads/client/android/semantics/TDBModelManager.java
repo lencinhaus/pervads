@@ -18,9 +18,9 @@ import com.hp.hpl.jena.tdb.TDBFactory;
 
 public class TDBModelManager implements Initializable {
 	private static final String CONTEXT_STORE_ARCHIVE_ASSET = "context_model_tdb.zip";
-	private static final String STORE_DIRECTORY_NAME = "store";
 	// private static final String CONTEXT_STORE_ARCHIVE_ASSET =
 	// "dummy_tdb.zip";
+	private static final String STORE_DIRECTORY_NAME = "store";
 	private static TDBModelManager instance = null;
 	private final Logger L = new Logger(TDBModelManager.class.getSimpleName());
 	private Dataset dataset = null;
