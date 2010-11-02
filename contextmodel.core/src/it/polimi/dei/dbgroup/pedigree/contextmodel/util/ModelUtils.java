@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDateTime;
 import com.hp.hpl.jena.rdf.model.Literal;
@@ -261,5 +262,12 @@ public class ModelUtils {
 
 	public static Date getDateProperty(Resource r, Property p) {
 		return getDateProperty(r, p, null);
+	}
+	
+	public static String getDefaultLanguage() {
+		Locale locale = Locale.getDefault();
+		if (locale != null)
+			return locale.getLanguage();
+		return null;
 	}
 }
