@@ -38,20 +38,15 @@ public class NamedEntityImpl extends EntityImpl implements NamedEntity {
 	@Override
 	public String getDescription() {
 		return ModelUtils.getStringProperty(getResource(), descriptionProperty,
-				getDefaultLanguage(), true);
+				ModelUtils.getDefaultLanguage(), true);
 	}
 
 	@Override
 	public String getName() {
 		return ModelUtils.getStringProperty(getResource(), nameProperty,
-				getDefaultLanguage(), true);
+				ModelUtils.getDefaultLanguage(), true);
 	}
 
-	private static String getDefaultLanguage() {
-		Locale locale = Locale.getDefault();
-		if (locale != null)
-			return locale.getLanguage();
-		return null;
-	}
+	
 
 }
