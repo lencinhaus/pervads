@@ -3,21 +3,18 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/contextmodel.core"/>
-	<!-- JENA -->
-		<classpathentry kind="lib" path="/libs/jena/jena-2.6.2.jar" sourcepath="/libs/jena/jena-2.6.2-sources.jar">
-			<attributes>
-				<attribute name="javadoc_location" value="http://jena.sourceforge.net/javadoc"/>
-			</attributes>
-		</classpathentry>
-		<!-- ARQ -->
-		<classpathentry kind="lib" path="/libs/arq/arq-2.8.3.jar" sourcepath="/libs/arq/arq-2.8.3-sources.jar">
-			<attributes>
-				<attribute name="javadoc_location" value="http://jena.sourceforge.net/ARQ/javadoc"/>
-			</attributes>
+	<classpathentry kind="lib" path="/libs/jena/jena-2.6.2.jar" sourcepath="/libs/jena/jena-2.6.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jena.sourceforge.net/javadoc"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/libs/arq/arq-2.8.3.jar" sourcepath="/libs/arq/arq-2.8.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://jena.sourceforge.net/ARQ/javadoc"/>
+		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
 	<classpathentry kind="lib" path="/libs/other/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.4.jar"/>
 	<classpathentry kind="lib" path="/libs/other/lucene-core-2.3.1.jar"/>
 	<classpathentry kind="lib" path="/libs/other/servlet-api-2.4.jar"/>
 	<classpathentry kind="lib" path="/libs/other/slf4j-api-1.5.8.jar"/>
@@ -25,5 +22,6 @@
 	<classpathentry kind="lib" path="/libs/other/wstx-asl-3.2.9.jar"/>
 	<classpathentry kind="lib" path="/libs/other/xercesImpl-2.7.1.jar"/>
 	<classpathentry kind="lib" path="/libs/other/xmlParserAPIs-2.6.1.jar"/>
+	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
