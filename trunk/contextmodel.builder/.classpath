@@ -19,7 +19,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
 	<classpathentry kind="lib" path="/libs/other/activation-1.1.jar"/>
-	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.4.jar"/>
 	<classpathentry kind="lib" path="/libs/other/js-1.6R5.jar"/>
 	<classpathentry kind="lib" path="/libs/other/jtidy-4aug2000r7-dev.jar"/>
 	<classpathentry kind="lib" path="/libs/other/junit-3.8.1.jar"/>
@@ -57,5 +56,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/contextmodel.core/dist/contextmodel.core_0.1.jar" sourcepath="/contextmodel.core/src"/>
+	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
