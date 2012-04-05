@@ -1,0 +1,6 @@
+<categories>
+	<category id="root">
+		<name>Root</name>
+		<reference source="paginegialle" limit="1" />
+	</category>
+</categories>

@@ -7,6 +7,7 @@ public class Category extends Node {
 	private Category parent;
 	private List<Category> subCategories = new ArrayList<Category>();
 	private List<Parameter> parameters = new ArrayList<Parameter>();
+	 
 
 	public Category(String name) {
 		super(name);
@@ -39,31 +40,27 @@ public class Category extends Node {
 	}
 
 	protected void toString(StringBuilder sb, int indent) {
-		for (int i = 0; i < indent; i++) {
-			sb.append("\t");
-		}
-		sb.append(super.toString());
-		sb.append("\n");
+		super.toString(sb, indent);
 		if (parameters.size() > 0) {
-			for (int i = 0; i < indent; i++) {
-				sb.append("\t");
+			for (int i = 0; i <= indent; i++) {
+				sb.append(" ");
 			}
 			sb.append("Parameters:\n");
 			for (Parameter parameter : parameters) {
-				for (int i = 0; i <= indent; i++) {
-					sb.append("\t");
+				for (int i = 0; i <= indent + 1; i++) {
+					sb.append(" ");
 				}
 				sb.append(parameter);
 				sb.append("\n");
 			}
 		}
 		if (subCategories.size() > 0) {
-			for (int i = 0; i < indent; i++) {
-				sb.append("\t");
+			for (int i = 0; i <= indent; i++) {
+				sb.append(" ");
 			}
 			sb.append("Subcategories:\n");
 			for (Category category : subCategories) {
-				category.toString(sb, indent + 1);
+				category.toString(sb, indent + 2);
 			}
 		}
 	}

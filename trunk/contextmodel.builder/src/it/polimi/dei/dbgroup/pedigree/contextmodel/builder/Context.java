@@ -4,23 +4,19 @@ import java.util.List;
 
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.ontology.OntProperty;
 
 public class Context {
 	private List<Category> dimensionCategories;
-	private OntClass dimensionAssignmentClass;
-	private OntProperty dimensionAssignmentProperty;
+	private OntClass actualDimensionClass;
 	private Individual valueIndividual;
 	private String identifier;
 
 	public Context(List<Category> dimensionCategories,
-			OntClass dimensionAssignmentClass,
-			OntProperty dimensionAssignmentProperty,
+			OntClass actualDimensionClass,
 			Individual valueIndividual, String identifier) {
 		super();
 		this.dimensionCategories = dimensionCategories;
-		this.dimensionAssignmentClass = dimensionAssignmentClass;
-		this.dimensionAssignmentProperty = dimensionAssignmentProperty;
+		this.actualDimensionClass = actualDimensionClass;
 		this.valueIndividual = valueIndividual;
 		this.identifier = identifier;
 	}
@@ -29,21 +25,12 @@ public class Context {
 		return dimensionCategories;
 	}
 
-	public OntClass getDimensionAssignmentClass() {
-		return dimensionAssignmentClass;
+	public OntClass getActualDimensionClass() {
+		return actualDimensionClass;
 	}
 
-	public void setDimensionAssignmentClass(OntClass dimensionAssignmentClass) {
-		this.dimensionAssignmentClass = dimensionAssignmentClass;
-	}
-
-	public OntProperty getDimensionAssignmentProperty() {
-		return dimensionAssignmentProperty;
-	}
-
-	public void setDimensionAssignmentProperty(
-			OntProperty dimensionAssignmentProperty) {
-		this.dimensionAssignmentProperty = dimensionAssignmentProperty;
+	public void setActualDimensionClass(OntClass actualDimensionClass) {
+		this.actualDimensionClass = actualDimensionClass;
 	}
 
 	public Individual getValueIndividual() {

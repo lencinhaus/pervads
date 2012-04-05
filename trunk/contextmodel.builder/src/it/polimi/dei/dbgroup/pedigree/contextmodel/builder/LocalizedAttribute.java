@@ -21,6 +21,7 @@ public class LocalizedAttribute {
 	}
 	
 	public void set(String lang, String value) {
+		if(value == null || value.length() == 0) throw new IllegalArgumentException("value cannot be empty");
 		if(lang == null || lang.length() == 0) setDefaultValue(value);
 		else localizedValues.put(lang, value);
 	}

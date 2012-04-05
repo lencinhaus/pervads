@@ -1,0 +1,6 @@
+<categories>
+	<category id="root">
+		<name>Root</name>
+		<reference source="unspsc" limit="3" />
+	</category>
+</categories>

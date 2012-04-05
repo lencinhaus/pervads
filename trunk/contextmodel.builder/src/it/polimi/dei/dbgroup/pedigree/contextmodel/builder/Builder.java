@@ -1,10 +1,8 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration.IncludedModelData;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelFactory;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextMetaModel;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextModel;
-import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsContextModel;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.vocabulary.ContextModelVocabulary;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,13 +11,17 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -27,6 +29,7 @@ import java.util.zip.ZipOutputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang.WordUtils;
 import org.apache.xerces.parsers.SAXParser;
 import org.apache.xml.serialize.OutputFormat;
 import org.apache.xml.serialize.XMLSerializer;
@@ -39,12 +42,17 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.hp.hpl.jena.datatypes.RDFDatatype;
+import com.hp.hpl.jena.datatypes.TypeMapper;
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.graph.Factory;
+import com.hp.hpl.jena.graph.Graph;
+import com.hp.hpl.jena.graph.Triple;
+import com.hp.hpl.jena.graph.compose.MultiUnion;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
-import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
-import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.ontology.OntResource;
 import com.hp.hpl.jena.ontology.Ontology;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -52,6 +60,10 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.RDFList;
 import com.hp.hpl.jena.rdf.model.RDFWriter;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.reasoner.rulesys.BuiltinRegistry;
+import com.hp.hpl.jena.reasoner.rulesys.FBRuleInfGraph;
+import com.hp.hpl.jena.reasoner.rulesys.GenericRuleReasoner;
+import com.hp.hpl.jena.reasoner.rulesys.Rule;
 import com.hp.hpl.jena.shared.UnknownPropertyException;
 import com.hp.hpl.jena.sparql.sse.Item;
 import com.hp.hpl.jena.tdb.TDB;
@@ -59,21 +71,26 @@ import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.tdb.TDBLoader;
 import com.hp.hpl.jena.tdb.solver.stats.StatsCollector;
 import com.hp.hpl.jena.tdb.store.DatasetGraphTDB;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.vocabulary.OWL;
 
+import de.fuberlin.wiwiss.ng4j.NamedGraph;
 import de.fuberlin.wiwiss.ng4j.NamedGraphSet;
+import de.fuberlin.wiwiss.ng4j.impl.NamedGraphImpl;
 import de.fuberlin.wiwiss.ng4j.impl.NamedGraphSetImpl;
 
 public class Builder {
 	public static final String CATEGORIES_FOLDER = "categories";
 	public static final String MODELS_FOLDER = "models";
-
-	private static final String ASSIGNMENT_CLASS_NAME_FORMAT = "Dimension_%s_Assignment";
-	private static final String VALUE_CLASS_NAME_FORMAT = "Dimension_%s_Value";
-	private static final String ASSIGNMENT_PROPERTY_NAME_FORMAT = "dimension_%s_AssignmentValue";
-	private static final String VALUE_INDIVIDUAL_NAME_FORMAT = "value_%s";
-	private static final String DIMENSION_INDIVIDUAL_NAME_FORMAT = "dimension_%s";
-	private static final String PARAMETER_INDIVIDUAL_NAME_FORMAT = "parameter_%s";
-	private static final String CONTEXT_MODEL_NS_PREFIX = "c";
+	public static final String RULESETS_FOLDER = "rulesets";
+	public static final String OWL_SPECIALIZED_RULESET = RULESETS_FOLDER
+			+ "/owl-specialized.rules";
+	private static final String VALUE_CLASS_NAME_FORMAT = "%sValue";
+	private static final String ACTUAL_CLASS_NAME_FORMAT = "Actual%s";
+	private static final String VALUE_INDIVIDUAL_NAME_FORMAT = "value-%s";
+	private static final String DIMENSION_INDIVIDUAL_NAME_FORMAT = "dimension-%s";
+	private static final String PARAMETER_INDIVIDUAL_NAME_FORMAT = "parameter-%s";
+	private static final String CONTEXT_MODEL_VOCABULARY_NS_PREFIX = "c";
 	private static final Map<String, String> LANG_OUTPUT_EXT = new HashMap<String, String>();
 
 	private static final Map<String, String> categorySourceNames = new HashMap<String, String>();
@@ -81,6 +98,7 @@ public class Builder {
 	private BuilderConfiguration config;
 
 	static {
+		// setup category source name shortcuts
 		categorySourceNames
 				.put("paginegialle",
 						"it.polimi.dei.dbgroup.pedigree.contextmodel.builder.sources.PagineGialle");
@@ -88,10 +106,21 @@ public class Builder {
 				.put("unspsc",
 						"it.polimi.dei.dbgroup.pedigree.contextmodel.builder.sources.UNSPSC");
 
+		// setup language-extension mappings
 		LANG_OUTPUT_EXT.put("RDF/XML-ABBREV", "owl");
 		LANG_OUTPUT_EXT.put("RDF/XML", "owl");
 		LANG_OUTPUT_EXT.put("N3", "n3");
 		LANG_OUTPUT_EXT.put("N-TRIPLE", "ntriple");
+
+		// register the MakeSkolem builtin
+		BuiltinRegistry.theRegistry.register(new MakeSkolem());
+	}
+
+	private static final class EntityCountReport {
+		public int categories = 0;
+		public int dimensions = 0;
+		public int values = 0;
+		public int parameters = 0;
 	}
 
 	public Builder(BuilderConfiguration config) {
@@ -101,20 +130,82 @@ public class Builder {
 	public void run() {
 		try {
 			// deserialize categories (parsing possible references)
-			p("Deserializing categories...");
+			pln("Deserializing categories...");
 			List<Category> categories = deserializeCategories(getDestinationFile(
 					config.getCategoriesFileName(), CATEGORIES_FOLDER, null));
 
+			// dump categories
+			for (Category cat : categories) {
+				p(cat.toString());
+			}
+
+			// count entities
+			EntityCountReport report = countEntites(categories);
+			pln("Categories: " + report.categories);
+			pln("Dimensions: " + report.dimensions);
+			pln("Values: " + report.values);
+			pln("Parameters: " + report.parameters);
+
 			// build model
-			p("Building model...");
-			OntModel model = buildModel(categories);
+			pln("Building model...");
+			OntModel ontModel = buildModel(categories);
+
+			// read the included models and cache the raw graphs
+			Map<String, Model> models = new HashMap<String, Model>();
+			Map<String, Graph> graphs = new HashMap<String, Graph>();
+			models.put(config.getModelURI(), ontModel.getBaseModel());
+			graphs.put(config.getModelURI(), ontModel.getBaseModel().getGraph());
+			for (IncludedModelData includedModelData : config
+					.getIncludedModels()) {
+				pln("Reading included model " + includedModelData.URI);
+				Model includedModel = ModelFactory.createDefaultModel();
+				includedModel.read(includedModelData.path,
+						includedModelData.URI, null);
+				models.put(includedModelData.URI, includedModel);
+				graphs.put(includedModelData.URI, includedModel.getGraph());
+			}
+
+			GenericRuleReasoner reasoner = null;
+			if (config.shouldClassify() || config.shouldCreateBackwardRuleset()) {
+				reasoner = new GenericRuleReasoner(Rule
+						.rulesFromURL(OWL_SPECIALIZED_RULESET));
+				reasoner.setTransitiveClosureCaching(false);
+				reasoner.setOWLTranslation(false);
+			}
+
+			if (config.shouldClassify()) {
+				pln("Classifying models...");
+
+				for (String modelURI : models.keySet()) {
+					Model rawModel = models.get(modelURI);
+					FBRuleInfGraph infGraph = (FBRuleInfGraph) reasoner
+							.bind(rawModel.getGraph());
+					infGraph.prepare();
+					// copy all the triples to a non-inference graph (so that
+					// it's
+					// faster to serialize)
+					Graph graph = Factory.createDefaultGraph();
+					for (ExtendedIterator<Triple> it = infGraph.find(
+							com.hp.hpl.jena.graph.Node.ANY,
+							com.hp.hpl.jena.graph.Node.ANY,
+							com.hp.hpl.jena.graph.Node.ANY); it.hasNext();) {
+						graph.add(it.next());
+					}
+					Model classifiedModel = ModelFactory
+							.createModelForGraph(graph);
+					models.put(modelURI, classifiedModel);
+				}
+			}
+
+			Model contextModel = models.get(config.getModelURI());
 
 			// save model under models
 			File modelFile = getModelFile(config.getOutputFileName(),
 					LANG_OUTPUT_EXT.get(config.getOutputLanguage()));
-			p("Saving model as " + config.getOutputLanguage() + " to file "
+			pln("Saving model as " + config.getOutputLanguage() + " to file "
 					+ modelFile.getName());
-			RDFWriter writer = model.getWriter(config.getOutputLanguage());
+			RDFWriter writer = contextModel.getWriter(config
+					.getOutputLanguage());
 
 			try {
 				writer.setProperty("showXMLDeclaration", config
@@ -133,36 +224,44 @@ public class Builder {
 			} catch (UnknownPropertyException upe) {
 			}
 			OutputStream os = new FileOutputStream(modelFile);
-			writer.write(model, os, config.getModelURI());
+			writer.write(contextModel, os, config.getModelURI());
 			os.close();
 
 			if (config.isCreateTDBStore()) {
 				String storeDir = MODELS_FOLDER + "/"
 						+ config.getOutputFileName();
-				p("Creating TriG dataset for TDB store");
+				File storeDirFile = new File(storeDir);
+				deleteDirectory(storeDirFile);
+				pln("Creating TriG dataset for TDB store");
 				NamedGraphSet ngs = new NamedGraphSetImpl();
-				Model contextModel = ngs.asJenaModel(config.getModelURI());
-				contextModel.read("file:" + MODELS_FOLDER + "/"
-						+ modelFile.getName(), config.getModelURI(), null);
-				for (IncludedModelData includedModelData : config
-						.getTDBStoreIncludedModels()) {
-					Model includedModel = ngs
-							.asJenaModel(includedModelData.URI);
-					includedModel.read(includedModelData.path,
-							includedModelData.URI, null);
+				for (String modelURI : models.keySet()) {
+					Model model = models.get(modelURI);
+					NamedGraph namedGraph = new NamedGraphImpl(modelURI, model
+							.getGraph());
+					ngs.addGraph(namedGraph);
 				}
+				// Model contextModel = ngs.asJenaModel(config.getModelURI());
+				// contextModel.read("file:" + MODELS_FOLDER + "/"
+				// + modelFile.getName(), config.getModelURI(), null);
+				// for (IncludedModelData includedModelData : config
+				// .getIncludedModels()) {
+				// Model includedModel = ngs
+				// .asJenaModel(includedModelData.URI);
+				// includedModel.read(includedModelData.path,
+				// includedModelData.URI, null);
+				// }
 				String dsFileName = MODELS_FOLDER + "/"
 						+ config.getOutputFileName() + "_dataset.trig";
 				ngs.write(new FileOutputStream(dsFileName), "TRIG", config
 						.getModelURI());
-				p("Creating TDB store in folder " + storeDir);
+				pln("Creating TDB store in folder " + storeDir);
 				DatasetGraphTDB ds = TDBFactory.createDatasetGraph(storeDir);
 				TDBLoader loader = new TDBLoader();
 				loader.setGenerateStats(false);
 				loader.setShowProgress(false);
 				loader.loadDataset(ds, "file:" + dsFileName);
 				TDB.sync(ds);
-				p("Creating TDB stats.opt file");
+				pln("Creating TDB stats.opt file");
 				Item statsItem = StatsCollector.gatherTDB(ds
 						.getGraphTDB(com.hp.hpl.jena.graph.Node
 								.createURI("urn:x-arq:UnionGraph")));
@@ -191,7 +290,7 @@ public class Builder {
 				// TDB.closedown();
 				File storeFile = getDestinationFile(config.getOutputFileName()
 						+ "_tdb", MODELS_FOLDER, "zip");
-				p("Creating TDB store archive in " + storeFile.getName());
+				pln("Creating TDB store archive in " + storeFile.getName());
 				zipDir(storeDir, storeFile);
 				// store deletion doesn't work because tdb leaks some file
 				// handle that prevents file from
@@ -199,11 +298,73 @@ public class Builder {
 				// p("Deleting TDB store folder " + storeDir);
 				// recursiveDelete(new File(storeDir));
 			}
+
+			if (config.shouldCreateBackwardRuleset()) {
+				pln("Creating backward ruleset in "
+						+ config.getOutputFileName() + ".rules");
+
+				String rulesetPath = MODELS_FOLDER + "/"
+						+ config.getOutputFileName() + ".rules";
+				File rulesetFile = new File(rulesetPath);
+				if (rulesetFile.exists())
+					rulesetFile.delete();
+
+				// setup the MultiUnion graph and init namespace prefix
+				// replacements
+				MultiUnion unionGraph = new MultiUnion();
+				Map<String, String> namespacePrefixMap = new HashMap<String, String>();
+				int includedModelIndex = 1;
+				for (String graphURI : graphs.keySet()) {
+					Graph graph = graphs.get(graphURI);
+					unionGraph.addGraph(graph);
+					namespacePrefixMap.put(graphURI + "#", "m"
+							+ (includedModelIndex++) + ":");
+				}
+				
+				Set<String> tabulatedPropertyURIs = new HashSet<String>();
+				// find all inverse properties that must be tabulated
+				for(ExtendedIterator<Triple> it = unionGraph.find(com.hp.hpl.jena.graph.Node.ANY, OWL.inverseOf.asNode(), com.hp.hpl.jena.graph.Node.ANY); it.hasNext(); ) {
+					Triple t = it.next();
+					if(t.getSubject().isURI()) tabulatedPropertyURIs.add(t.getSubject().getURI());
+					if(t.getObject().isURI()) tabulatedPropertyURIs.add(t.getObject().getURI());
+				}
+
+				// classify the uniongraph
+				FBRuleInfGraph classifiedGraph = (FBRuleInfGraph) reasoner
+						.bind(unionGraph);
+				classifiedGraph.prepare();
+
+				PrintWriter rulesetWriter = new PrintWriter(rulesetFile);
+				for (String namespace : namespacePrefixMap.keySet()) {
+					rulesetWriter.println("@prefix "
+							+ namespacePrefixMap.get(namespace) + " <"
+							+ namespace + ">.");
+				}
+				StringBuilder rulesetSb = new StringBuilder();
+				// use tableAll, it's faster
+//				for(String tabulatedPropertyURI : tabulatedPropertyURIs) {
+//					rulesetSb.append("-> table(");
+//					rulesetSb.append(tabulatedPropertyURI);
+//					rulesetSb.append(").\n");
+//				}
+				rulesetSb.append("-> tableAll().\n");
+				for (Rule rule : classifiedGraph.getBRules()) {
+					rulesetSb.append(rule.toString());
+					rulesetSb.append("\n");
+				}
+				String rulesetString = rulesetSb.toString();
+				for (String namespace : namespacePrefixMap.keySet()) {
+					rulesetString = rulesetString.replaceAll(namespace,
+							namespacePrefixMap.get(namespace));
+				}
+				rulesetWriter.print(rulesetString);
+				rulesetWriter.close();
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			System.err.flush();
 		} finally {
-			p("Done.");
+			pln("Done.");
 		}
 	}
 
@@ -269,7 +430,7 @@ public class Builder {
 			String ext) {
 		File folder = new File(folderName);
 		if (!folder.exists()) {
-			p("Creating " + folderName + " folder");
+			pln("Creating " + folderName + " folder");
 			folder.mkdir();
 		}
 		String fileName = name;
@@ -280,7 +441,7 @@ public class Builder {
 
 	private static void serializeCategories(File categoriesFile,
 			List<Category> categories) throws Exception {
-		p("Serializing categories to " + categoriesFile.getAbsolutePath());
+		pln("Serializing categories to " + categoriesFile.getAbsolutePath());
 		DocumentBuilderFactory builderFactory = DocumentBuilderFactory
 				.newInstance();
 		DocumentBuilder builder = builderFactory.newDocumentBuilder();
@@ -303,10 +464,13 @@ public class Builder {
 			Element el = doc.createElement("category");
 			parent.appendChild(el);
 			serializeNode(doc, category, el);
+			for (String clazz : category.getClasses()) {
+				el.appendChild(createTextElement(doc, "class", clazz));
+			}
 			for (Parameter parameter : category.getParameters()) {
 				Element parEl = doc.createElement("parameter");
 				serializeNode(doc, parameter, parEl);
-				parEl.setAttribute("type", parameter.getType());
+				parEl.setAttribute("type", parameter.getType().getURI());
 				el.appendChild(parEl);
 			}
 			serializeCategories(doc, el, category.getSubCategories());
@@ -348,7 +512,7 @@ public class Builder {
 
 	private static class CategoriesHandler extends DefaultHandler {
 		private enum Type {
-			Categories, Category, Parameter, Name, Description, Reference
+			Categories, Category, Parameter, Name, Description, Reference, Class
 		};
 
 		private static final Map<String, Type> typeMappings = new HashMap<String, Type>();
@@ -359,24 +523,28 @@ public class Builder {
 			typeMappings.put("name", Type.Name);
 			typeMappings.put("description", Type.Description);
 			typeMappings.put("reference", Type.Reference);
+			typeMappings.put("class", Type.Class);
 		}
 
 		private static final Map<Type, Type[]> allowedTypes = new HashMap<Type, Type[]>();
 		static {
+			Type[] noTypes = new Type[0];
 			allowedTypes.put(Type.Categories, new Type[] { Type.Category });
-			allowedTypes.put(Type.Category,
-					new Type[] { Type.Category, Type.Parameter, Type.Name,
-							Type.Description, Type.Reference });
+			allowedTypes.put(Type.Category, new Type[] { Type.Category,
+					Type.Parameter, Type.Name, Type.Description,
+					Type.Reference, Type.Class });
 			allowedTypes.put(Type.Parameter, new Type[] { Type.Name,
-					Type.Description });
-			allowedTypes.put(Type.Name, new Type[0]);
-			allowedTypes.put(Type.Description, new Type[0]);
-			allowedTypes.put(Type.Reference, new Type[0]);
+					Type.Description, Type.Class });
+			allowedTypes.put(Type.Name, noTypes);
+			allowedTypes.put(Type.Description, noTypes);
+			allowedTypes.put(Type.Reference, noTypes);
+			allowedTypes.put(Type.Class, noTypes);
 		}
 		private static final Type[] allowedRootTypes = new Type[] { Type.Categories };
 
 		private final Stack<Type> typeStack = new Stack<Type>();
 		private final Stack<Category> categoryStack = new Stack<Category>();
+		private final Set<String> foundIds = new HashSet<String>();
 		private Category parent = null;
 		private Node node = null;
 		private Type type = null;
@@ -397,6 +565,9 @@ public class Builder {
 					la.setDefaultValue(sb.toString());
 				else
 					la.set(lang, sb.toString());
+				sb = null;
+			} else if (type == Type.Class) {
+				node.getClasses().add(sb.toString());
 				sb = null;
 			}
 			type = typeStack.isEmpty() ? null : typeStack.pop();
@@ -439,7 +610,19 @@ public class Builder {
 				node = c;
 			} else if (type == Type.Parameter) {
 				Parameter p = new Parameter();
-				p.setType(atts.getValue("type"));
+				String dataType = atts.getValue("type");
+				if (dataType != null) {
+					if (!dataType.contains(":"))
+						dataType = XSDDatatype.XSD + "#" + dataType;
+					RDFDatatype rdfType = TypeMapper.getInstance()
+							.getTypeByName(dataType);
+					if (rdfType == null)
+						pln("WARNING: unknown parameter type " + dataType
+								+ " at line " + locator.getLineNumber()
+								+ ", col " + locator.getColumnNumber());
+					else
+						p.setType(rdfType);
+				}
 				parent.getParameters().add(p);
 				p.setCategory(parent);
 
@@ -486,13 +669,20 @@ public class Builder {
 				else
 					lang = null;
 				sb = new StringBuilder();
+			} else if (type == Type.Class) {
+				sb = new StringBuilder();
 			}
 
 			if (type == Type.Category || type == Type.Parameter) {
 				String id = atts.getValue("id");
-				if (!StringUtils.isEmpty(id))
+				if (!StringUtils.isEmpty(id)) {
+					// check that the ID is unique
+					if (foundIds.contains(id))
+						throw new SAXParseException(
+								"Found duplicate ID: " + id, locator);
 					node.setId(id);
-				else
+					foundIds.add(id);
+				} else
 					node.setId(null);
 			}
 		}
@@ -500,7 +690,8 @@ public class Builder {
 		@Override
 		public void characters(char[] ch, int start, int length)
 				throws SAXException {
-			if (type == Type.Name || type == Type.Description)
+			if (type == Type.Name || type == Type.Description
+					|| type == Type.Class)
 				sb.append(ch, start, length);
 		}
 
@@ -539,18 +730,19 @@ public class Builder {
 		}
 
 		String name = categorySource.getName();
-		p("Parsing reference " + name);
+		pln("Parsing reference " + name);
 		List<Category> categories = null;
 		// check if the taxonomy has already been built
 		File categoriesFile = getCategoriesFile(name);
 		if (!categoriesFile.exists()) {
-			p("Building categories " + name);
+			pln("Building categories " + name);
 			categories = categorySource.getCategories();
 			serializeCategories(categoriesFile, categories);
-		} else {
-			p("Reading categories from file " + categoriesFile.getName());
-			categories = deserializeCategories(categoriesFile);
 		}
+		// we re-read the categories from the serialized file in order to
+		// validate them
+		pln("Reading categories from file " + categoriesFile.getName());
+		categories = deserializeCategories(categoriesFile);
 
 		if (limit > 0)
 			pruneCategories(categories, limit);
@@ -582,27 +774,40 @@ public class Builder {
 
 	private OntModel buildModel(List<Category> categories) throws Exception {
 		// create model with no reasoning
-		OntDocumentManager docManager = OntDocumentManager.getInstance();
-		docManager.addAltEntry(ContextModel.URI,
-				ContextModelFactory.CONTEXT_MODEL_ALT_URI);
+		// OntDocumentManager docManager = OntDocumentManager.getInstance();
+		// docManager.addAltEntry(ContextModelVocabulary.URI,
+		// ContextModelFactory.CONTEXT_MODEL_VOCABULARY_ALT_URI);
 
 		OntModel m = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
-		docManager.loadImport(m, ContextModel.URI);
+
+		// ensure that the context model vocabulary is imported
+		// docManager.loadImport(m, ContextModelVocabulary.URI);
+
+		// // import each included model
+		// for (IncludedModelData includedModel : config.getIncludedModels()) {
+		// if (!ContextModelVocabulary.URI.equals(includedModel.URI)) {
+		// docManager.addAltEntry(includedModel.URI, includedModel.path);
+		// docManager.loadImport(m, includedModel.URI);
+		// }
+		// }
 
 		// set namespace prefix
 		String ns = config.getModelURI() + "#";
 		m.setNsPrefix("", ns);
-		m.setNsPrefix(CONTEXT_MODEL_NS_PREFIX, ContextModel.NS);
+		m.setNsPrefix(CONTEXT_MODEL_VOCABULARY_NS_PREFIX,
+				ContextModelVocabulary.NS);
 
 		// create ontology and import context model
 		Ontology ontology = m.createOntology(config.getModelURI());
 		ontology.addVersionInfo(config.getVersion());
-		ontology.addImport(ContextModel.Ontology);
+		ontology.addImport(ContextModelVocabulary.Ontology);
 
 		if (config.getUseMetaModel()) {
 			// import context meta model
 			ontology.addImport(ContextMetaModel.Ontology);
 		}
+
+		// if(true) return m;
 
 		Individual specificationIndividual = null;
 		if (config.getUseMetaModel()) {
@@ -614,14 +819,14 @@ public class Builder {
 		}
 
 		// prepare initial context
-		Context initialContext = new Context(categories, m
-				.getOntClass(ContextModel.DimensionAssignment.getURI()), null,
-				null, "");
+		Context initialContext = new Context(categories, null, null, "");
 
-		// init data structures and start parsing categories
+		// init data structures
 		// Set<OntClass> definedAssignmentClasses = new HashSet<OntClass>();
 		// Set<OntClass> definedValueClasses = new HashSet<OntClass>();
 		Deque<Context> queue = new LinkedList<Context>();
+
+		// start parsing categories
 		queue.add(initialContext);
 		while (!queue.isEmpty()) {
 			Context context = queue.poll();
@@ -629,20 +834,23 @@ public class Builder {
 			// definedAssignmentClasses.clear();
 
 			// parse dimension categories
-			for (int dimensionIndex = 1; dimensionIndex <= context
-					.getDimensionCategories().size(); dimensionIndex++) {
-				Category dimensionCategory = context.getDimensionCategories()
-						.get(dimensionIndex - 1);
-
+			int dimensionIndex = 1;
+			for (Category dimensionCategory : context.getDimensionCategories()) {
 				// create dimension identifier
-				String dimensionIdentifier = createIdentifier(context
-						.getIdentifier(), dimensionIndex);
+				String dimensionIdentifier = dimensionCategory.getId();
+				String dimensionName = dimensionIdentifier;
+				if (dimensionIdentifier == null) {
+					dimensionIdentifier = createIdentifier(context
+							.getIdentifier(), dimensionIndex++);
+					dimensionName = String.format(
+							DIMENSION_INDIVIDUAL_NAME_FORMAT,
+							dimensionIdentifier);
+				}
 
 				// create formal dimension individual
-				Individual dimensionIndividual = m.createIndividual(ns
-						+ String.format(DIMENSION_INDIVIDUAL_NAME_FORMAT,
-								dimensionIdentifier), m
-						.getOntClass(ContextModel.FormalDimension.getURI()));
+				Individual dimensionIndividual = createIndividual(m, ns,
+						dimensionName, dimensionCategory,
+						ContextModelVocabulary.Dimension);
 
 				if (config.getUseMetaModel()) {
 					// set rootDimension or valueSubDimension properties
@@ -657,154 +865,193 @@ public class Builder {
 					}
 				}
 
-				// assign label and comment to dimension
-				assignLabelAndComment(dimensionIndividual, dimensionCategory);
-
 				// parse dimension parameters
-				for (int parameterIndex = 1; parameterIndex <= dimensionCategory
-						.getParameters().size(); parameterIndex++) {
-					// create parameter identifier
-					String parameterIdentifier = createIdentifier(
-							dimensionIdentifier, parameterIndex);
+				// for (int parameterIndex = 1; parameterIndex <=
+				// dimensionCategory
+				// .getParameters().size(); parameterIndex++) {
+				// // create parameter identifier
+				// String parameterIdentifier = createIdentifier(
+				// dimensionIdentifier, parameterIndex);
+				//
+				// Parameter parameter = dimensionCategory.getParameters()
+				// .get(parameterIndex - 1);
 
-					Parameter parameter = dimensionCategory.getParameters()
-							.get(parameterIndex - 1);
+				// create parameter stuff
+				// Individual parameterIndividual = createParameter(parameter,
+				// parameterIdentifier, m, m
+				// .getOntClass(ContextModel.FormalParameter
+				// .getURI()));
 
-					// create parameter stuff
-					Individual parameterIndividual = createParameter(parameter,
-							parameterIdentifier, m, m
-									.getOntClass(ContextModel.FormalParameter
-											.getURI()));
+				// assign label and comment to parameter
+				// assignLabelAndComment(parameterIndividual, parameter);
+				//
+				// if (config.getUseMetaModel()) {
+				// // set dimensionParameter property
+				// dimensionIndividual.addProperty(
+				// ContextMetaModel.dimensionParameter,
+				// parameterIndividual);
+				// }
+				// }
 
-					// assign label and comment to parameter
-					assignLabelAndComment(parameterIndividual, parameter);
-
-					if (config.getUseMetaModel()) {
-						// set dimensionParameter property
-						dimensionIndividual.addProperty(
-								ContextMetaModel.dimensionParameter,
-								parameterIndividual);
-					}
-				}
+				// get a camelized identifier
+				String camelizedDimensionName = camelize(dimensionName);
 
 				// create values class
-				OntClass valueClass = m.createClass(ns
-						+ String.format(VALUE_CLASS_NAME_FORMAT,
-								dimensionIdentifier));
-				valueClass.addSuperClass(m
-						.getOntClass(ContextModel.DimensionValue.getURI()));
+				String valueClassName = String.format(VALUE_CLASS_NAME_FORMAT,
+						camelizedDimensionName);
+				OntClass valueClass = m.createClass(ns + valueClassName);
+				valueClass.addSuperClass(ContextModelVocabulary.Value);
 
-				// add values class to set
-				// definedValueClasses.add(valueClass);
+				// create actual dimension class
+				String actualDimensionClassName = String.format(
+						ACTUAL_CLASS_NAME_FORMAT, camelizedDimensionName);
+				OntClass actualDimensionClass = m.createClass(ns
+						+ actualDimensionClassName);
 
-				// create value assignment property
-				OntProperty assignmentProperty = m.createOntProperty(ns
-						+ String.format(ASSIGNMENT_PROPERTY_NAME_FORMAT,
-								dimensionIdentifier));
-				assignmentProperty
-						.setSuperProperty(m
-								.getObjectProperty(ContextModel.dimensionAssignmentValue
-										.getURI()));
-				assignmentProperty.setRange(valueClass);
-				// we'll set domain later
+				// add superclass
+				actualDimensionClass
+						.addSuperClass(ContextModelVocabulary.ActualDimension);
 
-				// create assignment class
-				OntClass assignmentClass = m.createClass(ns
-						+ String.format(ASSIGNMENT_CLASS_NAME_FORMAT,
-								dimensionIdentifier));
+				// add dimension value restriction
+				String dimensionValueRestrictionURI = ns + actualDimensionClassName
+						+ "-DimensionValueRestriction";
+				actualDimensionClass.addSuperClass(m
+						.createSomeValuesFromRestriction(
+								dimensionValueRestrictionURI,
+								ContextModelVocabulary.dimensionValue,
+								valueClass));
 
-				if (config.getComplexity() == ModelComplexityLevel.HIGH) {
-					// set equivalent restrictions
-					assignmentClass
-							.addEquivalentClass(m
-									.createHasValueRestriction(
-											null,
-											m
-													.getObjectProperty(ContextModel.assignmentDimension
-															.getURI()),
-											dimensionIndividual));
-					assignmentClass
-							.addEquivalentClass(m
+				// add formal dimension restriction
+				String formalDimensionRestrictionURI = ns + actualDimensionClassName
+						+ "-FormalDimensionRestriction";
+				actualDimensionClass.addSuperClass(m.createHasValueRestriction(
+						formalDimensionRestrictionURI,
+						ContextModelVocabulary.formalDimension,
+						dimensionIndividual));
+
+				// add parent dimension restriction
+				// TODO: reimplement model formality level
+				if (context.getActualDimensionClass() != null
+						&& context.getValueIndividual() != null) {
+					String parentDimensionValueRestrictionURI = ns + actualDimensionClassName
+							+ "-ParentDimensionValueRestriction";
+					RDFList parentDimensionIntersectionList = m.createList();
+					parentDimensionIntersectionList = parentDimensionIntersectionList
+							.with(context.getActualDimensionClass());
+					parentDimensionIntersectionList = parentDimensionIntersectionList
+							.with(m.createHasValueRestriction(
+									parentDimensionValueRestrictionURI,
+									ContextModelVocabulary.dimensionValue,
+									context.getValueIndividual()));
+					String inContextRestrictionURI = ns + actualDimensionClassName
+							+ "-InContextRestriction";
+					String hasDimensionRestrictionURI = ns + actualDimensionClassName
+							+ "-HasDimensionRestriction";
+					String hasDimensionIntersectionURI = ns + actualDimensionClassName
+							+ "-HasDimensionIntersection";
+					actualDimensionClass
+							.addSuperClass(m
 									.createSomeValuesFromRestriction(
-											null,
+											inContextRestrictionURI,
+											ContextModelVocabulary.inContext,
 											m
-													.getObjectProperty(ContextModel.dimensionAssignmentValue
-															.getURI()),
-											valueClass));
-
-					// set superclass
-					RDFList intersectionList = m.createList();
-					intersectionList = intersectionList.with(context
-							.getDimensionAssignmentClass());
-					intersectionList = intersectionList.with(m
-							.createCardinalityRestriction(null,
-									assignmentProperty, 1));
-					if (context.getDimensionAssignmentProperty() != null)
-						intersectionList = intersectionList.with(m
-								.createHasValueRestriction(null, context
-										.getDimensionAssignmentProperty(),
-										context.getValueIndividual()));
-					assignmentClass.addSuperClass(m.createIntersectionClass(
-							null, intersectionList));
-				} else if (config.getComplexity() == ModelComplexityLevel.LOW) {
-					// set equivalent restriction
-					RDFList equivalentIntersectionList = m.createList();
-					equivalentIntersectionList = equivalentIntersectionList
-							.with(m.createCardinalityRestriction(null,
-									assignmentProperty, 1));
-					equivalentIntersectionList = equivalentIntersectionList
-							.with(m
-									.createHasValueRestriction(
-											null,
-											m
-													.getObjectProperty(ContextModel.assignmentDimension
-															.getURI()),
-											dimensionIndividual));
-					assignmentClass.addEquivalentClass(m
-							.createIntersectionClass(null,
-									equivalentIntersectionList));
-
-					// set superclass
-					Resource superclass;
-					if (context.getDimensionAssignmentProperty() != null) {
-						RDFList superclassIntersectionList = m.createList();
-						superclassIntersectionList = superclassIntersectionList
-								.with(context.getDimensionAssignmentClass());
-						superclassIntersectionList = superclassIntersectionList
-								.with(m.createHasValueRestriction(null, context
-										.getDimensionAssignmentProperty(),
-										context.getValueIndividual()));
-						superclass = m.createIntersectionClass(null,
-								superclassIntersectionList);
-					} else {
-						superclass = context.getDimensionAssignmentClass();
-					}
-					assignmentClass.addSuperClass(superclass);
+													.createSomeValuesFromRestriction(
+															hasDimensionRestrictionURI,
+															ContextModelVocabulary.hasDimension,
+															m
+																	.createIntersectionClass(
+																			hasDimensionIntersectionURI,
+																			parentDimensionIntersectionList))));
 				}
 
-				// add assignment class to set
-				// definedAssignmentClasses.add(assignmentClass);
-
-				// set assignment property domain
-				assignmentProperty.setDomain(assignmentClass);
+				// if (config.getComplexity() == ModelComplexityLevel.HIGH) {
+				// // set equivalent restrictions
+				// assignmentClass
+				// .addEquivalentClass(m
+				// .createHasValueRestriction(
+				// null,
+				// m
+				// .getObjectProperty(ContextModel.assignmentDimension
+				// .getURI()),
+				// dimensionIndividual));
+				// assignmentClass
+				// .addEquivalentClass(m
+				// .createSomeValuesFromRestriction(
+				// null,
+				// m
+				// .getObjectProperty(ContextModel.dimensionAssignmentValue
+				// .getURI()),
+				// valueClass));
+				//
+				// // set superclass
+				// RDFList intersectionList = m.createList();
+				// intersectionList = intersectionList.with(context
+				// .getActualDimensionClass());
+				// intersectionList = intersectionList.with(m
+				// .createCardinalityRestriction(null,
+				// assignmentProperty, 1));
+				// if (context.getDimensionAssignmentProperty() != null)
+				// intersectionList = intersectionList.with(m
+				// .createHasValueRestriction(null, context
+				// .getDimensionAssignmentProperty(),
+				// context.getValueIndividual()));
+				// assignmentClass.addSuperClass(m.createIntersectionClass(
+				// null, intersectionList));
+				// } else if (config.getComplexity() ==
+				// ModelComplexityLevel.LOW) {
+				// // set equivalent restriction
+				// RDFList equivalentIntersectionList = m.createList();
+				// equivalentIntersectionList = equivalentIntersectionList
+				// .with(m.createCardinalityRestriction(null,
+				// assignmentProperty, 1));
+				// equivalentIntersectionList = equivalentIntersectionList
+				// .with(m
+				// .createHasValueRestriction(
+				// null,
+				// m
+				// .getObjectProperty(ContextModel.assignmentDimension
+				// .getURI()),
+				// dimensionIndividual));
+				// assignmentClass.addEquivalentClass(m
+				// .createIntersectionClass(null,
+				// equivalentIntersectionList));
+				//
+				// // set superclass
+				// Resource superclass;
+				// if (context.getDimensionAssignmentProperty() != null) {
+				// RDFList superclassIntersectionList = m.createList();
+				// superclassIntersectionList = superclassIntersectionList
+				// .with(context.getActualDimensionClass());
+				// superclassIntersectionList = superclassIntersectionList
+				// .with(m.createHasValueRestriction(null, context
+				// .getDimensionAssignmentProperty(),
+				// context.getValueIndividual()));
+				// superclass = m.createIntersectionClass(null,
+				// superclassIntersectionList);
+				// } else {
+				// superclass = context.getActualDimensionClass();
+				// }
+				// assignmentClass.addSuperClass(superclass);
+				// }
 
 				// parse value categories
-				for (int valueIndex = 1; valueIndex <= dimensionCategory
-						.getSubCategories().size(); valueIndex++) {
-					Category valueCategory = dimensionCategory
-							.getSubCategories().get(valueIndex - 1);
-
-					// create value identifier
-					String valueIdentifier = createIdentifier(
-							dimensionIdentifier, valueIndex);
+				int valueIndex = 1;
+				for (Category valueCategory : dimensionCategory
+						.getSubCategories()) {
+					// create value identifier and name
+					String valueIdentifier = valueCategory.getId();
+					String valueName = valueIdentifier;
+					if (valueIdentifier == null) {
+						valueIdentifier = createIdentifier(dimensionIdentifier,
+								valueIndex++);
+						valueName = String.format(VALUE_INDIVIDUAL_NAME_FORMAT,
+								valueIdentifier);
+					}
 
 					// create value individual
-					Individual valueIndividual = m.createIndividual(ns
-							+ String.format(VALUE_INDIVIDUAL_NAME_FORMAT,
-									valueIdentifier), valueClass);
-
-					// assign label and comment to value
-					assignLabelAndComment(valueIndividual, valueCategory);
+					Individual valueIndividual = createIndividual(m, ns,
+							valueName, valueCategory, valueClass,
+							ContextModelVocabulary.Value);
 
 					if (config.getUseMetaModel()) {
 						// set dimensionValue property
@@ -814,22 +1061,72 @@ public class Builder {
 					}
 
 					// parse value parameters
-					for (int parameterIndex = 1; parameterIndex <= valueCategory
-							.getParameters().size(); parameterIndex++) {
-						// create parameter identifier
-						String parameterIdentifier = createIdentifier(
-								valueIdentifier, parameterIndex);
-						Parameter parameter = valueCategory.getParameters()
-								.get(parameterIndex - 1);
+					int valueParameterIndex = 1;
+					for (Parameter valueParameter : valueCategory
+							.getParameters()) {
+						// create parameter identifier and name
+						String parameterIdentifier = valueParameter.getId();
+						String parameterName = parameterIdentifier;
+						if (parameterIdentifier == null) {
+							parameterIdentifier = createIdentifier(
+									valueIdentifier, valueParameterIndex++);
+							parameterName = String.format(
+									PARAMETER_INDIVIDUAL_NAME_FORMAT,
+									parameterIdentifier);
+						}
 
-						// create parameter stuff
-						Individual parameterIndividual = createParameter(
-								parameter, parameterIdentifier, m,
-								m.getOntClass(ContextModel.FormalParameter
-										.getURI()));
+						// create parameter individual
+						Individual parameterIndividual = createIndividual(m,
+								ns, parameterName, valueParameter,
+								ContextModelVocabulary.Parameter);
 
-						// assign label and comment to parameter
-						assignLabelAndComment(parameterIndividual, parameter);
+						// create camelized parameter name
+						String camelizedParameterName = camelize(parameterName);
+
+						// create actual parameter class
+						String actualParameterClassName = String.format(
+								ACTUAL_CLASS_NAME_FORMAT,
+								camelizedParameterName);
+						OntClass actualParameterClass = m.createClass(ns
+								+ actualParameterClassName);
+
+						// add super class
+						actualParameterClass
+								.addSuperClass(ContextModelVocabulary.ActualParameter);
+
+						// add formal parameter restriction
+						String formalParameterRestrictionURI = ns + actualParameterClassName
+								+ "-FormalParameterRestriction";
+						actualParameterClass.addSuperClass(m
+								.createHasValueRestriction(
+										formalParameterRestrictionURI,
+										ContextModelVocabulary.formalParameter,
+										parameterIndividual));
+
+						// add parameter value restriction
+						if (valueParameter.getType() != null) {
+							String parameterValueRestrictionURI = ns + actualParameterClassName
+									+ "-ParameterValueRestriction";
+							actualParameterClass
+									.addSuperClass(m
+											.createSomeValuesFromRestriction(
+													parameterValueRestrictionURI,
+													ContextModelVocabulary.parameterValue,
+													m
+															.createResource(valueParameter
+																	.getType()
+																	.getURI())));
+						}
+
+						// add parent value restriction
+						String parameterOfValueRestrictionURI = ns + actualParameterClassName
+								+ "-ParameterOfValueRestriction";
+						actualParameterClass
+								.addSuperClass(m
+										.createHasValueRestriction(
+												parameterOfValueRestrictionURI,
+												ContextModelVocabulary.parameterOfValue,
+												valueIndividual));
 
 						if (config.getUseMetaModel()) {
 							// set valueParameter property
@@ -842,9 +1139,8 @@ public class Builder {
 					// if value has subdimension, enqueue a new context
 					if (valueCategory.getSubCategories().size() > 0) {
 						Context newContext = new Context(valueCategory
-								.getSubCategories(), assignmentClass,
-								assignmentProperty, valueIndividual,
-								valueIdentifier);
+								.getSubCategories(), actualDimensionClass,
+								valueIndividual, valueIdentifier);
 						queue.add(newContext);
 					}
 				}
@@ -881,16 +1177,18 @@ public class Builder {
 		return m;
 	}
 
-	private static Individual createParameter(Parameter p,
-			String parameterIdentifier, OntModel m,
-			OntClass formalParameterClass) {
-		Individual parameterIndividual = m.createIndividual(
-				PervADsContextModel.NS
-						+ String.format(PARAMETER_INDIVIDUAL_NAME_FORMAT,
-								parameterIdentifier), formalParameterClass);
+	private static Individual createIndividual(OntModel m, String ns,
+			String name, Node n, Resource parentClass) {
+		return createIndividual(m, ns, name, n, parentClass, parentClass);
+	}
 
-		// TODO create parameter assignment with restriction on type etc.
-		return parameterIndividual;
+	private static Individual createIndividual(OntModel m, String ns,
+			String name, Node n, Resource parentClass,
+			Resource customClassesParentClass) {
+		Individual individual = m.createIndividual(ns + name, parentClass);
+		assignLabelAndComment(individual, n);
+		addToClasses(n, ns, individual, customClassesParentClass, m);
+		return individual;
 	}
 
 	private static void assignLabelAndComment(OntResource i, Node n) {
@@ -908,18 +1206,72 @@ public class Builder {
 		}
 	}
 
+	private static void addToClasses(Node n, String ns, Individual i,
+			Resource parentClass, OntModel m) {
+		for (String className : n.getClasses()) {
+			String classURI = ns + className;
+			OntClass ontClass = m.createClass(classURI);
+			if (!ontClass.hasSuperClass(parentClass))
+				ontClass.addSuperClass(parentClass);
+			i.addOntClass(ontClass);
+		}
+	}
+
 	private static String createIdentifier(String parentIdentifier, int index) {
 		StringBuilder sb = new StringBuilder();
 		if (!StringUtils.isEmpty(parentIdentifier)) {
 			sb.append(parentIdentifier);
-			sb.append("_");
+			sb.append("-");
 		}
 		sb.append(index);
 		return sb.toString();
 	}
 
-	private static void p(String s) {
+	private static String camelize(String s) {
+		return WordUtils.capitalizeFully(s, new char[] { '-', '_', ' ' });
+	}
+
+	private static void pln(String s) {
 		System.out.println(s);
 		System.out.flush();
+	}
+
+	private static void p(String s) {
+		System.out.print(s);
+		System.out.flush();
+	}
+
+	private static boolean deleteDirectory(File path) {
+		if (path.exists()) {
+			File[] files = path.listFiles();
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].isDirectory()) {
+					deleteDirectory(files[i]);
+				} else {
+					files[i].delete();
+				}
+			}
+		}
+		return (path.delete());
+	}
+
+	private static EntityCountReport countEntites(List<Category> categories) {
+		EntityCountReport report = new EntityCountReport();
+		countEntitiesRec(categories, report, true);
+		return report;
+	}
+
+	private static void countEntitiesRec(List<Category> categories,
+			EntityCountReport report, boolean areDimensions) {
+		report.categories += categories.size();
+		if (areDimensions)
+			report.dimensions += categories.size();
+		else
+			report.values += categories.size();
+		for (Category category : categories) {
+			report.parameters += category.getParameters().size();
+			countEntitiesRec(category.getSubCategories(), report,
+					!areDimensions);
+		}
 	}
 }
