@@ -1,18 +1,28 @@
 # Parameters:
-# 1 - dimension assignment class
+# 1 - actual dimension class
 
-PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX cmv:		<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
 PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX list:	<http://jena.hpl.hp.com/ARQ/list#>
 
 SELECT ?valueIndividual
 WHERE 
 {
-	<%1$s> rdfs:subClassOf ?superclass .
-	?superclass owl:intersectionOf ?intersectionItem1 .
-	?intersectionItem1 rdf:rest ?intersectionItem2 .
-	?intersectionItem2 rdf:first ?superValueRestriction .
-#	?superValueRestriction rdf:type owl:Restriction .
-	?superValueRestriction owl:hasValue ?valueIndividual
+	<%1$s> rdfs:subClassOf cmv:ActualDimension .
+	
+	<%1$s> rdfs:subClassOf ?contextRestriction .
+	?contextRestriction rdf:type owl:Restriction .
+	?contextRestriction owl:onProperty cmv:inContext .
+	?contextRestriction owl:someValuesFrom ?parentDimensionRestriction .
+	
+	?parentDimensionRestriction rdf:type owl:Restriction .
+	?parentDimensionRestriction owl:onProperty cmv:hasDimension .
+	?parentDimensionRestriction owl:someValuesFrom ?parentDimensionIntersection .
+	
+	?parentDimensionIntersection list:member ?parentValueRestriction .
+	?parentValueRestriction rdf:type owl:Restriction .
+	?parentValueRestriction owl:onProperty cmv:dimensionValue .
+	?parentValueRestriction owl:hasValue ?valueIndividual
 }

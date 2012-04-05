@@ -12,6 +12,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.util.ResourceUtils;
 
 public class ModelUtils {
 	private ModelUtils() {
@@ -125,7 +126,7 @@ public class ModelUtils {
 		Object value = parseLiteralValue(node);
 		if (value == null)
 			return null;
-		if (!value.getClass().equals(clazz))
+		if (!clazz.isAssignableFrom(value.getClass()))
 			throw new RuntimeException("Node value " + value + " is not a "
 					+ clazz.getName() + " but a " + value.getClass().getName());
 		return (T) value;

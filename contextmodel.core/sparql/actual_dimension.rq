@@ -1,0 +1,19 @@
+# Parameters:
+# 1 - actual dimension class
+# 2 - context individual
+# 3 - values class
+
+PREFIX cmv:      <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?actualDimensionIndividual ?valueIndividual
+WHERE
+{
+	?actualDimensionIndividual rdf:type <%1$s> .
+	?actualDimensionIndividual cmv:inContext <%2$s> .
+	?actualDimensionIndividual cmv:dimensionValue ?valueIndividual .
+	?valueIndividual rdf:type <%3$s> .
+}
+

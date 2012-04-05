@@ -13,9 +13,10 @@ import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
+import com.hp.hpl.jena.query.Syntax;
 import com.hp.hpl.jena.rdf.model.Model;
 
-public class QueryUtils {
+public final class QueryUtils {
 	public static final String SPARQL_FOLDER_NAME = "sparql";
 	public static final String QUERY_FILE_EXT = "rq";
 	private static final Map<String, String> queryMap = new HashMap<String, String>();
@@ -58,7 +59,7 @@ public class QueryUtils {
 			queryMap.put(queryName, queryString);
 		}
 		queryString = String.format(queryString, args);
-		Query query = QueryFactory.create(queryString);
+		Query query = QueryFactory.create(queryString, Syntax.syntaxARQ);
 		return QueryExecutionFactory.create(query, model);
 	}
 }

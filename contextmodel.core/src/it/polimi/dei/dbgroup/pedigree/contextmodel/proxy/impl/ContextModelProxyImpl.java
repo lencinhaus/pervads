@@ -21,7 +21,7 @@ import com.hp.hpl.jena.vocabulary.RDF;
 public class ContextModelProxyImpl implements ContextModelProxy {
 	private static final String ROOT_DIMENSIONS_QUERY_NAME = "root_dimensions";
 	private static final String DIMENSION_QUERY_NAME = "dimension";
-	private static final String DIMENSION_BY_ASSIGNMENT_CLASS_QUERY_NAME = "dimension_by_assignment_class";
+	private static final String DIMENSION_BY_ACTUAL_DIMENSION_CLASS_QUERY_NAME = "dimension_by_actual_dimension_class";
 	private static final String ALL_DIMENSIONS_QUERY_NAME = "all_dimensions";
 	private static final String ALL_VALUES_QUERY_NAME = "all_values";
 	private Model model;
@@ -80,24 +80,24 @@ public class ContextModelProxyImpl implements ContextModelProxy {
 	}
 
 	@Override
-	public Dimension findDimension(String uri) {
-		Resource formalDimension = ModelUtils.getResourceIfExists(model, uri);
-		if (formalDimension == null)
+	public Dimension findDimension(String formalDimensionIndividualUri) {
+		Resource formalDimensionIndividual = ModelUtils.getResourceIfExists(model, formalDimensionIndividualUri);
+		if (formalDimensionIndividual == null)
 			throw new ContextModelException(
-					"cannot find formal dimension individual with URI " + uri);
+					"cannot find formal dimension individual with URI " + formalDimensionIndividualUri);
 
 		Dimension dimension = null;
 		QueryExecution qe = null;
 		try {
-			qe = QueryUtils.createQuery(model, DIMENSION_QUERY_NAME, uri);
+			qe = QueryUtils.createQuery(model, DIMENSION_QUERY_NAME, formalDimensionIndividualUri);
 			ResultSet rs = qe.execSelect();
 			if (rs.hasNext()) {
 				dimension = DimensionImpl
 						.createFromFormalDimensionAndQuerySolution(this,
-								formalDimension, rs.next(), null);
+								formalDimensionIndividual, rs.next(), null);
 				if (rs.hasNext())
 					throw new ContextModelException(
-							"Found more than one dimension with uri " + uri);
+							"Found more than one dimension with uri " + formalDimensionIndividualUri);
 			}
 		} catch (Exception ex) {
 			throw new ContextModelException("Cannot read dimension", ex);
@@ -108,35 +108,35 @@ public class ContextModelProxyImpl implements ContextModelProxy {
 
 		if (dimension == null)
 			throw new ContextModelException(
-					"cannot find dimension with formal dimension " + uri);
+					"cannot find dimension with formal dimension " + formalDimensionIndividualUri);
 		return dimension;
 	}
 
 	@Override
-	public Dimension findDimensionByAssignmentClass(String assignmentClassUri) {
+	public Dimension findDimensionByActualDimensionClass(String actualDimensionClassUri) {
 		// TODO maybe the owl class check is too much (would need inference)
-		Resource assignmentClass = ModelUtils.getResourceWithProperty(model,
-				assignmentClassUri, RDF.type, OWL.Class);
-		if (assignmentClass == null)
+		Resource actualDimensionClass = ModelUtils.getResourceWithProperty(model,
+				actualDimensionClassUri, RDF.type, OWL.Class);
+		if (actualDimensionClass == null)
 			throw new ContextModelException(
 					"cannot find assignment class with URI "
-							+ assignmentClassUri);
+							+ actualDimensionClassUri);
 
 		Dimension dimension = null;
 		QueryExecution qe = null;
 		try {
 			qe = QueryUtils.createQuery(model,
-					DIMENSION_BY_ASSIGNMENT_CLASS_QUERY_NAME,
-					assignmentClassUri);
+					DIMENSION_BY_ACTUAL_DIMENSION_CLASS_QUERY_NAME,
+					actualDimensionClassUri);
 			ResultSet rs = qe.execSelect();
 			if (rs.hasNext()) {
 				dimension = DimensionImpl
-						.createFromAssignmentClassAndQuerySolution(this,
-								assignmentClass, rs.next(), null);
+						.createFromActualDimensionClassAndQuerySolution(this,
+								actualDimensionClass, rs.next(), null);
 				if (rs.hasNext())
 					throw new ContextModelException(
 							"Found more than one dimension with assignment class "
-									+ assignmentClassUri);
+									+ actualDimensionClassUri);
 			}
 		} catch (Exception ex) {
 			throw new ContextModelException("Cannot read dimension", ex);
@@ -148,7 +148,7 @@ public class ContextModelProxyImpl implements ContextModelProxy {
 		if (dimension == null)
 			throw new ContextModelException(
 					"cannot find dimension with assignment class "
-							+ assignmentClass.getURI());
+							+ actualDimensionClass.getURI());
 		return dimension;
 	}
 

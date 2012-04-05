@@ -4,6 +4,8 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.ContextModelException;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ValueParameter;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.util.ModelUtils;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.util.QueryUtils;
 
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 public class ValueImpl extends ContextModelEntityImpl implements Value {
 	private static final String VALUE_SUB_DIMENSIONS_QUERY_NAME = "value_sub_dimensions";
 	private static final String VALUE_PARENT_DIMENSION_QUERY_NAME = "value_parent_dimension";
+	private static final String VALUE_PARAMETERS_QUERY_NAME = "value_parameters";
+	private static final String VALUE_PARAMETER_QUERY_NAME = "value_parameter";
 	private Dimension parentDimension;
 
 	private ValueImpl(ContextModelProxy proxy, Resource valueIndividual,
@@ -32,10 +36,8 @@ public class ValueImpl extends ContextModelEntityImpl implements Value {
 		QueryExecution qe = null;
 		try {
 			qe = QueryUtils.createQuery(getProxy().getModel(),
-					VALUE_SUB_DIMENSIONS_QUERY_NAME, getParentDimension()
-							.getAssignmentClass().getURI(),
-					getValueIndividual().getURI(), getParentDimension()
-							.getAssignmentProperty().getURI());
+					VALUE_SUB_DIMENSIONS_QUERY_NAME, getValueIndividual()
+							.getURI());
 			ResultSet rs = qe.execSelect();
 			while (rs.hasNext()) {
 				Dimension dimension = DimensionImpl.createFromQuerySolution(
@@ -90,6 +92,60 @@ public class ValueImpl extends ContextModelEntityImpl implements Value {
 		while (rootDimension.getParentValue() != null)
 			rootDimension = rootDimension.getParentValue().getParentDimension();
 		return rootDimension;
+	}
+
+	@Override
+	public Collection<? extends ValueParameter> listParameters() {
+		List<ValueParameter> parameters = new ArrayList<ValueParameter>();
+		QueryExecution qe = null;
+		try {
+			qe = QueryUtils.createQuery(getProxy().getModel(),
+					VALUE_PARAMETERS_QUERY_NAME, getValueIndividual().getURI());
+			ResultSet rs = qe.execSelect();
+			while (rs.hasNext()) {
+				ValueParameter parameter = ValueParameterImpl
+						.createFromQuerySolution(getProxy(), rs.next(), this);
+				parameters.add(parameter);
+			}
+		} catch (Exception ex) {
+			throw new ContextModelException("Cannot read value parameters", ex);
+		} finally {
+			if (qe != null)
+				qe.close();
+		}
+
+		return parameters;
+	}
+
+	@Override
+	public ValueParameter findParameter(String formalParameterIndividualUri) {
+		Resource formalParameterIndividual = ModelUtils.getResourceIfExists(
+				getProxy().getModel(), formalParameterIndividualUri);
+		if (formalParameterIndividual == null)
+			throw new ContextModelException(
+					"cannot find formal parameter individual with URI "
+							+ formalParameterIndividualUri);
+		ValueParameter parameter = null;
+		QueryExecution qe = null;
+		try {
+			qe = QueryUtils.createQuery(getProxy().getModel(),
+					VALUE_PARAMETER_QUERY_NAME, getValueIndividual().getURI(),
+					formalParameterIndividualUri);
+			ResultSet rs = qe.execSelect();
+			if (rs.hasNext()) {
+				parameter = ValueParameterImpl
+						.createFromFormalParameterAndQuerySolution(getProxy(),
+								rs.next(), this, formalParameterIndividual);
+			}
+		} catch (Exception ex) {
+			throw new ContextModelException("Cannot read value parameter "
+					+ formalParameterIndividualUri, ex);
+		} finally {
+			if (qe != null)
+				qe.close();
+		}
+
+		return parameter;
 	}
 
 	public static Value create(ContextModelProxy proxy,
