@@ -2,6 +2,7 @@ package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters.ValueAdapter;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextProxyManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextSearchManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;

@@ -253,6 +253,8 @@ public class AndroidWifiAdapter extends AbstractWifiAdapter {
 
 	@Override
 	public synchronized void endSession() throws WifiAdapterException {
+		//TODO guardare il codice di riattivazione delle configurazioni in benchmarks, funza da dio
+		// preso da http://code.google.com/p/android-wifi-connecter/source/browse/trunk/src/com/farproc/wifi/connecter/Wifi.java
 		if (!sessionStarted)
 			throw new WifiAdapterException("no session was started");
 
@@ -574,6 +576,7 @@ public class AndroidWifiAdapter extends AbstractWifiAdapter {
 		if (adapterState == AdapterState.CONNECTING) {
 			DetailedState state = info.getDetailedState();
 
+			//TODO probabilmente il BSSID deve essere null per essere un fallimento nostro!
 			if (state == DetailedState.DISCONNECTED
 					|| state == DetailedState.FAILED) {
 				if (BSSID == null

@@ -1,5 +1,6 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters.QueryResultAdapter;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 import android.app.ListActivity;

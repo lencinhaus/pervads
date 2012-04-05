@@ -4,8 +4,9 @@ import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.NamedEntity;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters.NamedEntityAdapter;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextProxyManager;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.LightweightAssignment;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.AssignmentProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.widget.AssignmentView;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.widget.AssignmentView.OnEntityClickListener;
 
@@ -84,7 +85,7 @@ public class AssignmentNavigationActivity extends ListActivity {
 
 		if (intent.hasExtra(ASSIGNMENT_EXTRA)) {
 			// edit the assignment
-			LightweightAssignment assignment = intent.getParcelableExtra(ASSIGNMENT_EXTRA);
+			AssignmentProxy assignment = intent.getParcelableExtra(ASSIGNMENT_EXTRA);
 			Value value = ContextProxyManager.getInstance().getProxy()
 					.findValue(assignment.getValueURI());
 			setValue(value);
@@ -178,7 +179,7 @@ public class AssignmentNavigationActivity extends ListActivity {
 
 	private void returnResult() {
 		if (selectedValue != null) {
-			LightweightAssignment assignment = new LightweightAssignment(selectedValue.getURI());
+			AssignmentProxy assignment = new AssignmentProxy(selectedValue.getURI());
 			Intent intent = new Intent();
 			intent.putExtra(ASSIGNMENT_EXTRA, (Parcelable) assignment);
 			setResult(Activity.RESULT_OK, intent);

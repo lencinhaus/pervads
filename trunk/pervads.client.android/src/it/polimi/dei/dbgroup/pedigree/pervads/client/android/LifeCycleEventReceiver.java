@@ -6,9 +6,6 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiManager;
-import android.text.TextUtils;
 
 public class LifeCycleEventReceiver extends BroadcastReceiver {
 	private static final Logger L = new Logger(LifeCycleEventReceiver.class);
@@ -31,8 +28,10 @@ public class LifeCycleEventReceiver extends BroadcastReceiver {
 			boolean autoUpdate = settings.getAutoUpdate();
 			boolean serviceRunning = Utils.checkServiceRunning(context,
 					PervAdsService.class);
-			
-			if(Logger.D) L.d("boot completed. auto-update: " + autoUpdate + ", serviceRunning: " + serviceRunning);
+
+			if (Logger.D)
+				L.d("boot completed. auto-update: " + autoUpdate
+						+ ", serviceRunning: " + serviceRunning);
 			// if auto-update is enabled and service is not already started,
 			// start it, bind to it and enable autoupdating
 			if (autoUpdate && !serviceRunning) {
@@ -42,12 +41,12 @@ public class LifeCycleEventReceiver extends BroadcastReceiver {
 				final Intent serviceIntent = getServiceIntent(context);
 				context.startService(serviceIntent);
 			}
-		} /*else if (Intent.ACTION_SHUTDOWN.equals(action)) {
-			// stop PervAdsService if it's running
-			if (Utils.checkServiceRunning(context, PervAdsService.class)) {
-				context.stopService(getServiceIntent(context));
-			}
-		}*/
+		} /*
+		 * else if (Intent.ACTION_SHUTDOWN.equals(action)) { // stop
+		 * PervAdsService if it's running if (Utils.checkServiceRunning(context,
+		 * PervAdsService.class)) {
+		 * context.stopService(getServiceIntent(context)); } }
+		 */
 	}
 
 	private static final Intent getServiceIntent(Context context) {

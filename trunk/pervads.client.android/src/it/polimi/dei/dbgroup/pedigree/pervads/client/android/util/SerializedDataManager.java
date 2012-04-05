@@ -51,6 +51,7 @@ public abstract class SerializedDataManager<T> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void deserializeData() {
 		File dataFile = getDataFile();
 		if (!dataFile.exists())

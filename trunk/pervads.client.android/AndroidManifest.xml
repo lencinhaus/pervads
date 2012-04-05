@@ -34,7 +34,7 @@
 </intent-filter>
 <meta-data android:resource="@xml/assignment_searchable" android:name="android.app.searchable"></meta-data>
 </activity>
-<uses-library android:name="com.google.android.maps"></uses-library>
+<activity android:name="AssignmentEditorActivity" android:label="@string/assignment_editor_activity_label" android:icon="@drawable/icon"></activity>
 </application>
     <uses-sdk android:minSdkVersion="3"/>
 

@@ -3,10 +3,11 @@ package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.R;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters.AssignmentAdapter;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextProxyManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextSearchManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextSearchManager.OnValueSelectedListener;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.LightweightAssignment;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.AssignmentProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.Query;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager.OnFinishListener;
@@ -272,13 +273,13 @@ public class QueryEditorActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == ADD_ASSIGNMENT_BY_NAVIGATION_REQUEST) {
 			if (resultCode == Activity.RESULT_OK) {
-				LightweightAssignment assignment = data
+				AssignmentProxy assignment = data
 						.getParcelableExtra(AssignmentNavigationActivity.ASSIGNMENT_EXTRA);
 				assignmentAdded(assignment);
 			}
 		} else if (requestCode == EDIT_ASSIGNMENT_REQUEST) {
 			if (resultCode == Activity.RESULT_OK) {
-				LightweightAssignment assignment = data
+				AssignmentProxy assignment = data
 						.getParcelableExtra(AssignmentNavigationActivity.ASSIGNMENT_EXTRA);
 				assignmentUpdated(assignment);
 			}
@@ -287,9 +288,9 @@ public class QueryEditorActivity extends ListActivity {
 	}
 
 	private void initializeAssignmentAdapter() {
-		assignmentAdapter = new AssignmentAdapter(QueryEditorActivity.this,
-				query.getAssignments());
+		assignmentAdapter = new AssignmentAdapter(QueryEditorActivity.this);
 		setListAdapter(assignmentAdapter);
+		assignmentAdapter.setAssignments(query.getAssignments());
 	}
 
 	private void addAssignmentByNavigation() {
@@ -313,7 +314,7 @@ public class QueryEditorActivity extends ListActivity {
 		conflictingValue = null;
 		Dimension rootDimension = value.getRootDimension();
 		for (int i = 0; i < query.getAssignments().size(); i++) {
-			LightweightAssignment assignment = query.getAssignments().get(i);
+			AssignmentProxy assignment = query.getAssignments().get(i);
 			Value assignmentValue = ContextProxyManager.getInstance()
 					.getProxy().findValue(assignment.getValueURI());
 			if (assignmentValue.getRootDimension().equals(rootDimension)) {
@@ -326,12 +327,12 @@ public class QueryEditorActivity extends ListActivity {
 			}
 		}
 
-		LightweightAssignment assignment = new LightweightAssignment(value.getURI());
+		AssignmentProxy assignment = new AssignmentProxy(value.getURI());
 		assignmentAdded(assignment);
 	}
 
 	private void replaceAssignment() {
-		LightweightAssignment assignment = query.getAssignments().get(
+		AssignmentProxy assignment = query.getAssignments().get(
 				conflictingAssignmentId);
 		assignment.setValueURI(pendingValue.getURI());
 		assignmentAdapter.notifyDataSetChanged();
@@ -341,33 +342,33 @@ public class QueryEditorActivity extends ListActivity {
 		conflictingRootDimension = null;
 	}
 
-	private void assignmentAdded(LightweightAssignment assignment) {
+	private void assignmentAdded(AssignmentProxy assignment) {
 		query.getAssignments().add(assignment);
-		assignmentAdapter.notifyDataSetChanged();
+		assignmentAdapter.setAssignments(query.getAssignments());
 	}
 
-	private void assignmentUpdated(LightweightAssignment assignment) {
+	private void assignmentUpdated(AssignmentProxy assignment) {
 		if (editAssignmentId != -1) {
 			query.getAssignments().remove(editAssignmentId);
 			query.getAssignments().add(editAssignmentId, assignment);
-			assignmentAdapter.notifyDataSetChanged();
+			assignmentAdapter.setAssignments(query.getAssignments());
 			editAssignmentId = -1;
 		}
 	}
 
 	private void deleteAssignment(int id) {
 		query.getAssignments().remove(id);
-		assignmentAdapter.notifyDataSetChanged();
+		assignmentAdapter.setAssignments(query.getAssignments());
 	}
 
 	private void clearAssignments() {
 		query.getAssignments().clear();
-		assignmentAdapter.notifyDataSetChanged();
+		assignmentAdapter.setAssignments(query.getAssignments());
 	}
 
 	private void editAssignment(int id) {
 		editAssignmentId = id;
-		LightweightAssignment assignment = query.getAssignments().get(id);
+		AssignmentProxy assignment = query.getAssignments().get(id);
 		Intent intent = new Intent(this, AssignmentNavigationActivity.class);
 		intent.putExtra(AssignmentNavigationActivity.ASSIGNMENT_EXTRA,
 				(Parcelable) assignment);
@@ -386,7 +387,7 @@ public class QueryEditorActivity extends ListActivity {
 		int index = 0;
 		for (int i = 0; i < query.getAssignments().size(); i++) {
 			if (i != editAssignmentId) {
-				LightweightAssignment assignment = query.getAssignments().get(i);
+				AssignmentProxy assignment = query.getAssignments().get(i);
 				Value value = ContextProxyManager.getInstance().getProxy()
 						.findValue(assignment.getValueURI());
 				uris[index++] = value.getRootDimension().getURI();
@@ -400,7 +401,7 @@ public class QueryEditorActivity extends ListActivity {
 		int count = query.getAssignments().size();
 		String[] uris = new String[count];
 		for (int i = 0; i < count; i++) {
-			LightweightAssignment assignment = query.getAssignments().get(i);
+			AssignmentProxy assignment = query.getAssignments().get(i);
 			uris[i] = assignment.getValueURI();
 		}
 

@@ -8,7 +8,7 @@ import android.os.Parcelable;
 
 public class Query implements Parcelable {
 	public static final long serialVersionUID = 0L;
-	private List<LightweightAssignment> assignments = new ArrayList<LightweightAssignment>();
+	private List<AssignmentProxy> assignments = new ArrayList<AssignmentProxy>();
 	private String name;
 	private boolean enabled = true;
 
@@ -16,7 +16,7 @@ public class Query implements Parcelable {
 
 	}
 
-	public List<LightweightAssignment> getAssignments() {
+	public List<AssignmentProxy> getAssignments() {
 		return assignments;
 	}
 
@@ -65,6 +65,6 @@ public class Query implements Parcelable {
 		this();
 		name = in.readString();
 		enabled = in.readInt() == 1;
-		in.readTypedList(assignments, LightweightAssignment.CREATOR);
+		in.readTypedList(assignments, AssignmentProxy.CREATOR);
 	}
 }

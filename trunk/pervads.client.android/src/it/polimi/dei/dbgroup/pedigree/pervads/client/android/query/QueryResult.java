@@ -7,6 +7,7 @@ public class QueryResult {
 	private String queryName;
 	private List<MatchingPervAD> matchingPervADs = new ArrayList<MatchingPervAD>();
 
+	@SuppressWarnings("unused")
 	private QueryResult() {
 	}
 

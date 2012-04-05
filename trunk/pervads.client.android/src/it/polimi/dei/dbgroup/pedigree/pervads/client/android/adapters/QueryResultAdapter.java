@@ -1,10 +1,7 @@
-package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
+package it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
-
-import java.util.Collections;
-import java.util.List;
-
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.QueryResult;
+import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.ResultManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,38 +9,32 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class ValueAdapter extends BaseAdapter {
+public class QueryResultAdapter extends BaseAdapter {
 
 	private LayoutInflater inflater = null;
-	private List<? extends Value> values = Collections.EMPTY_LIST;
+
+	private ResultManager manager = null;
 
 	private class ViewHolder {
-		public TextView text;
-		public TextView summary;
+		public TextView text1;
+		public TextView text2;
 	}
 
-	public ValueAdapter(Context context) {
+	public QueryResultAdapter(Context context) {
+		super();
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
-
-	public void setValues(List<? extends Value> values) {
-		this.values = values;
-		notifyDataSetChanged();
-	}
-
-	public Value getValue(int position) {
-		return values.get(position);
+		this.manager = new ResultManager(context);
 	}
 
 	@Override
 	public int getCount() {
-		return values.size();
+		return manager.getResults().size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return values.get(position);
+		return manager.getResults().get(position);
 	}
 
 	@Override
@@ -51,25 +42,32 @@ public class ValueAdapter extends BaseAdapter {
 		return position;
 	}
 
+	public void update() {
+		manager.synchronize();
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder;
-		Value value = values.get(position);
+		QueryResult result = manager.getResults().get(position);
 		if (convertView == null) {
 			convertView = inflater.inflate(android.R.layout.simple_list_item_2,
 					null);
 
 			holder = new ViewHolder();
-			holder.text = (TextView) convertView
+			holder.text1 = (TextView) convertView
 					.findViewById(android.R.id.text1);
-			holder.summary = (TextView) convertView
+			holder.text2 = (TextView) convertView
 					.findViewById(android.R.id.text2);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.text.setText(value.getName());
-		holder.summary.setText(value.getParentDimension().getName());
+
+		holder.text1.setText(result.getQueryName());
+		holder.text2.setText(result.getMatchingPervADs().size() + " pervads");
+
 		return convertView;
 	}
 

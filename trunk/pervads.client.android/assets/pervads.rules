@@ -1,0 +1,73 @@
+@prefix cmv: <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>.
+
+-> tableAll().
+
+# rdf/rdfs/owl closure
+
+[subclasstype: (?x rdfs:subClassOf ?y), notEqual(?x, ?y) -> [(?z rdf:type ?y) <- (?z rdf:type ?x)]]
+#[subclass1:  (?a rdfs:subClassOf ?c) <- unbound(?c) (?a rdfs:subClassOf ?b) (?b rdfs:subClassOf ?c)] 
+#[subclass2:  (?a rdfs:subClassOf ?c) <- bound(?c)   (?b rdfs:subClassOf ?c) (?a rdfs:subClassOf ?b)]
+[subproperty: (?p rdfs:subPropertyOf ?q), notEqual(?p, ?q) -> [(?x ?q ?y) <- (?x ?p ?y)]]
+[domain:  (?p rdfs:domain ?c) -> [(?x rdf:type ?c) <- (?x ?p ?y)] ] 
+[range:  (?p rdfs:range ?c)  -> [(?y rdf:type ?c) <- (?x ?p ?y), notFunctor(?y)] ] 
+[inverseOf1: (?P owl:inverseOf ?Q) -> (?Q owl:inverseOf ?P) ]
+[inverseOf2: (?P owl:inverseOf ?Q) -> [(?y ?Q ?x) <- (?x ?P ?y)]]
+[inverseof3:  (?P owl:inverseOf ?Q) (?P rdfs:range ?C) -> (?Q rdfs:domain ?C)]
+[inverseof4:  (?P owl:inverseOf ?Q) (?P rdfs:domain ?C) -> (?Q rdfs:range ?C)]
+
+# context model rules
+
+[dimension:
+	(?AD rdfs:subClassOf cmv:ActualDimension) 
+	(?AD rdfs:subClassOf ?dimRestr)
+	(?dimRestr owl:onProperty cmv:formalDimension)
+	(?dimRestr owl:hasValue ?dimension)
+	(?AD rdfs:subClassOf ?valRestr)
+	(?valRestr owl:onProperty cmv:dimensionValue)
+	(?valRestr owl:someValuesFrom ?valuesClass)
+	->
+	[(?x cmv:formalDimension ?dimension) <- (?x rdf:type ?AD)]
+	[(?y rdf:type ?valuesClass) <- (?x rdf:type ?AD), (?x cmv:dimensionValue ?y)]
+]
+
+[superDimension:
+	(?AD rdfs:subClassOf cmv:ActualDimension)
+	(?AD rdfs:subClassOf ?contextRestr)
+	(?contextRestr owl:onProperty cmv:inContext)
+	(?contextRestr owl:someValuesFrom ?hasDimRestr)
+	(?hasDimRestr owl:onProperty cmv:hasDimension)
+	(?hasDimRestr owl:someValuesFrom ?superRestr)
+	(?superRestr owl:intersectionOf ?superInt)
+	(?superInt rdf:first ?superAD)	
+	(?superAD rdfs:subClassOf cmv:ActualDimension)
+	(?superInt rdf:rest ?superInt2)
+	(?superInt2 rdf:first ?valRestr)
+	(?valRestr owl:onProperty cmv:dimensionValue)
+	(?valRestr owl:hasValue ?val)
+	->
+	[(?t cmv:inContext ?c) <- (?x rdf:type ?AD), (?x cmv:inContext ?c), noValue(?y rdf:type ?superAD), makeSkolem(?t, ?c, ?inContext, ?superAD)]
+	[(?t rdf:type ?superAD) <- (?x rdf:type ?AD), (?x cmv:inContext ?c), noValue(?y rdf:type ?superAD), makeSkolem(?t, ?c, ?inContext, ?superAD)]
+	[(?y cmv:dimensionValue ?val) <- (?x rdf:type ?AD), (?x cmv:inContext ?c), (?y rdf:type ?superAD), (?y cmv:inContext ?c)]
+]
+
+[parameter:
+	(?AP rdfs:subClassOf cmv:ActualParameter)
+	(?AP rdfs:subClassOf ?dimensionValueRestr)
+	(?dimensionValueRestr owl:onProperty cmv:parameterOfValue)
+	(?dimensionValueRestr owl:hasValue ?dimensionValue)
+	(?AP rdfs:subClassOf ?parameterValueRestr)
+	(?parameterValueRestr owl:onProperty cmv:parameterValue)
+	(?parameterValueRestr owl:someValuesFrom ?parameterValueType)
+	(?AP rdfs:subClassOf ?parameterRestr)
+	(?parameterRestr owl:onProperty cmv:formalParameter)
+	(?parameterRestr owl:hasValue ?parameter)
+	->
+	[(?x cmv:parameterOfValue ?dimensionValue) <- (?x rdf:type ?AP)]
+	[(?v rdf:type ?parameterValueType) <- (?x rdf:type ?AP) (?x cmv:parameterValue ?v)]
+	[(?x cmv:formalParameter ?parameter) <- (?x rdf:type ?AP)]
+]
+# VALIDATION
+
+#[(?v rb:validation on()) ->
+#	[(?x rb:violation error('actual dimension of no context', 'ActualDimension individual which is not bound to any Context individual') <- (?x rdf:type cmv:ActualDimension), noValue(?x cmv:inContext ?y)]
+#]

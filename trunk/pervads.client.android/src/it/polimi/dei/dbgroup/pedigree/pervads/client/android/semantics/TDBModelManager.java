@@ -17,7 +17,7 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.tdb.TDBFactory;
 
 public class TDBModelManager implements Initializable {
-	private static final String CONTEXT_STORE_ARCHIVE_ASSET = "context_model_tdb.zip";
+	private static final String CONTEXT_STORE_ARCHIVE_ASSET = "pervads-context-model_tdb.zip";
 	// private static final String CONTEXT_STORE_ARCHIVE_ASSET =
 	// "dummy_tdb.zip";
 	private static final String STORE_DIRECTORY_NAME = "store";

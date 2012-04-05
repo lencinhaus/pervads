@@ -5,14 +5,11 @@ import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.wifi.ConnectionInfo;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;

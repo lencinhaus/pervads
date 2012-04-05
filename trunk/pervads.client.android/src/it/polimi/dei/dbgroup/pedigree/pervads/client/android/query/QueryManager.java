@@ -36,6 +36,6 @@ public class QueryManager extends SerializedDataManager<List<Query>> {
 	@Override
 	protected void initializeXStream(XStream xstream) {
 		xstream.alias("query", Query.class);
-		xstream.alias("assignment", LightweightAssignment.class);
+		xstream.alias("assignment", AssignmentProxy.class);
 	}
 }

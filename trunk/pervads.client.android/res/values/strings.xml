@@ -107,4 +107,6 @@
 <string name="query_editor_dialog_replace_assignment_message">Choosen value &lt;b&gt;%1$s&lt;/b&gt; and existing value &lt;b&gt;%2$s&lt;/b&gt; share the same root category (&lt;b&gt;%3$s&lt;/b&gt;). Do you want to replace the existing value with the new one?</string>
 
 <string name="notification_new_pervads_content_text">You received &lt;b&gt;%d&lt;/b&gt; &lt;i&gt;new&lt;/i&gt; &lt;b&gt;PervAds&lt;/b&gt;!</string>
+
+<string name="assignment_editor_activity_label">Choose a category</string>
 </resources>

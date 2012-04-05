@@ -14,9 +14,9 @@ public final class Config {
 	public static final boolean DEBUG_RESET = false;
 	
 	public static final boolean TESTING_BEHAVIOR = true;
-	// disabled, connect to all available networks event in testing behavior
-//	public static final String TESTING_SSID = "LOREPRI";
-	public static final int TESTING_GATEWAY = Utils.parseIPAddress("192.168.1.100");
+	// leave null in order to connect to all available networks even in testing behavior
+	public static final String TESTING_SSID = "LOREPRI";
+	public static final int TESTING_GATEWAY = Utils.parseIPAddress("192.168.1.102");
 	
 	public static final String WEP40_PASSWORD = "1234567890";
 	public static final String WEP104_PASSWORD = "12345678901234567890123456";

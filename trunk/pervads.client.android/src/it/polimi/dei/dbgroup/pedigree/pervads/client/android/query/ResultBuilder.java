@@ -1,31 +1,27 @@
 package it.polimi.dei.dbgroup.pedigree.pervads.client.android.query;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.matching.AssignmentMatching;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.matching.DimensionAssignmentMatching;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.matching.Matching;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.AssignmentDefinition;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ActualDimensionAssignment;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelFactory;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ContextModelProxy;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.FormalDimensionAssignment;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.Config;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.context.ContextProxyManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.AttachedMediaManager;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.data.HotspotClient;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.OWLSpecializedReasoner;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.PervADsMatcher;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.TDBAwareOntDocumentManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.semantics.TDBModelManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Initializable;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.InitializationManager;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Logger;
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.ProgressMonitor;
-import it.polimi.dei.dbgroup.pedigree.pervads.client.android.util.Utils;
+import it.polimi.dei.dbgroup.pedigree.pervads.model.matching.PervADsMatcher;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.Offer;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervAD;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelFactory;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.proxy.PervADsModelProxy;
 import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsModel;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -36,9 +32,6 @@ import java.util.Map;
 import java.util.Set;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.Environment;
-import arq.query;
 
 import com.hp.hpl.jena.ontology.OntDocumentManager;
 import com.hp.hpl.jena.ontology.OntModel;
@@ -51,10 +44,10 @@ import com.hp.hpl.jena.reasoner.Reasoner;
 public class ResultBuilder implements Initializable {
 	private static ResultBuilder instance = null;
 	private final Logger L = new Logger(ResultBuilder.class.getSimpleName());
-	private Map<String, List<? extends AssignmentDefinition>> queryDefinitions;
+	private Map<String, List<FormalDimensionAssignment>> queryDefinitions;
 	private Map<String, QueryResult> resultsMap;
 	private QueryManager queryManager = null;
-	private PervADsMatcher matcher = new PervADsMatcher();
+	private PervADsMatcher<FormalDimensionAssignment, ActualDimensionAssignment> matcher;
 	private Reasoner reasoner;
 	private boolean initialized = false;
 	private boolean started = false;
@@ -121,20 +114,22 @@ public class ResultBuilder implements Initializable {
 					if (Logger.D)
 						L.d("matching pervad with query " + queryName);
 					QueryResult result = resultsMap.get(queryName);
-					matcher.setDefinitions(queryDefinitions.get(queryName));
-					Matching matching = matcher.match();
+					matcher.setSourceDimensionAssignments(queryDefinitions
+							.get(queryName));
+					Matching<FormalDimensionAssignment, ActualDimensionAssignment> matching = matcher
+							.match();
 					if (matching.getScore() > 0) {
 						if (Logger.D)
 							L.d("positive matching with score "
 									+ matching.getScore());
-						LightweightPervAD lPervad = new LightweightPervAD();
-						List<LightweightAssignmentMatching> lAssignmentMatchings = new ArrayList<LightweightAssignmentMatching>();
-						for (AssignmentMatching assignmentMatching : matching
-								.getAssignmentMatchings()) {
-							LightweightAssignment lAssignment = new LightweightAssignment(
-									assignmentMatching.getDefinition()
-											.getValue().getURI());
-							LightweightAssignmentMatching lAssignmentMatching = new LightweightAssignmentMatching(
+						PervADProxy lPervad = new PervADProxy();
+						List<MatchingAssignment> lAssignmentMatchings = new ArrayList<MatchingAssignment>();
+						for (DimensionAssignmentMatching<FormalDimensionAssignment, ActualDimensionAssignment> assignmentMatching : matching
+								.getMatchings()) {
+							AssignmentProxy lAssignment = new AssignmentProxy(
+									assignmentMatching.getTarget().getValue()
+											.getURI());
+							MatchingAssignment lAssignmentMatching = new MatchingAssignment(
 									assignmentMatching.getScore(), lAssignment);
 							lAssignmentMatchings.add(lAssignmentMatching);
 						}
@@ -168,23 +163,23 @@ public class ResultBuilder implements Initializable {
 		if (queries.size() > 0) {
 			ContextModelProxy contextModel = ContextProxyManager.getInstance()
 					.getProxy();
-			queryDefinitions = new HashMap<String, List<? extends AssignmentDefinition>>();
+			queryDefinitions = new HashMap<String, List<FormalDimensionAssignment>>();
 			resultsMap = new HashMap<String, QueryResult>();
 			for (Query query : queries) {
 				if (query.isEnabled()) {
 					started = true;
-					
+
 					String queryName = query.getName();
 					if (Logger.D)
 						L.d("initializing assignment definitions for query "
 								+ queryName);
-					List<AssignmentDefinition> definitions = new ArrayList<AssignmentDefinition>();
-					for (LightweightAssignment assignment : query
+					List<FormalDimensionAssignment> definitions = new ArrayList<FormalDimensionAssignment>();
+					for (AssignmentProxy assignment : query
 							.getAssignments()) {
 						Value value = contextModel.findValue(assignment
 								.getValueURI());
 						definitions.add(ContextModelFactory
-								.createAssignmentDefinition(value));
+								.createDimensionAssignment(value));
 					}
 					queryDefinitions.put(queryName, definitions);
 					QueryResult result = new QueryResult(queryName);
@@ -240,6 +235,10 @@ public class ResultBuilder implements Initializable {
 
 			// create query manager
 			queryManager = new QueryManager(context);
+			
+			// create the location service and matcher
+			AndroidLocationService locationService = new AndroidLocationService(context);
+			matcher = new PervADsMatcher<FormalDimensionAssignment, ActualDimensionAssignment>(locationService);
 
 			initialized = true;
 		}
