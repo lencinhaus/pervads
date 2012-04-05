@@ -1,0 +1,98 @@
+@prefix : <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl>     a owl:Ontology .
+
+:ActualDimension     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onProperty :dimensionValue;
+     owl:someValuesFrom :Value ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :parentDimension;
+     owl:someValuesFrom :ActualDimension ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :formalDimension;
+     owl:someValuesFrom :Dimension ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :inContext;
+     owl:someValuesFrom :Context ] .
+
+:ActualParameter     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onProperty :ofValue;
+     owl:someValuesFrom :Value ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :formalParameter;
+     owl:someValuesFrom :Parameter ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :parameterValue;
+     owl:someValuesFrom xsd:anyType ] .
+
+:Context     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onProperty :hasDimension;
+     owl:someValuesFrom :ActualDimension ] .
+
+:Dimension     a owl:Class .
+
+:Parameter     a owl:Class .
+
+:Value     a owl:Class .
+
+:dimensionDataValue     a owl:DatatypeProperty;
+ rdfs:domain :Value;
+ rdfs:range xsd:anyType .
+
+:dimensionValue     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ rdfs:domain :ActualDimension;
+ rdfs:range :Value .
+
+:formalDimension     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ rdfs:domain :ActualDimension;
+ rdfs:range :Dimension .
+
+:formalParameter     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ rdfs:domain :ActualParameter;
+ rdfs:range :Parameter .
+
+:hasDimension     a owl:ObjectProperty;
+ rdfs:domain :Context;
+ rdfs:range :ActualDimension .
+
+:hasParameter     a owl:ObjectProperty;
+ rdfs:domain :Value;
+ rdfs:range :ActualParameter .
+
+:inContext     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ owl:inverseOf :hasDimension .
+
+:ofValue     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ owl:inverseOf :hasParameter .
+
+:parameterValue     a owl:DatatypeProperty,
+	owl:FunctionalProperty;
+ rdfs:domain :ActualParameter;
+ rdfs:range xsd:anyType .
+
+:parentDimension     a owl:FunctionalProperty,
+	owl:ObjectProperty;
+ rdfs:domain :ActualDimension;
+ rdfs:range :ActualDimension .
+
+xsd:anyType     a rdfs:Datatype .

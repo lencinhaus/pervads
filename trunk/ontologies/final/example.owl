@@ -1,0 +1,614 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY model "http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:model="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#date -->
+
+    <rdfs:Datatype rdf:about="&xsd;date"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;dimensionValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;hasDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#inContext -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;inContext"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#advertises -->
+
+    <owl:ObjectProperty rdf:about="&model;advertises"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAdvertiser -->
+
+    <owl:ObjectProperty rdf:about="&model;hasAdvertiser"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasContext -->
+
+    <owl:ObjectProperty rdf:about="&model;hasContext"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#offers -->
+
+    <owl:ObjectProperty rdf:about="&model;offers"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#valueOfDimension -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#valueOfDimension">
+        <owl:inverseOf rdf:resource="&context-model-vocabulary;dimensionValue"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parameterValue -->
+
+    <owl:DatatypeProperty rdf:about="&context-model-vocabulary;parameterValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#discount -->
+
+    <owl:DatatypeProperty rdf:about="&model;discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedVideo -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedVideo"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasDetailCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasDetailCoupon"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasListCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasListCoupon"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasTag -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasTag"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemDescription -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemDescription"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemName -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationAddress -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationAddress"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationCity -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationCity"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationEmail -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationEmail"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationName -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationWebsite -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationWebsite"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validFrom -->
+
+    <owl:DatatypeProperty rdf:about="&model;validFrom"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validUntil -->
+
+    <owl:DatatypeProperty rdf:about="&model;validUntil"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Context -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Context"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge -->
+
+    <owl:Class rdf:about="&context-model;ActualAge"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge-Birthday-X -->
+
+    <owl:Class rdf:about="&context-model;ActualAge-Birthday-X"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge-Exact-X -->
+
+    <owl:Class rdf:about="&context-model;ActualAge-Exact-X"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge-Interval-From -->
+
+    <owl:Class rdf:about="&context-model;ActualAge-Interval-From"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge-Interval-To -->
+
+    <owl:Class rdf:about="&context-model;ActualAge-Interval-To"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDimension-Interest-Topic-1-1 -->
+
+    <owl:Class rdf:about="&context-model;ActualDimension-Interest-Topic-1-1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDimension-Interest-Topic-1-1-1-1 -->
+
+    <owl:Class rdf:about="&context-model;ActualDimension-Interest-Topic-1-1-1-1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDimension-Interest-Topic-10-1 -->
+
+    <owl:Class rdf:about="&context-model;ActualDimension-Interest-Topic-10-1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualGender -->
+
+    <owl:Class rdf:about="&context-model;ActualGender"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace -->
+
+    <owl:Class rdf:about="&context-model;ActualSpace"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace-Exact-Within-Location-Location -->
+
+    <owl:Class rdf:about="&context-model;ActualSpace-Exact-Within-Location-Location"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace-Exact-Within-Location-Radius -->
+
+    <owl:Class rdf:about="&context-model;ActualSpace-Exact-Within-Location-Radius"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime -->
+
+    <owl:Class rdf:about="&context-model;ActualTime"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime-Interval-From -->
+
+    <owl:Class rdf:about="&context-model;ActualTime-Interval-From"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime-Interval-To -->
+
+    <owl:Class rdf:about="&context-model;ActualTime-Interval-To"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Dimension-Interest-Topic-1-1Value -->
+
+    <owl:Class rdf:about="&context-model;Dimension-Interest-Topic-1-1Value">
+        <owl:disjointWith rdf:resource="&context-model;Interest-TopicValue"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Interest-TopicValue -->
+
+    <owl:Class rdf:about="&context-model;Interest-TopicValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Discount -->
+
+    <owl:Class rdf:about="&model;Discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Good -->
+
+    <owl:Class rdf:about="&model;Good"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#OfferedItem -->
+
+    <owl:Class rdf:about="&model;OfferedItem"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Organization -->
+
+    <owl:Class rdf:about="&model;Organization"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#PervAD -->
+
+    <owl:Class rdf:about="&model;PervAD"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Service -->
+
+    <owl:Class rdf:about="&model;Service"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-birthday -->
+
+    <owl:NamedIndividual rdf:about="&context-model;age-birthday"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-exact -->
+
+    <owl:NamedIndividual rdf:about="&context-model;age-exact"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-interval -->
+
+    <owl:NamedIndividual rdf:about="&context-model;age-interval"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gender-male -->
+
+    <owl:NamedIndividual rdf:about="&context-model;gender-male"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-exact-within-location -->
+
+    <owl:NamedIndividual rdf:about="&context-model;space-exact-within-location"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-exact-within-location-location -->
+
+    <owl:NamedIndividual rdf:about="&context-model;space-exact-within-location-location"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-interval -->
+
+    <owl:NamedIndividual rdf:about="&context-model;time-interval"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value-interest-topic-1-1-1 -->
+
+    <owl:NamedIndividual rdf:about="&context-model;value-interest-topic-1-1-1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value-interest-topic-1-1-1-1-1 -->
+
+    <owl:NamedIndividual rdf:about="&context-model;value-interest-topic-1-1-1-1-1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value-interest-topic-10-1-4 -->
+
+    <owl:NamedIndividual rdf:about="&context-model;value-interest-topic-10-1-4"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age">
+        <rdf:type rdf:resource="&context-model;ActualAge"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;age-interval"/>
+        <context-model-vocabulary:inContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age-interval-from -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age-interval-from">
+        <rdf:type rdf:resource="&context-model;ActualAge-Interval-From"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;positiveInteger">20</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age-interval-to -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age-interval-to">
+        <rdf:type rdf:resource="&context-model;ActualAge-Interval-To"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;positiveInteger">40</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-gender -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-gender">
+        <rdf:type rdf:resource="&context-model;ActualGender"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;gender-male"/>
+        <context-model-vocabulary:inContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space">
+        <rdf:type rdf:resource="&context-model;ActualSpace"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;space-exact-within-location"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space-location -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space-location">
+        <rdf:type rdf:resource="&context-model;ActualSpace-Exact-Within-Location-Location"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;string">Via Sant&#39;Antonino 3, Bergamo</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space-radius -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space-radius">
+        <rdf:type rdf:resource="&context-model;ActualSpace-Exact-Within-Location-Radius"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;double">30</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time">
+        <rdf:type rdf:resource="&context-model;ActualTime"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;time-interval"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time-from -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time-from">
+        <rdf:type rdf:resource="&context-model;ActualTime-Interval-From"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;dateTime">2010-01-01T00:00:00</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time-to -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time-to">
+        <rdf:type rdf:resource="&context-model;ActualTime-Interval-To"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;dateTime">2012-01-01T00:00:00</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c_topic -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c_topic">
+        <rdf:type rdf:resource="&context-model;ActualDimension-Interest-Topic-1-1-1-1"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;value-interest-topic-1-1-1-1-1"/>
+        <context-model-vocabulary:inContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context">
+        <rdf:type rdf:resource="&context-model-vocabulary;Context"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-age"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-gender"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-space"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-time"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c_topic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1">
+        <rdf:type rdf:resource="&model;Good"/>
+        <model:itemName rdf:datatype="&xsd;string">lunch</model:itemName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2">
+        <rdf:type rdf:resource="&model;Service"/>
+        <model:itemName rdf:datatype="&xsd;string">dinner</model:itemName>
+        <model:itemDescription rdf:datatype="&xsd;string">really cheap dinner</model:itemDescription>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer">
+        <rdf:type rdf:resource="&model;Discount"/>
+        <model:discount rdf:datatype="&xsd;float">.1</model:discount>
+        <model:validFrom rdf:datatype="&xsd;dateTime">2011-01-01T00:00:00</model:validFrom>
+        <model:validUntil rdf:datatype="&xsd;dateTime">2011-12-31T23:59:59</model:validUntil>
+        <model:hasListCoupon rdf:datatype="&xsd;anyURI">coupon.png</model:hasListCoupon>
+        <model:hasAttachedVideo rdf:datatype="&xsd;anyURI">video.avi</model:hasAttachedVideo>
+        <model:offers rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1"/>
+        <model:offers rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization">
+        <rdf:type rdf:resource="&model;Organization"/>
+        <model:organizationAddress rdf:datatype="&xsd;string">3rd street</model:organizationAddress>
+        <model:organizationCity rdf:datatype="&xsd;string">New York</model:organizationCity>
+        <model:organizationWebsite rdf:datatype="&xsd;anyURI">http://www.restaurantxyz.com</model:organizationWebsite>
+        <model:organizationEmail rdf:datatype="&xsd;string">info@restaurantxyz.com</model:organizationEmail>
+        <model:organizationName rdf:datatype="&xsd;string">restaurant XYZ</model:organizationName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#pervad -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#pervad">
+        <rdf:type rdf:resource="&model;PervAD"/>
+        <model:hasTag rdf:datatype="&xsd;string">cheap</model:hasTag>
+        <model:hasTag rdf:datatype="&xsd;string">restaurant</model:hasTag>
+        <model:hasContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+        <model:advertises rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer"/>
+        <model:hasAdvertiser rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,3325 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+  <!ENTITY this 'http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#'>
+  <!ENTITY rdfs 'http://www.w3.org/2000/01/rdf-schema#'>
+  <!ENTITY c 'http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#'>
+  <!ENTITY owl 'http://www.w3.org/2002/07/owl#'>
+  <!ENTITY xsd 'http://www.w3.org/2001/XMLSchema#'>
+  <!ENTITY rdf 'http://www.w3.org/1999/02/22-rdf-syntax-ns#'>]>
+<rdf:RDF
+    xmlns:rdf="&rdf;"
+    xmlns="&this;"
+    xmlns:owl="&owl;"
+    xmlns:c="&c;"
+    xmlns:xsd="&xsd;"
+    xmlns:rdfs="&rdfs;"
+  xml:base="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl">
+  <owl:Ontology rdf:about="">
+    <owl:imports rdf:resource="../context-model-vocabulary.owl"/>
+    <owl:versionInfo>0.1</owl:versionInfo>
+  </owl:Ontology>
+  <owl:Class rdf:ID="TimeValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-17-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:ID="ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-17">
+                        <rdfs:label xml:lang="es">Relojes, joyas y artículos de regalo</rdfs:label>
+                        <rdfs:label xml:lang="en">Clocks, jewelry and gifts</rdfs:label>
+                        <rdfs:label xml:lang="fr">Horloges, montres, bijoux et articles cadeau</rdfs:label>
+                        <rdfs:label xml:lang="it">Orologi, gioielli ed articoli da regalo</rdfs:label>
+                        <rdfs:label xml:lang="de">Uhren, schmuck und geschenkartikel</rdfs:label>
+                        <rdfs:label>Clocks, jewelry and gifts</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-17-1">
+            <rdfs:label xml:lang="es">Tipo de relojes, joyas y artículos de regalo</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of clocks, jewelry and gifts</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de horloges, montres, bijoux et articles cadeau</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di orologi, gioielli ed articoli da regalo</rdfs:label>
+            <rdfs:label xml:lang="de">Uhren, schmuck und geschenkartikel sorte</rdfs:label>
+            <rdfs:label>Kind of clocks, jewelry and gifts</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-17-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Location-X">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AdvertiserValue rdf:ID="space-exact-location">
+            <rdfs:label xml:lang="en">Location</rdfs:label>
+            <rdfs:label xml:lang="it">Posizione</rdfs:label>
+            <rdfs:label>Location</rdfs:label>
+            <rdf:type>
+              <owl:Class rdf:ID="SpaceValue"/>
+            </rdf:type>
+          </AdvertiserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-location-X">
+            <rdfs:label xml:lang="en">location</rdfs:label>
+            <rdfs:label xml:lang="it">posizione</rdfs:label>
+            <rdfs:label>location</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-11-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-11">
+                        <rdfs:label xml:lang="es">Entes públicos y comunidades</rdfs:label>
+                        <rdfs:label xml:lang="en">Public authorities and communities</rdfs:label>
+                        <rdfs:label xml:lang="fr">Organismes publics et communautés</rdfs:label>
+                        <rdfs:label xml:lang="it">Enti pubblici e comunita'</rdfs:label>
+                        <rdfs:label xml:lang="de">Öffentliche vereine und gemeinschaften</rdfs:label>
+                        <rdfs:label>Public authorities and communities</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-11-1">
+            <rdfs:label xml:lang="es">Tipo de entes públicos y comunidades</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of public authorities and communities</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de organismes publics et communautés</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di enti pubblici e comunita'</rdfs:label>
+            <rdfs:label xml:lang="de">Öffentliche vereine und gemeinschaften sorte</rdfs:label>
+            <rdfs:label>Kind of public authorities and communities</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-11-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Interval-From">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AdvertiserValue rdf:ID="age-interval">
+            <rdfs:label xml:lang="en">Age interval</rdfs:label>
+            <rdfs:label xml:lang="it">Intervallo di età</rdfs:label>
+            <rdfs:label>Age interval</rdfs:label>
+            <rdf:type>
+              <owl:Class rdf:ID="AgeValue"/>
+            </rdf:type>
+          </AdvertiserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;positiveInteger"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-interval-from">
+            <rdfs:label xml:lang="en">from</rdfs:label>
+            <rdfs:label xml:lang="it">da</rdfs:label>
+            <rdfs:label>from</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-4-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <QueryDimension rdf:ID="space">
+            <rdfs:label xml:lang="en">Where</rdfs:label>
+            <rdfs:label xml:lang="it">Dove</rdfs:label>
+            <rdfs:label>Where</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+          </QueryDimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#SpaceValue"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-7-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-1-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-13-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-10-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-10">
+                        <rdfs:label xml:lang="es">Electrónica y electrotecnia</rdfs:label>
+                        <rdfs:label xml:lang="en">Electronic and electrical engineering</rdfs:label>
+                        <rdfs:label xml:lang="fr">Électronique et électrotechnique</rdfs:label>
+                        <rdfs:label xml:lang="it">Elettronica ed elettrotecnica</rdfs:label>
+                        <rdfs:label xml:lang="de">Elektronik und elektrotechnik</rdfs:label>
+                        <rdfs:label>Electronic and electrical engineering</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-10-1">
+            <rdfs:label xml:lang="es">Tipo de electrónica y electrotecnia</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of electronic and electrical engineering</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de électronique et électrotechnique</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di elettronica ed elettrotecnica</rdfs:label>
+            <rdfs:label xml:lang="de">Elektronik und elektrotechnik sorte</rdfs:label>
+            <rdfs:label>Kind of electronic and electrical engineering</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-10-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualGender">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <ProfileDimension rdf:ID="gender">
+            <rdfs:label xml:lang="en">Gender</rdfs:label>
+            <rdfs:label xml:lang="it">Sesso</rdfs:label>
+            <rdfs:label>Gender</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+          </ProfileDimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="GenderValue"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualTime-Exact-Date">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <TimeValue rdf:ID="time-exact">
+            <rdfs:label xml:lang="en">Exact date</rdfs:label>
+            <rdfs:label xml:lang="it">Data esatta</rdfs:label>
+            <rdfs:label>Exact date</rdfs:label>
+          </TimeValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="time-exact-date">
+            <rdfs:label xml:lang="en">date</rdfs:label>
+            <rdfs:label xml:lang="it">data</rdfs:label>
+            <rdfs:label>date</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-19-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-19">
+                        <rdfs:label xml:lang="es">Publicidad y servicios para empresas</rdfs:label>
+                        <rdfs:label xml:lang="en">Advertising and services for business</rdfs:label>
+                        <rdfs:label xml:lang="fr">Publicité et services pour entreprises</rdfs:label>
+                        <rdfs:label xml:lang="it">Pubblicita' e servizi per le aziende</rdfs:label>
+                        <rdfs:label xml:lang="de">Werbung und dienstleistungen an unternehmen</rdfs:label>
+                        <rdfs:label>Advertising and services for business</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-19-1">
+            <rdfs:label xml:lang="es">Tipo de publicidad y servicios para empresas</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of advertising and services for business</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de publicité et services pour entreprises</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di pubblicita' e servizi per le aziende</rdfs:label>
+            <rdfs:label xml:lang="de">Werbung und dienstleistungen an unternehmen sorte</rdfs:label>
+            <rdfs:label>Kind of advertising and services for business</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-19-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualTime">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <QueryDimension rdf:ID="time">
+            <rdfs:label xml:lang="en">When</rdfs:label>
+            <rdfs:label xml:lang="it">Quando</rdfs:label>
+            <rdfs:label>When</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+          </QueryDimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#TimeValue"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-15-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-15">
+                        <rdfs:label xml:lang="es">Mecánica</rdfs:label>
+                        <rdfs:label xml:lang="en">Mechanics</rdfs:label>
+                        <rdfs:label xml:lang="fr">Mécanique</rdfs:label>
+                        <rdfs:label xml:lang="it">Meccanica</rdfs:label>
+                        <rdfs:label xml:lang="de">Mechanik</rdfs:label>
+                        <rdfs:label>Mechanics</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-15-1">
+            <rdfs:label xml:lang="es">Tipo de mecánica</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of mechanics</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de mécanique</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di meccanica</rdfs:label>
+            <rdfs:label xml:lang="de">Mechanik sorte</rdfs:label>
+            <rdfs:label>Kind of mechanics</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-15-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-14-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Coordinates-Latitude">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AdvertiserValue rdf:ID="space-exact-coordinates">
+            <rdfs:label xml:lang="en">Coordinates</rdfs:label>
+            <rdfs:label xml:lang="it">Coordinate</rdfs:label>
+            <rdfs:label>Coordinates</rdfs:label>
+            <rdf:type>
+              <owl:Class rdf:about="#SpaceValue"/>
+            </rdf:type>
+          </AdvertiserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;double"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-coordinates-latitude">
+            <rdfs:label xml:lang="en">latitude</rdfs:label>
+            <rdfs:label xml:lang="it">latitudine</rdfs:label>
+            <rdfs:label>latitude</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Interest-TopicValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-2-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-13-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-13">
+                        <rdfs:label xml:lang="es">Suministros para oficinas y empresas</rdfs:label>
+                        <rdfs:label xml:lang="en">Office and business supplies</rdfs:label>
+                        <rdfs:label xml:lang="fr">Fournitures pour bureaux et entreprises</rdfs:label>
+                        <rdfs:label xml:lang="it">Forniture per uffici ed aziende</rdfs:label>
+                        <rdfs:label xml:lang="de">Belieferung an büros und unternehmen</rdfs:label>
+                        <rdfs:label>Office and business supplies</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-13-1">
+            <rdfs:label xml:lang="es">Tipo de suministros para oficinas y empresas</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of office and business supplies</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de fournitures pour bureaux et entreprises</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di forniture per uffici ed aziende</rdfs:label>
+            <rdfs:label xml:lang="de">Belieferung an büros und unternehmen sorte</rdfs:label>
+            <rdfs:label>Kind of office and business supplies</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-13-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-17-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-3-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SpaceValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-8-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-2-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-2">
+                        <rdfs:label xml:lang="es">Alimentación</rdfs:label>
+                        <rdfs:label xml:lang="en">Food and related products</rdfs:label>
+                        <rdfs:label xml:lang="fr">Alimentation</rdfs:label>
+                        <rdfs:label xml:lang="it">Alimentazione</rdfs:label>
+                        <rdfs:label xml:lang="de">Ernährung</rdfs:label>
+                        <rdfs:label>Food and related products</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-2-1">
+            <rdfs:label xml:lang="es">Tipo de alimentación</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of food and related products</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de alimentation</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di alimentazione</rdfs:label>
+            <rdfs:label xml:lang="de">Ernährung sorte</rdfs:label>
+            <rdfs:label>Kind of food and related products</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-2-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-21-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-20-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-5-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-5">
+                        <rdfs:label xml:lang="es">Papel y estampa</rdfs:label>
+                        <rdfs:label xml:lang="en">Paper and printing</rdfs:label>
+                        <rdfs:label xml:lang="fr">Papier et imprimerie</rdfs:label>
+                        <rdfs:label xml:lang="it">Carta e stampa</rdfs:label>
+                        <rdfs:label xml:lang="de">Papier und druck</rdfs:label>
+                        <rdfs:label>Paper and printing</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-5-1">
+            <rdfs:label xml:lang="es">Tipo de papel y estampa</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of paper and printing</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de papier et imprimerie</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di carta e stampa</rdfs:label>
+            <rdfs:label xml:lang="de">Papier und druck sorte</rdfs:label>
+            <rdfs:label>Kind of paper and printing</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-5-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-11-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ImplicitParameter">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Parameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-4-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-4">
+                        <rdfs:label xml:lang="es">Automóviles, transportes y embalajes</rdfs:label>
+                        <rdfs:label xml:lang="en">Cars, transportation and packaging</rdfs:label>
+                        <rdfs:label xml:lang="fr">Automobiles, transports et emballages</rdfs:label>
+                        <rdfs:label xml:lang="it">Automobili, trasporti ed imballaggi</rdfs:label>
+                        <rdfs:label xml:lang="de">Autos, transporte und verpackungen</rdfs:label>
+                        <rdfs:label>Cars, transportation and packaging</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-4-1">
+            <rdfs:label xml:lang="es">Tipo de automóviles, transportes y embalajes</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of cars, transportation and packaging</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de automobiles, transports et emballages</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di automobili, trasporti ed imballaggi</rdfs:label>
+            <rdfs:label xml:lang="de">Autos, transporte und verpackungen sorte</rdfs:label>
+            <rdfs:label>Kind of cars, transportation and packaging</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-4-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-18-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Dimension-Interest-Topic-6-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Within-Here-Here">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <UserValue rdf:ID="space-exact-within-here">
+            <rdfs:label xml:lang="en">Within N kilometers from here</rdfs:label>
+            <rdfs:label xml:lang="it">In un raggio di N kilometri da qui</rdfs:label>
+            <rdfs:label>Within N kilometers from here</rdfs:label>
+            <rdf:type rdf:resource="#SpaceValue"/>
+          </UserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <ImplicitParameter rdf:ID="space-exact-within-here-here">
+            <rdfs:label xml:lang="en">here</rdfs:label>
+            <rdfs:label xml:lang="it">qui</rdfs:label>
+            <rdfs:label>here</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Parameter"/>
+          </ImplicitParameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-14-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-14">
+                        <rdfs:label xml:lang="es">Informática y telecomunicaciones</rdfs:label>
+                        <rdfs:label xml:lang="en">Information technology and telecommunications</rdfs:label>
+                        <rdfs:label xml:lang="fr">Informatique et télécommunications</rdfs:label>
+                        <rdfs:label xml:lang="it">Informatica e telecomunicazioni</rdfs:label>
+                        <rdfs:label xml:lang="de">Informatik und telekommunikation</rdfs:label>
+                        <rdfs:label>Information technology and telecommunications</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-14-1">
+            <rdfs:label xml:lang="es">Tipo de informática y telecomunicaciones</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of information technology and telecommunications</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de informatique et télécommunications</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di informatica e telecomunicazioni</rdfs:label>
+            <rdfs:label xml:lang="de">Informatik und telekommunikation sorte</rdfs:label>
+            <rdfs:label>Kind of information technology and telecommunications</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-14-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="QueryDimension">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-19-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Within-Location-Location">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <UserValue rdf:ID="space-exact-within-location">
+            <rdfs:label xml:lang="en">Within N kilometers from location</rdfs:label>
+            <rdfs:label xml:lang="it">In un raggio di N kilometri da posizione</rdfs:label>
+            <rdfs:label>Within N kilometers from location</rdfs:label>
+            <rdf:type rdf:resource="#SpaceValue"/>
+          </UserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-within-location-location">
+            <rdfs:label xml:lang="en">location</rdfs:label>
+            <rdfs:label xml:lang="it">posizione</rdfs:label>
+            <rdfs:label>location</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-12-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-12">
+                        <rdfs:label xml:lang="es">Hacienda, créditos y seguros</rdfs:label>
+                        <rdfs:label xml:lang="en">Finance, credit, insurance</rdfs:label>
+                        <rdfs:label xml:lang="fr">Finance, crédit, assurances</rdfs:label>
+                        <rdfs:label xml:lang="it">Finanza, credito, assicurazioni</rdfs:label>
+                        <rdfs:label xml:lang="de">Finanz, kreditinstitute, versicherungen</rdfs:label>
+                        <rdfs:label>Finance, credit, insurance</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-12-1">
+            <rdfs:label xml:lang="es">Tipo de hacienda, créditos y seguros</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of finance, credit, insurance</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de finance, crédit, assurances</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di finanza, credito, assicurazioni</rdfs:label>
+            <rdfs:label xml:lang="de">Finanz, kreditinstitute, versicherungen sorte</rdfs:label>
+            <rdfs:label>Kind of finance, credit, insurance</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-12-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-9-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-9">
+                        <rdfs:label xml:lang="es">Construcción y obras públicas</rdfs:label>
+                        <rdfs:label xml:lang="en">Building industry and public works</rdfs:label>
+                        <rdfs:label xml:lang="fr">Bâtiment et travaux publics</rdfs:label>
+                        <rdfs:label xml:lang="it">Edilizia e lavori pubblici</rdfs:label>
+                        <rdfs:label xml:lang="de">Bauwesen und öffentliche arbeiten</rdfs:label>
+                        <rdfs:label>Building industry and public works</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-9-1">
+            <rdfs:label xml:lang="es">Tipo de construcción y obras públicas</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of building industry and public works</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de bâtiment et travaux publics</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di edilizia e lavori pubblici</rdfs:label>
+            <rdfs:label xml:lang="de">Bauwesen und öffentliche arbeiten sorte</rdfs:label>
+            <rdfs:label>Kind of building industry and public works</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-9-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="AdvertiserValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Within-Location-Radius">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#space-exact-within-location"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;double"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-within-location-radius">
+            <rdfs:label xml:lang="en">radius in kilometers</rdfs:label>
+            <rdfs:label xml:lang="it">raggio in kilometri</rdfs:label>
+            <rdfs:label>radius in kilometers</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-8-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-8">
+                        <rdfs:label xml:lang="es">Ecología y termotecnia</rdfs:label>
+                        <rdfs:label xml:lang="en">Environmental protection and heat engineering</rdfs:label>
+                        <rdfs:label xml:lang="fr">Écologie et thermotechnique</rdfs:label>
+                        <rdfs:label xml:lang="it">Ecologia e termotecnica</rdfs:label>
+                        <rdfs:label xml:lang="de">Ökologie und wärmetechnik</rdfs:label>
+                        <rdfs:label>Environmental protection and heat engineering</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-8-1">
+            <rdfs:label xml:lang="es">Tipo de ecología y termotecnia</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of environmental protection and heat engineering</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de écologie et thermotechnique</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di ecologia e termotecnica</rdfs:label>
+            <rdfs:label xml:lang="de">Ökologie und wärmetechnik sorte</rdfs:label>
+            <rdfs:label>Kind of environmental protection and heat engineering</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-8-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ProfileDimension">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Coordinates-Longitude">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#space-exact-coordinates"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;double"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-coordinates-longitude">
+            <rdfs:label xml:lang="en">longitude</rdfs:label>
+            <rdfs:label xml:lang="it">longitudine</rdfs:label>
+            <rdfs:label>longitude</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="UserValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-7-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-7">
+                        <rdfs:label xml:lang="es">Cultura, arte y editoría</rdfs:label>
+                        <rdfs:label xml:lang="en">Culture, art and publishing</rdfs:label>
+                        <rdfs:label xml:lang="fr">Culture, art et édition</rdfs:label>
+                        <rdfs:label xml:lang="it">Cultura, arte ed editoria</rdfs:label>
+                        <rdfs:label xml:lang="de">Kultur, kunst und verlagswesen</rdfs:label>
+                        <rdfs:label>Culture, art and publishing</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-7-1">
+            <rdfs:label xml:lang="es">Tipo de cultura, arte y editoría</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of culture, art and publishing</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de culture, art et édition</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di cultura, arte ed editoria</rdfs:label>
+            <rdfs:label xml:lang="de">Kultur, kunst und verlagswesen sorte</rdfs:label>
+            <rdfs:label>Kind of culture, art and publishing</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-7-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-16-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-16">
+                        <rdfs:label xml:lang="es">Medicina y estética</rdfs:label>
+                        <rdfs:label xml:lang="en">Medicine and beauty care</rdfs:label>
+                        <rdfs:label xml:lang="fr">Médecine et esthétique</rdfs:label>
+                        <rdfs:label xml:lang="it">Medicina ed estetica</rdfs:label>
+                        <rdfs:label xml:lang="de">Medizin und schönheitspflege</rdfs:label>
+                        <rdfs:label>Medicine and beauty care</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-16-1">
+            <rdfs:label xml:lang="es">Tipo de medicina y estética</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of medicine and beauty care</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de médecine et esthétique</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di medicina ed estetica</rdfs:label>
+            <rdfs:label xml:lang="de">Medizin und schönheitspflege sorte</rdfs:label>
+            <rdfs:label>Kind of medicine and beauty care</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:ID="Dimension-Interest-Topic-16-1Value"/>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Exact-X">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AdvertiserValue rdf:ID="age-exact">
+            <rdfs:label xml:lang="en">Exact age</rdfs:label>
+            <rdfs:label xml:lang="it">Età esatta</rdfs:label>
+            <rdfs:label>Exact age</rdfs:label>
+            <rdf:type>
+              <owl:Class rdf:about="#AgeValue"/>
+            </rdf:type>
+          </AdvertiserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;positiveInteger"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-exact-X">
+            <rdfs:label xml:lang="en">age</rdfs:label>
+            <rdfs:label xml:lang="it">età</rdfs:label>
+            <rdfs:label>age</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-15-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:about="#AgeValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-1-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-1">
+                        <rdfs:label xml:lang="es">Ropa</rdfs:label>
+                        <rdfs:label xml:lang="en">Clothing</rdfs:label>
+                        <rdfs:label xml:lang="fr">Habillement</rdfs:label>
+                        <rdfs:label xml:lang="it">Abbigliamento</rdfs:label>
+                        <rdfs:label xml:lang="de">Bekleidung</rdfs:label>
+                        <rdfs:label>Clothing</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-1-1">
+            <rdfs:label xml:lang="es">Tipo de ropa</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of clothing</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de habillement</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di abbigliamento</rdfs:label>
+            <rdfs:label xml:lang="de">Bekleidung sorte</rdfs:label>
+            <rdfs:label>Kind of clothing</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-1-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-5-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Birthday-X">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AgeValue rdf:ID="age-birthday">
+            <rdfs:label xml:lang="en">Birthday</rdfs:label>
+            <rdfs:label xml:lang="it">Data di nascita</rdfs:label>
+            <rdfs:label>Birthday</rdfs:label>
+          </AgeValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;date"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-birthday-X">
+            <rdfs:label xml:lang="en">date</rdfs:label>
+            <rdfs:label xml:lang="it">data</rdfs:label>
+            <rdfs:label>date</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualTime-Interval-To">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <TimeValue rdf:ID="time-interval">
+            <rdfs:label xml:lang="en">Interval</rdfs:label>
+            <rdfs:label xml:lang="it">Intervallo</rdfs:label>
+            <rdfs:label>Interval</rdfs:label>
+          </TimeValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="time-interval-to">
+            <rdfs:label xml:lang="en">to</rdfs:label>
+            <rdfs:label xml:lang="it">a</rdfs:label>
+            <rdfs:label>to</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-21-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-21">
+                        <rdfs:label xml:lang="es">Turismo</rdfs:label>
+                        <rdfs:label xml:lang="en">Tourism</rdfs:label>
+                        <rdfs:label xml:lang="fr">Tourisme</rdfs:label>
+                        <rdfs:label xml:lang="it">Turismo</rdfs:label>
+                        <rdfs:label xml:lang="de">Touristik</rdfs:label>
+                        <rdfs:label>Tourism</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-21-1">
+            <rdfs:label xml:lang="es">Tipo de turismo</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of tourism</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de tourisme</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di turismo</rdfs:label>
+            <rdfs:label xml:lang="de">Touristik sorte</rdfs:label>
+            <rdfs:label>Kind of tourism</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-21-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-6-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-6">
+                        <rdfs:label xml:lang="es">Química, goma y plástico</rdfs:label>
+                        <rdfs:label xml:lang="en">Chemicals, rubber, plastics</rdfs:label>
+                        <rdfs:label xml:lang="fr">Chimie, caoutchouc, matières plastiques</rdfs:label>
+                        <rdfs:label xml:lang="it">Chimica, gomma, materie plastiche</rdfs:label>
+                        <rdfs:label xml:lang="de">Chemie, gummi, plastik</rdfs:label>
+                        <rdfs:label>Chemicals, rubber, plastics</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-6-1">
+            <rdfs:label xml:lang="es">Tipo de química, goma y plástico</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of chemicals, rubber, plastics</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de chimie, caoutchouc, matières plastiques</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di chimica, gomma, materie plastiche</rdfs:label>
+            <rdfs:label xml:lang="de">Chemie, gummi, plastik sorte</rdfs:label>
+            <rdfs:label>Kind of chemicals, rubber, plastics</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-6-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-18-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-18">
+                        <rdfs:label xml:lang="es">Profesionales - estudios y servicios</rdfs:label>
+                        <rdfs:label xml:lang="en">Professional workers - services and consultancies</rdfs:label>
+                        <rdfs:label xml:lang="fr">Professionnels - bureaux et conseils</rdfs:label>
+                        <rdfs:label xml:lang="it">Professionisti - studi e consulenze</rdfs:label>
+                        <rdfs:label xml:lang="de">Freiberüfler - büros und beratung</rdfs:label>
+                        <rdfs:label>Professional workers - services and consultancies</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-18-1">
+            <rdfs:label xml:lang="es">Tipo de profesionales - estudios y servicios</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of professional workers - services and consultancies</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de professionnels - bureaux et conseils</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di professionisti - studi e consulenze</rdfs:label>
+            <rdfs:label xml:lang="de">Freiberüfler - büros und beratung sorte</rdfs:label>
+            <rdfs:label>Kind of professional workers - services and consultancies</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-18-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ActualInterest-Topic">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <QueryDimension rdf:ID="interest-topic">
+            <rdfs:comment xml:lang="en">Product categories</rdfs:comment>
+            <rdfs:comment xml:lang="it">Categorie merceologiche
+		</rdfs:comment>
+            <rdfs:comment>Product categories</rdfs:comment>
+            <rdfs:label xml:lang="en">What</rdfs:label>
+            <rdfs:label xml:lang="it">Cosa</rdfs:label>
+            <rdfs:label>What</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+          </QueryDimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Interest-TopicValue"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-10-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Birthday-Interval-To">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <AdvertiserValue rdf:ID="age-birthday-interval">
+            <rdfs:label xml:lang="en">Birthday interval</rdfs:label>
+            <rdfs:label xml:lang="it">Intervallo di nascita</rdfs:label>
+            <rdfs:label>Birthday interval</rdfs:label>
+            <rdf:type rdf:resource="#AgeValue"/>
+          </AdvertiserValue>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;date"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-birthday-interval-to">
+            <rdfs:label xml:lang="en">to date</rdfs:label>
+            <rdfs:label xml:lang="it">a</rdfs:label>
+            <rdfs:label>to date</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <ProfileDimension rdf:ID="age">
+            <rdfs:label xml:lang="en">Age</rdfs:label>
+            <rdfs:label xml:lang="it">Età</rdfs:label>
+            <rdfs:label>Age</rdfs:label>
+            <rdf:type rdf:resource="../context-model-vocabulary.owl#Dimension"/>
+          </ProfileDimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#AgeValue"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-20-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-20">
+                        <rdfs:label xml:lang="es">Deporte y tiempo libre</rdfs:label>
+                        <rdfs:label xml:lang="en">Sport and leisure</rdfs:label>
+                        <rdfs:label xml:lang="fr">Sport et loisirs</rdfs:label>
+                        <rdfs:label xml:lang="it">Sport e tempo libero</rdfs:label>
+                        <rdfs:label xml:lang="de">Sport und freizeit</rdfs:label>
+                        <rdfs:label>Sport and leisure</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-20-1">
+            <rdfs:label xml:lang="es">Tipo de deporte y tiempo libre</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of sport and leisure</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de sport et loisirs</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di sport e tempo libero</rdfs:label>
+            <rdfs:label xml:lang="de">Sport und freizeit sorte</rdfs:label>
+            <rdfs:label>Kind of sport and leisure</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-20-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualSpace-Exact-Within-Here-Radius">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#space-exact-within-here"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;double"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="space-exact-within-here-radius">
+            <rdfs:label xml:lang="en">radius in kilometers</rdfs:label>
+            <rdfs:label xml:lang="it">raggio in kilometri</rdfs:label>
+            <rdfs:label>radius in kilometers</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-9-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-16-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:about="#GenderValue">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualTime-Interval-From">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#time-interval"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="time-interval-from">
+            <rdfs:label xml:lang="en">from</rdfs:label>
+            <rdfs:label xml:lang="it">da</rdfs:label>
+            <rdfs:label>from</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualDimension-Interest-Topic-3-1">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ActualInterest-Topic"/>
+                  <owl:Restriction>
+                    <owl:hasValue>
+                      <Interest-TopicValue rdf:ID="value-interest-topic-3">
+                        <rdfs:label xml:lang="es">Decoración</rdfs:label>
+                        <rdfs:label xml:lang="en">Furniture</rdfs:label>
+                        <rdfs:label xml:lang="fr">Ameublement</rdfs:label>
+                        <rdfs:label xml:lang="it">Arredamento</rdfs:label>
+                        <rdfs:label xml:lang="de">Einrichtung</rdfs:label>
+                        <rdfs:label>Furniture</rdfs:label>
+                      </Interest-TopicValue>
+                    </owl:hasValue>
+                    <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+                  </owl:Restriction>
+                </owl:intersectionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty rdf:resource="../context-model-vocabulary.owl#hasDimension"/>
+          </owl:Restriction>
+        </owl:someValuesFrom>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#inContext"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Dimension rdf:ID="dimension-interest-topic-3-1">
+            <rdfs:label xml:lang="es">Tipo de decoración</rdfs:label>
+            <rdfs:label xml:lang="en">Kind of furniture</rdfs:label>
+            <rdfs:label xml:lang="fr">Genre de ameublement</rdfs:label>
+            <rdfs:label xml:lang="it">Tipo di arredamento</rdfs:label>
+            <rdfs:label xml:lang="de">Einrichtung sorte</rdfs:label>
+            <rdfs:label>Kind of furniture</rdfs:label>
+          </c:Dimension>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalDimension"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="#Dimension-Interest-Topic-3-1Value"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#dimensionValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualDimension"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Dimension-Interest-Topic-12-1Value">
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#Value"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Interval-To">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#age-interval"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;positiveInteger"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-interval-to">
+            <rdfs:label xml:lang="en">to</rdfs:label>
+            <rdfs:label xml:lang="it">a</rdfs:label>
+            <rdfs:label>to</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <owl:Class rdf:ID="ActualAge-Birthday-Interval-From">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue rdf:resource="#age-birthday-interval"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterOfValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom rdf:resource="&xsd;date"/>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#parameterValue"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:hasValue>
+          <c:Parameter rdf:ID="age-birthday-interval-from">
+            <rdfs:label xml:lang="en">from date</rdfs:label>
+            <rdfs:label xml:lang="it">da</rdfs:label>
+            <rdfs:label>from date</rdfs:label>
+          </c:Parameter>
+        </owl:hasValue>
+        <owl:onProperty rdf:resource="../context-model-vocabulary.owl#formalParameter"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="../context-model-vocabulary.owl#ActualParameter"/>
+  </owl:Class>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-5">
+    <rdfs:label xml:lang="es">Máquinas herramientas e instalaciones</rdfs:label>
+    <rdfs:label xml:lang="en">Machine tools and systems</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines-outils et équipements</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine utensili e impianti</rdfs:label>
+    <rdfs:label xml:lang="de">Werkzeugmaschinen und anlagen</rdfs:label>
+    <rdfs:label>Machine tools and systems</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-4">
+    <rdfs:label xml:lang="es">Iglesias y asociaciones religiosas</rdfs:label>
+    <rdfs:label xml:lang="en">Churches and religious associations</rdfs:label>
+    <rdfs:label xml:lang="fr">Églises et association religieuses</rdfs:label>
+    <rdfs:label xml:lang="it">Chiese ed associazioni religiose</rdfs:label>
+    <rdfs:label xml:lang="de">Kirchen und religiöse vereine</rdfs:label>
+    <rdfs:label>Churches and religious associations</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-3">
+    <rdfs:label xml:lang="es">Muebles para el baño y sanitarios</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and accessories, bathroom</rdfs:label>
+    <rdfs:label xml:lang="fr">Mobilier salles de bains et sanitaires</rdfs:label>
+    <rdfs:label xml:lang="it">Arredo bagno ed idrosanitari</rdfs:label>
+    <rdfs:label xml:lang="de">Badezimmereinrichtungen und sanitäre anlagen</rdfs:label>
+    <rdfs:label>Furnishings and accessories, bathroom</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-5">
+    <rdfs:label xml:lang="es">Equipos y suministros para talleres de reparación y servicios auxiliares</rdfs:label>
+    <rdfs:label xml:lang="en">Garages, equipment and supplies and auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Équipements et fournitures pour ateliers de réparation et services auxiliaires</rdfs:label>
+    <rdfs:label xml:lang="it">Attrezzature e forniture per officine riparazione e servizi ausiliari</rdfs:label>
+    <rdfs:label xml:lang="de">Ausstattungen und belieferungen für reparaturwerkstätten und hilfstdienste</rdfs:label>
+    <rdfs:label>Garages, equipment and supplies and auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-11">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la construcción y obras públicas</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry and civil works, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour le bâtiment et travaux publics</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per edilizia e lavori pubblici</rdfs:label>
+    <rdfs:label xml:lang="de">Dienstleistungen und arbeiten für bauwesen und öffentliche arbeiten</rdfs:label>
+    <rdfs:label>Building industry and civil works, services and works</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-1">
+    <rdfs:label xml:lang="es">Cerámicas: productos y elaboración</rdfs:label>
+    <rdfs:label xml:lang="en">Ceramics, products and processing</rdfs:label>
+    <rdfs:label xml:lang="fr">Céramiques: produits et travaux</rdfs:label>
+    <rdfs:label xml:lang="it">Ceramiche: prodotti e lavorazioni</rdfs:label>
+    <rdfs:label xml:lang="de">Keramik, produkte und bearbeitung</rdfs:label>
+    <rdfs:label>Ceramics, products and processing</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-5">
+    <rdfs:label xml:lang="es">Administración pública</rdfs:label>
+    <rdfs:label xml:lang="en">Public administration</rdfs:label>
+    <rdfs:label xml:lang="fr">Administration publique</rdfs:label>
+    <rdfs:label xml:lang="it">Pubblica amministrazione</rdfs:label>
+    <rdfs:label xml:lang="de">Öffentliche verwaltung</rdfs:label>
+    <rdfs:label>Public administration</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <GenderValue rdf:ID="gender-male">
+    <rdfs:label xml:lang="en">Male</rdfs:label>
+    <rdfs:label xml:lang="it">Uomo</rdfs:label>
+    <rdfs:label>Male</rdfs:label>
+  </GenderValue>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-4">
+    <rdfs:label xml:lang="es">Elaboración de metales, estampado y soldadura</rdfs:label>
+    <rdfs:label xml:lang="en">Metal working, forming and welding</rdfs:label>
+    <rdfs:label xml:lang="fr">Usinage de métaux, emboutissage et soudure</rdfs:label>
+    <rdfs:label xml:lang="it">Lavorazioni metalli, stampaggio e saldatura</rdfs:label>
+    <rdfs:label xml:lang="de">Metall, bearbeitungen, druck, schweissung</rdfs:label>
+    <rdfs:label>Metal working, forming and welding</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-4">
+    <rdfs:label xml:lang="es">Muebles de dormitorio y complementos</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and accessories, bedroom</rdfs:label>
+    <rdfs:label xml:lang="fr">Mobilier chambre à coucher et accessoires</rdfs:label>
+    <rdfs:label xml:lang="it">Arredo camera letto e complementi</rdfs:label>
+    <rdfs:label xml:lang="de">Schlafzimmer und zubehör</rdfs:label>
+    <rdfs:label>Furnishings and accessories, bedroom</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-3">
+    <rdfs:label xml:lang="es">Asociaciones y órganos de interés público</rdfs:label>
+    <rdfs:label xml:lang="en">Associations and organizations of public interest</rdfs:label>
+    <rdfs:label xml:lang="fr">Associations et organismes d'intérêt public</rdfs:label>
+    <rdfs:label xml:lang="it">Associazioni ed organismi di interesse pubblico</rdfs:label>
+    <rdfs:label xml:lang="de">Vereine und organe öffentlichen interesses</rdfs:label>
+    <rdfs:label>Associations and organizations of public interest</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-9">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la industria del vestido y peleterías</rdfs:label>
+    <rdfs:label xml:lang="en">Clothing and leather goods, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour habillement et maroquineries</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per abbigliamento e pelletterie</rdfs:label>
+    <rdfs:label xml:lang="de">Bekleidung und lederwaren, arbeiten und dienstleistungen</rdfs:label>
+    <rdfs:label>Clothing and leather goods, services and works</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-4">
+    <rdfs:label xml:lang="es">Artículos para  embalaje y confección</rdfs:label>
+    <rdfs:label xml:lang="en">Packing and packaging articles</rdfs:label>
+    <rdfs:label xml:lang="fr">Articles pour emballage et conditionnement</rdfs:label>
+    <rdfs:label xml:lang="it">Articoli per imballaggio e confezionamento</rdfs:label>
+    <rdfs:label xml:lang="de">Artikel für verpackung und aufmachung</rdfs:label>
+    <rdfs:label>Packing and packaging articles</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-2">
+    <rdfs:label xml:lang="es">Suministros para la construcción y obras públicas</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry and civil works, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour le bâtiment et travaux publics</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per edilizia e lavori pubblici</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferung für bauwesen und öffentliche arbeiten</rdfs:label>
+    <rdfs:label>Building industry and civil works, supplies</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-12">
+    <rdfs:label xml:lang="es">Vidrio: productos y elaboración</rdfs:label>
+    <rdfs:label xml:lang="en">Glass, products and processing</rdfs:label>
+    <rdfs:label xml:lang="fr">Verre: produits et travaux</rdfs:label>
+    <rdfs:label xml:lang="it">Vetro: prodotti e lavorazioni</rdfs:label>
+    <rdfs:label xml:lang="de">Glas, produkte und bearbeitung</rdfs:label>
+    <rdfs:label>Glass, products and processing</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-10">
+    <rdfs:label xml:lang="es">Bombas</rdfs:label>
+    <rdfs:label xml:lang="en">Pumps</rdfs:label>
+    <rdfs:label xml:lang="fr">Pompes</rdfs:label>
+    <rdfs:label xml:lang="it">Pompe</rdfs:label>
+    <rdfs:label xml:lang="de">Pumpen</rdfs:label>
+    <rdfs:label>Pumps</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-5">
+    <rdfs:label xml:lang="es">Muebles de cocina y electrodomésticos</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings, kitchen and household appliances</rdfs:label>
+    <rdfs:label xml:lang="fr">Mobilier cuisine et électroménagers</rdfs:label>
+    <rdfs:label xml:lang="it">Arredo cucina ed elettrodomestici</rdfs:label>
+    <rdfs:label xml:lang="de">Kücheneinrichtungen und geräte</rdfs:label>
+    <rdfs:label>Furnishings, kitchen and household appliances</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-7">
+    <rdfs:label xml:lang="es">Metales y ligas</rdfs:label>
+    <rdfs:label xml:lang="en">Metals and alloys</rdfs:label>
+    <rdfs:label xml:lang="fr">Métaux et alliages</rdfs:label>
+    <rdfs:label xml:lang="it">Metalli e leghe</rdfs:label>
+    <rdfs:label xml:lang="de">Metalle und legierungen</rdfs:label>
+    <rdfs:label>Metals and alloys</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-7">
+    <rdfs:label xml:lang="es">Servicios diversos de interés público</rdfs:label>
+    <rdfs:label xml:lang="en">Public services, various</rdfs:label>
+    <rdfs:label xml:lang="fr">Services divers d'intérêt public</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi vari di interesse pubblico</rdfs:label>
+    <rdfs:label xml:lang="de">Verschiedene dienstleistungen im öffentlichen interesse</rdfs:label>
+    <rdfs:label>Public services, various</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-3">
+    <rdfs:label xml:lang="es">Sanitarios y accesorios</rdfs:label>
+    <rdfs:label xml:lang="en">Plumbing fittings and accessories</rdfs:label>
+    <rdfs:label xml:lang="fr">Sanitaires et accessoires</rdfs:label>
+    <rdfs:label xml:lang="it">Idrosanitari e accessori</rdfs:label>
+    <rdfs:label xml:lang="de">Sanitäre anlagen und zubehör</rdfs:label>
+    <rdfs:label>Plumbing fittings and accessories</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-3">
+    <rdfs:label xml:lang="es">Maquinaria y sistemas para almacenaje y movimiento</rdfs:label>
+    <rdfs:label xml:lang="en">Storage and handling, equipment and systems</rdfs:label>
+    <rdfs:label xml:lang="fr">Appareils et systèmes pour emmagasinage et manutention</rdfs:label>
+    <rdfs:label xml:lang="it">Apparecchiature e sistemi per magazzinaggio e movimentazione</rdfs:label>
+    <rdfs:label xml:lang="de">Geräte und systeme für lagerung und bewegung</rdfs:label>
+    <rdfs:label>Storage and handling, equipment and systems</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-6">
+    <rdfs:label xml:lang="es">Materiales semi elaborados y metálicos</rdfs:label>
+    <rdfs:label xml:lang="en">Metal materials, semi-finished</rdfs:label>
+    <rdfs:label xml:lang="fr">Matériaux semi-finis métalliques</rdfs:label>
+    <rdfs:label xml:lang="it">Materiali semilavorati metallici</rdfs:label>
+    <rdfs:label xml:lang="de">Metall, halbprodukte</rdfs:label>
+    <rdfs:label>Metal materials, semi-finished</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-6">
+    <rdfs:label xml:lang="es">Artículos de limpieza</rdfs:label>
+    <rdfs:label xml:lang="en">Cleaning products</rdfs:label>
+    <rdfs:label xml:lang="fr">Articles de nettoyage</rdfs:label>
+    <rdfs:label xml:lang="it">Articoli pulizia</rdfs:label>
+    <rdfs:label xml:lang="de">Reinigungs- und pflegemittel für den haushalt</rdfs:label>
+    <rdfs:label>Cleaning products</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <GenderValue rdf:ID="gender-female">
+    <rdfs:label xml:lang="en">Female</rdfs:label>
+    <rdfs:label xml:lang="it">Donna</rdfs:label>
+    <rdfs:label>Female</rdfs:label>
+  </GenderValue>
+  <Dimension-Interest-Topic-8-1Value rdf:ID="value-interest-topic-8-1-1">
+    <rdfs:label xml:lang="es">Climatización y condicionamiento, maquinaria y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Climate control and conditioning, equipment and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Climatisation, appareils et services</rdfs:label>
+    <rdfs:label xml:lang="it">Climatizzazione e condizionamento, apparecchiature e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Klimatisierung und klimaanlagen, geräte und dienstleistungen</rdfs:label>
+    <rdfs:label>Climate control and conditioning, equipment and services</rdfs:label>
+  </Dimension-Interest-Topic-8-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-10">
+    <rdfs:label xml:lang="es">Cerrajería y carpintería</rdfs:label>
+    <rdfs:label xml:lang="en">Door and window frames</rdfs:label>
+    <rdfs:label xml:lang="fr">Menuiserie</rdfs:label>
+    <rdfs:label xml:lang="it">Serramenti ed infissi</rdfs:label>
+    <rdfs:label xml:lang="de">Fenster und türen</rdfs:label>
+    <rdfs:label>Door and window frames</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-6">
+    <rdfs:label xml:lang="es">Servicios sociales</rdfs:label>
+    <rdfs:label xml:lang="en">Social services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services sociaux</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi sociali</rdfs:label>
+    <rdfs:label xml:lang="de">Sozialdienste</rdfs:label>
+    <rdfs:label>Social services</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-4">
+    <rdfs:label xml:lang="es">Instalaciones y productos tecnológicos para la construcción</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry, technological products and plants</rdfs:label>
+    <rdfs:label xml:lang="fr">Installations et produits technologiques pour le bâtiment</rdfs:label>
+    <rdfs:label xml:lang="it">Impiantistica e prodotti tecnologici per edilizia</rdfs:label>
+    <rdfs:label xml:lang="de">Bauwesen, anlagen und technische produkte</rdfs:label>
+    <rdfs:label>Building industry, technological products and plants</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-2">
+    <rdfs:label xml:lang="es">Maquinaria y sistemas para  embalaje y confección</rdfs:label>
+    <rdfs:label xml:lang="en">Packing and packaging, equipment and systems</rdfs:label>
+    <rdfs:label xml:lang="fr">Appareils et systèmes pour l'emballage et le conditionnement</rdfs:label>
+    <rdfs:label xml:lang="it">Apparecchiature e sistemi per imballaggio e confezionamento</rdfs:label>
+    <rdfs:label xml:lang="de">Geräte und systeme für verpackung und aufmachungtionnement</rdfs:label>
+    <rdfs:label>Packing and packaging, equipment and systems</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-8-1Value rdf:ID="value-interest-topic-8-1-2">
+    <rdfs:label xml:lang="es">Refrigeración, maquinaria y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Refrigeration, equipment and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Techniques du  froid, appareils et services</rdfs:label>
+    <rdfs:label xml:lang="it">Frigotecnica, apparecchiature e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Kühltechnik, anlagen und dienstleistungen</rdfs:label>
+    <rdfs:label>Refrigeration, equipment and services</rdfs:label>
+  </Dimension-Interest-Topic-8-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-9">
+    <rdfs:label xml:lang="es">Motores y órganos de transmisión</rdfs:label>
+    <rdfs:label xml:lang="en">Motors and drives</rdfs:label>
+    <rdfs:label xml:lang="fr">Moteurs et organes de transmission</rdfs:label>
+    <rdfs:label xml:lang="it">Motori ed organi di trasmissione</rdfs:label>
+    <rdfs:label xml:lang="de">Motore und übertragungen</rdfs:label>
+    <rdfs:label>Motors and drives</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-6">
+    <rdfs:label xml:lang="es">Materiales y componentes electrónicos</rdfs:label>
+    <rdfs:label xml:lang="en">Electronic engineering, materials and components</rdfs:label>
+    <rdfs:label xml:lang="fr">Matériaux et composants électroniques</rdfs:label>
+    <rdfs:label xml:lang="it">Materiali e componenti elettronici</rdfs:label>
+    <rdfs:label xml:lang="de">Elektronisches material und komponenten</rdfs:label>
+    <rdfs:label>Electronic engineering, materials and components</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-5-1Value rdf:ID="value-interest-topic-5-1-1">
+    <rdfs:label xml:lang="es">Papel, cartón y productos primarios</rdfs:label>
+    <rdfs:label xml:lang="en">Paper, cardboard and primary products</rdfs:label>
+    <rdfs:label xml:lang="fr">Papier, carton et produits primaires</rdfs:label>
+    <rdfs:label xml:lang="it">Carta, cartone e prodotti primari</rdfs:label>
+    <rdfs:label xml:lang="de">Papier, kartons und vorprodukte</rdfs:label>
+    <rdfs:label>Paper, cardboard and primary products</rdfs:label>
+  </Dimension-Interest-Topic-5-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-9">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la industria química</rdfs:label>
+    <rdfs:label xml:lang="en">Chemical industry, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux de l'industrie chimique</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori industria chimica</rdfs:label>
+    <rdfs:label xml:lang="de">Chemische industrie, arbeiten und dienstleistungen</rdfs:label>
+    <rdfs:label>Chemical industry, services and works</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-5">
+    <rdfs:label xml:lang="es">Electrotécnica profesional y de consumo</rdfs:label>
+    <rdfs:label xml:lang="en">Professional and non-professional electrical engineering</rdfs:label>
+    <rdfs:label xml:lang="fr">Électrotechnique professionnelle et grand public</rdfs:label>
+    <rdfs:label xml:lang="it">Elettrotecnica professionale e di consumo</rdfs:label>
+    <rdfs:label xml:lang="de">Elektrotechnik für beruf und konsum</rdfs:label>
+    <rdfs:label>Professional and non-professional electrical engineering</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-5">
+    <rdfs:label xml:lang="es">Empresas de construcción civil e industrial</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry, residential and industrial</rdfs:label>
+    <rdfs:label xml:lang="fr">Entreprises de constructions civiles et industrielles</rdfs:label>
+    <rdfs:label xml:lang="it">Imprese di costruzioni civili ed industriali</rdfs:label>
+    <rdfs:label xml:lang="de">Private und industrielle bauunternehmen</rdfs:label>
+    <rdfs:label>Building industry, residential and industrial</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-9">
+    <rdfs:label xml:lang="es">Reparación para medios de transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Motor vehicles, repairs</rdfs:label>
+    <rdfs:label xml:lang="fr">Réparations des moyens de transport</rdfs:label>
+    <rdfs:label xml:lang="it">Riparazione dei mezzi di trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Reparatur, transportmittel</rdfs:label>
+    <rdfs:label>Motor vehicles, repairs</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-5-1Value rdf:ID="value-interest-topic-5-1-2">
+    <rdfs:label xml:lang="es">Procesamiento del cartón y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Publishing and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Papeterie et services</rdfs:label>
+    <rdfs:label xml:lang="it">Cartotecnica e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Papiertechnik und dienstleistungen</rdfs:label>
+    <rdfs:label>Publishing and services</rdfs:label>
+  </Dimension-Interest-Topic-5-1Value>
+  <Dimension-Interest-Topic-8-1Value rdf:ID="value-interest-topic-8-1-3">
+    <rdfs:label xml:lang="es">Máquinas e instalaciones para la ecología y eliminación de residuos</rdfs:label>
+    <rdfs:label xml:lang="en">Environmental protection and refuse disposal, machinery and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines et fournitures pour l'écologie et traitement des déchets</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine e forniture per ecologia e smaltimento rifiuti</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen und belieferungen für ökologie und abfallentsorgung</rdfs:label>
+    <rdfs:label>Environmental protection and refuse disposal, machinery and supplies</rdfs:label>
+  </Dimension-Interest-Topic-8-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-6">
+    <rdfs:label xml:lang="es">Máquinas e instalaciones para la construcción y obras públicas</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry and civil works, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines et installations pour le bâtiment et travaux publics</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine ed impianti per edilizia e lavori pubblici</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen und anlagen für bauwesen und öffentliche arbeiten</rdfs:label>
+    <rdfs:label>Building industry and civil works, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-8">
+    <rdfs:label xml:lang="es">Menudencias metálicas y herramientas</rdfs:label>
+    <rdfs:label xml:lang="en">Hardware</rdfs:label>
+    <rdfs:label xml:lang="fr">Minuteries métalliques et quincaillerie</rdfs:label>
+    <rdfs:label xml:lang="it">Minuterie metalliche e ferramenta</rdfs:label>
+    <rdfs:label xml:lang="de">Metallkleinteile</rdfs:label>
+    <rdfs:label>Hardware</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-8">
+    <rdfs:label xml:lang="es">Productos y manufactura en  plástico</rdfs:label>
+    <rdfs:label xml:lang="en">Plastics, products and articles</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits et articles en matières plastiques</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti e manufatti in materie plastiche</rdfs:label>
+    <rdfs:label xml:lang="de">Plastikprodukte und erzeugnisse</rdfs:label>
+    <rdfs:label>Plastics, products and articles</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-4">
+    <rdfs:label xml:lang="es">Electrotécnica industrial, productos y maquinaria</rdfs:label>
+    <rdfs:label xml:lang="en">Industrial electrical engineering, products and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Électrotechnique industrielle, produits et appareils</rdfs:label>
+    <rdfs:label xml:lang="it">Elettrotecnica industriale, prodotti e apparecchiature</rdfs:label>
+    <rdfs:label xml:lang="de">Elektrotechnik für industrie, produkte und geräte</rdfs:label>
+    <rdfs:label>Industrial electrical engineering, products and equipment</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-8">
+    <rdfs:label xml:lang="es">Repuestos y componentes para medios de transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Motor vehicles, spare parts and components</rdfs:label>
+    <rdfs:label xml:lang="fr">Pièces de rechange et composants pour les moyens de transport</rdfs:label>
+    <rdfs:label xml:lang="it">Ricambi e componenti dei mezzi di trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Ersatzteile und komponenten für transportmittel</rdfs:label>
+    <rdfs:label>Motor vehicles, spare parts and components</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-7">
+    <rdfs:label xml:lang="es">Manufacturas ediles y prefabricados</rdfs:label>
+    <rdfs:label xml:lang="en">Building industry, articles and semi-finished products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits de bâtiment et préfabriquées</rdfs:label>
+    <rdfs:label xml:lang="it">Manufatti edili e prefabbricati</rdfs:label>
+    <rdfs:label xml:lang="de">Bauwesen, erzeugnisse und fertigteile</rdfs:label>
+    <rdfs:label>Building industry, articles and semi-finished products</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-8-1Value rdf:ID="value-interest-topic-8-1-4">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la ecología y eliminación de residuos</rdfs:label>
+    <rdfs:label xml:lang="en">Environmental protection and refuse disposal, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour l'écologie et le traitement des déchets</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per ecologia e smaltimento rifiuti</rdfs:label>
+    <rdfs:label xml:lang="de">Arbeiten und dienstleistungen für ökologie und abfallentsorgung</rdfs:label>
+    <rdfs:label>Environmental protection and refuse disposal, services and works</rdfs:label>
+  </Dimension-Interest-Topic-8-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-1">
+    <rdfs:label xml:lang="es">Decoraciones y muebles para la casa</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and furniture, home</rdfs:label>
+    <rdfs:label xml:lang="fr">Ameublements et meubles pour la maison</rdfs:label>
+    <rdfs:label xml:lang="it">Arredamenti e mobili per la casa</rdfs:label>
+    <rdfs:label xml:lang="de">Einrichtungen und möbel für wohnungen</rdfs:label>
+    <rdfs:label>Furnishings and furniture, home</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-5-1Value rdf:ID="value-interest-topic-5-1-3">
+    <rdfs:label xml:lang="es">Composición, estampa y confección</rdfs:label>
+    <rdfs:label xml:lang="en">Setting, printing and packaging</rdfs:label>
+    <rdfs:label xml:lang="fr">Composition, impression et reliure</rdfs:label>
+    <rdfs:label xml:lang="it">Composizione, stampa e confezione</rdfs:label>
+    <rdfs:label xml:lang="de">Zusammenstellung, druck und verpackung</rdfs:label>
+    <rdfs:label>Setting, printing and packaging</rdfs:label>
+  </Dimension-Interest-Topic-5-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-2">
+    <rdfs:label xml:lang="es">Embajadas y entes internacionales</rdfs:label>
+    <rdfs:label xml:lang="en">Embassies and international organizations</rdfs:label>
+    <rdfs:label xml:lang="fr">Ambassades et organismes internationaux</rdfs:label>
+    <rdfs:label xml:lang="it">Ambasciate ed enti internazionali</rdfs:label>
+    <rdfs:label xml:lang="de">Botschaften und internationale stellen</rdfs:label>
+    <rdfs:label>Embassies and international organizations</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-7">
+    <rdfs:label xml:lang="es">Suministros y materiales para  embalaje y confección</rdfs:label>
+    <rdfs:label xml:lang="en">Packing and packaging, supplies and materials</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures et matériaux pour l'emballage et le conditionnement</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture e materiali per imballaggio e confezionamento</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferung und materialien für verpackung und aufmachung</rdfs:label>
+    <rdfs:label>Packing and packaging, supplies and materials</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-7">
+    <rdfs:label xml:lang="es">Materiales y componentes electrotécnicos</rdfs:label>
+    <rdfs:label xml:lang="en">Electrical engineering, materials and components</rdfs:label>
+    <rdfs:label xml:lang="fr">Matériaux et composants électrotechniques</rdfs:label>
+    <rdfs:label xml:lang="it">Materiali e componenti elettrotecnici</rdfs:label>
+    <rdfs:label xml:lang="de">Elektrotechnisches material und komponenten</rdfs:label>
+    <rdfs:label>Electrical engineering, materials and components</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-8-1Value rdf:ID="value-interest-topic-8-1-5">
+    <rdfs:label xml:lang="es">Termotecnia y calefacción, maquinaria y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Heat engineering and heating, equipment and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Termotechnique et chauffage, appareilles et services</rdfs:label>
+    <rdfs:label xml:lang="it">Termotecnica e riscaldamento, apparecchiature e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Heiztechnik und beheizung, anlagen und dienstleistungen</rdfs:label>
+    <rdfs:label>Heat engineering and heating, equipment and services</rdfs:label>
+  </Dimension-Interest-Topic-8-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-8">
+    <rdfs:label xml:lang="es">Mármol, piedras y afines</rdfs:label>
+    <rdfs:label xml:lang="en">Marble, stone and similar</rdfs:label>
+    <rdfs:label xml:lang="fr">Marbre, pierres et similaires</rdfs:label>
+    <rdfs:label xml:lang="it">Marmo, pietre ed affini</rdfs:label>
+    <rdfs:label xml:lang="de">Marmor, steine und ähnliches</rdfs:label>
+    <rdfs:label>Marble, stone and similar</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-11-1Value rdf:ID="value-interest-topic-11-1-1">
+    <rdfs:label xml:lang="es">Agua, luz, gas y sociedad de ejercicio público</rdfs:label>
+    <rdfs:label xml:lang="en">Water, light, gas and public utility companies</rdfs:label>
+    <rdfs:label xml:lang="fr">Eau, lumière, gaz et sociétés d'exploitation publique</rdfs:label>
+    <rdfs:label xml:lang="it">Acqua, luce, gas e societa' di esercizio pubblico</rdfs:label>
+    <rdfs:label xml:lang="de">Wasser, licht, gas und öffentliche unternehmen</rdfs:label>
+    <rdfs:label>Water, light, gas and public utility companies</rdfs:label>
+  </Dimension-Interest-Topic-11-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-2">
+    <rdfs:label xml:lang="es">Decoraciones y muebles profesionales</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and furniture, professional</rdfs:label>
+    <rdfs:label xml:lang="fr">Ameublements et meubles professionnels</rdfs:label>
+    <rdfs:label xml:lang="it">Arredamenti e mobili professionali</rdfs:label>
+    <rdfs:label xml:lang="de">Einrichtungen und möbel für geschäfte und freiberufler</rdfs:label>
+    <rdfs:label>Furnishings and furniture, professional</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-5-1Value rdf:ID="value-interest-topic-5-1-4">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y suministros para la industria gráfica de papel y procesamiento del cartón</rdfs:label>
+    <rdfs:label xml:lang="en">Graphic, paper and publishing industry, machinery, equipment and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, matériel et fournitures pour industrie graphique, papier et papeterie</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti e forniture per industria grafica, cartaria e cartotecnica</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen, anlagen und belieerungen für grafik, papierindustrie und papiertechnik</rdfs:label>
+    <rdfs:label>Graphic, paper and publishing industry, machinery, equipment and supplies</rdfs:label>
+  </Dimension-Interest-Topic-5-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-6">
+    <rdfs:label xml:lang="es">Automóviles y medios de transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Cars and motor vehicles</rdfs:label>
+    <rdfs:label xml:lang="fr">Automobiles et moyens de transport</rdfs:label>
+    <rdfs:label xml:lang="it">Automobili e mezzi di trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Autos und transportmittel</rdfs:label>
+    <rdfs:label>Cars and motor vehicles</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-2">
+    <rdfs:label xml:lang="es">Bebidas, vinos y licores</rdfs:label>
+    <rdfs:label xml:lang="en">Drinks, wines and liqueurs</rdfs:label>
+    <rdfs:label xml:lang="fr">Boissons, vins et liqueurs</rdfs:label>
+    <rdfs:label xml:lang="it">Bevande, vini e liquori</rdfs:label>
+    <rdfs:label xml:lang="de">Getränke, wein und likör</rdfs:label>
+    <rdfs:label>Drinks, wines and liqueurs</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-11">
+    <rdfs:label xml:lang="es">Servicios auxiliares para el transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Transport, auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires pour le transport</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari per il trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Transport-hilfsdienste</rdfs:label>
+    <rdfs:label>Transport, auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-1">
+    <rdfs:label xml:lang="es">Electrodomésticos</rdfs:label>
+    <rdfs:label xml:lang="en">Household appliances</rdfs:label>
+    <rdfs:label xml:lang="fr">Électroménagers</rdfs:label>
+    <rdfs:label xml:lang="it">Elettrodomestici</rdfs:label>
+    <rdfs:label xml:lang="de">Elektro-haushaltsgeräte</rdfs:label>
+    <rdfs:label>Household appliances</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-5">
+    <rdfs:label xml:lang="es">Productos químicos de base</rdfs:label>
+    <rdfs:label xml:lang="en">Chemicals, basic products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits chimiques de base</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti chimici di base</rdfs:label>
+    <rdfs:label xml:lang="de">Chemische grundprodukte</rdfs:label>
+    <rdfs:label>Chemicals, basic products</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-12">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la agricultura y la zootecnia</rdfs:label>
+    <rdfs:label xml:lang="en">Agriculture and livestock breeding, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour agriculture et zootechnie</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per agricoltura e zootecnia</rdfs:label>
+    <rdfs:label xml:lang="de">Landwirtschaft und tierzucht, anlagen und dienstleistungen</rdfs:label>
+    <rdfs:label>Agriculture and livestock breeding, services and works</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-8">
+    <rdfs:label xml:lang="es">Deportes - artículos y suministros</rdfs:label>
+    <rdfs:label xml:lang="en">Sport, articles and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Sport - articles et fournitures</rdfs:label>
+    <rdfs:label xml:lang="it">Sport - articoli e forniture</rdfs:label>
+    <rdfs:label xml:lang="de">Sport - artikel und belieferungen</rdfs:label>
+    <rdfs:label>Sport, articles and supplies</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-9-1Value rdf:ID="value-interest-topic-9-1-9">
+    <rdfs:label xml:lang="es">Materiales ediles</rdfs:label>
+    <rdfs:label xml:lang="en">Building materials</rdfs:label>
+    <rdfs:label xml:lang="fr">Matériaux de construction</rdfs:label>
+    <rdfs:label xml:lang="it">Materiali edili</rdfs:label>
+    <rdfs:label xml:lang="de">Baumaterialien</rdfs:label>
+    <rdfs:label>Building materials</rdfs:label>
+  </Dimension-Interest-Topic-9-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-3">
+    <rdfs:label xml:lang="es">Carnes, embutidos y pescados</rdfs:label>
+    <rdfs:label xml:lang="en">Meat, sausages and fish</rdfs:label>
+    <rdfs:label xml:lang="fr">Viandes, charcuterie et poissons</rdfs:label>
+    <rdfs:label xml:lang="it">Carni, salumi e pesci</rdfs:label>
+    <rdfs:label xml:lang="de">Fleisch, wurst und fisch</rdfs:label>
+    <rdfs:label>Meat, sausages and fish</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-6">
+    <rdfs:label xml:lang="es">Música</rdfs:label>
+    <rdfs:label xml:lang="en">Music</rdfs:label>
+    <rdfs:label xml:lang="fr">Musique</rdfs:label>
+    <rdfs:label xml:lang="it">Musica</rdfs:label>
+    <rdfs:label xml:lang="de">Musik</rdfs:label>
+    <rdfs:label>Music</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-12">
+    <rdfs:label xml:lang="es">Servicios de almacenaje y movimiento</rdfs:label>
+    <rdfs:label xml:lang="en">Storage and handling, services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services d'emmagasinage et manutention</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi di magazzinaggio e movimentazione</rdfs:label>
+    <rdfs:label xml:lang="de">Lagerung und bewegung, dienstleistungen</rdfs:label>
+    <rdfs:label>Storage and handling, services</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-11">
+    <rdfs:label xml:lang="es">Servicio de restaurante, locales públicos y afines</rdfs:label>
+    <rdfs:label xml:lang="en">Restaurants and related public premises</rdfs:label>
+    <rdfs:label xml:lang="fr">Restauration et établissements publics similaires</rdfs:label>
+    <rdfs:label xml:lang="it">Ristorazione e locali pubblici affini</rdfs:label>
+    <rdfs:label xml:lang="de">Restaurants, öffentliche lokale</rdfs:label>
+    <rdfs:label>Restaurants and related public premises</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-4">
+    <rdfs:label xml:lang="es">Petróleo, gas y combustibles</rdfs:label>
+    <rdfs:label xml:lang="en">Petroleum products, gas and fuels</rdfs:label>
+    <rdfs:label xml:lang="fr">Pétroles, gaz et combustibles</rdfs:label>
+    <rdfs:label xml:lang="it">Petroli, gas e combustibili</rdfs:label>
+    <rdfs:label xml:lang="de">Petroleum, gas und brennstoffe</rdfs:label>
+    <rdfs:label>Petroleum products, gas and fuels</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-7">
+    <rdfs:label xml:lang="es">Servicios para el deporte y el tiempo libre</rdfs:label>
+    <rdfs:label xml:lang="en">Sport and leisure, services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services  pour le sport et les loisirs</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi per lo sport e il tempo libero</rdfs:label>
+    <rdfs:label xml:lang="de">Dienstleistungen für sport und freizeit</rdfs:label>
+    <rdfs:label>Sport and leisure, services</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-13">
+    <rdfs:label xml:lang="es">Servicios de  embalaje y confección</rdfs:label>
+    <rdfs:label xml:lang="en">Packing and packaging, services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services pour l'emballage et le conditionnement</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi per imballaggio e confezionamento</rdfs:label>
+    <rdfs:label xml:lang="de">Dienstleistungen für verpackung und aufmachung</rdfs:label>
+    <rdfs:label>Packing and packaging, services</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-3">
+    <rdfs:label xml:lang="es">Electrónica profesional y de consumo</rdfs:label>
+    <rdfs:label xml:lang="en">Professional and non-professional electronic  engineering</rdfs:label>
+    <rdfs:label xml:lang="fr">Électronique professionnelle et grand public</rdfs:label>
+    <rdfs:label xml:lang="it">Elettronica professionale e di consumo</rdfs:label>
+    <rdfs:label xml:lang="de">Elektronik für beruf und konsum</rdfs:label>
+    <rdfs:label>Professional and non-professional electronic  engineering</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-14">
+    <rdfs:label xml:lang="es">Zootecnia y pesca, cría de animales pequeños</rdfs:label>
+    <rdfs:label xml:lang="en">Livestock breeding and fishing, breeding of small animals</rdfs:label>
+    <rdfs:label xml:lang="fr">Zootechnie et pêche, élevage de petits animaux</rdfs:label>
+    <rdfs:label xml:lang="it">Zootecnia e pesca, allevamento piccoli animali</rdfs:label>
+    <rdfs:label xml:lang="de">Tier-, fisch- und kleintierzucht</rdfs:label>
+    <rdfs:label>Livestock breeding and fishing, breeding of small animals</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-7">
+    <rdfs:label xml:lang="es">Productos y manufactura en goma</rdfs:label>
+    <rdfs:label xml:lang="en">Rubber, products and articles</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits et articles en caoutchouc</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti e manufatti in gomma</rdfs:label>
+    <rdfs:label xml:lang="de">Gummiprodukte und erzeugnisse</rdfs:label>
+    <rdfs:label>Rubber, products and articles</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-10">
+    <rdfs:label xml:lang="es">Máquinas e instalaciones para actividades comerciales y de artesanía</rdfs:label>
+    <rdfs:label xml:lang="en">Commercial and artisan activities, machines and systems</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines et installations pour activités commerciales et artisanales</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine e impianti per attivita' commerciali ed artigianali</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen und anlagen für kommerzielle und handwerkliche tätigkeiten</rdfs:label>
+    <rdfs:label>Commercial and artisan activities, machines and systems</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-1">
+    <rdfs:label xml:lang="es">Agricultura, horticultura y floricultura</rdfs:label>
+    <rdfs:label xml:lang="en">Agriculture, vegetable and flower growing</rdfs:label>
+    <rdfs:label xml:lang="fr">Agriculture, horticulture et floriculture</rdfs:label>
+    <rdfs:label xml:lang="it">Agricoltura, orticoltura e floricoltura</rdfs:label>
+    <rdfs:label xml:lang="de">Landwirtschaftliche produkte, gemüse- und blumenzucht</rdfs:label>
+    <rdfs:label>Agriculture, vegetable and flower growing</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-10-1Value rdf:ID="value-interest-topic-10-1-2">
+    <rdfs:label xml:lang="es">Electrónica industrial, productos y maquinaria</rdfs:label>
+    <rdfs:label xml:lang="en">Industrial electronic engineering, products and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Électronique industrielle, produits et appareils</rdfs:label>
+    <rdfs:label xml:lang="it">Elettronica industriale, prodotti e apparecchiature</rdfs:label>
+    <rdfs:label xml:lang="de">Elektronik für industrie, produkte und geräte</rdfs:label>
+    <rdfs:label>Industrial electronic engineering, products and equipment</rdfs:label>
+  </Dimension-Interest-Topic-10-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-14">
+    <rdfs:label xml:lang="es">Transportes y despachos de mercaderías</rdfs:label>
+    <rdfs:label xml:lang="en">Goods transport and shipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Transport et expédition de marchandises</rdfs:label>
+    <rdfs:label xml:lang="it">Trasporti e spedizioni merci</rdfs:label>
+    <rdfs:label xml:lang="de">Transporte und warenbeförderung</rdfs:label>
+    <rdfs:label>Goods transport and shipment</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-13">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la industria alimenticia y bebidas</rdfs:label>
+    <rdfs:label xml:lang="en">Food and drinks industry, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour l'industrie alimentaire et des boissons</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per industria alimentare e bevande</rdfs:label>
+    <rdfs:label xml:lang="de">Nahrungsmittel- getränkeindustrie, arbeiten und dienstleistungen</rdfs:label>
+    <rdfs:label>Food and drinks industry, services and works</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-6">
+    <rdfs:label xml:lang="es">Productos químicos secundarios</rdfs:label>
+    <rdfs:label xml:lang="en">Chemicals, secondary products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits chimiques secondaires</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti chimici secondari</rdfs:label>
+    <rdfs:label xml:lang="de">Chemische nebenprodukte</rdfs:label>
+    <rdfs:label>Chemicals, secondary products</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-9">
+    <rdfs:label xml:lang="es">Tiempo libre - artículos y suministros</rdfs:label>
+    <rdfs:label xml:lang="en">Leisure, articles and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Loisirs - articles et fournitures</rdfs:label>
+    <rdfs:label xml:lang="it">Tempo libero - articoli e forniture</rdfs:label>
+    <rdfs:label xml:lang="de">Freizeit - artikel und belieferungen</rdfs:label>
+    <rdfs:label>Leisure, articles and supplies</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-1">
+    <rdfs:label xml:lang="es">Colores, pinturas y esmaltes</rdfs:label>
+    <rdfs:label xml:lang="en">Paints, varnishes and enamels</rdfs:label>
+    <rdfs:label xml:lang="fr">Couleurs, peintures et laques</rdfs:label>
+    <rdfs:label xml:lang="it">Colori, vernici e smalti</rdfs:label>
+    <rdfs:label xml:lang="de">Farben und lacke</rdfs:label>
+    <rdfs:label>Paints, varnishes and enamels</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-1">
+    <rdfs:label xml:lang="es">Accesorios para medios de transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Motor vehicles, accessories</rdfs:label>
+    <rdfs:label xml:lang="fr">Accessoires des moyens de transport</rdfs:label>
+    <rdfs:label xml:lang="it">Accessori dei mezzi di trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Zubehör für transportmittel</rdfs:label>
+    <rdfs:label>Motor vehicles, accessories</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-15">
+    <rdfs:label xml:lang="es">Transporte público y privado</rdfs:label>
+    <rdfs:label xml:lang="en">Public and private transport</rdfs:label>
+    <rdfs:label xml:lang="fr">Transports de voyageurs</rdfs:label>
+    <rdfs:label xml:lang="it">Trasporto pubblico e privato</rdfs:label>
+    <rdfs:label xml:lang="de">Öffentliche und private transporte</rdfs:label>
+    <rdfs:label>Public and private transport</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-3">
+    <rdfs:label xml:lang="es">Cine-foto-óptica</rdfs:label>
+    <rdfs:label xml:lang="en">Cinema, cameras, optical instruments</rdfs:label>
+    <rdfs:label xml:lang="fr">Ciné-photo-optique</rdfs:label>
+    <rdfs:label xml:lang="it">Cine-foto-ottica</rdfs:label>
+    <rdfs:label xml:lang="de">Filme, foto, optik</rdfs:label>
+    <rdfs:label>Cinema, cameras, optical instruments</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-12-1Value rdf:ID="value-interest-topic-12-1-2">
+    <rdfs:label xml:lang="es">Seguradoras y seguros</rdfs:label>
+    <rdfs:label xml:lang="en">Insurance companies and insurance services</rdfs:label>
+    <rdfs:label xml:lang="fr">Assurances et services d'assurances</rdfs:label>
+    <rdfs:label xml:lang="it">Assicurazioni e servizi assicurativi</rdfs:label>
+    <rdfs:label xml:lang="de">Versicherungen</rdfs:label>
+    <rdfs:label>Insurance companies and insurance services</rdfs:label>
+  </Dimension-Interest-Topic-12-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-7">
+    <rdfs:label xml:lang="es">Artículos para el hogar</rdfs:label>
+    <rdfs:label xml:lang="en">Kitchen utensils and houseware</rdfs:label>
+    <rdfs:label xml:lang="fr">Articles de ménage</rdfs:label>
+    <rdfs:label xml:lang="it">Casalinghi e articoli per la casa</rdfs:label>
+    <rdfs:label xml:lang="de">Haushaltsgeräte</rdfs:label>
+    <rdfs:label>Kitchen utensils and houseware</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-2">
+    <rdfs:label xml:lang="es">Camping</rdfs:label>
+    <rdfs:label xml:lang="en">Camping</rdfs:label>
+    <rdfs:label xml:lang="fr">Camping</rdfs:label>
+    <rdfs:label xml:lang="it">Campeggio</rdfs:label>
+    <rdfs:label xml:lang="de">Camping</rdfs:label>
+    <rdfs:label>Camping</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-12-1Value rdf:ID="value-interest-topic-12-1-3">
+    <rdfs:label xml:lang="es">Abogados, notarios y servicios legales</rdfs:label>
+    <rdfs:label xml:lang="en">Lawyers, notaries and legal services</rdfs:label>
+    <rdfs:label xml:lang="fr">Avocats, notaires et services juridiques</rdfs:label>
+    <rdfs:label xml:lang="it">Avvocati, notai e servizi legali</rdfs:label>
+    <rdfs:label xml:lang="de">Rechtsanwälte, notare und gerichtliche dienstleistungen</rdfs:label>
+    <rdfs:label>Lawyers, notaries and legal services</rdfs:label>
+  </Dimension-Interest-Topic-12-1Value>
+  <Dimension-Interest-Topic-12-1Value rdf:ID="value-interest-topic-12-1-4">
+    <rdfs:label xml:lang="es">Bancos y servicios financieros</rdfs:label>
+    <rdfs:label xml:lang="en">Banks and financial services</rdfs:label>
+    <rdfs:label xml:lang="fr">Banques et services financiers</rdfs:label>
+    <rdfs:label xml:lang="it">Banche e servizi finanziari</rdfs:label>
+    <rdfs:label xml:lang="de">Banken und finanzinstitute</rdfs:label>
+    <rdfs:label>Banks and financial services</rdfs:label>
+  </Dimension-Interest-Topic-12-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-11">
+    <rdfs:label xml:lang="es">Regalos para empresas</rdfs:label>
+    <rdfs:label xml:lang="en">Business gifts</rdfs:label>
+    <rdfs:label xml:lang="fr">Cadeaux d'entreprises</rdfs:label>
+    <rdfs:label xml:lang="it">Regalistica aziendale</rdfs:label>
+    <rdfs:label xml:lang="de">Firmengeschenke</rdfs:label>
+    <rdfs:label>Business gifts</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-8">
+    <rdfs:label xml:lang="es">Complementos para la decoración</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings, decorative objects</rdfs:label>
+    <rdfs:label xml:lang="fr">Accessoires d'ameublement</rdfs:label>
+    <rdfs:label xml:lang="it">Complementi di arredamento</rdfs:label>
+    <rdfs:label xml:lang="de">Einrichtungsgegenstände, kleinmöbel</rdfs:label>
+    <rdfs:label>Furnishings, decorative objects</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-3">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y equipos para la industria de plástico y goma</rdfs:label>
+    <rdfs:label xml:lang="en">Plastics and rubber industry, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, installations et équipements industrie des matières plastiques et caoutchouc</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti ed attrezzature industria delle materie plastiche e gomma</rdfs:label>
+    <rdfs:label xml:lang="de">Plastik- und gummiindustrie, maschinen, anlagen und geräte</rdfs:label>
+    <rdfs:label>Plastics and rubber industry, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-10">
+    <rdfs:label xml:lang="es">Productos de base y suministros para la industria alimenticia y bebidas</rdfs:label>
+    <rdfs:label xml:lang="en">Food and drinks industry, basic products and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits de base et fournitures pour l'industrie alimentaire et des boissons</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti di base e forniture per industria alimentare e bevande</rdfs:label>
+    <rdfs:label xml:lang="de">Nahrungsmittel- und getränke-zusätze</rdfs:label>
+    <rdfs:label>Food and drinks industry, basic products and supplies</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-5">
+    <rdfs:label xml:lang="es">Equipos e instalaciones para el deporte y el tiempo libre</rdfs:label>
+    <rdfs:label xml:lang="en">Sport and leisure, facilities and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Installations et équipements pour le sport et les loisirs</rdfs:label>
+    <rdfs:label xml:lang="it">Impianti e attrezzature per lo sport e il tempo libero</rdfs:label>
+    <rdfs:label xml:lang="de">Anlagen und geräte für sport und freizeit</rdfs:label>
+    <rdfs:label>Sport and leisure, facilities and equipment</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-9">
+    <rdfs:label xml:lang="es">Madera y semi elaborados</rdfs:label>
+    <rdfs:label xml:lang="en">Wood and semi-finished products</rdfs:label>
+    <rdfs:label xml:lang="fr">Bois et produits semi-finis</rdfs:label>
+    <rdfs:label xml:lang="it">Legno e semilavorati</rdfs:label>
+    <rdfs:label xml:lang="de">Holz und halbprodukte</rdfs:label>
+    <rdfs:label>Wood and semi-finished products</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-2">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y equipos para la industria química</rdfs:label>
+    <rdfs:label xml:lang="en">Chemical industry, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, installations et équipements de l'industrie chimique</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti ed attrezzature industria chimica</rdfs:label>
+    <rdfs:label xml:lang="de">Chemische industrie, maschinen, anlagen und geräte</rdfs:label>
+    <rdfs:label>Chemical industry, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-4">
+    <rdfs:label xml:lang="es">Pasatiempos</rdfs:label>
+    <rdfs:label xml:lang="en">Hobbies</rdfs:label>
+    <rdfs:label xml:lang="fr">Bricolage</rdfs:label>
+    <rdfs:label xml:lang="it">Hobbistica</rdfs:label>
+    <rdfs:label xml:lang="de">Hobby</rdfs:label>
+    <rdfs:label>Hobbies</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-17-1Value rdf:ID="value-interest-topic-17-1-3">
+    <rdfs:label xml:lang="es">Máquinas y suministros para la industria de orfebrería y relojería</rdfs:label>
+    <rdfs:label xml:lang="en">Watchmakers, gold- and silversmiths, machinery and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines et fournitures pour bijouterie et horlogerie</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine e forniture per industria orafa e per orologeria</rdfs:label>
+    <rdfs:label xml:lang="de">Goldschmiede und uhrenindustrie, maschinen und belieferungen</rdfs:label>
+    <rdfs:label>Watchmakers, gold- and silversmiths, machinery and supplies</rdfs:label>
+  </Dimension-Interest-Topic-17-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-7">
+    <rdfs:label xml:lang="es">Suministros para congresos, ferias y manifestaciones</rdfs:label>
+    <rdfs:label xml:lang="en">Congresses, fairs and events, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour congrès, foires et manifestations</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per congressi, fiere e manifestazioni</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferung an kongresse, messen und veranstaltungen</rdfs:label>
+    <rdfs:label>Congresses, fairs and events, supplies</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-17-1Value rdf:ID="value-interest-topic-17-1-2">
+    <rdfs:label xml:lang="es">Joyería, orfebrería y platería</rdfs:label>
+    <rdfs:label xml:lang="en">Jewelers, watchmakers and gold and silversmiths</rdfs:label>
+    <rdfs:label xml:lang="fr">Joaillerie, orfèvrerie et argenterie</rdfs:label>
+    <rdfs:label xml:lang="it">Gioielleria, oreficeria e argenteria</rdfs:label>
+    <rdfs:label xml:lang="de">Gold und silber, schmiedearbeiten</rdfs:label>
+    <rdfs:label>Jewelers, watchmakers and gold and silversmiths</rdfs:label>
+  </Dimension-Interest-Topic-17-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-6">
+    <rdfs:label xml:lang="es">Suministros para actividades industriales</rdfs:label>
+    <rdfs:label xml:lang="en">Industrial activities, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour activités industrielles</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per attivita' industriali</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferung für industrielle tätigkeiten</rdfs:label>
+    <rdfs:label>Industrial activities, supplies</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-20-1Value rdf:ID="value-interest-topic-20-1-1">
+    <rdfs:label xml:lang="es">Animales domésticos</rdfs:label>
+    <rdfs:label xml:lang="en">Pets</rdfs:label>
+    <rdfs:label xml:lang="fr">Animaux domestiques</rdfs:label>
+    <rdfs:label xml:lang="it">Animali domestici</rdfs:label>
+    <rdfs:label xml:lang="de">Haustiere</rdfs:label>
+    <rdfs:label>Pets</rdfs:label>
+  </Dimension-Interest-Topic-20-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-8">
+    <rdfs:label xml:lang="es">Productos cosméticos y de aseo</rdfs:label>
+    <rdfs:label xml:lang="en">Cosmetics and toilet products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits de beauté et de toilette</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti cosmetici e da toeletta</rdfs:label>
+    <rdfs:label xml:lang="de">Kosmetikprodukte und toilettenartikel</rdfs:label>
+    <rdfs:label>Cosmetics and toilet products</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-12-1Value rdf:ID="value-interest-topic-12-1-1">
+    <rdfs:label xml:lang="es">Agentes de negocios y servicios comerciales</rdfs:label>
+    <rdfs:label xml:lang="en">Business agencies and commercial services</rdfs:label>
+    <rdfs:label xml:lang="fr">Agences d'affaires et services commerciaux</rdfs:label>
+    <rdfs:label xml:lang="it">Agenzie d'affari e servizi commerciali</rdfs:label>
+    <rdfs:label xml:lang="de">Geschäftsagenturen und kommerzielle dienste</rdfs:label>
+    <rdfs:label>Business agencies and commercial services</rdfs:label>
+  </Dimension-Interest-Topic-12-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-9">
+    <rdfs:label xml:lang="es">Máquinas, instrumentos y aparatos para actividades industriales</rdfs:label>
+    <rdfs:label xml:lang="en">Industrial activities, machines, instruments and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, instruments et appareils pour activités industrielles</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, strumenti ed apparecchi per attivita' industriali</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen, instrumente und geräte für industrielle tätigkeiten</rdfs:label>
+    <rdfs:label>Industrial activities, machines, instruments and equipment</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-1">
+    <rdfs:label xml:lang="es">Arte y artesanía artístico</rdfs:label>
+    <rdfs:label xml:lang="en">Art and artistic crafts</rdfs:label>
+    <rdfs:label xml:lang="fr">Art et artisanat artistique</rdfs:label>
+    <rdfs:label xml:lang="it">Arte ed artigianato artistico</rdfs:label>
+    <rdfs:label xml:lang="de">Kunstgegenstände und kunsthandwerk</rdfs:label>
+    <rdfs:label>Art and artistic crafts</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-7">
+    <rdfs:label xml:lang="es">Hospitales y servicios sanitarios</rdfs:label>
+    <rdfs:label xml:lang="en">Hospital and health services</rdfs:label>
+    <rdfs:label xml:lang="fr">Hôpitaux et services sanitaires</rdfs:label>
+    <rdfs:label xml:lang="it">Ospedali e servizi sanitari</rdfs:label>
+    <rdfs:label xml:lang="de">Krankenhäuser und sanitäre dienste</rdfs:label>
+    <rdfs:label>Hospital and health services</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-17-1Value rdf:ID="value-interest-topic-17-1-4">
+    <rdfs:label xml:lang="es">Relojerías</rdfs:label>
+    <rdfs:label xml:lang="en">Clock and watch making</rdfs:label>
+    <rdfs:label xml:lang="fr">Horlogerie</rdfs:label>
+    <rdfs:label xml:lang="it">Orologeria</rdfs:label>
+    <rdfs:label xml:lang="de">Uhren</rdfs:label>
+    <rdfs:label>Clock and watch making</rdfs:label>
+  </Dimension-Interest-Topic-17-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-11">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la industria de  plástico</rdfs:label>
+    <rdfs:label xml:lang="en">Plastics industry, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et  travaux pour l'industrie des matières plastiques</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori industria delle materie plastiche</rdfs:label>
+    <rdfs:label xml:lang="de">Plastikprodukte und erzeugnisse, arbeiten und dienstleistungen</rdfs:label>
+    <rdfs:label>Plastics industry, services and works</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-8">
+    <rdfs:label xml:lang="es">Suministros para oficinas</rdfs:label>
+    <rdfs:label xml:lang="en">Office supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures de bureaux</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per uffici</rdfs:label>
+    <rdfs:label xml:lang="de">Bürobelieferungen</rdfs:label>
+    <rdfs:label>Office supplies</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-2">
+    <rdfs:label xml:lang="es">Cinematografía y radiotelevisión</rdfs:label>
+    <rdfs:label xml:lang="en">Cinema and radio-television</rdfs:label>
+    <rdfs:label xml:lang="fr">Cinématographie et radiotélévision</rdfs:label>
+    <rdfs:label xml:lang="it">Cinematografia e radiotelevisione</rdfs:label>
+    <rdfs:label xml:lang="de">Filmkunst, radio, tv</rdfs:label>
+    <rdfs:label>Cinema and radio-television</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-4-1Value rdf:ID="value-interest-topic-4-1-10">
+    <rdfs:label xml:lang="es">Servicios auxiliares para medios de transporte</rdfs:label>
+    <rdfs:label xml:lang="en">Motor vehicles, auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires des moyens de transport</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari dei mezzi di trasporto</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste, transportmittel</rdfs:label>
+    <rdfs:label>Motor vehicles, auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-4-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-3">
+    <rdfs:label xml:lang="es">Suministros a las estructuras receptivas</rdfs:label>
+    <rdfs:label xml:lang="en">Accommodation, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures aux structures de réception</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture alle strutture ricettive</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferung der aufnahmestrukturen</rdfs:label>
+    <rdfs:label>Accommodation, supplies</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-6-1Value rdf:ID="value-interest-topic-6-1-10">
+    <rdfs:label xml:lang="es">Servicios y trabajos para la industria de la goma</rdfs:label>
+    <rdfs:label xml:lang="en">Rubber industry, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour industrie du caoutchouc</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori industria della gomma</rdfs:label>
+    <rdfs:label xml:lang="de">Gummiindustrie, arbeiten und dienstleistungen</rdfs:label>
+    <rdfs:label>Rubber industry, services and works</rdfs:label>
+  </Dimension-Interest-Topic-6-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-10">
+    <rdfs:label xml:lang="es">Máquinas y suministros para la decoración y la industria de madera</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and wood industry, machinery and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines et fournitures pour ameublement et industrie du bois</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine e forniture per arredamento e industria del legno</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen und belieferung für einrichtungsgegenstände und holzindustrie</rdfs:label>
+    <rdfs:label>Furnishings and wood industry, machinery and supplies</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-4">
+    <rdfs:label xml:lang="es">Restaurantes, locales y clubes</rdfs:label>
+    <rdfs:label xml:lang="en">Restaurants, public houses</rdfs:label>
+    <rdfs:label xml:lang="fr">Restaurants, établissements publics</rdfs:label>
+    <rdfs:label xml:lang="it">Ristoranti, locali e ritrovi</rdfs:label>
+    <rdfs:label xml:lang="de">Restaurants, lokale und treffen</rdfs:label>
+    <rdfs:label>Restaurants, public houses</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-11">
+    <rdfs:label xml:lang="es">Salones, sillones, sillas y mesas</rdfs:label>
+    <rdfs:label xml:lang="en">Suites, armchairs, chairs and tables</rdfs:label>
+    <rdfs:label xml:lang="fr">Salons, fauteuils, chaises et tables</rdfs:label>
+    <rdfs:label xml:lang="it">Salotti, poltrone, sedie e tavoli</rdfs:label>
+    <rdfs:label xml:lang="de">Wohnzimmergarnituren, sessel, stühle und tische</rdfs:label>
+    <rdfs:label>Suites, armchairs, chairs and tables</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-9">
+    <rdfs:label xml:lang="es">Servicios para empresas, manifestaciones y soporte a los intercambios comerciales</rdfs:label>
+    <rdfs:label xml:lang="en">Services for companies, events, and support for trade</rdfs:label>
+    <rdfs:label xml:lang="fr">Services pour entreprises, manifestations et support aux échanges commmerciaux</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi per aziende, manifestazioni e supporto agli scambi commerciali</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste für unternehmen, veranstaltungen und unterstützung bei kommerziellen tauschgeschäften</rdfs:label>
+    <rdfs:label>Services for companies, events, and support for trade</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-1">
+    <rdfs:label xml:lang="es">Agencias y entes turísticos</rdfs:label>
+    <rdfs:label xml:lang="en">Tour operators and tourist organizations</rdfs:label>
+    <rdfs:label xml:lang="fr">Agences et offices de tourisme</rdfs:label>
+    <rdfs:label xml:lang="it">Agenzie ed enti turistici</rdfs:label>
+    <rdfs:label xml:lang="de">Reisebüros und vereine</rdfs:label>
+    <rdfs:label>Tour operators and tourist organizations</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-12">
+    <rdfs:label xml:lang="es">Servicios y trabajos  para la decoración y la industria de madera</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishings and wood industry, services and works</rdfs:label>
+    <rdfs:label xml:lang="fr">Services et travaux pour ameublement et industrie du bois</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi e lavori per arredamento e industria del legno</rdfs:label>
+    <rdfs:label xml:lang="de">Arbeiten und dienstleistungen für einrichtungsgegenstände und holzindustrie</rdfs:label>
+    <rdfs:label>Furnishings and wood industry, services and works</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-8">
+    <rdfs:label xml:lang="es">Servicios auxiliares de cuidado, manutención y limpieza</rdfs:label>
+    <rdfs:label xml:lang="en">Surveillance, maintenance and cleaning auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires de surveillance, entretien et nettoyage</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari di sorveglianza, manutenzione e pulizia</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste für überwachung, wartung und reinigung</rdfs:label>
+    <rdfs:label>Surveillance, maintenance and cleaning auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-2">
+    <rdfs:label xml:lang="es">Hoteles y estructuras extra hoteleras</rdfs:label>
+    <rdfs:label xml:lang="en">Hotels and hotel facilities</rdfs:label>
+    <rdfs:label xml:lang="fr">Hôtels et structures extra-hôtelières</rdfs:label>
+    <rdfs:label xml:lang="it">Alberghi e strutture extra alberghiere</rdfs:label>
+    <rdfs:label xml:lang="de">Hotels und unterbringungen</rdfs:label>
+    <rdfs:label>Hotels and hotel facilities</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-4">
+    <rdfs:label xml:lang="es">Condimentos, especias, infusiones y café</rdfs:label>
+    <rdfs:label xml:lang="en">Condiments, spices, infusions and coffee</rdfs:label>
+    <rdfs:label xml:lang="fr">Condiments, épices, infusions et café</rdfs:label>
+    <rdfs:label xml:lang="it">Condimenti, spezie, infusi e caffe'</rdfs:label>
+    <rdfs:label xml:lang="de">Essenzen, gewürze, extrakte und kaffee</rdfs:label>
+    <rdfs:label>Condiments, spices, infusions and coffee</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-7">
+    <rdfs:label xml:lang="es">Servicios editoriales</rdfs:label>
+    <rdfs:label xml:lang="en">Publishing services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services pour l'industrie d'édition</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi editoriali</rdfs:label>
+    <rdfs:label xml:lang="de">Verlage, dienstleistungen</rdfs:label>
+    <rdfs:label>Publishing services</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-7">
+    <rdfs:label xml:lang="es">Suministros para la industria del vestido y peleterías</rdfs:label>
+    <rdfs:label xml:lang="en">Clothing and leather goods, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour habillement et maroquineries</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per abbigliamento e pelletterie</rdfs:label>
+    <rdfs:label xml:lang="de">Bekleidung und lederwaren, belieferungen</rdfs:label>
+    <rdfs:label>Clothing and leather goods, supplies</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-2">
+    <rdfs:label xml:lang="es">Artículos médico-sanitarios y ortopédicos</rdfs:label>
+    <rdfs:label xml:lang="en">Medical-health and orthopedic products</rdfs:label>
+    <rdfs:label xml:lang="fr">Articles médico-sanitaires et orthopédiques</rdfs:label>
+    <rdfs:label xml:lang="it">Articoli medico-sanitari ed ortopedici</rdfs:label>
+    <rdfs:label xml:lang="de">Medizinsanitäre und orthopädische artikel</rdfs:label>
+    <rdfs:label>Medical-health and orthopedic products</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-7">
+    <rdfs:label xml:lang="es">Servicios auxiliares de restaurante y de entretenimiento</rdfs:label>
+    <rdfs:label xml:lang="en">Catering and entertainment auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires de restauration et de réception</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari di ristorazione e di intrattenimento</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste für bewirtung und unterhaltung</rdfs:label>
+    <rdfs:label>Catering and entertainment auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-3-1Value rdf:ID="value-interest-topic-3-1-13">
+    <rdfs:label xml:lang="es">Tejidos para decoración, cortinas y tapetes</rdfs:label>
+    <rdfs:label xml:lang="en">Furnishing fabrics, curtains and carpets</rdfs:label>
+    <rdfs:label xml:lang="fr">Tissus d'ameublement, rideaux et tapis</rdfs:label>
+    <rdfs:label xml:lang="it">Tessuti arredamento, tende e tappeti</rdfs:label>
+    <rdfs:label xml:lang="de">Einrichtungsstoffe, gardinen und teppiche</rdfs:label>
+    <rdfs:label>Furnishing fabrics, curtains and carpets</rdfs:label>
+  </Dimension-Interest-Topic-3-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-8">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y equipos para la industria del vestido y peleterías</rdfs:label>
+    <rdfs:label xml:lang="en">Clothing and leather goods, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, matériel et outillage pour habillement et maroquineries</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti ed attrezzature per abbigliamento e pelletterie</rdfs:label>
+    <rdfs:label xml:lang="de">Bekleidung und lederwaren, maschinen, anlagen und geräte</rdfs:label>
+    <rdfs:label>Clothing and leather goods, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-5">
+    <rdfs:label xml:lang="es">Dulces y helados</rdfs:label>
+    <rdfs:label xml:lang="en">Candy, confectionery and ice cream</rdfs:label>
+    <rdfs:label xml:lang="fr">Confiserie et glaces</rdfs:label>
+    <rdfs:label xml:lang="it">Dolciumi e gelati</rdfs:label>
+    <rdfs:label xml:lang="de">Genussmittel, eis</rdfs:label>
+    <rdfs:label>Candy, confectionery and ice cream</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-6">
+    <rdfs:label xml:lang="es">Servicios auxiliares de certificados, reproducciones, dibujos y fotos</rdfs:label>
+    <rdfs:label xml:lang="en">Certificates, reproduction, drawings and photos auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires de certificats, reproductions, dessins et photos</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari di certificati, riproduzioni, disegni e foto</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste für zertifikate, reproduktionen, zeichnungen und foto</rdfs:label>
+    <rdfs:label>Certificates, reproduction, drawings and photos auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-1">
+    <rdfs:label xml:lang="es">Aparatos, equipos y suministros para centros de estética</rdfs:label>
+    <rdfs:label xml:lang="en">Beauty salons, equipment and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Appareils, équipements et fournitures pour centres esthétiques</rdfs:label>
+    <rdfs:label xml:lang="it">Apparecchi, attrezzature e forniture per centri estetici</rdfs:label>
+    <rdfs:label xml:lang="de">Anlagen, geräte, belieferung für schöhneitszentren</rdfs:label>
+    <rdfs:label>Beauty salons, equipment and supplies</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-5-1Value rdf:ID="value-interest-topic-5-1-5">
+    <rdfs:label xml:lang="es">Productos acabados estampados</rdfs:label>
+    <rdfs:label xml:lang="en">Printed finished products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits finis imprimés</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti finiti stampati</rdfs:label>
+    <rdfs:label xml:lang="de">Gedruckte endprodukte</rdfs:label>
+    <rdfs:label>Printed finished products</rdfs:label>
+  </Dimension-Interest-Topic-5-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-5">
+    <rdfs:label xml:lang="es">Servicios al turismo</rdfs:label>
+    <rdfs:label xml:lang="en">Tourism, services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services tourisme</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi al turismo</rdfs:label>
+    <rdfs:label xml:lang="de">Reisedienste</rdfs:label>
+    <rdfs:label>Tourism, services</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-5">
+    <rdfs:label xml:lang="es">Calzados, peleterías y pieles</rdfs:label>
+    <rdfs:label xml:lang="en">Footwear, leather goods and skins</rdfs:label>
+    <rdfs:label xml:lang="fr">Chaussures, maroquineries et peaux</rdfs:label>
+    <rdfs:label xml:lang="it">Calzature, pelletterie e pelli</rdfs:label>
+    <rdfs:label xml:lang="de">Schuhe, lederwaren und felle</rdfs:label>
+    <rdfs:label>Footwear, leather goods and skins</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-6">
+    <rdfs:label xml:lang="es">Suministros para la agricultura, la zootecnia y la pesca</rdfs:label>
+    <rdfs:label xml:lang="en">Agriculture, livestock and fishing supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour agriculture, zootechnie et pêche</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per agricoltura, zootecnia e pesca</rdfs:label>
+    <rdfs:label xml:lang="de">Bedarf für landwirtschaft, tierzucht und fischerei</rdfs:label>
+    <rdfs:label>Agriculture, livestock and fishing supplies</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-5">
+    <rdfs:label xml:lang="es">Servicios auxiliares de análisis, control y búsqueda</rdfs:label>
+    <rdfs:label xml:lang="en">Analysis, control and research auxiliary services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services auxiliaires d'analyse, contrôle et recherche</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi ausiliari di analisi, controllo e ricerca</rdfs:label>
+    <rdfs:label xml:lang="de">Hilfsdienste für analyse, kontrolle und recherchen</rdfs:label>
+    <rdfs:label>Analysis, control and research auxiliary services</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-21-1Value rdf:ID="value-interest-topic-21-1-6">
+    <rdfs:label xml:lang="es">Compras</rdfs:label>
+    <rdfs:label xml:lang="en">Shopping</rdfs:label>
+    <rdfs:label xml:lang="fr">Shopping</rdfs:label>
+    <rdfs:label xml:lang="it">Shopping</rdfs:label>
+    <rdfs:label xml:lang="de">Shopping</rdfs:label>
+    <rdfs:label>Shopping</rdfs:label>
+  </Dimension-Interest-Topic-21-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-7">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y equipos para la agricultura, la zootecnia y la pesca</rdfs:label>
+    <rdfs:label xml:lang="en">Agriculture, livestock and fishing breeding, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, matériel et outillages pour agriculture, zootechnie et pêche</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti ed attrezzature per agricoltura, zootecnia e pesca</rdfs:label>
+    <rdfs:label xml:lang="de">Maschinen, anlagen und geräte für landwirtschaft, tierzucht und fischerei</rdfs:label>
+    <rdfs:label>Agriculture, livestock and fishing breeding, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-6">
+    <rdfs:label xml:lang="es">Hilados y materias primas textiles</rdfs:label>
+    <rdfs:label xml:lang="en">Textiles, yarns and raw materials</rdfs:label>
+    <rdfs:label xml:lang="fr">Fils et matières premières textiles</rdfs:label>
+    <rdfs:label xml:lang="it">Filati e materie prime tessili</rdfs:label>
+    <rdfs:label xml:lang="de">Garne und textilfäden</rdfs:label>
+    <rdfs:label>Textiles, yarns and raw materials</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-4">
+    <rdfs:label xml:lang="es">Búsqueda, selección y formación de personal</rdfs:label>
+    <rdfs:label xml:lang="en">Personnel recruitment and training</rdfs:label>
+    <rdfs:label xml:lang="fr">Recherche, sélection et formation du personnel</rdfs:label>
+    <rdfs:label xml:lang="it">Ricerca, selezione e formazione del personale</rdfs:label>
+    <rdfs:label xml:lang="de">Personalsuche, auswahl, ausbildung</rdfs:label>
+    <rdfs:label>Personnel recruitment and training</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-3">
+    <rdfs:label xml:lang="es">Editoría</rdfs:label>
+    <rdfs:label xml:lang="en">Publishing</rdfs:label>
+    <rdfs:label xml:lang="fr">Édition</rdfs:label>
+    <rdfs:label xml:lang="it">Editoria</rdfs:label>
+    <rdfs:label xml:lang="de">Verlage</rdfs:label>
+    <rdfs:label>Publishing</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-8">
+    <rdfs:label xml:lang="es">Máquinas, instalaciones y equipos para la industria alimenticia y bebidas</rdfs:label>
+    <rdfs:label xml:lang="en">Food and drinks industry, machinery and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Machines, installations et équipements pour l'industrie alimentaire et des boissons</rdfs:label>
+    <rdfs:label xml:lang="it">Macchine, impianti ed attrezzature per industria alimentare e bevande</rdfs:label>
+    <rdfs:label xml:lang="de">Nahrungsmittel- getränkeindustrie, maschinen und geräte</rdfs:label>
+    <rdfs:label>Food and drinks industry, machinery and equipment</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-3">
+    <rdfs:label xml:lang="es">Complementos para la moda y el vestir</rdfs:label>
+    <rdfs:label xml:lang="en">Clothing, accessories</rdfs:label>
+    <rdfs:label xml:lang="fr">Accessoires modes d'habillement</rdfs:label>
+    <rdfs:label xml:lang="it">Accessori moda d'abbigliamento</rdfs:label>
+    <rdfs:label xml:lang="de">Modezubehör</rdfs:label>
+    <rdfs:label>Clothing, accessories</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-3">
+    <rdfs:label xml:lang="es">Automación y máquinas para oficinas</rdfs:label>
+    <rdfs:label xml:lang="en">Automation and office machines</rdfs:label>
+    <rdfs:label xml:lang="fr">Automatisation et machines de bureaux</rdfs:label>
+    <rdfs:label xml:lang="it">Automazione e macchine per ufficio</rdfs:label>
+    <rdfs:label xml:lang="de">Büroautomatisierung und maschinen</rdfs:label>
+    <rdfs:label>Automation and office machines</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-14">
+    <rdfs:label xml:lang="es">Válvulas y maquinaria de medición</rdfs:label>
+    <rdfs:label xml:lang="en">Valves and measurement equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Soupapes et appareils de mesure</rdfs:label>
+    <rdfs:label xml:lang="it">Valvole e apparecchiature di misura</rdfs:label>
+    <rdfs:label xml:lang="de">Ventile und messgeräte</rdfs:label>
+    <rdfs:label>Valves and measurement equipment</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-2">
+    <rdfs:label xml:lang="es">Decoraciones y equipos para oficinas</rdfs:label>
+    <rdfs:label xml:lang="en">Office furnishings and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Mobilier et équipements de bureaux</rdfs:label>
+    <rdfs:label xml:lang="it">Arredi ed attrezzature per uffici</rdfs:label>
+    <rdfs:label xml:lang="de">Büroeinrichtungen und geräte</rdfs:label>
+    <rdfs:label>Office furnishings and equipment</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-3">
+    <rdfs:label xml:lang="en">Advertising, marketing and communication</rdfs:label>
+    <rdfs:label xml:lang="fr">Publicité, marketing et communication</rdfs:label>
+    <rdfs:label xml:lang="it">Pubblicita', marketing e comunicazione</rdfs:label>
+    <rdfs:label xml:lang="de">Werbung, marketing und kommunikation</rdfs:label>
+    <rdfs:label>Advertising, marketing and communication</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-14-1Value rdf:ID="value-interest-topic-14-1-4">
+    <rdfs:label xml:lang="es">Telecomunicaciones y telefonía, instalaciones, aparatos y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Telecommunications and telephony, systems, equipment and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Télécommunications et téléphonie, installations, appareils et services</rdfs:label>
+    <rdfs:label xml:lang="it">Telecomunicazioni e telefonia, impianti, apparecchi e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Telekommunikation, telefonie, anlagen, geräte und dienstleistungen</rdfs:label>
+    <rdfs:label>Telecommunications and telephony, systems, equipment and services</rdfs:label>
+  </Dimension-Interest-Topic-14-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-2">
+    <rdfs:label xml:lang="es">Maquinaria y equipos mecánicos</rdfs:label>
+    <rdfs:label xml:lang="en">Mechanical equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Appareilles et outillages mécaniques</rdfs:label>
+    <rdfs:label xml:lang="it">Apparecchiature ed attrezzature meccaniche</rdfs:label>
+    <rdfs:label xml:lang="de">Mechanische geräte und einrichtungen</rdfs:label>
+    <rdfs:label>Mechanical equipment</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-18-1Value rdf:ID="value-interest-topic-18-1-3">
+    <rdfs:label xml:lang="es">Estudios y asesorías técnicas y industriales</rdfs:label>
+    <rdfs:label xml:lang="en">Technical and industrial consultants</rdfs:label>
+    <rdfs:label xml:lang="fr">Bureaux et conseils techniques et industriels</rdfs:label>
+    <rdfs:label xml:lang="it">Studi e consulenze tecniche e industriali</rdfs:label>
+    <rdfs:label xml:lang="de">Ingenieur-, industrieberatung und -büros</rdfs:label>
+    <rdfs:label>Technical and industrial consultants</rdfs:label>
+  </Dimension-Interest-Topic-18-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-6">
+    <rdfs:label xml:lang="es">Medicinales y productos farmacéuticos</rdfs:label>
+    <rdfs:label xml:lang="en">Pharmaceutical and related products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits pharmaceutiques et parapharmaceutiques</rdfs:label>
+    <rdfs:label xml:lang="it">Medicinali e prodotti parafarmaceutici</rdfs:label>
+    <rdfs:label xml:lang="de">Arzneimittel und parapharmazeutische produkte</rdfs:label>
+    <rdfs:label>Pharmaceutical and related products</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-2-1Value rdf:ID="value-interest-topic-2-1-9">
+    <rdfs:label xml:lang="es">Productos alimenticios</rdfs:label>
+    <rdfs:label xml:lang="en">Food products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits alimentaires</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti alimentari</rdfs:label>
+    <rdfs:label xml:lang="de">Nahrungsmittel</rdfs:label>
+    <rdfs:label>Food products</rdfs:label>
+  </Dimension-Interest-Topic-2-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-4">
+    <rdfs:label xml:lang="es">Suministros para el sector del espectáculo</rdfs:label>
+    <rdfs:label xml:lang="en">Entertainment sector, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour le secteur du spectacle</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per il settore dello spettacolo</rdfs:label>
+    <rdfs:label xml:lang="de">Veranstaltungen, belieferungen</rdfs:label>
+    <rdfs:label>Entertainment sector, supplies</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-10">
+    <rdfs:label xml:lang="es">Tejidos y telas</rdfs:label>
+    <rdfs:label xml:lang="en">Fabrics and material</rdfs:label>
+    <rdfs:label xml:lang="fr">Tissus et étoffes</rdfs:label>
+    <rdfs:label xml:lang="it">Tessuti e stoffe</rdfs:label>
+    <rdfs:label xml:lang="de">Stoffe und gewebe</rdfs:label>
+    <rdfs:label>Fabrics and material</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-4">
+    <rdfs:label xml:lang="es">Ropa para el hogar, lencerías y mantas</rdfs:label>
+    <rdfs:label xml:lang="en">Linen, drapery and blankets</rdfs:label>
+    <rdfs:label xml:lang="fr">Linge de maison, toiles et couvertures</rdfs:label>
+    <rdfs:label xml:lang="it">Biancheria, telerie e coperte</rdfs:label>
+    <rdfs:label xml:lang="de">Tisch- und bettwäsche, decken</rdfs:label>
+    <rdfs:label>Linen, drapery and blankets</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-13">
+    <rdfs:label xml:lang="es">Herramientas mecánicas y materiales</rdfs:label>
+    <rdfs:label xml:lang="en">Mechanical tools and materials</rdfs:label>
+    <rdfs:label xml:lang="fr">Outils mécaniques et matériaux</rdfs:label>
+    <rdfs:label xml:lang="it">Utensili meccanici e materiali</rdfs:label>
+    <rdfs:label xml:lang="de">Mechanische werkzeuge und materialien</rdfs:label>
+    <rdfs:label>Mechanical tools and materials</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-1">
+    <rdfs:label xml:lang="es">Decoraciones y equipos para actividades comerciales y de artesanía</rdfs:label>
+    <rdfs:label xml:lang="en">Commercial and artisan activities, furnishings and equipment</rdfs:label>
+    <rdfs:label xml:lang="fr">Mobilier et équipements pour activités commerciales et artisanales</rdfs:label>
+    <rdfs:label xml:lang="it">Arredi ed attrezzature per attivita' commerciali ed artigianali</rdfs:label>
+    <rdfs:label xml:lang="de">Einrichtungen und ausstattung für kommerzielle und handwerkliche tätigkeiten</rdfs:label>
+    <rdfs:label>Commercial and artisan activities, furnishings and equipment</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-3">
+    <rdfs:label xml:lang="es">Elaboración mecánica y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Mechanical machining and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Usinage et services</rdfs:label>
+    <rdfs:label xml:lang="it">Lavorazioni meccaniche e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Mechanische bearbeitungen und dienstleistungen</rdfs:label>
+    <rdfs:label>Mechanical machining and services</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-2">
+    <rdfs:label xml:lang="es">Publicidad, marketing y comunicación</rdfs:label>
+    <rdfs:label xml:lang="en">Professional workers - consultants and services and business associations</rdfs:label>
+    <rdfs:label xml:lang="fr">Professionnels - bureaux et services et associations intéressant l'entreprise</rdfs:label>
+    <rdfs:label xml:lang="it">Professionisti - studi e servizi ed associazioni di interesse aziendale</rdfs:label>
+    <rdfs:label xml:lang="de">Freiberufler, praxen und dienstleistungen und interessenvereinigungen</rdfs:label>
+    <rdfs:label>Professional workers - consultants and services and business associations</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-14-1Value rdf:ID="value-interest-topic-14-1-3">
+    <rdfs:label xml:lang="es">Informática - asesoramiento y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Information technology - consultants and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Informatique - conseils et services</rdfs:label>
+    <rdfs:label xml:lang="it">Informatica -  consulenza e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Informatik - beratung und dienstleistungen</rdfs:label>
+    <rdfs:label>Information technology - consultants and services</rdfs:label>
+  </Dimension-Interest-Topic-14-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-5">
+    <rdfs:label xml:lang="es">Médicos</rdfs:label>
+    <rdfs:label xml:lang="en">Physicians and surgeons</rdfs:label>
+    <rdfs:label xml:lang="fr">Médecins</rdfs:label>
+    <rdfs:label xml:lang="it">Medici</rdfs:label>
+    <rdfs:label xml:lang="de">Ärzte</rdfs:label>
+    <rdfs:label>Physicians and surgeons</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-5">
+    <rdfs:label xml:lang="es">Escuelas y servicios escolares</rdfs:label>
+    <rdfs:label xml:lang="en">Schools and educational services</rdfs:label>
+    <rdfs:label xml:lang="fr">Écoles et services scolaires</rdfs:label>
+    <rdfs:label xml:lang="it">Scuole e servizi scolastici</rdfs:label>
+    <rdfs:label xml:lang="de">Schulen und schuldienstleistungen</rdfs:label>
+    <rdfs:label>Schools and educational services</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-5">
+    <rdfs:label xml:lang="es">Suministros para actividades comerciales y de artesanía</rdfs:label>
+    <rdfs:label xml:lang="en">Commercial and artisan activities, supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures pour activités commerciales et artisanales</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture per attivita' commerciali ed artigianali</rdfs:label>
+    <rdfs:label xml:lang="de">Belieferungen für kommerzielle und handwerkliche tätigkeiten</rdfs:label>
+    <rdfs:label>Commercial and artisan activities, supplies</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-1">
+    <rdfs:label xml:lang="es">Ropa exterior, géneros de punto y peleterías</rdfs:label>
+    <rdfs:label xml:lang="en">Clothing, knitwear and furs</rdfs:label>
+    <rdfs:label xml:lang="fr">Vêtements, tricots et  fourrures</rdfs:label>
+    <rdfs:label xml:lang="it">Abbigliamento esterno, maglierie e pelliccerie</rdfs:label>
+    <rdfs:label xml:lang="de">Bekleidung, strickwaren und pelze</rdfs:label>
+    <rdfs:label>Clothing, knitwear and furs</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-14-1Value rdf:ID="value-interest-topic-14-1-1">
+    <rdfs:label xml:lang="es">Ordenadores</rdfs:label>
+    <rdfs:label xml:lang="en">Computers</rdfs:label>
+    <rdfs:label xml:lang="fr">Ordinateurs</rdfs:label>
+    <rdfs:label xml:lang="it">Computers</rdfs:label>
+    <rdfs:label xml:lang="de">Computers</rdfs:label>
+    <rdfs:label>Computers</rdfs:label>
+  </Dimension-Interest-Topic-14-1Value>
+  <Dimension-Interest-Topic-19-1Value rdf:ID="value-interest-topic-19-1-1">
+    <rdfs:label xml:lang="es">Asesoramiento técnico, administrativo y peritajes</rdfs:label>
+    <rdfs:label xml:lang="en">Technical, administrative consultants and appraisers</rdfs:label>
+    <rdfs:label xml:lang="fr">Conseils techniques, administratifs et expertises</rdfs:label>
+    <rdfs:label xml:lang="it">Consulenze tecniche, amministrative e perizie</rdfs:label>
+    <rdfs:label xml:lang="de">Technische, kommerzielle beratung, gutachten</rdfs:label>
+    <rdfs:label>Technical, administrative consultants and appraisers</rdfs:label>
+  </Dimension-Interest-Topic-19-1Value>
+  <Dimension-Interest-Topic-14-1Value rdf:ID="value-interest-topic-14-1-2">
+    <rdfs:label xml:lang="es">Suministros y productos para la informática</rdfs:label>
+    <rdfs:label xml:lang="en">Information technology, products and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures et produits informatiques</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture e prodotti informatici</rdfs:label>
+    <rdfs:label xml:lang="de">Informatik, belieferung und produkte</rdfs:label>
+    <rdfs:label>Information technology, products and supplies</rdfs:label>
+  </Dimension-Interest-Topic-14-1Value>
+  <Dimension-Interest-Topic-17-1Value rdf:ID="value-interest-topic-17-1-1">
+    <rdfs:label xml:lang="es">Artículos de regalo</rdfs:label>
+    <rdfs:label xml:lang="en">Gifts</rdfs:label>
+    <rdfs:label xml:lang="fr">Articles de cadeau</rdfs:label>
+    <rdfs:label xml:lang="it">Articoli da regalo</rdfs:label>
+    <rdfs:label xml:lang="de">Geschenkartikel</rdfs:label>
+    <rdfs:label>Gifts</rdfs:label>
+  </Dimension-Interest-Topic-17-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-12">
+    <rdfs:label xml:lang="es">Tratamientos térmicos y superficiales metales, galvanotécnica</rdfs:label>
+    <rdfs:label xml:lang="en">Metals, heat and surface treatments, electroforming and plating</rdfs:label>
+    <rdfs:label xml:lang="fr">Traitement thermique et superficiel des métaux et galvanotechnique</rdfs:label>
+    <rdfs:label xml:lang="it">Trattamenti termici e superficiali metalli, galvanotecnica</rdfs:label>
+    <rdfs:label xml:lang="de">Metall, wärme- und oberflächenbehandlung, galvanik</rdfs:label>
+    <rdfs:label>Metals, heat and surface treatments, electroforming and plating</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-18-1Value rdf:ID="value-interest-topic-18-1-1">
+    <rdfs:label xml:lang="es">Estudios y asesoirías administrativas, comerciales y de empresas</rdfs:label>
+    <rdfs:label xml:lang="en">Administration and business services and consultancies</rdfs:label>
+    <rdfs:label xml:lang="fr">Bureaux et conseils administratives, commerciaux et d'entreprise</rdfs:label>
+    <rdfs:label xml:lang="it">Studi e consulenze amministrative, commerciali e aziendali</rdfs:label>
+    <rdfs:label xml:lang="de">Wirtschfts-, handels-, betriebsberatung und -büros</rdfs:label>
+    <rdfs:label>Administration and business services and consultancies</rdfs:label>
+  </Dimension-Interest-Topic-18-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-4">
+    <rdfs:label xml:lang="es">Instalaciones, equipos y suministros sanitarios y hospitalares</rdfs:label>
+    <rdfs:label xml:lang="en">Health and hospital systems, equipment and supplies</rdfs:label>
+    <rdfs:label xml:lang="fr">Installations, équipements et fournitures sanitaires et hospitalières</rdfs:label>
+    <rdfs:label xml:lang="it">Impianti, attrezzature e forniture sanitarie ed ospedaliere</rdfs:label>
+    <rdfs:label xml:lang="de">Anlagen, geräte und belieferung für sanitäre anwendungen und krankenhäuser</rdfs:label>
+    <rdfs:label>Health and hospital systems, equipment and supplies</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-7-1Value rdf:ID="value-interest-topic-7-1-6">
+    <rdfs:label xml:lang="es">Servicios culturales para el espectáculo</rdfs:label>
+    <rdfs:label xml:lang="en">Cultural and entertainment services</rdfs:label>
+    <rdfs:label xml:lang="fr">Services culturels et pour le spectacle</rdfs:label>
+    <rdfs:label xml:lang="it">Servizi culturali e per lo spettacolo</rdfs:label>
+    <rdfs:label xml:lang="de">Kulturelle dienstleistungen, dienstleistungen für veranstaltungen</rdfs:label>
+    <rdfs:label>Cultural and entertainment services</rdfs:label>
+  </Dimension-Interest-Topic-7-1Value>
+  <Dimension-Interest-Topic-13-1Value rdf:ID="value-interest-topic-13-1-4">
+    <rdfs:label xml:lang="es">Suministros industriales para la prevención, control y seguridad</rdfs:label>
+    <rdfs:label xml:lang="en">Industrial supplies for prevention, control and safety</rdfs:label>
+    <rdfs:label xml:lang="fr">Fournitures industrielles pour prévention, contrôle et sécurité</rdfs:label>
+    <rdfs:label xml:lang="it">Forniture industriali per prevenzione, controllo e sicurezza</rdfs:label>
+    <rdfs:label xml:lang="de">Industrielle belieferungen für vorsorge, kontrolle und sicherheit</rdfs:label>
+    <rdfs:label>Industrial supplies for prevention, control and safety</rdfs:label>
+  </Dimension-Interest-Topic-13-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-11">
+    <rdfs:label xml:lang="es">Productos variados en metal</rdfs:label>
+    <rdfs:label xml:lang="en">Various metal products</rdfs:label>
+    <rdfs:label xml:lang="fr">Produits divers en métal</rdfs:label>
+    <rdfs:label xml:lang="it">Prodotti vari in metallo</rdfs:label>
+    <rdfs:label xml:lang="de">Verschiedene metallprodukte</rdfs:label>
+    <rdfs:label>Various metal products</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-1-1Value rdf:ID="value-interest-topic-1-1-2">
+    <rdfs:label xml:lang="es">Ropa interior, medias y bañadores</rdfs:label>
+    <rdfs:label xml:lang="en">Underwear, stockings and bathing costumes</rdfs:label>
+    <rdfs:label xml:lang="fr">Lingerie, chaussettes et bas, maillots de bain</rdfs:label>
+    <rdfs:label xml:lang="it">Abbigliamento intimo, calze e costumi da bagno</rdfs:label>
+    <rdfs:label xml:lang="de">Unterwäsche, strümpfe und badeanzüge</rdfs:label>
+    <rdfs:label>Underwear, stockings and bathing costumes</rdfs:label>
+  </Dimension-Interest-Topic-1-1Value>
+  <Dimension-Interest-Topic-15-1Value rdf:ID="value-interest-topic-15-1-1">
+    <rdfs:label xml:lang="es">Fábricas de acero y fundiciones</rdfs:label>
+    <rdfs:label xml:lang="en">Steelworks and foundries</rdfs:label>
+    <rdfs:label xml:lang="fr">Aciéries et fonderies</rdfs:label>
+    <rdfs:label xml:lang="it">Acciaierie e fonderie</rdfs:label>
+    <rdfs:label xml:lang="de">Stahlwerke und giessereien</rdfs:label>
+    <rdfs:label>Steelworks and foundries</rdfs:label>
+  </Dimension-Interest-Topic-15-1Value>
+  <Dimension-Interest-Topic-16-1Value rdf:ID="value-interest-topic-16-1-3">
+    <rdfs:label xml:lang="es">Centros de estética, cosmética,salud y bienestar y servicios</rdfs:label>
+    <rdfs:label xml:lang="en">Beauty salons, cosmetics, health &amp; well-being and services</rdfs:label>
+    <rdfs:label xml:lang="fr">Centres d'esthétique, de cosmétologie et de bien-être et services</rdfs:label>
+    <rdfs:label xml:lang="it">Centri di estetica, cosmesi, benessere e servizi</rdfs:label>
+    <rdfs:label xml:lang="de">Schönheitszentren, kosmetik, gesundheit, dienstleistungen</rdfs:label>
+    <rdfs:label>Beauty salons, cosmetics, health &amp; well-being and services</rdfs:label>
+  </Dimension-Interest-Topic-16-1Value>
+  <Dimension-Interest-Topic-18-1Value rdf:ID="value-interest-topic-18-1-2">
+    <rdfs:label xml:lang="es">Estudios y asesorías juridicas</rdfs:label>
+    <rdfs:label xml:lang="en">Lawyer's and notary's offices</rdfs:label>
+    <rdfs:label xml:lang="fr">Etudes et conseils légaux et notariés</rdfs:label>
+    <rdfs:label xml:lang="it">Studi e consulenze legali e notarili</rdfs:label>
+    <rdfs:label xml:lang="de">Rechtsanwalts- und notariatsberatung und -büros</rdfs:label>
+    <rdfs:label>Lawyer's and notary's offices</rdfs:label>
+  </Dimension-Interest-Topic-18-1Value>
+</rdf:RDF>

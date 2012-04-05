@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog id="XML Catalog File (see http://www.oasis-open.org/committees/entity/spec-2001-08-06.html) - Created By Protege 4" prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl" uri="advertisement-description-model.owl"/>
+    <uri id="Imports Wizard Entry" name="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl" uri="context-model-vocabulary.owl"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=1" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1300062678979" name="http://dei.polimi.it/dbgroup/pedigree/context-model.owl" uri="context-model-vocabulary.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1300064275039" name="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl" uri="pervads-model.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1300065170035" name="http://www.pervads.com/example/user-profile.owl" uri="user-profile.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1300099502316" name="http://www.pervads.com/example/pervad.owl" uri="pervad.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1300835995857" name="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl" uri="pervads-context-model.owl"/>
+    </group>
+</catalog>

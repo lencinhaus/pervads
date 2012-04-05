@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY user-profile "http://www.pervads.com/example/user-profile.owl#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.pervads.com/example/user-profile.owl#"
+     xml:base="http://www.pervads.com/example/user-profile.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:user-profile="http://www.pervads.com/example/user-profile.owl#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#">
+    <owl:Ontology rdf:about="http://www.pervads.com/example/user-profile.owl">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;dimensionValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;hasDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parentDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;parentDimension"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parameterValue -->
+
+    <owl:DatatypeProperty rdf:about="&context-model-vocabulary;parameterValue"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge -->
+
+    <owl:Class rdf:about="&context-model;ActualAge"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain -->
+
+    <owl:Class rdf:about="&context-model;ActualDomain"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualGender -->
+
+    <owl:Class rdf:about="&context-model;ActualGender"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParAgeN -->
+
+    <owl:Class rdf:about="&context-model;ActualParAgeN"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADsContext -->
+
+    <owl:Class rdf:about="&context-model;PervADsContext"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs -->
+
+    <owl:NamedIndividual rdf:about="&context-model;PervADs"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-equal-N -->
+
+    <owl:NamedIndividual rdf:about="&context-model;age-equal-N"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#male -->
+
+    <owl:NamedIndividual rdf:about="&context-model;male"/>
+    
+
+
+    <!-- http://www.pervads.com/example/user-profile.owl#c-profile -->
+
+    <owl:NamedIndividual rdf:about="&user-profile;c-profile">
+        <rdf:type rdf:resource="&context-model;PervADsContext"/>
+        <context-model-vocabulary:hasDimension rdf:resource="&user-profile;c-profile-age"/>
+        <context-model-vocabulary:hasDimension rdf:resource="&user-profile;c-profile-domain"/>
+        <context-model-vocabulary:hasDimension rdf:resource="&user-profile;c-profile-gender"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/user-profile.owl#c-profile-age -->
+
+    <owl:NamedIndividual rdf:about="&user-profile;c-profile-age">
+        <rdf:type rdf:resource="&context-model;ActualAge"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;age-equal-N"/>
+        <context-model-vocabulary:parentDimension rdf:resource="&user-profile;c-profile-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/user-profile.owl#c-profile-age-N -->
+
+    <owl:NamedIndividual rdf:about="&user-profile;c-profile-age-N">
+        <rdf:type rdf:resource="&context-model;ActualParAgeN"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;positiveInteger">30</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/user-profile.owl#c-profile-domain -->
+
+    <owl:NamedIndividual rdf:about="&user-profile;c-profile-domain">
+        <rdf:type rdf:resource="&context-model;ActualDomain"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;PervADs"/>
+        <context-model-vocabulary:parentDimension rdf:resource="&user-profile;c-profile-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/user-profile.owl#c-profile-gender -->
+
+    <owl:NamedIndividual rdf:about="&user-profile;c-profile-gender">
+        <rdf:type rdf:resource="&context-model;ActualGender"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;male"/>
+        <context-model-vocabulary:parentDimension rdf:resource="&user-profile;c-profile-domain"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

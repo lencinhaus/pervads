@@ -1,0 +1,91 @@
+@prefix : <http://www.pervads.com/example/pervad.owl#> .
+@prefix advertisement-description-model: <http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#> .
+@prefix context-model: <http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#> .
+@prefix context-model-vocabulary: <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+context-model:between-X-and-Y     a owl:NamedIndividual;
+ context-model-vocabulary:parameterValue "15:00"^^xsd:time .
+
+<http://www.pervads.com/example/pervad.owl>     a owl:Ontology;
+ owl:imports <http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl> .
+
+:discount_offer     a advertisement-description-model:Discount,
+	owl:NamedIndividual;
+ advertisement-description-model:discount "0.1"^^xsd:float;
+ advertisement-description-model:hasContext :restaurant-context;
+ advertisement-description-model:hasListCoupon "coupon.png"^^xsd:anyURI;
+ advertisement-description-model:offers :vegetarian_lunch;
+ advertisement-description-model:validUntil "2011-05-15T15:00:00+01:00"^^xsd:dateTime .
+
+:rest-age     a context-model:ActualAge,
+	owl:NamedIndividual;
+ context-model-vocabulary:parentDimension :rest-domain .
+
+:rest-domain     a context-model:ActualDomain,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:PervADs;
+ context-model-vocabulary:parentDimension :rest-domain .
+
+:rest-food-type     a context-model:ActualFoodType,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:vegetarian;
+ context-model-vocabulary:parentDimension :rest-domain .
+
+:rest-location-X     a context-model:ActualParLocationX,
+	owl:NamedIndividual;
+ context-model-vocabulary:parameterValue "3rd street"^^xsd:string .
+
+:rest-space     a context-model:ActualSpace,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:location-equal-X;
+ context-model-vocabulary:parentDimension :rest-domain .
+
+:rest-time     a context-model:ActualTime,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:between-X-and-Y;
+ context-model-vocabulary:parentDimension :rest-topic .
+
+:rest-time-X     a context-model:ActualParTimeBetweenX,
+	owl:NamedIndividual;
+ context-model-vocabulary:parameterValue "11:00"^^xsd:time .
+
+:rest-time-Y     a context-model:ActualParTimeBetweenY,
+	owl:NamedIndividual .
+
+:rest-topic     a context-model:ActualInterestTopic,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:food;
+ context-model-vocabulary:parentDimension :rest-domain .
+
+:restaurant-XYZ     a advertisement-description-model:Organization,
+	owl:NamedIndividual;
+ advertisement-description-model:organizationAddress "3rd street"^^xsd:string;
+ advertisement-description-model:organizationCity "new york"^^xsd:string;
+ advertisement-description-model:organizationName "XYZ"^^xsd:string;
+ advertisement-description-model:organizationWebsite "http://www.restaurantxyz.com"^^xsd:anyURI .
+
+:restaurant-context     a context-model:PervADsContext,
+	owl:NamedIndividual;
+ context-model-vocabulary:hasDimension :rest-age,
+	:rest-domain,
+	:rest-food-type,
+	:rest-space,
+	:rest-time,
+	:rest-topic .
+
+:restaurant-pervad     a advertisement-description-model:PervAD,
+	owl:NamedIndividual;
+ advertisement-description-model:advertises :discount_offer;
+ advertisement-description-model:hasAdvertiser :restaurant-XYZ;
+ advertisement-description-model:hasTag "restaurant"^^xsd:string,
+	"vegetarian"^^xsd:string .
+
+:vegetarian_lunch     a advertisement-description-model:Good,
+	owl:NamedIndividual;
+ advertisement-description-model:itemName "a tasty vegetarian lunch!"^^xsd:string .
+
+xsd:time     a rdfs:Datatype .

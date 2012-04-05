@@ -1,0 +1,229 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@base <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl> .
+
+<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+###  http://www.w3.org/2001/XMLSchema#anyType
+
+xsd:anyType rdf:type rdfs:Datatype .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionValue
+
+:dimensionValue rdf:type owl:FunctionalProperty ,
+                         owl:ObjectProperty ;
+                
+                rdfs:domain :ActualDimension ;
+                
+                rdfs:range :Value .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#formalDimension
+
+:formalDimension rdf:type owl:FunctionalProperty ,
+                          owl:ObjectProperty ;
+                 
+                 rdfs:domain :ActualDimension ;
+                 
+                 rdfs:range :Dimension .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#formalParameter
+
+:formalParameter rdf:type owl:FunctionalProperty ,
+                          owl:ObjectProperty ;
+                 
+                 rdfs:domain :ActualParameter ;
+                 
+                 rdfs:range :Parameter .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasDimension
+
+:hasDimension rdf:type owl:ObjectProperty ;
+              
+              rdfs:range :ActualDimension ;
+              
+              rdfs:domain :Context .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasParameter
+
+:hasParameter rdf:type owl:ObjectProperty ;
+              
+              rdfs:range :ActualParameter ;
+              
+              rdfs:domain :Value .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#inContext
+
+:inContext rdf:type owl:FunctionalProperty ,
+                    owl:ObjectProperty ;
+           
+           owl:inverseOf :hasDimension .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ofValue
+
+:ofValue rdf:type owl:FunctionalProperty ,
+                  owl:ObjectProperty ;
+         
+         owl:inverseOf :hasParameter .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parentDimension
+
+:parentDimension rdf:type owl:FunctionalProperty ,
+                          owl:ObjectProperty ;
+                 
+                 rdfs:range :ActualDimension ;
+                 
+                 rdfs:domain :ActualDimension .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionDataValue
+
+:dimensionDataValue rdf:type owl:DatatypeProperty ;
+                    
+                    rdfs:domain :Value ;
+                    
+                    rdfs:range xsd:anyType .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parameterValue
+
+:parameterValue rdf:type owl:DatatypeProperty ,
+                         owl:FunctionalProperty ;
+                
+                rdfs:domain :ActualParameter ;
+                
+                rdfs:range xsd:anyType .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ActualDimension
+
+:ActualDimension rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :parentDimension ;
+                                   owl:someValuesFrom :ActualDimension
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :dimensionValue ;
+                                   owl:someValuesFrom :Value
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :formalDimension ;
+                                   owl:someValuesFrom :Dimension
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :inContext ;
+                                   owl:someValuesFrom :Context
+                                 ] .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ActualParameter
+
+:ActualParameter rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty :formalParameter ;
+                                   owl:someValuesFrom :Parameter
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :ofValue ;
+                                   owl:someValuesFrom :Value
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :parameterValue ;
+                                   owl:someValuesFrom xsd:anyType
+                                 ] .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Context
+
+:Context rdf:type owl:Class ;
+         
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :hasDimension ;
+                           owl:someValuesFrom :ActualDimension
+                         ] .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Dimension
+
+:Dimension rdf:type owl:Class .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Parameter
+
+:Parameter rdf:type owl:Class .
+
+
+
+###  http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Value
+
+:Value rdf:type owl:Class .
+
+
+
+
+###  Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net
+
