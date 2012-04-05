@@ -1,18 +1,20 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
+import com.hp.hpl.jena.datatypes.RDFDatatype;
+
 public class Parameter extends Node {
-	private String type;
+	private RDFDatatype type;
 	private Category category;
 
 	public Parameter() {
 		super();
 	}
 
-	public String getType() {
+	public RDFDatatype getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(RDFDatatype type) {
 		this.type = type;
 	}
 
@@ -26,7 +28,7 @@ public class Parameter extends Node {
 
 	@Override
 	public String toString() {
-		return getName() + " (" + type + ")";
+		return getName() + " (" + type.getURI() + ")";
 	}
 
 }

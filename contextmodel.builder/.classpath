@@ -49,7 +49,6 @@
 	<classpathentry kind="lib" path="/libs/pellet/pellet-query.jar" sourcepath="/libs/pellet/src/pellet-query-src.jar"/>
 	<classpathentry kind="lib" path="/libs/pellet/pellet-rules.jar" sourcepath="/libs/pellet/src/pellet-rules-src.jar"/>
 	<classpathentry kind="lib" path="/libs/tdb/tdb-0.8.5.jar" sourcepath="/libs/tdb/tdb-0.8.5-sources.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/pervads.model.core"/>
 	<classpathentry kind="lib" path="/libs/ng4j/ng4j-0.9.3.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://www4.wiwiss.fu-berlin.de/bizer/ng4j/javadoc"/>
@@ -57,5 +56,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/contextmodel.core/dist/contextmodel.core_0.1.jar" sourcepath="/contextmodel.core/src"/>
 	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.5.jar"/>
+	<classpathentry kind="lib" path="/libs/apache-commons/commons-lang-2.6.jar" sourcepath="/libs/apache-commons/commons-lang-2.6-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/E:/uni/technologies for information systems/project/workspace/libs/apache-commons/commons-lang-2.6-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,7 +1,5 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
-import it.polimi.dei.dbgroup.pedigree.pervads.model.vocabulary.PervADsContextModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +8,9 @@ public class BuilderConfiguration {
 		public String path;
 		public String URI;
 
-		public IncludedModelData(String path, String uRI) {
-			super();
+		public IncludedModelData(String path, String URI) {
 			this.path = path;
-			URI = uRI;
+			this.URI = URI;
 		}
 
 	}
@@ -23,12 +20,14 @@ public class BuilderConfiguration {
 	public static final String DEFAULT_OUTPUT_LANGUAGE = "RDF/XML-ABBREV";
 	public static final boolean DEFAULT_USE_META_MODEL = false;
 	public static final String DEFAULT_VERSION = "0.1";
-	public static final String DEFAULT_MODEL_URI = PervADsContextModel.URI;
-	public static final String DEFAULT_SPECIFICATION_URI = PervADsContextModel.PERVADS_SPECIFICATION_URI;
+	public static final String DEFAULT_MODEL_URI = "http://example.org/context-model.owl";
+	public static final String DEFAULT_SPECIFICATION_URI = "http://example.org/context-model-spec.owl";
 	public static final ModelComplexityLevel DEFAULT_COMPLEXITY = ModelComplexityLevel.LOW;
 	public static final boolean DEFAULT_SHOW_XML_DECLARATION = false;
 	public static final boolean DEFAULT_SHOW_DOCTYPE_DECLARATION = false;
 	public static final boolean DEFAULT_CREATE_TDB_STORE = false;
+	public static final boolean DEFAULT_CLASSIFY = false;
+	public static final boolean DEFAULT_CREATE_BACKWARD_RULESET = false;
 
 	private String categoriesFileName = DEFAULT_CATEGORIES_FILE_NAME;
 	private String outputFileName = DEFAULT_OUTPUT_FILE_NAME;
@@ -41,7 +40,9 @@ public class BuilderConfiguration {
 	private boolean showXMLDeclaration = DEFAULT_SHOW_XML_DECLARATION;
 	private boolean showDocTypeDeclaration = DEFAULT_SHOW_DOCTYPE_DECLARATION;
 	private boolean createTDBStore = DEFAULT_CREATE_TDB_STORE;
-	private List<IncludedModelData> TDBStoreIncludedModels = new ArrayList<IncludedModelData>();
+	private List<IncludedModelData> includedModels = new ArrayList<IncludedModelData>();
+	private boolean classify = DEFAULT_CLASSIFY;
+	private boolean createBackwardRuleset = DEFAULT_CREATE_BACKWARD_RULESET;
 
 	public String getCategoriesFileName() {
 		return categoriesFileName;
@@ -131,8 +132,23 @@ public class BuilderConfiguration {
 		this.createTDBStore = createTDBStore;
 	}
 
-	public List<IncludedModelData> getTDBStoreIncludedModels() {
-		return TDBStoreIncludedModels;
+	public List<IncludedModelData> getIncludedModels() {
+		return includedModels;
 	}
 
+	public boolean shouldClassify() {
+		return classify;
+	}
+
+	public void setClassify(boolean classify) {
+		this.classify = classify;
+	}
+
+	public boolean shouldCreateBackwardRuleset() {
+		return createBackwardRuleset;
+	}
+
+	public void setCreateBackwardRuleset(boolean createBackwardRuleset) {
+		this.createBackwardRuleset = createBackwardRuleset;
+	}
 }

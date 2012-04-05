@@ -1,138 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <categories>
-	<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-		<category name="Questo" xml:lang="it">
-			<category name="Questo cosa?" xml:lang="it">
-				<category name="Questo ho detto!" xml:lang="it">
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
+	<category id="what">
+		<name xml:lang="it">Cosa</name>
+		<name xml:lang="en">What</name>
+		<name>What</name>
+		<class>QueryDimension</class>
+		<category id="what-this">
+			<name xml:lang="it">Questo</name>
+			<name xml:lang="en">This</name>
+			<name>This</name>
+			<category id="this-what">
+				<name xml:lang="it">Questo quale?</name>
+				<name xml:lang="en">This what?</name>
+				<name>This what?</name>
+				<category id="this-what-this">
+					<name xml:lang="it">Questo!</name>
+					<name xml:lang="en">This!</name>
+					<name>This!</name>
 				</category>
-				<category name="Quest'altro forse." xml:lang="it">
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
-				</category>
-				<category name="Non lo so cosa vuoi da me." xml:lang="it">
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
+				<category id="this-what-dunno">
+					<name xml:lang="it">Bo</name>
+					<name xml:lang="en">Dunno</name>
+					<name>Dunno</name>
 				</category>
 			</category>
 		</category>
-		<category name="Quest'altro" xml:lang="it">
-			<category name="Quest'altro cosa?" xml:lang="it">
-				<category name="Bo!" xml:lang="it">
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
+		<category id="what-that">
+			<name xml:lang="it">Quello</name>
+			<name xml:lang="en">That</name>
+			<name>That</name>
+		</category>
+	</category>
+	<category id="where">
+		<name xml:lang="it">Dove</name>
+		<name xml:lang="en">Where</name>
+		<name>Where</name>
+		<class>QueryDimension</class>
+		<category id="where-here">
+			<name xml:lang="it">Qui</name>
+			<name xml:lang="en">Here</name>
+			<name>Here</name>
+			<category id="here-where">
+				<name xml:lang="it">Qui dove?</name>
+				<name xml:lang="en">Here where?</name>
+				<name>Here where?</name>
+				<category id="here-where-here">
+					<name xml:lang="it">Qui!</name>
+					<name xml:lang="en">Here!</name>
+					<name>Here!</name>
 				</category>
-				<category name="Uffa." xml:lang="it">
-
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
-				</category>
-				<category name="La vita è un po' così" xml:lang="it">
-					<category name="Cosa" xml:lang="it" description="Categorie merceologiche">
-						<category name="Questo" xml:lang="it">
-							<category name="Questo cosa?" xml:lang="it">
-								<category name="Questo ho detto!" xml:lang="it" />
-								<category name="Quest'altro forse." xml:lang="it" />
-								<category name="Non lo so cosa vuoi da me." xml:lang="it" />
-							</category>
-						</category>
-						<category name="Quest'altro" xml:lang="it">
-							<category name="Quest'altro cosa?" xml:lang="it">
-								<category name="Bo!" xml:lang="it" />
-								<category name="Uffa." xml:lang="it" />
-								<category name="La vita è un po' così" xml:lang="it" />
-							</category>
-						</category>
-					</category>
+				<category id="here-where-dunno">
+					<name xml:lang="it">Bo</name>
+					<name xml:lang="en">Dunno</name>
+					<name>Dunno</name>
 				</category>
 			</category>
 		</category>
-	</category>
-	<category name="Dove" xml:lang="it">
-		<category name="qui" xml:lang="it">
-			<parameter name="posizione" type="current_position"
-				xml:lang="it" />
+		<category id="where-there">
+			<name xml:lang="it">Laggiù</name>
+			<name xml:lang="en">There</name>
+			<name>There</name>
 		</category>
-		<category name="in un raggio di N chilometri da qui"
-			xml:lang="it">
-			<parameter name="posizione" type="current_position"
-				xml:lang="it" />
-			<parameter name="N" type="double" xml:lang="it" />
-		</category>
-	</category>
-	<category name="Quando" xml:lang="it">
-		<category name="Ora" xml:lang="it" />
-		<category name="Prima o poi" xml:lang="it" />
 	</category>
 </categories>

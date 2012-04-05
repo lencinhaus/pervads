@@ -1,0 +1,179 @@
+<categories>
+	<category id="gender">
+		<name xml:lang="it">Sesso</name>
+		<name xml:lang="en">Gender</name>
+		<name>Gender</name>
+		<class>ProfileDimension</class>
+		<category id="gender-male">
+			<name xml:lang="it">Uomo</name>
+			<name xml:lang="en">Male</name>
+			<name>Male</name>
+		</category>
+		<category id="gender-female">
+			<name xml:lang="it">Donna</name>
+			<name xml:lang="en">Female</name>
+			<name>Female</name>
+		</category>
+	</category>
+	<category id="age">
+		<name xml:lang="it">Età</name>
+		<name xml:lang="en">Age</name>
+		<name>Age</name>
+		<class>ProfileDimension</class>
+		<category id="age-exact">
+			<name xml:lang="it">Età esatta</name>
+			<name xml:lang="en">Exact age</name>
+			<name>Exact age</name>
+			<class>AdvertiserValue</class>
+			<parameter id="age-exact-X" type="positiveInteger">
+				<name xml:lang="it">età</name>
+				<name xml:lang="en">age</name>
+				<name>age</name>
+			</parameter>
+		</category>
+		<category id="age-interval">
+			<name xml:lang="it">Intervallo di età</name>
+			<name xml:lang="en">Age interval</name>
+			<name>Age interval</name>
+			<class>AdvertiserValue</class>
+			<parameter id="age-interval-from" type="positiveInteger">
+				<name xml:lang="it">da</name>
+				<name xml:lang="en">from</name>
+				<name>from</name>
+			</parameter>
+			<parameter id="age-interval-to" type="positiveInteger">
+				<name xml:lang="it">a</name>
+				<name xml:lang="en">to</name>
+				<name>to</name>
+			</parameter>
+		</category>
+		<category id="age-birthday">
+			<name xml:lang="it">Data di nascita</name>
+			<name xml:lang="en">Birthday</name>
+			<name>Birthday</name>
+			<parameter id="age-birthday-X" type="date">
+				<name xml:lang="it">data</name>
+				<name xml:lang="en">date</name>
+				<name>date</name>
+			</parameter>
+		</category>
+		<category id="age-birthday-interval">
+			<name xml:lang="it">Intervallo di nascita</name>
+			<name xml:lang="en">Birthday interval</name>
+			<name>Birthday interval</name>
+			<class>AdvertiserValue</class>
+			<parameter id="age-birthday-interval-from" type="date">
+				<name xml:lang="it">da</name>
+				<name xml:lang="en">from date</name>
+				<name>from date</name>
+			</parameter>
+			<parameter id="age-birthday-interval-to" type="date">
+				<name xml:lang="it">a</name>
+				<name xml:lang="en">to date</name>
+				<name>to date</name>
+			</parameter>
+		</category>
+	</category>
+	<category id="interest-topic">
+		<name xml:lang="it">Cosa</name>
+		<description xml:lang="it">Categorie merceologiche
+		</description>
+		<name xml:lang="en">What</name>
+		<description xml:lang="en">Product categories</description>
+		<name>What</name>
+		<description>Product categories</description>
+		<class>QueryDimension</class>
+		<reference source="paginegialle" />
+	</category>
+	<category id="space">
+		<name xml:lang="it">Dove</name>
+		<name xml:lang="en">Where</name>
+		<name>Where</name>
+		<class>QueryDimension</class>
+		<category id="space-exact-location">
+			<name xml:lang="it">Posizione</name>
+			<name xml:lang="en">Location</name>
+			<name>Location</name>
+			<class>AdvertiserValue</class>
+			<parameter type="string" id="space-exact-location-X">
+				<name xml:lang="it">posizione</name>
+				<name xml:lang="en">location</name>
+				<name>location</name>
+			</parameter>
+		</category>
+		<category id="space-exact-coordinates">
+			<name xml:lang="it">Coordinate</name>
+			<name xml:lang="en">Coordinates</name>
+			<name>Coordinates</name>
+			<class>AdvertiserValue</class>
+			<parameter type="double" id="space-exact-coordinates-longitude">
+				<name xml:lang="it">longitudine</name>
+				<name xml:lang="en">longitude</name>
+				<name>longitude</name>
+			</parameter>
+			<parameter type="double" id="space-exact-coordinates-latitude">
+				<name xml:lang="it">latitudine</name>
+				<name xml:lang="en">latitude</name>
+				<name>latitude</name>
+			</parameter>
+		</category>
+		<category id="space-exact-within-location">
+			<name xml:lang="it">In un raggio di N kilometri da posizione</name>
+			<name xml:lang="en">Within N kilometers from location</name>
+			<name>Within N kilometers from location</name>
+			<class>UserValue</class>
+			<parameter id="space-exact-within-location-location" type="string">
+				<name xml:lang="it">posizione</name>
+				<name xml:lang="en">location</name>
+				<name>location</name>
+			</parameter>
+			<parameter id="space-exact-within-location-radius" type="double">
+				<name xml:lang="it">raggio in kilometri</name>
+				<name xml:lang="en">radius in kilometers</name>
+				<name>radius in kilometers</name>
+			</parameter>
+		</category>
+		<category id="space-exact-within-here">
+			<name xml:lang="it">In un raggio di N kilometri da qui</name>
+			<name xml:lang="en">Within N kilometers from here</name>
+			<name>Within N kilometers from here</name>
+			<class>UserValue</class>
+			<parameter id="space-exact-within-here-radius" type="double">
+				<name xml:lang="it">raggio in kilometri</name>
+				<name xml:lang="en">radius in kilometers</name>
+				<name>radius in kilometers</name>
+			</parameter>
+		</category>
+	</category>
+	<category id="time">
+		<name xml:lang="it">Quando</name>
+		<name xml:lang="en">When</name>
+		<name>When</name>
+		<class>QueryDimension</class>
+		<category id="time-exact">
+			<name xml:lang="it">Data esatta</name>
+			<name xml:lang="en">Exact date</name>
+			<name>Exact date</name>
+			<parameter id="time-exact-date" type="dateTime">
+				<name xml:lang="it">data</name>
+				<name xml:lang="en">date</name>
+				<name>date</name>
+			</parameter>
+		</category>
+		<category id="time-interval">
+			<name xml:lang="it">Intervallo</name>
+			<name xml:lang="en">Interval</name>
+			<name>Interval</name>
+			<parameter id="time-interval-from" type="dateTime">
+				<name xml:lang="it">da</name>
+				<name xml:lang="en">from</name>
+				<name>from</name>
+			</parameter>
+			<parameter id="time-interval-to" type="dateTime">
+				<name xml:lang="it">a</name>
+				<name xml:lang="en">to</name>
+				<name>to</name>
+			</parameter>
+		</category>
+	</category>
+</categories>

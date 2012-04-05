@@ -2,11 +2,13 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.builder;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.BuilderConfiguration.IncludedModelData;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CategoriesFileName;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Classify;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Complexity;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CreateBackwardRuleset;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.CreateTDBStore;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.DocTypeDeclaration;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.Help;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.IncludeModelInTDBStore;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.IncludeModel;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.ModelURI;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputFileName;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.builder.options.OutputLanguage;
@@ -28,45 +30,51 @@ public class Main {
 	public static final Set<String> VALID_LANGS = new HashSet<String>();
 
 	static {
-		Option output = new OutputFileName();
-		options.put("o", output);
-		options.put("-output", output);
 		Option categories = new CategoriesFileName();
 		options.put("c", categories);
 		options.put("-categories", categories);
+		Option doctypeDeclaration = new DocTypeDeclaration();
+		options.put("d", doctypeDeclaration);
+		options.put("-doctype-declaration", doctypeDeclaration);
+		Option help = new Help();
+		options.put("h", help);
+		options.put("-help", help);
+		Option classify = new Classify();
+		options.put("k", classify);
+		options.put("-classify", classify);
+		Option includeModel = new IncludeModel();
+		options.put("i", includeModel);
+		options.put("-include-model", includeModel);
 		Option lang = new OutputLanguage();
 		options.put("l", lang);
 		options.put("-language", lang);
 		Option meta = new UseMetaModel();
 		options.put("m", meta);
 		options.put("-use-meta-model", meta);
-		Option version = new Version();
-		options.put("v", version);
-		options.put("-version", version);
-		Option help = new Help();
-		options.put("h", help);
-		options.put("-help", help);
-		Option modelURI = new ModelURI();
-		options.put("u", modelURI);
-		options.put("-model-uri", modelURI);
+		Option output = new OutputFileName();
+		options.put("o", output);
+		options.put("-output", output);
+		Option createBackwardRuleset = new CreateBackwardRuleset();
+		options.put("r", createBackwardRuleset);
+		options.put("-ruleset", createBackwardRuleset);
 		Option specURI = new SpecificationURI();
 		options.put("s", specURI);
 		options.put("-specification-uri", specURI);
+		Option modelURI = new ModelURI();
+		options.put("u", modelURI);
+		options.put("-model-uri", modelURI);
+		Option version = new Version();
+		options.put("v", version);
+		options.put("-version", version);
 		Option complexity = new Complexity();
 		options.put("x", complexity);
 		options.put("-complexity", complexity);
 		Option xmlDeclaration = new XMLDeclaration();
 		options.put("xd", xmlDeclaration);
 		options.put("-xml-declaration", xmlDeclaration);
-		Option doctypeDeclaration = new DocTypeDeclaration();
-		options.put("d", doctypeDeclaration);
-		options.put("-doctype-declaration", doctypeDeclaration);
 		Option createTDBStore = new CreateTDBStore();
 		options.put("tdb", createTDBStore);
 		options.put("-create-tdb-store", createTDBStore);
-		Option includeModelInTDBStore = new IncludeModelInTDBStore();
-		options.put("tdbi", includeModelInTDBStore);
-		options.put("-include-model-in-tdb-store", includeModelInTDBStore);
 
 		VALID_LANGS.add("RDF/XML");
 		VALID_LANGS.add("RDF/XML-ABBREV");
@@ -162,11 +170,11 @@ public class Main {
 		System.out.println("Show DocType declaration: " + (config.isShowDocTypeDeclaration()?"yes":"no"));
 		if(config.isCreateTDBStore()) {
 			System.out.println("TDB store output file: " + config.getOutputFileName() + "_tdb.zip");
-			if(config.getTDBStoreIncludedModels().size() > 0) {
-				System.out.println("Included models:");
-				for(IncludedModelData includedModel : config.getTDBStoreIncludedModels()) {
-					System.out.println("\t" + includedModel.path + " <" + includedModel.URI + ">");
-				}
+		}
+		if(config.getIncludedModels().size() > 0) {
+			System.out.println("Included models:");
+			for(IncludedModelData includedModel : config.getIncludedModels()) {
+				System.out.println("\t" + includedModel.path + " <" + includedModel.URI + ">");
 			}
 		}
 
