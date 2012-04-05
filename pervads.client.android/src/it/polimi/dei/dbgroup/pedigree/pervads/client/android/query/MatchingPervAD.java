@@ -4,16 +4,17 @@ import java.util.List;
 
 public class MatchingPervAD {
 	private double score;
-	private List<LightweightAssignmentMatching> assignmentMatchings;
-	private LightweightPervAD pervAD;
+	private List<MatchingAssignment> assignmentMatchings;
+	private PervADProxy pervAD;
 
+	@SuppressWarnings("unused")
 	private MatchingPervAD() {
 
 	}
 
 	protected MatchingPervAD(double score,
-			List<LightweightAssignmentMatching> assignmentMatchings,
-			LightweightPervAD pervAD) {
+			List<MatchingAssignment> assignmentMatchings,
+			PervADProxy pervAD) {
 		super();
 		this.score = score;
 		this.assignmentMatchings = assignmentMatchings;
@@ -24,11 +25,11 @@ public class MatchingPervAD {
 		return score;
 	}
 
-	public List<LightweightAssignmentMatching> getAssignmentMatchings() {
+	public List<MatchingAssignment> getAssignmentMatchings() {
 		return assignmentMatchings;
 	}
 
-	public LightweightPervAD getPervAD() {
+	public PervADProxy getPervAD() {
 		return pervAD;
 	}
 

@@ -1,4 +1,4 @@
-package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
+package it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters;
 
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.NamedEntity;
 
@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class NamedEntityAdapter extends BaseAdapter {
+public abstract class NamedEntityAdapter extends BaseAdapter {
 	private static final Comparator<NamedEntity> NAMED_ENTITY_COMPARATOR = new Comparator<NamedEntity>() {
 		
 		@Override
@@ -28,12 +28,9 @@ public class NamedEntityAdapter extends BaseAdapter {
 			else return object1.getName().compareTo(object2.getName());
 		}
 	};
-	private class ViewHolder {
-		public TextView text;
-	}
 
-	private List<? extends NamedEntity> entities = null;
-	private LayoutInflater inflater;
+	protected List<? extends NamedEntity> entities = null;
+	protected LayoutInflater inflater;
 	
 	public NamedEntityAdapter(Context context) {
 		this.inflater = (LayoutInflater) context
@@ -46,7 +43,7 @@ public class NamedEntityAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return entities.get(position);
+		return getEntity(position);
 	}
 	
 	public NamedEntity getEntity(int position) {
@@ -59,23 +56,26 @@ public class NamedEntityAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
-		NamedEntity entity = entities.get(position);
-		if (convertView == null) {
-			convertView = inflater.inflate(android.R.layout.simple_list_item_1, null);
-
-			holder = new ViewHolder();
-			holder.text = (TextView) convertView.findViewById(android.R.id.text1);
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-
-		holder.text.setText(entity.getName());
-
-		return convertView;
-	}
+	public abstract View getView(int position, View convertView, ViewGroup parent);
+	
+//	@Override
+//	public View getView(int position, View convertView, ViewGroup parent) {
+//		ViewHolder holder;
+//		NamedEntity entity = entities.get(position);
+//		if (convertView == null) {
+//			convertView = inflater.inflate(android.R.layout.simple_list_item_1, null);
+//
+//			holder = new ViewHolder();
+//			holder.text = (TextView) convertView.findViewById(android.R.id.text1);
+//			convertView.setTag(holder);
+//		} else {
+//			holder = (ViewHolder) convertView.getTag();
+//		}
+//
+//		holder.text.setText(entity.getName());
+//
+//		return convertView;
+//	}
 
 	public void setEntities(List<? extends NamedEntity> entities) {
 		this.entities = entities;

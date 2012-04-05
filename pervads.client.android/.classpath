@@ -10,8 +10,8 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="lib" path="/libs/iri/iri-0.8.jar" sourcepath="/libs/iri/iri-0.8-sources.jar"/>
 	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.5.jar"/>
-	<classpathentry kind="lib" path="/libs/androjena/androjena_0.4.jar" sourcepath="/libs/androjena/androjena_0.4_sources.jar"/>
-	<classpathentry kind="lib" path="/libs/arqoid/arqoid_0.4.jar" sourcepath="/libs/arqoid/arqoid_0.4_sources.jar"/>
 	<classpathentry kind="lib" path="/libs/tdboid/tdboid_0.4.jar" sourcepath="/libs/tdboid/tdboid_0.4_sources.jar"/>
+	<classpathentry kind="lib" path="/libs/androjena/androjena_0.5.jar" sourcepath="/libs/androjena/androjena_0.5_sources.jar"/>
+	<classpathentry kind="lib" path="/libs/arqoid/arqoid_0.5.jar" sourcepath="/libs/arqoid/arqoid_0.5_sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewAnimator xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/animator" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    <LinearLayout android:id="@+id/dimension_chooser" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical">
+        <ListView android:layout_width="fill_parent" android:id="@+id/dimensions" android:layout_height="fill_parent"></ListView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/value_chooser" android:layout_height="fill_parent" android:layout_width="fill_parent" android:orientation="vertical">
+        <ListView android:layout_width="fill_parent" android:id="@+id/values" android:layout_height="fill_parent"></ListView>
+    </LinearLayout>
+</ViewAnimator>

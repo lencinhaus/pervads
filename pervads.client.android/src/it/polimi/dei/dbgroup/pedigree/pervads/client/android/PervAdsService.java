@@ -136,6 +136,11 @@ public class PervAdsService extends Service implements IWifiAdapterListener {
 			while (++currentNetworkId < networks.length) {
 				final WifiNetwork network = networks[currentNetworkId];
 				final String networkName = network.getSSID();
+				
+				if(Config.TESTING_BEHAVIOR && Config.TESTING_SSID != null && !networkName.equals(Config.TESTING_SSID)) {
+					handler.sendEmptyMessage(CONNECT_TO_NEXT_NETWORK_MESSAGE);
+					break;
+				}
 
 				// notify listeners about connection start
 				postNetworkConnectionEvent(EventTypes.Started, networkName);

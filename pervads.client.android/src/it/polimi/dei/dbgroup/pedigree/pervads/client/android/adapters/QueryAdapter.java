@@ -1,4 +1,4 @@
-package it.polimi.dei.dbgroup.pedigree.pervads.client.android;
+package it.polimi.dei.dbgroup.pedigree.pervads.client.android.adapters;
 
 import it.polimi.dei.dbgroup.pedigree.pervads.client.android.query.Query;
 
