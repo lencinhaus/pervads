@@ -1,0 +1,16 @@
+# Parameters:
+# 1 - value individual
+
+PREFIX cmv:      <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?actualParameterIndividual ?formalParameterIndividual ?valueLiteral
+WHERE
+{
+	?actualParameterIndividual cmv:parameterOfValue <%1$s> .
+	?actualParameterIndividual cmv:formalParameter ?formalParameterIndividual .
+	?actualParameterIndividual cmv:parameterValue ?valueLiteral
+}
+

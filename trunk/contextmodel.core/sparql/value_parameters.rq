@@ -1,0 +1,28 @@
+# Parameters:
+# 1 - value individual
+
+PREFIX cmv:		<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?actualParameterClass ?formalParameterIndividual ?valuesDataType
+WHERE 
+{
+	?parentValueRestriction owl:hasValue <%1$s> .
+	?parentValueRestriction rdf:type owl:Restriction .
+	?parentValueRestriction owl:onProperty cmv:parameterOfValue .
+	
+	?actualParameterClass rdfs:subClassOf ?parentValueRestriction .
+	?actualParameterClass rdfs:subClassOf cmv:ActualParameter .
+	?actualParameterClass rdfs:subClassOf ?formalParameterRestriction .
+	?actualParameterClass rdfs:subClassOf ?valuesDataTypeRestriction .
+	
+	?formalParameterRestriction rdf:type owl:Restriction .
+	?formalParameterRestriction owl:onProperty cmv:formalParameter .
+	?formalParameterRestriction owl:hasValue ?formalParameterIndividual .
+	
+	?valuesDataTypeRestriction rdf:type owl:Restriction .
+	?valuesDataTypeRestriction owl:onProperty cmv:parameterValue .
+	?valuesDataTypeRestriction owl:someValuesFrom ?valuesDataType
+}

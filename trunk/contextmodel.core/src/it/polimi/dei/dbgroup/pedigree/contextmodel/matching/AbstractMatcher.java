@@ -1,65 +1,104 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.matching;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Assignment;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.AssignmentDefinition;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.matching.specialized.SpecializedMatcherResolver;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.DimensionAssignment;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ParameterAssignment;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Value;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public abstract class AbstractMatcher {
-	private List<? extends AssignmentDefinition> definitions;
+public abstract class AbstractMatcher<S extends DimensionAssignment<? extends ParameterAssignment>, T extends DimensionAssignment<? extends ParameterAssignment>> {
+	private Collection<S> sourceDimensionAssignments;
+	private SpecializedMatcherResolver<S, T> specializedMatcherResolver = new SpecializedMatcherResolver<S, T>();
 
-	public AbstractMatcher() {
-		this.definitions = new ArrayList<AssignmentDefinition>();
+	public SpecializedMatcherResolver<S, T> getSpecializedMatcherResolver() {
+		return specializedMatcherResolver;
 	}
 
-	public AbstractMatcher(List<? extends AssignmentDefinition> definitions) {
-		this.definitions = definitions;
-	}
-
-	public List<? extends AssignmentDefinition> getDefinitions() {
-		return definitions;
-	}
-
-	public void setDefinitions(List<? extends AssignmentDefinition> definitions) {
-		this.definitions = definitions;
-	}
-
-	public Matching match() {
-		double matchingScoreSum = 0;
-		List<AssignmentDefinition> unmatchedDefinitions = new ArrayList<AssignmentDefinition>();
-		List<AssignmentMatching> matchings = new ArrayList<AssignmentMatching>();
-
-		for (AssignmentDefinition definition : definitions) {
-			Assignment assignment = findMatchingAssignment(definition);
-
-			if (assignment != null) {
-				AssignmentMatching matching = createAssignmentMatching(
-						definition, assignment);
-				matchingScoreSum += matching.getScore();
-				matchings.add(matching);
-			} else
-				unmatchedDefinitions.add(definition);
+	private final DimensionAssignmentMatcher<S, T> StandardMatcher = new DimensionAssignmentMatcher<S, T>() {
+		@Override
+		public double match(S sourceAssignment, T targetAssignment)
+				throws IncompatibleAssignmentsException {
+			if (!sourceAssignment.equals(targetAssignment))
+				throw new IncompatibleAssignmentsException();
+			return 1D / (1D + (double) getDistance(sourceAssignment
+					.getDimension()));
 		}
 
-		double score = matchingScoreSum / ((double) definitions.size());
-		return new Matching(matchings, unmatchedDefinitions, score);
+		private int getDistance(Dimension dimension) {
+			int distance = 0;
+			for (Value value : dimension.listChildValues()) {
+				for (Dimension subDimension : value.listChildDimensions()) {
+					if (findTargetAssignmentForDimension(subDimension) != null)
+						distance += 1 + getDistance(subDimension);
+				}
+			}
+
+			return distance;
+		}
+	};
+
+	public AbstractMatcher() {
+		this(null);
 	}
 
-	protected abstract Assignment findMatchingAssignment(
-			AssignmentDefinition definition);
-
-	private AssignmentMatching createAssignmentMatching(
-			AssignmentDefinition definition, Assignment assignment) {
-		int distance = assignment.getDefinition().getDimension().getDistance(
-				definition.getDimension());
-		double score = 1 / ((double) (1 + distance));
-		score *= getCustomMatchingScore(definition, assignment);
-		return new AssignmentMatching(definition, assignment, score);
+	public AbstractMatcher(Collection<S> sourceDimensionAssignments) {
+		if(sourceDimensionAssignments == null) sourceDimensionAssignments = new ArrayList<S>();
+		this.sourceDimensionAssignments = sourceDimensionAssignments;
 	}
 
-	protected double getCustomMatchingScore(AssignmentDefinition definition,
-			Assignment assignment) {
-		return 1;
+	public Collection<S> getSourceDimensionAssignments() {
+		return sourceDimensionAssignments;
 	}
+
+	public void setSourceDimensionAssignments(
+			Collection<S> sourceDimensionAssignments) {
+		this.sourceDimensionAssignments = sourceDimensionAssignments;
+	}
+
+	public Matching<S, T> match() {
+		double matchingScoreSum = 0;
+		List<S> unmatchedAssignments = new ArrayList<S>();
+		List<DimensionAssignmentMatching<S, T>> matchings = new ArrayList<DimensionAssignmentMatching<S, T>>();
+
+		for (S source : sourceDimensionAssignments) {
+			double assignmentMatchingScore = 0;
+			Dimension dimension = source.getDimension();
+			T target = findTargetAssignmentForDimension(dimension);
+			if (target != null) {
+				DimensionAssignmentMatcher<S, T> matcher = specializedMatcherResolver
+						.findSpecializedMatcher(source.getValue(), target
+								.getValue());
+				if (matcher == null)
+					matcher = StandardMatcher;
+				try {
+					assignmentMatchingScore = matcher.match(source, target);
+					DimensionAssignmentMatching<S, T> matching = new DimensionAssignmentMatching<S, T>(
+							source, target, assignmentMatchingScore);
+					matchings.add(matching);
+				} catch (IncompatibleAssignmentsException ex) {
+					// invalidate the whole matching
+					matchingScoreSum = 0;
+					matchings.clear();
+					unmatchedAssignments.clear();
+					unmatchedAssignments.addAll(sourceDimensionAssignments);
+					break;
+				}
+			} else
+				unmatchedAssignments.add(source);
+
+			matchingScoreSum += assignmentMatchingScore;
+		}
+
+		double totalMatchingScore = matchingScoreSum
+				/ ((double) sourceDimensionAssignments.size());
+
+		return new Matching<S, T>(matchings, unmatchedAssignments,
+				totalMatchingScore);
+	}
+
+	protected abstract T findTargetAssignmentForDimension(Dimension dimension);
 }

@@ -1,0 +1,24 @@
+# Parameters:
+# 1 - actual dimension class
+
+PREFIX cmv:		<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
+PREFIX owl:     <http://www.w3.org/2002/07/owl#>
+PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX list:	<http://jena.hpl.hp.com/ARQ/list#>
+
+SELECT ?formalDimensionIndividual ?valuesClass
+WHERE 
+{
+	<%1$s> rdfs:subClassOf cmv:ActualDimension .
+	
+	<%1$s> rdfs:subClassOf ?formalDimensionRestriction .
+	?formalDimensionRestriction rdf:type owl:Restriction .
+	?formalDimensionRestriction owl:onProperty cmv:formalDimension .
+	?formalDimensionRestriction owl:hasValue ?formalDimensionIndividual .
+	
+	<%1$s> rdfs:subClassOf ?dimensionValueRestriction .
+	?dimensionValueRestriction rdf:type owl:Restriction .
+	?dimensionValueRestriction owl:onProperty cmv:dimensionValue .
+	?dimensionValueRestriction owl:someValuesFrom ?valuesClass
+}

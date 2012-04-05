@@ -9,7 +9,7 @@ public interface ContextModelProxy extends DimensionParent {
 	
 	public Dimension findDimension(String uri);
 	
-	public Dimension findDimensionByAssignmentClass(String assignmentClassUri);
+	public Dimension findDimensionByActualDimensionClass(String actualDimensionClassUri);
 
 	public Value findValue(String uri);
 

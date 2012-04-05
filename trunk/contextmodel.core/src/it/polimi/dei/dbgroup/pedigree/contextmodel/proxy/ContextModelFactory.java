@@ -1,13 +1,13 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.AssignmentDefinitionImpl;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.ContextInstanceProxyImpl;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.ContextModelProxyImpl;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl.FormalDimensionAssignmentImpl;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class ContextModelFactory {
-	public static final String CONTEXT_MODEL_ALT_URI = "owl/context-model.owl";
+	public static final String CONTEXT_MODEL_VOCABULARY_ALT_URI = "owl/context-model-vocabulary.owl";
 
 	private ContextModelFactory() {
 	}
@@ -21,18 +21,10 @@ public class ContextModelFactory {
 		return new ContextInstanceProxyImpl(contextModel, model);
 	}
 
-	public static AssignmentDefinition createAssignmentDefinition(Value value,
-			Dimension dimension) {
+	public static FormalDimensionAssignment createDimensionAssignment(
+			Value value) {
 		if (value == null)
 			throw new IllegalArgumentException("value cannot be null");
-		if (dimension == null)
-			dimension = value.getParentDimension();
-		return new AssignmentDefinitionImpl(dimension, value);
-	}
-
-	public static AssignmentDefinition createAssignmentDefinition(Value value) {
-		if (value == null)
-			throw new IllegalArgumentException("value cannot be null");
-		return createAssignmentDefinition(value, value.getParentDimension());
+		return new FormalDimensionAssignmentImpl(value);
 	}
 }

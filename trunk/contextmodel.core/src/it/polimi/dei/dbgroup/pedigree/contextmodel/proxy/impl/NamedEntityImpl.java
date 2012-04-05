@@ -3,8 +3,6 @@ package it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.impl;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.NamedEntity;
 import it.polimi.dei.dbgroup.pedigree.contextmodel.util.ModelUtils;
 
-import java.util.Locale;
-
 import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDFS;
@@ -46,7 +44,5 @@ public class NamedEntityImpl extends EntityImpl implements NamedEntity {
 		return ModelUtils.getStringProperty(getResource(), nameProperty,
 				ModelUtils.getDefaultLanguage(), true);
 	}
-
-	
 
 }

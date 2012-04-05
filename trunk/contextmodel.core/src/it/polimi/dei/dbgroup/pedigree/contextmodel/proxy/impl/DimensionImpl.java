@@ -13,36 +13,28 @@ import java.util.List;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.ResIterator;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 
 public class DimensionImpl extends ContextModelEntityImpl implements Dimension {
 	private static final String DIMENSION_PARENT_VALUE_QUERY_NAME = "dimension_parent_value";
-	private Resource assignmentClass;
-	private Property assignmentProperty;
+	private Resource actualDimensionClass;
 	private Resource valuesClass;
 	private Value parentValue;
 
-	private DimensionImpl(ContextModelProxy proxy, Resource assignmentClass,
-			Property assignmentProperty, Resource formalDimensionIndividual,
+	private DimensionImpl(ContextModelProxy proxy,
+			Resource actualDimensionClass, Resource formalDimensionIndividual,
 			Resource valuesClass, Value parentValue) {
 		super(proxy, formalDimensionIndividual);
-		this.assignmentClass = assignmentClass;
-		this.assignmentProperty = assignmentProperty;
+		this.actualDimensionClass = actualDimensionClass;
 		this.valuesClass = valuesClass;
 		this.parentValue = parentValue;
 	}
 
 	@Override
-	public Resource getAssignmentClass() {
-		return assignmentClass;
-	}
-
-	@Override
-	public Property getAssignmentProperty() {
-		return assignmentProperty;
+	public Resource getActualDimensionClass() {
+		return actualDimensionClass;
 	}
 
 	@Override
@@ -61,7 +53,7 @@ public class DimensionImpl extends ContextModelEntityImpl implements Dimension {
 			QueryExecution qe = null;
 			try {
 				qe = QueryUtils.createQuery(getProxy().getModel(),
-						DIMENSION_PARENT_VALUE_QUERY_NAME, assignmentClass
+						DIMENSION_PARENT_VALUE_QUERY_NAME, actualDimensionClass
 								.getURI());
 				ResultSet rs = qe.execSelect();
 				if (rs.hasNext()) {
@@ -109,29 +101,26 @@ public class DimensionImpl extends ContextModelEntityImpl implements Dimension {
 
 	public static Dimension createFromQuerySolution(ContextModelProxy proxy,
 			QuerySolution solution, Value parentValue) {
-		return new DimensionImpl(proxy,
-				solution.getResource("assignmentClass"), solution.getResource(
-						"assignmentProperty").as(Property.class), solution
-						.getResource("formalDimension"), solution
-						.getResource("valuesClass"), parentValue);
+		return new DimensionImpl(proxy, solution
+				.getResource("actualDimensionClass"), solution
+				.getResource("formalDimensionIndividual"), solution
+				.getResource("valuesClass"), parentValue);
 	}
 
 	public static Dimension createFromFormalDimensionAndQuerySolution(
-			ContextModelProxy proxy, Resource formalDimension,
+			ContextModelProxy proxy, Resource formalDimensionIndividual,
 			QuerySolution solution, Value parentValue) {
-		return new DimensionImpl(proxy,
-				solution.getResource("assignmentClass"), solution.getResource(
-						"assignmentProperty").as(Property.class),
-				formalDimension, solution.getResource("valuesClass"),
+		return new DimensionImpl(proxy, solution
+				.getResource("actualDimensionClass"),
+				formalDimensionIndividual, solution.getResource("valuesClass"),
 				parentValue);
 	}
 
-	public static Dimension createFromAssignmentClassAndQuerySolution(
-			ContextModelProxy proxy, Resource assignmentClass,
+	public static Dimension createFromActualDimensionClassAndQuerySolution(
+			ContextModelProxy proxy, Resource actualDimensionClass,
 			QuerySolution solution, Value parentValue) {
-		return new DimensionImpl(proxy, assignmentClass, solution.getResource(
-				"assignmentProperty").as(Property.class), solution
-				.getResource("formalDimension"), solution
+		return new DimensionImpl(proxy, actualDimensionClass, solution
+				.getResource("formalDimensionIndividual"), solution
 				.getResource("valuesClass"), parentValue);
 	}
 }

@@ -1,50 +1,40 @@
 package it.polimi.dei.dbgroup.pedigree.contextmodel.matching;
 
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Assignment;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.AssignmentDefinition;
-import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.AssignmentSource;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.Dimension;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.DimensionAssignment;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.DimensionAssignmentSource;
+import it.polimi.dei.dbgroup.pedigree.contextmodel.proxy.ParameterAssignment;
 
-import java.util.List;
+import java.util.Collection;
 
-public class SourceMatcher extends AbstractMatcher {
-	private AssignmentSource source;
-	
+public class SourceMatcher<S extends DimensionAssignment<? extends ParameterAssignment>, T extends DimensionAssignment<? extends ParameterAssignment>>
+		extends AbstractMatcher<S, T> {
+	private DimensionAssignmentSource<T> source;
+
 	public SourceMatcher() {
-		super();
-		this.source = null;
+		this(null, null);
 	}
 
-	public SourceMatcher(List<? extends AssignmentDefinition> definitions) {
-		super(definitions);
-		this.source = null;
+	public SourceMatcher(Collection<S> sourceDimensionAssignments) {
+		this(sourceDimensionAssignments, null);
 	}
 
-	public SourceMatcher(List<? extends AssignmentDefinition> definitions,
-			AssignmentSource source) {
-		super(definitions);
+	public SourceMatcher(Collection<S> sourceDimensionAssignments,
+			DimensionAssignmentSource<T> source) {
+		super(sourceDimensionAssignments);
 		this.source = source;
 	}
 
-	public AssignmentSource getSource() {
+	public DimensionAssignmentSource<T> getSource() {
 		return source;
 	}
 
-	public void setSource(AssignmentSource source) {
+	public void setSource(DimensionAssignmentSource<T> source) {
 		this.source = source;
 	}
 
 	@Override
-	protected Assignment findMatchingAssignment(AssignmentDefinition definition) {
-		if(source == null) throw new IllegalStateException("source not set");
-		List<? extends Assignment> matchingAssignments = source
-				.findCompatibleAssignments(definition);
-		if (matchingAssignments.size() > 1)
-			throw new RuntimeException(
-					"source returned more than 1 compatible assignment for definition "
-							+ definition);
-		if (matchingAssignments.size() > 0)
-			return matchingAssignments.get(0);
-		return null;
+	protected T findTargetAssignmentForDimension(Dimension dimension) {
+		return source.findAssignmentForDimension(dimension);
 	}
-
 }

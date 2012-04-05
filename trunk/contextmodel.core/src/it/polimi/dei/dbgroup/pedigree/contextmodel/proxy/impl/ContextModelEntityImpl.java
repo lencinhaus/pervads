@@ -9,8 +9,7 @@ public class ContextModelEntityImpl extends NamedEntityImpl implements
 		ContextModelEntity {
 	private ContextModelProxy proxy;
 
-	protected ContextModelEntityImpl(ContextModelProxy proxy,
-			Resource resource) {
+	protected ContextModelEntityImpl(ContextModelProxy proxy, Resource resource) {
 		super(resource);
 		this.proxy = proxy;
 	}

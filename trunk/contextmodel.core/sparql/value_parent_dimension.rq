@@ -1,24 +1,27 @@
 # Parameters:
 # 1 - value individual
 
-PREFIX cm:      <http://dei.polimi.it/dbgroup/pedigree/context-model.owl#>
+PREFIX cmv:		<http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#>
 PREFIX owl:     <http://www.w3.org/2002/07/owl#>
 PREFIX rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX list:	<http://jena.hpl.hp.com/ARQ/list#>
 
-SELECT ?assignmentClass ?assignmentProperty ?valuesClass ?formalDimension
+SELECT ?actualDimensionClass ?valuesClass ?formalDimensionIndividual
 WHERE 
 {
 	<%1$s> rdf:type ?valuesClass .
-#	?valuesClass rdfs:subClassOf cm:DimensionValue .
-	?assignmentProperty rdfs:range ?valuesClass .
-	?assignmentProperty rdfs:domain ?assignmentClass .
-	?assignmentClass owl:equivalentClass ?equivalentClass .
-	?equivalentClass owl:intersectionOf ?equivalentItem1 .
-#	?equivalentItem1 rdf:first ?valueRestriction .
-#	?valueRestriction owl:onProperty ?assignmentProperty .
-	?equivalentItem1 rdf:rest ?equivalentItem2 .
-	?equivalentItem2 rdf:first ?dimensionRestriction .
-	?dimensionRestriction owl:onProperty cm:assignmentDimension .
-	?dimensionRestriction owl:hasValue ?formalDimension
+	?valuesClass rdfs:subClassOf cmv:Value .
+	
+	?dimensionValueRestriction owl:someValuesFrom ?valuesClass .
+	?dimensionValueRestriction rdf:type owl:Restriction .
+	?dimensionValueRestriction owl:onProperty cmv:dimensionValue .
+	?actualDimensionClass rdfs:subClassOf ?dimensionValueRestriction .
+	
+	?actualDimensionClass rdfs:subClassOf ?formalDimensionRestriction .
+	?formalDimensionRestriction rdf:type owl:Restriction .
+	?formalDimensionRestriction owl:onProperty cmv:formalDimension .
+	?formalDimensionRestriction owl:hasValue ?formalDimensionIndividual .
+	
+	?actualDimensionClass rdfs:subClassOf cmv:ActualDimension
 }
