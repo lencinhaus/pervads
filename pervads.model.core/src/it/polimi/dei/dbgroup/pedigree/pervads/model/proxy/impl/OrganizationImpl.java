@@ -61,9 +61,9 @@ public class OrganizationImpl extends PervADsModelEntityImpl implements
 	}
 
 	@Override
-	public int getZipCode() {
-		return ModelUtils.getTypedProperty(getOrganizationIndividual(),
-				PervADsModel.organizationZipCode, Integer.class);
+	public String getZipCode() {
+		return ModelUtils.getStringProperty(getOrganizationIndividual(),
+				PervADsModel.organizationZipCode);
 	}
 
 	@Override

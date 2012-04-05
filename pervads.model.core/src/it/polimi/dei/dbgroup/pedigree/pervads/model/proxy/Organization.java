@@ -15,7 +15,7 @@ public interface Organization extends PervADsModelEntity {
 
 	public String getCity();
 
-	public int getZipCode();
+	public String getZipCode();
 
 	public String getZone();
 
