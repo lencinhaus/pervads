@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY model "http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:model="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#">        
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-root -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-root">
+        <rdf:type rdf:resource="&context-model;ActualDimension-Root-19-1"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;value-root-19-1-4"/>
+        <context-model-vocabulary:inContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context">
+        <rdf:type rdf:resource="&context-model-vocabulary;Context"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#c-root"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1">
+        <rdf:type rdf:resource="&model;Good"/>
+        <model:itemName rdf:datatype="&xsd;string">lunch</model:itemName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2">
+        <rdf:type rdf:resource="&model;Service"/>
+        <model:itemName rdf:datatype="&xsd;string">dinner</model:itemName>
+        <model:itemDescription rdf:datatype="&xsd;string">really cheap dinner</model:itemDescription>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer">
+        <rdf:type rdf:resource="&model;Discount"/>
+        <model:discount rdf:datatype="&xsd;float">.1</model:discount>
+        <model:validFrom rdf:datatype="&xsd;dateTime">2011-01-01T00:00:00</model:validFrom>
+        <model:validUntil rdf:datatype="&xsd;dateTime">2011-12-31T23:59:59</model:validUntil>
+        <model:hasListCoupon rdf:datatype="&xsd;anyURI">coupon.png</model:hasListCoupon>
+        <model:hasAttachedVideo rdf:datatype="&xsd;anyURI">video.avi</model:hasAttachedVideo>
+        <model:offers rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item1"/>
+        <model:offers rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#item2"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization">
+        <rdf:type rdf:resource="&model;Organization"/>
+        <model:organizationAddress rdf:datatype="&xsd;string">3rd street</model:organizationAddress>
+        <model:organizationCity rdf:datatype="&xsd;string">New York</model:organizationCity>
+        <model:organizationWebsite rdf:datatype="&xsd;anyURI">http://www.restaurantxyz.com</model:organizationWebsite>
+        <model:organizationEmail rdf:datatype="&xsd;string">info@restaurantxyz.com</model:organizationEmail>
+        <model:organizationName rdf:datatype="&xsd;string">restaurant XYZ</model:organizationName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#pervad -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#pervad">
+        <rdf:type rdf:resource="&model;PervAD"/>
+        <model:hasTag rdf:datatype="&xsd;string">cheap</model:hasTag>
+        <model:hasTag rdf:datatype="&xsd;string">restaurant</model:hasTag>
+        <model:hasContext rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#context"/>
+        <model:advertises rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#offer"/>
+        <model:hasAdvertiser rdf:resource="http://www.semanticweb.org/ontologies/2011/2/Ontology1300836751494.owl#organization"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

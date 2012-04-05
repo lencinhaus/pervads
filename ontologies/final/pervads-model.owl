@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY model "http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/context-model.owl#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#"
+     xml:base="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:model="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/context-model.owl#">
+    <owl:Ontology rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#advertises -->
+
+    <owl:ObjectProperty rdf:about="&model;advertises">
+        <rdfs:range rdf:resource="&model;Offer"/>
+        <rdfs:domain rdf:resource="&model;PervAD"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAdvertiser -->
+
+    <owl:ObjectProperty rdf:about="&model;hasAdvertiser">
+        <rdfs:range rdf:resource="&model;Organization"/>
+        <rdfs:domain rdf:resource="&model;PervAD"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasContext -->
+
+    <owl:ObjectProperty rdf:about="&model;hasContext">
+        <rdfs:range rdf:resource="&context-model-vocabulary;Context"/>
+        <rdfs:domain rdf:resource="&model;PervAD"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#isAdvertisedIn -->
+
+    <owl:ObjectProperty rdf:about="&model;isAdvertisedIn">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:range rdf:resource="&model;PervAD"/>
+        <owl:inverseOf rdf:resource="&model;advertises"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#offers -->
+
+    <owl:ObjectProperty rdf:about="&model;offers">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:range rdf:resource="&model;OfferedItem"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#currency -->
+
+    <owl:DatatypeProperty rdf:about="&model;currency">
+        <rdfs:domain rdf:resource="&model;SpecialPrice"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#discount -->
+
+    <owl:DatatypeProperty rdf:about="&model;discount">
+        <rdfs:domain rdf:resource="&model;Discount"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedImage -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedImage">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:subPropertyOf rdf:resource="&model;hasAttachedMedia"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedMedia -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedMedia">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedVideo -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedVideo">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:subPropertyOf rdf:resource="&model;hasAttachedMedia"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasDetailCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasDetailCoupon">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:subPropertyOf rdf:resource="&model;hasAttachedImage"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasListCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasListCoupon">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:subPropertyOf rdf:resource="&model;hasAttachedImage"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasTag -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasTag">
+        <rdfs:domain rdf:resource="&model;PervAD"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemDescription -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemDescription">
+        <rdfs:domain rdf:resource="&model;OfferedItem"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemName -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemName">
+        <rdfs:domain rdf:resource="&model;OfferedItem"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationAddress -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationAddress">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationCity -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationCity">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationEmail -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationEmail">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationName -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationName">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationWebsite -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationWebsite">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;anyURI"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationZipCode -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationZipCode">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationZone -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationZone">
+        <rdfs:domain rdf:resource="&model;Organization"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#price -->
+
+    <owl:DatatypeProperty rdf:about="&model;price">
+        <rdfs:domain rdf:resource="&model;SpecialPrice"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validFrom -->
+
+    <owl:DatatypeProperty rdf:about="&model;validFrom">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validUntil -->
+
+    <owl:DatatypeProperty rdf:about="&model;validUntil">
+        <rdfs:domain rdf:resource="&model;Offer"/>
+        <rdfs:range rdf:resource="&xsd;dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Context -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Context"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Discount -->
+
+    <owl:Class rdf:about="&model;Discount">
+        <rdfs:subClassOf rdf:resource="&model;Offer"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Good -->
+
+    <owl:Class rdf:about="&model;Good">
+        <rdfs:subClassOf rdf:resource="&model;OfferedItem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Offer -->
+
+    <owl:Class rdf:about="&model;Offer"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#OfferedItem -->
+
+    <owl:Class rdf:about="&model;OfferedItem"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Organization -->
+
+    <owl:Class rdf:about="&model;Organization"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#PervAD -->
+
+    <owl:Class rdf:about="&model;PervAD"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Service -->
+
+    <owl:Class rdf:about="&model;Service">
+        <rdfs:subClassOf rdf:resource="&model;OfferedItem"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#SpecialPrice -->
+
+    <owl:Class rdf:about="&model;SpecialPrice">
+        <rdfs:subClassOf rdf:resource="&model;Offer"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

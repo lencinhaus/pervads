@@ -1,0 +1,1126 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#"
+     xml:base="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;dimensionValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#formalDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;formalDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#formalParameter -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;formalParameter"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;hasDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#inContext -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;inContext"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ofValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;ofValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parentDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;parentDimension"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parameterValue -->
+
+    <owl:DatatypeProperty rdf:about="&context-model-vocabulary;parameterValue"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ActualDimension -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;ActualDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#ActualParameter -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;ActualParameter"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Context -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Context"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Dimension -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Dimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Parameter -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Parameter"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#Value -->
+
+    <owl:Class rdf:about="&context-model-vocabulary;Value"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualCuisine -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualCuisine">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#cuisine"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Cuisine"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Domain"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#domains"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualFoodType -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualFoodType">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food-type"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualGender -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualGender">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Gender"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gender"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#InterestTopic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#interest-topic"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualMean -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualMean">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#transportation"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#mean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Mean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParAgeN -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParAgeN">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-equal-N"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;positiveInteger"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-N"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParLocationX -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParLocationX">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-equal-X"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-X"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinHere -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinHere">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-HERE"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinHereN -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinHereN">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE-N"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-HERE"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinLoc -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinLoc">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-LOC"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinLocN -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParSpaceWithinLocN">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC-N"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-LOC"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenX -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenX">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#between-X-and-Y"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-X"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenY -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenY">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#between-X-and-Y"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-Y"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeX -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeX">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualParameter"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalParameter"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-X"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parameterValue"/>
+                <owl:someValuesFrom rdf:resource="&xsd;dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;ofValue"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-equal-X"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;ActualDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;inContext"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADsContext"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime">
+        <rdfs:subClassOf rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualPervADsDimension"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;formalDimension"/>
+                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;parentDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                <owl:someValuesFrom rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Time"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Cuisine -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Cuisine">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Domain -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Domain">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Gender -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Gender">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#InterestTopic -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#InterestTopic">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Mean -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Mean">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADsContext -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADsContext">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Context"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&context-model-vocabulary;hasDimension"/>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:intersectionOf rdf:parseType="Collection">
+                            <rdf:Description rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain"/>
+                            <owl:Restriction>
+                                <owl:onProperty rdf:resource="&context-model-vocabulary;dimensionValue"/>
+                                <owl:hasValue rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs"/>
+                            </owl:Restriction>
+                        </owl:intersectionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Time -->
+
+    <owl:Class rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Time">
+        <rdfs:subClassOf rdf:resource="&context-model-vocabulary;Value"/>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#0-10 -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#0-10">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#10-18 -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#10-18">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#18-30 -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#18-30">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-N -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-N">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-equal-N -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#age-equal-N">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Age"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#between-X-and-Y -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#between-X-and-Y">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Time"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#bus -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#bus">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Mean"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#chinese -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#chinese">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#cuisine -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#cuisine">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#domains -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#domains">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#female -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#female">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Gender"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#InterestTopic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food-type -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food-type">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gender -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gender">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gluten-free -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#gluten-free">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#interest-topic -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#interest-topic">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#italian -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#italian">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Cuisine"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-X -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-X">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-equal-X -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-equal-X">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#male -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#male">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Gender"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#mean -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#mean">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE-N -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-HERE-N">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC-N -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#space-within-LOC-N">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#subway -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#subway">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Mean"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time">
+        <rdf:type rdf:resource="&context-model-vocabulary;Dimension"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-X -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-X">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-X -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-X">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-Y -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-between-Y">
+        <rdf:type rdf:resource="&context-model-vocabulary;Parameter"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-equal-X -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#time-equal-X">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Time"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#transportation -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#transportation">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#InterestTopic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#vegan -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#vegan">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#vegetarian -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#vegetarian">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#FoodType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-HERE -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-HERE">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-LOC -->
+
+    <owl:NamedIndividual rdf:about="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#within-N-miles-from-LOC">
+        <rdf:type rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Space"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

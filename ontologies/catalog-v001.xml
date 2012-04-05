@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog id="XML Catalog File (see http://www.oasis-open.org/committees/entity/spec-2001-08-06.html) - Created By Protege 4" prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=1" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://dei.polimi.it/dbgroup/pedigree/context-model.owl" uri="context-model.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://www.dei.polimi.it/dbgroup/kid/contextModelOntology.owl" uri="contextModelOntology.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://www.pervads.com/PervADS.owl" uri="PervADS.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl" uri="pervads_context_model.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl" uri="pervads_esempio.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl" uri="pervads_model.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1297608680832" name="http://www.pervads.com/shakespeare_cafe_pervads.owl" uri="shakespeare_cafe_pervads.owl"/>
+    </group>
+</catalog>

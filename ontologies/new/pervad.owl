@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#" >
+    <!ENTITY context-model-vocabulary "http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#" >
+    <!ENTITY advertisement-description-model "http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.pervads.com/example/pervad.owl#"
+     xml:base="http://www.pervads.com/example/pervad.owl"
+     xmlns:context-model-vocabulary="http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#"
+     xmlns:advertisement-description-model="http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#">
+    <owl:Ontology rdf:about="http://www.pervads.com/example/pervad.owl">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.w3.org/2001/XMLSchema#time -->
+
+    <rdfs:Datatype rdf:about="&xsd;time"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#dimensionValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;dimensionValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#hasDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;hasDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parentDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model-vocabulary;parentDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#advertises -->
+
+    <owl:ObjectProperty rdf:about="&advertisement-description-model;advertises"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#hasAdvertiser -->
+
+    <owl:ObjectProperty rdf:about="&advertisement-description-model;hasAdvertiser"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#hasContext -->
+
+    <owl:ObjectProperty rdf:about="&advertisement-description-model;hasContext"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#offers -->
+
+    <owl:ObjectProperty rdf:about="&advertisement-description-model;offers"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#parameterValue -->
+
+    <owl:DatatypeProperty rdf:about="&context-model-vocabulary;parameterValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#discount -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#hasListCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;hasListCoupon"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#hasTag -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;hasTag"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#itemName -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;itemName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#organizationAddress -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;organizationAddress"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#organizationCity -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;organizationCity"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#organizationName -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;organizationName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#organizationWebsite -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;organizationWebsite"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#validUntil -->
+
+    <owl:DatatypeProperty rdf:about="&advertisement-description-model;validUntil"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#Discount -->
+
+    <owl:Class rdf:about="&advertisement-description-model;Discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#Good -->
+
+    <owl:Class rdf:about="&advertisement-description-model;Good"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#Organization -->
+
+    <owl:Class rdf:about="&advertisement-description-model;Organization"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#PervAD -->
+
+    <owl:Class rdf:about="&advertisement-description-model;PervAD"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualAge -->
+
+    <owl:Class rdf:about="&context-model;ActualAge"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualDomain -->
+
+    <owl:Class rdf:about="&context-model;ActualDomain"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualFoodType -->
+
+    <owl:Class rdf:about="&context-model;ActualFoodType"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualInterestTopic -->
+
+    <owl:Class rdf:about="&context-model;ActualInterestTopic"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParLocationX -->
+
+    <owl:Class rdf:about="&context-model;ActualParLocationX"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenX -->
+
+    <owl:Class rdf:about="&context-model;ActualParTimeBetweenX"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualParTimeBetweenY -->
+
+    <owl:Class rdf:about="&context-model;ActualParTimeBetweenY"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualSpace -->
+
+    <owl:Class rdf:about="&context-model;ActualSpace"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#ActualTime -->
+
+    <owl:Class rdf:about="&context-model;ActualTime"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADsContext -->
+
+    <owl:Class rdf:about="&context-model;PervADsContext"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#18-30 -->
+
+    <owl:NamedIndividual rdf:about="&context-model;18-30"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#PervADs -->
+
+    <owl:NamedIndividual rdf:about="&context-model;PervADs"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#between-X-and-Y -->
+
+    <owl:NamedIndividual rdf:about="&context-model;between-X-and-Y">
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;time">15:00</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#food -->
+
+    <owl:NamedIndividual rdf:about="&context-model;food"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#location-equal-X -->
+
+    <owl:NamedIndividual rdf:about="&context-model;location-equal-X"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#vegetarian -->
+
+    <owl:NamedIndividual rdf:about="&context-model;vegetarian"/>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#discount_offer -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#discount_offer">
+        <rdf:type rdf:resource="&advertisement-description-model;Discount"/>
+        <advertisement-description-model:discount rdf:datatype="&xsd;float">0.1</advertisement-description-model:discount>
+        <advertisement-description-model:validUntil rdf:datatype="&xsd;dateTime">2011-05-15T15:00:00+01:00</advertisement-description-model:validUntil>
+        <advertisement-description-model:hasListCoupon rdf:datatype="&xsd;anyURI">coupon.png</advertisement-description-model:hasListCoupon>
+        <advertisement-description-model:hasContext rdf:resource="http://www.pervads.com/example/pervad.owl#restaurant-context"/>
+        <advertisement-description-model:offers rdf:resource="http://www.pervads.com/example/pervad.owl#vegetarian_lunch"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-age -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-age">
+        <rdf:type rdf:resource="&context-model;ActualAge"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;18-30"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-domain -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-domain">
+        <rdf:type rdf:resource="&context-model;ActualDomain"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;PervADs"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-food-type -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-food-type">
+        <rdf:type rdf:resource="&context-model;ActualFoodType"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;vegetarian"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-topic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-location-X -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-location-X">
+        <rdf:type rdf:resource="&context-model;ActualParLocationX"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;string">3rd street</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-space -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-space">
+        <rdf:type rdf:resource="&context-model;ActualSpace"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;location-equal-X"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-time -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-time">
+        <rdf:type rdf:resource="&context-model;ActualTime"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;between-X-and-Y"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-topic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-time-X -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-time-X">
+        <rdf:type rdf:resource="&context-model;ActualParTimeBetweenX"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;time">11:00</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-time-Y -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-time-Y">
+        <rdf:type rdf:resource="&context-model;ActualParTimeBetweenY"/>
+        <context-model-vocabulary:parameterValue rdf:datatype="&xsd;time">15:00</context-model-vocabulary:parameterValue>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#rest-topic -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#rest-topic">
+        <rdf:type rdf:resource="&context-model;ActualInterestTopic"/>
+        <context-model-vocabulary:dimensionValue rdf:resource="&context-model;food"/>
+        <context-model-vocabulary:parentDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-domain"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#restaurant-XYZ -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#restaurant-XYZ">
+        <rdf:type rdf:resource="&advertisement-description-model;Organization"/>
+        <advertisement-description-model:organizationAddress rdf:datatype="&xsd;string">3rd street</advertisement-description-model:organizationAddress>
+        <advertisement-description-model:organizationName rdf:datatype="&xsd;string">XYZ</advertisement-description-model:organizationName>
+        <advertisement-description-model:organizationWebsite rdf:datatype="&xsd;anyURI">http://www.restaurantxyz.com</advertisement-description-model:organizationWebsite>
+        <advertisement-description-model:organizationCity rdf:datatype="&xsd;string">new york</advertisement-description-model:organizationCity>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#restaurant-context -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#restaurant-context">
+        <rdf:type rdf:resource="&context-model;PervADsContext"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-age"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-domain"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-food-type"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-space"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-time"/>
+        <context-model-vocabulary:hasDimension rdf:resource="http://www.pervads.com/example/pervad.owl#rest-topic"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#restaurant-pervad -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#restaurant-pervad">
+        <rdf:type rdf:resource="&advertisement-description-model;PervAD"/>
+        <advertisement-description-model:hasTag rdf:datatype="&xsd;string">restaurant</advertisement-description-model:hasTag>
+        <advertisement-description-model:hasTag rdf:datatype="&xsd;string">vegetarian</advertisement-description-model:hasTag>
+        <advertisement-description-model:advertises rdf:resource="http://www.pervads.com/example/pervad.owl#discount_offer"/>
+        <advertisement-description-model:hasAdvertiser rdf:resource="http://www.pervads.com/example/pervad.owl#restaurant-XYZ"/>
+        <advertisement-description-model:hasContext rdf:resource="http://www.pervads.com/example/pervad.owl#restaurant-context"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.pervads.com/example/pervad.owl#vegetarian_lunch -->
+
+    <owl:NamedIndividual rdf:about="http://www.pervads.com/example/pervad.owl#vegetarian_lunch">
+        <rdf:type rdf:resource="&advertisement-description-model;Good"/>
+        <advertisement-description-model:itemName rdf:datatype="&xsd;string">a tasty vegetarian lunch!</advertisement-description-model:itemName>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.1.0.20069) http://owlapi.sourceforge.net -->
+

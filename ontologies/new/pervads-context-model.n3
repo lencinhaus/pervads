@@ -1,0 +1,510 @@
+@prefix : <http://www.w3.org/2002/07/owl#> .
+@prefix context-model-vocabulary: <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix context-model: <http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+context-model-vocabulary:ActualDimension     a :Class .
+
+context-model-vocabulary:ActualParameter     a :Class .
+
+context-model-vocabulary:Context     a :Class .
+
+context-model-vocabulary:Dimension     a :Class .
+
+context-model-vocabulary:Parameter     a :Class .
+
+context-model-vocabulary:Value     a :Class .
+
+context-model-vocabulary:dimensionValue     a :ObjectProperty .
+
+context-model-vocabulary:formalDimension     a :ObjectProperty .
+
+context-model-vocabulary:formalParameter     a :ObjectProperty .
+
+context-model-vocabulary:hasDimension     a :ObjectProperty .
+
+context-model-vocabulary:ofValue     a :ObjectProperty .
+
+context-model-vocabulary:parameterValue     a :DatatypeProperty .
+
+context-model-vocabulary:parentDimension     a :ObjectProperty .
+
+<http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl>     a :Ontology;
+ :imports <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl> .
+
+context-model:0-10     a context-model:Age,
+	:NamedIndividual .
+
+context-model:10-18     a context-model:Age,
+	:NamedIndividual .
+
+context-model:18-30     a context-model:Age,
+	:NamedIndividual .
+
+context-model:ActualAge     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Age ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	 [
+     a :Restriction;
+     :hasValue context-model:age;
+     :onProperty context-model-vocabulary:formalDimension ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualCuisine     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:cuisine;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Cuisine ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualInterestTopic 
+	 [
+		 :hasValue context-model:food;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualDomain     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:domains;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom context-model:ActualDomain ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Domain ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualFoodType     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:food-type;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:FoodType ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualInterestTopic 
+	 [
+		 :hasValue context-model:food;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualGender     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	 [
+     a :Restriction;
+     :hasValue context-model:gender;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Gender ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualInterestTopic     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:InterestTopic ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	 [
+     a :Restriction;
+     :hasValue context-model:interest-topic;
+     :onProperty context-model-vocabulary:formalDimension ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualMean     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Mean ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualInterestTopic 
+	 [
+		 :hasValue context-model:transportation;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	 [
+     a :Restriction;
+     :hasValue context-model:mean;
+     :onProperty context-model-vocabulary:formalDimension ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualParAgeN     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:age-equal-N;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:positiveInteger ],
+	 [
+     a :Restriction;
+     :hasValue context-model:age-N;
+     :onProperty context-model-vocabulary:formalParameter ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParLocationX     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:location-X;
+     :onProperty context-model-vocabulary:formalParameter ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:string ],
+	 [
+     a :Restriction;
+     :hasValue context-model:location-equal-X;
+     :onProperty context-model-vocabulary:ofValue ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParSpaceWithinHere     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:space-within-HERE;
+     :onProperty context-model-vocabulary:formalParameter ],
+	 [
+     a :Restriction;
+     :hasValue context-model:within-N-miles-from-HERE;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:string ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParSpaceWithinHereN     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:within-N-miles-from-HERE;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:double ],
+	 [
+     a :Restriction;
+     :hasValue context-model:space-within-HERE-N;
+     :onProperty context-model-vocabulary:formalParameter ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParSpaceWithinLoc     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:within-N-miles-from-LOC;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:string ],
+	 [
+     a :Restriction;
+     :hasValue context-model:space-within-LOC;
+     :onProperty context-model-vocabulary:formalParameter ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParSpaceWithinLocN     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:space-within-LOC-N;
+     :onProperty context-model-vocabulary:formalParameter ],
+	 [
+     a :Restriction;
+     :hasValue context-model:within-N-miles-from-LOC;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:double ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParTimeBetweenX     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:dateTime ],
+	 [
+     a :Restriction;
+     :hasValue context-model:between-X-and-Y;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :hasValue context-model:time-between-X;
+     :onProperty context-model-vocabulary:formalParameter ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParTimeBetweenY     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:dateTime ],
+	 [
+     a :Restriction;
+     :hasValue context-model:time-between-Y;
+     :onProperty context-model-vocabulary:formalParameter ],
+	 [
+     a :Restriction;
+     :hasValue context-model:between-X-and-Y;
+     :onProperty context-model-vocabulary:ofValue ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualParTimeX     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:time-equal-X;
+     :onProperty context-model-vocabulary:ofValue ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parameterValue;
+     :someValuesFrom xsd:dateTime ],
+	 [
+     a :Restriction;
+     :hasValue context-model:time-X;
+     :onProperty context-model-vocabulary:formalParameter ],
+	context-model-vocabulary:ActualParameter .
+
+context-model:ActualSpace     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:space;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Space ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:ActualTime     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :hasValue context-model:time;
+     :onProperty context-model-vocabulary:formalDimension ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:parentDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	 [
+     a :Restriction;
+     :onProperty context-model-vocabulary:dimensionValue;
+     :someValuesFrom context-model:Time ],
+	context-model-vocabulary:ActualDimension .
+
+context-model:Age     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:Cuisine     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:Domain     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:FoodType     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:Gender     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:InterestTopic     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:Mean     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:PervADs     a context-model:Domain,
+	:NamedIndividual .
+
+context-model:PervADsContext     a :Class;
+ rdfs:subClassOf  [
+     a :Restriction;
+     :onProperty context-model-vocabulary:hasDimension;
+     :someValuesFrom  [
+	 a :Class;
+	 :intersectionOf  (
+	context-model:ActualDomain 
+	 [
+		 :hasValue context-model:PervADs;
+		 :onProperty context-model-vocabulary:dimensionValue ] ) ] ],
+	context-model-vocabulary:Context .
+
+context-model:Space     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:Time     a :Class;
+ rdfs:subClassOf context-model-vocabulary:Value .
+
+context-model:age     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:age-N     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:age-equal-N     a context-model:Age,
+	:NamedIndividual .
+
+context-model:between-X-and-Y     a context-model:Time,
+	:NamedIndividual .
+
+context-model:bus     a context-model:Mean,
+	:NamedIndividual .
+
+context-model:chinese     a context-model:Cuisine,
+	:NamedIndividual .
+
+context-model:cuisine     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:domains     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:female     a context-model:Gender,
+	:NamedIndividual .
+
+context-model:food     a context-model:InterestTopic,
+	:NamedIndividual .
+
+context-model:food-type     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:gender     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:gluten-free     a context-model:FoodType,
+	:NamedIndividual .
+
+context-model:interest-topic     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:italian     a context-model:Cuisine,
+	:NamedIndividual .
+
+context-model:location-X     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:location-equal-X     a context-model:Space,
+	:NamedIndividual .
+
+context-model:male     a context-model:Gender,
+	:NamedIndividual .
+
+context-model:mean     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:space     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:space-within-HERE     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:space-within-HERE-N     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:space-within-LOC     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:space-within-LOC-N     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:subway     a context-model:Mean,
+	:NamedIndividual .
+
+context-model:time     a context-model-vocabulary:Dimension,
+	:NamedIndividual .
+
+context-model:time-X     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:time-between-X     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:time-between-Y     a context-model-vocabulary:Parameter,
+	:NamedIndividual .
+
+context-model:time-equal-X     a context-model:Time,
+	:NamedIndividual .
+
+context-model:transportation     a context-model:InterestTopic,
+	:NamedIndividual .
+
+context-model:vegan     a context-model:FoodType,
+	:NamedIndividual .
+
+context-model:vegetarian     a context-model:FoodType,
+	:NamedIndividual .
+
+context-model:within-N-miles-from-HERE     a context-model:Space,
+	:NamedIndividual .
+
+context-model:within-N-miles-from-LOC     a context-model:Space,
+	:NamedIndividual .

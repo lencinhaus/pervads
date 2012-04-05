@@ -1,0 +1,225 @@
+@prefix : <http://dei.polimi.it/dbgroup/pedigree/pervads/advertisement-description-model.owl#> .
+@prefix context-model-vocabulary: <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+context-model-vocabulary:Context     a owl:Class .
+
+<http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl>     a owl:Ontology .
+
+:Discount     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onDataRange xsd:float;
+     owl:onProperty :discount;
+     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+	:Offer .
+
+:Good     a owl:Class;
+ rdfs:subClassOf :OfferedItem .
+
+:Offer     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:dateTime;
+     owl:onProperty :validFrom ],
+	 [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:dateTime;
+     owl:onProperty :validUntil ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :hasListCoupon;
+     owl:someValuesFrom xsd:anyURI ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :hasDetailCoupon;
+     owl:someValuesFrom xsd:anyURI ];
+ owl:equivalentClass  [
+     a owl:Restriction;
+     owl:onProperty :offers;
+     owl:someValuesFrom :OfferedItem ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :isAdvertisedIn;
+     owl:someValuesFrom :PervAD ] .
+
+:OfferedItem     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onProperty :itemDescription;
+     owl:someValuesFrom xsd:string ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :itemName;
+     owl:someValuesFrom xsd:string ] .
+
+:Organization     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:positiveInteger;
+     owl:onProperty :organizationZipCode ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :organizationName;
+     owl:someValuesFrom xsd:string ],
+	 [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:string;
+     owl:onProperty :organizationZone ],
+	 [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:string;
+     owl:onProperty :organizationCity ],
+	 [
+     a owl:Restriction;
+     owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+     owl:onDataRange xsd:string;
+     owl:onProperty :organizationAddress ] .
+
+:PervAD     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onClass context-model-vocabulary:Context;
+     owl:onProperty :hasContext;
+     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ];
+ owl:equivalentClass  [
+     a owl:Restriction;
+     owl:onProperty :hasAdvertiser;
+     owl:someValuesFrom :Organization ],
+	 [
+     a owl:Restriction;
+     owl:onProperty :advertises;
+     owl:someValuesFrom :Offer ] .
+
+:Service     a owl:Class;
+ rdfs:subClassOf :OfferedItem .
+
+:SpecialPrice     a owl:Class;
+ rdfs:subClassOf  [
+     a owl:Restriction;
+     owl:onDataRange xsd:string;
+     owl:onProperty :currency;
+     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+	 [
+     a owl:Restriction;
+     owl:onDataRange xsd:float;
+     owl:onProperty :price;
+     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+	:Offer .
+
+:advertises     a owl:ObjectProperty;
+ rdfs:domain :PervAD;
+ rdfs:range :Offer .
+
+:currency     a owl:DatatypeProperty;
+ rdfs:domain :SpecialPrice;
+ rdfs:range xsd:string .
+
+:discount     a owl:DatatypeProperty;
+ rdfs:domain :Discount;
+ rdfs:range xsd:float .
+
+:hasAdvertiser     a owl:ObjectProperty;
+ rdfs:domain :PervAD;
+ rdfs:range :Organization .
+
+:hasAttachedImage     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:anyURI;
+ rdfs:subPropertyOf :hasAttachedMedia .
+
+:hasAttachedMedia     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:anyURI .
+
+:hasAttachedVideo     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:anyURI;
+ rdfs:subPropertyOf :hasAttachedMedia .
+
+:hasContext     a owl:ObjectProperty;
+ rdfs:domain :PervAD;
+ rdfs:range context-model-vocabulary:Context .
+
+:hasDetailCoupon     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:anyURI;
+ rdfs:subPropertyOf :hasAttachedImage .
+
+:hasListCoupon     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:anyURI;
+ rdfs:subPropertyOf :hasAttachedImage .
+
+:hasTag     a owl:DatatypeProperty;
+ rdfs:domain :PervAD;
+ rdfs:range xsd:string .
+
+:isAdvertisedIn     a owl:ObjectProperty;
+ rdfs:domain :Offer;
+ rdfs:range :PervAD;
+ owl:inverseOf :advertises .
+
+:itemDescription     a owl:DatatypeProperty;
+ rdfs:domain :OfferedItem;
+ rdfs:range xsd:string .
+
+:itemName     a owl:DatatypeProperty;
+ rdfs:domain :OfferedItem;
+ rdfs:range xsd:string .
+
+:offers     a owl:ObjectProperty;
+ rdfs:domain :Offer;
+ rdfs:range :OfferedItem .
+
+:organizationAddress     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:string .
+
+:organizationCity     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:string .
+
+:organizationEmail     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:string .
+
+:organizationName     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:string .
+
+:organizationWebsite     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:anyURI .
+
+:organizationZipCode     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:positiveInteger .
+
+:organizationZone     a owl:DatatypeProperty;
+ rdfs:domain :Organization;
+ rdfs:range xsd:string .
+
+:price     a owl:DatatypeProperty;
+ rdfs:domain :SpecialPrice;
+ rdfs:range xsd:float .
+
+:validFrom     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:dateTime .
+
+:validUntil     a owl:DatatypeProperty;
+ rdfs:domain :Offer;
+ rdfs:range xsd:dateTime .
+
+#ENDS
+

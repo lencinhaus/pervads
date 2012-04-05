@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY owl2xml "http://www.w3.org/2006/12/owl2-xml#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY model "http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#" >
+    <!ENTITY context-model "http://dei.polimi.it/dbgroup/pedigree/context-model.owl#" >
+    <!ENTITY context-model2 "http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#" >
+    <!ENTITY Ontology1287682833244 "http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#"
+     xml:base="http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:model="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#"
+     xmlns:context-model2="http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:context-model="http://dei.polimi.it/dbgroup/pedigree/context-model.owl#"
+     xmlns:Ontology1287682833244="http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#">
+    <owl:Ontology rdf:about="">
+        <owl:imports rdf:resource="http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#assignmentDimension -->
+
+    <owl:ObjectProperty rdf:about="&context-model;assignmentDimension"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#dimensionAssignment -->
+
+    <owl:ObjectProperty rdf:about="&context-model;dimensionAssignment"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#dimension_1_1_1_1_1_AssignmentValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model2;dimension_1_1_1_1_1_AssignmentValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#dimension_2_AssignmentValue -->
+
+    <owl:ObjectProperty rdf:about="&context-model2;dimension_2_AssignmentValue"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#advertises -->
+
+    <owl:ObjectProperty rdf:about="&model;advertises"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAdvertiser -->
+
+    <owl:ObjectProperty rdf:about="&model;hasAdvertiser"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasContext -->
+
+    <owl:ObjectProperty rdf:about="&model;hasContext"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#offers -->
+
+    <owl:ObjectProperty rdf:about="&model;offers"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#currency -->
+
+    <owl:DatatypeProperty rdf:about="&model;currency"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#discount -->
+
+    <owl:DatatypeProperty rdf:about="&model;discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedImage -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedImage"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedMedia -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedMedia"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasAttachedVideo -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasAttachedVideo"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasDetailCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasDetailCoupon"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#hasListCoupon -->
+
+    <owl:DatatypeProperty rdf:about="&model;hasListCoupon"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemDescription -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemDescription"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#itemName -->
+
+    <owl:DatatypeProperty rdf:about="&model;itemName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationAddress -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationAddress"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationCity -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationCity"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationEmail -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationEmail"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationName -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationName"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationWebsite -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationWebsite"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationZipCode -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationZipCode"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#organizationZone -->
+
+    <owl:DatatypeProperty rdf:about="&model;organizationZone"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#price -->
+
+    <owl:DatatypeProperty rdf:about="&model;price"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validFrom -->
+
+    <owl:DatatypeProperty rdf:about="&model;validFrom"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#validUntil -->
+
+    <owl:DatatypeProperty rdf:about="&model;validUntil"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/context-model.owl#Context -->
+
+    <owl:Class rdf:about="&context-model;Context"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Dimension_1_1_1_1_1_Assignment -->
+
+    <owl:Class rdf:about="&context-model2;Dimension_1_1_1_1_1_Assignment"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#Dimension_2_Assignment -->
+
+    <owl:Class rdf:about="&context-model2;Dimension_2_Assignment"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Discount -->
+
+    <owl:Class rdf:about="&model;Discount"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Good -->
+
+    <owl:Class rdf:about="&model;Good"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Offer -->
+
+    <owl:Class rdf:about="&model;Offer"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#OfferedItem -->
+
+    <owl:Class rdf:about="&model;OfferedItem"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Organization -->
+
+    <owl:Class rdf:about="&model;Organization"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#PervAD -->
+
+    <owl:Class rdf:about="&model;PervAD"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#Service -->
+
+    <owl:Class rdf:about="&model;Service"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/model.owl#SpecialPrice -->
+
+    <owl:Class rdf:about="&model;SpecialPrice"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Thing -->
+
+    <owl:Class rdf:about="&owl;Thing"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#dimension_1_1_1 -->
+
+    <owl:Thing rdf:about="&context-model2;dimension_1_1_1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#dimension_1_1_1_1_1 -->
+
+    <owl:Thing rdf:about="&context-model2;dimension_1_1_1_1_1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#dimension_2 -->
+
+    <owl:Thing rdf:about="&context-model2;dimension_2"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value_1_1_1_1 -->
+
+    <owl:Thing rdf:about="&context-model2;value_1_1_1_1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value_1_1_1_1_1_1 -->
+
+    <owl:Thing rdf:about="&context-model2;value_1_1_1_1_1_1"/>
+    
+
+
+    <!-- http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#value_2_1 -->
+
+    <owl:Thing rdf:about="&context-model2;value_2_1"/>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#assignment1-1 -->
+
+    <context-model2:Dimension_1_1_1_1_1_Assignment rdf:about="#assignment1-1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <context-model:assignmentDimension rdf:resource="&context-model2;dimension_1_1_1_1_1"/>
+        <context-model2:dimension_1_1_1_1_1_AssignmentValue rdf:resource="&context-model2;value_1_1_1_1_1_1"/>
+    </context-model2:Dimension_1_1_1_1_1_Assignment>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#assignment1-2 -->
+
+    <context-model2:Dimension_2_Assignment rdf:about="#assignment1-2">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <context-model:assignmentDimension rdf:resource="&context-model2;dimension_2"/>
+        <context-model2:dimension_2_AssignmentValue rdf:resource="&context-model2;value_2_1"/>
+    </context-model2:Dimension_2_Assignment>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#context1 -->
+
+    <owl:Thing rdf:about="#context1">
+        <rdf:type rdf:resource="&context-model;Context"/>
+        <context-model:dimensionAssignment rdf:resource="#assignment1-1"/>
+        <context-model:dimensionAssignment rdf:resource="#assignment1-2"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#item1-1-1 -->
+
+    <owl:Thing rdf:about="#item1-1-1">
+        <rdf:type rdf:resource="&model;OfferedItem"/>
+        <model:itemDescription rdf:datatype="&xsd;string"
+            >Descrizione Prodotto 1-1-1</model:itemDescription>
+        <model:itemName rdf:datatype="&xsd;string">Prodotto 1-1-1</model:itemName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#item1-1-2 -->
+
+    <owl:Thing rdf:about="#item1-1-2">
+        <rdf:type rdf:resource="&model;Good"/>
+        <model:itemDescription rdf:datatype="&xsd;string"
+            >Descrizione Good 1-1-2</model:itemDescription>
+        <model:itemName rdf:datatype="&xsd;string">Good 1-1-2</model:itemName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#item1-2-1 -->
+
+    <model:Good rdf:about="#item1-2-1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <model:itemDescription rdf:datatype="&xsd;string"
+            >Descrizione Good 1-2-1</model:itemDescription>
+        <model:itemName rdf:datatype="&xsd;string">Good 1-2-1</model:itemName>
+    </model:Good>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#item1-3-1 -->
+
+    <owl:Thing rdf:about="#item1-3-1">
+        <rdf:type rdf:resource="&model;Service"/>
+        <model:itemDescription rdf:datatype="&xsd;string"
+            >Descrizione Service 1-3-1</model:itemDescription>
+        <model:itemName rdf:datatype="&xsd;string">Service 1-3-1</model:itemName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#offer1-1 -->
+
+    <model:Offer rdf:about="#offer1-1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <model:hasDetailCoupon rdf:datatype="&xsd;anyURI"
+            >detail_coupon_1_1.png</model:hasDetailCoupon>
+        <model:hasAttachedMedia rdf:datatype="&xsd;anyURI">doc_1_1.pdf</model:hasAttachedMedia>
+        <model:hasAttachedImage rdf:datatype="&xsd;anyURI">image_1_1.png</model:hasAttachedImage>
+        <model:hasListCoupon rdf:datatype="&xsd;anyURI"
+            >list_coupon_1_1.png</model:hasListCoupon>
+        <model:hasAttachedVideo rdf:datatype="&xsd;anyURI">video_1_1.avi</model:hasAttachedVideo>
+        <model:offers rdf:resource="#item1-1-1"/>
+        <model:offers rdf:resource="#item1-1-2"/>
+    </model:Offer>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#offer1-2 -->
+
+    <model:SpecialPrice rdf:about="#offer1-2">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <model:validFrom rdf:datatype="&xsd;dateTime"
+            >2010-01-01T00:00:00</model:validFrom>
+        <model:validUntil rdf:datatype="&xsd;dateTime"
+            >2011-01-01T00:00:00</model:validUntil>
+        <model:price rdf:datatype="&xsd;float">99.99</model:price>
+        <model:currency rdf:datatype="&xsd;string">EUR</model:currency>
+        <model:hasDetailCoupon rdf:datatype="&xsd;anyURI"
+            >detail_coupon_1_2.png</model:hasDetailCoupon>
+        <model:hasListCoupon rdf:datatype="&xsd;anyURI"
+            >list_coupon_1_2.png</model:hasListCoupon>
+        <model:offers rdf:resource="#item1-2-1"/>
+    </model:SpecialPrice>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#offer1-3 -->
+
+    <owl:Thing rdf:about="#offer1-3">
+        <rdf:type rdf:resource="&model;Discount"/>
+        <model:discount rdf:datatype="&xsd;float">0.2</model:discount>
+        <model:hasDetailCoupon rdf:datatype="&xsd;anyURI"
+            >detail_coupon_1_3.png</model:hasDetailCoupon>
+        <model:hasListCoupon rdf:datatype="&xsd;anyURI"
+            >list_coupon_1_3.png</model:hasListCoupon>
+        <model:offers rdf:resource="#item1-3-1"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#organization1 -->
+
+    <model:Organization rdf:about="#organization1">
+        <rdf:type rdf:resource="&owl;Thing"/>
+        <model:organizationZipCode rdf:datatype="&xsd;positiveInteger">20100</model:organizationZipCode>
+        <model:organizationCity rdf:datatype="&xsd;string">Milano</model:organizationCity>
+        <model:organizationName rdf:datatype="&xsd;string"
+            >Organizzazione 1</model:organizationName>
+        <model:organizationZone rdf:datatype="&xsd;string">Porta Romana</model:organizationZone>
+        <model:organizationAddress rdf:datatype="&xsd;string"
+            >Via del sapone 1</model:organizationAddress>
+        <model:organizationWebsite rdf:datatype="&xsd;anyURI"
+            >http://www.organizzazione1.com</model:organizationWebsite>
+        <model:organizationEmail rdf:datatype="&xsd;string"
+            >info@organizzazione1.com</model:organizationEmail>
+        <model:organizationEmail rdf:datatype="&xsd;string"
+            >sales@organizazzione1.com</model:organizationEmail>
+    </model:Organization>
+    
+
+
+    <!-- http://www.semanticweb.org/ontologies/2010/9/Ontology1287682833244.owl#pervad1 -->
+
+    <owl:Thing rdf:about="#pervad1">
+        <rdf:type rdf:resource="&model;PervAD"/>
+        <model:hasContext rdf:resource="#context1"/>
+        <model:advertises rdf:resource="#offer1-1"/>
+        <model:advertises rdf:resource="#offer1-2"/>
+        <model:advertises rdf:resource="#offer1-3"/>
+        <model:hasAdvertiser rdf:resource="#organization1"/>
+    </owl:Thing>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 2.2.1.1138) http://owlapi.sourceforge.net -->
+

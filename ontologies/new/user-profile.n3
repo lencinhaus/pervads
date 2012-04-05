@@ -1,0 +1,35 @@
+@prefix : <http://www.pervads.com/example/user-profile.owl#> .
+@prefix context-model: <http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl#> .
+@prefix context-model-vocabulary: <http://dei.polimi.it/dbgroup/pedigree/context-model-vocabulary.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://www.pervads.com/example/user-profile.owl>     a owl:Ontology;
+ owl:imports <http://dei.polimi.it/dbgroup/pedigree/pervads/context-model.owl> .
+
+:c-profile     a context-model:PervADsContext,
+	owl:NamedIndividual;
+ context-model-vocabulary:hasDimension :c-profile-age,
+	:c-profile-domain,
+	:c-profile-gender .
+
+:c-profile-age     a context-model:ActualAge,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:age-equal-N;
+ context-model-vocabulary:parentDimension :c-profile-domain .
+
+:c-profile-age-N     a context-model:ActualParAgeN,
+	owl:NamedIndividual;
+ context-model-vocabulary:parameterValue "30"^^xsd:positiveInteger .
+
+:c-profile-domain     a context-model:ActualDomain,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:PervADs;
+ context-model-vocabulary:parentDimension :c-profile-domain .
+
+:c-profile-gender     a context-model:ActualGender,
+	owl:NamedIndividual;
+ context-model-vocabulary:dimensionValue context-model:male;
+ context-model-vocabulary:parentDimension :c-profile-domain .
