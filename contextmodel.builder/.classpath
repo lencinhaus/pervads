@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="E:/uni/technologies for information systems/project/workspace/libs/jena/jena-2.6.2.jar" sourcepath="/libs/jena/jena-2.6.2-sources.jar">
+	<classpathentry kind="lib" path="/libs/jena/jena-2.6.2.jar" sourcepath="/libs/jena/jena-2.6.2-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://jena.sourceforge.net/javadoc"/>
 		</attributes>
@@ -12,7 +12,7 @@
 			<attribute name="javadoc_location" value="http://httpunit.sourceforge.net/doc/api"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/uni/technologies for information systems/project/workspace/libs/arq/arq-2.8.3.jar" sourcepath="/libs/arq/arq-2.8.3-sources.jar">
+	<classpathentry kind="lib" path="/libs/arq/arq-2.8.3.jar" sourcepath="/libs/arq/arq-2.8.3-sources.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="http://jena.sourceforge.net/ARQ/javadoc"/>
 		</attributes>
@@ -58,7 +58,7 @@
 	<classpathentry kind="lib" path="/libs/other/icu4j-3.4.5.jar"/>
 	<classpathentry kind="lib" path="/libs/apache-commons/commons-lang-2.6.jar" sourcepath="/libs/apache-commons/commons-lang-2.6-sources.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/E:/uni/technologies for information systems/project/workspace/libs/apache-commons/commons-lang-2.6-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="http://commons.apache.org/lang/api-2.6"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
